@@ -50,13 +50,20 @@ public class RazorpayPlugin extends Plugin {
             options.put("currency", currency);
             
             // Amount can be passed as String or Number from JS, Razorpay expects an Integer in paise
-            if (amountObj instanceof Number) {
-                options.put("amount", ((Number) amountObj).longValue());
+            long amountPaise = 0;
+            if (amountObj instanceof Integer) {
+                amountPaise = ((Integer) amountObj).longValue();
+            } else if (amountObj instanceof Long) {
+                amountPaise = (Long) amountObj;
+            } else if (amountObj instanceof Double) {
+                amountPaise = ((Double) amountObj).longValue();
             } else if (amountObj instanceof String) {
-                options.put("amount", Long.parseLong((String) amountObj));
+                amountPaise = Long.parseLong((String) amountObj);
             } else {
                 throw new Exception("Invalid amount type: " + (amountObj != null ? amountObj.getClass().getName() : "null"));
             }
+            options.put("amount", amountPaise);
+            Log.d("RazorpayPlugin", "Final amount in paise: " + amountPaise);
             
             if (orderId != null && !orderId.isEmpty()) {
                 options.put("order_id", orderId);

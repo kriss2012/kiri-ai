@@ -1341,6 +1341,15 @@
       margin-top: 7px;
     }
 
+    /* Keyboard open state */
+    body.keyboard-open .input-bar {
+      padding-bottom: 2px !important;
+    }
+
+    body.keyboard-open .input-hint {
+      display: none !important;
+    }
+
     /* bottom nav removed */
 
     /* ── INNER PANELS (Settings, Pricing, History) ── */
@@ -2824,8 +2833,9 @@
           updateRequestBadge();
           toast('Daily limit reached!', 'error');
         } else {
-          msgs.innerHTML += buildMsgHTML('assistant', '⚠️ Sorry, something went wrong. Please try again.');
-          toast(err.message || 'Failed to get response.', 'error');
+          const detail = err.data && err.data.message ? err.data.message : (err.message || 'Unknown server error');
+          msgs.innerHTML += buildMsgHTML('assistant', `⚠️ AI Error: ${detail}<br><small>If this persists, check your Gemini API key and backend logs.</small>`);
+          toast(`AI Error: ${detail}`, 'error');
           scrollDown();
         }
       } finally {
@@ -3265,15 +3275,10 @@
     // KEYBOARD ADAPTATION (Capacitor Native)
     // ══════════════════════════════════
     (function initKeyboardFix() {
-      const inputBar = document.querySelector('.input-bar');
-      const hint = document.querySelector('.input-hint');
-
       const setKbdStyle = (isOpen) => {
-        if (!inputBar) return;
-        // Strip padding and hide hint when keyboard is open to stick to bottom
-        inputBar.style.paddingBottom = isOpen ? '2px' : '12px';
-        if (hint) hint.style.display = isOpen ? 'none' : 'block';
-        setTimeout(scrollDown, 100);
+        if (isOpen) document.body.classList.add('keyboard-open');
+        else document.body.classList.remove('keyboard-open');
+        setTimeout(scrollDown, 150);
       };
 
       if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Keyboard) {
@@ -3281,10 +3286,9 @@
         Keyboard.addListener('keyboardWillShow', () => setKbdStyle(true));
         Keyboard.addListener('keyboardWillHide', () => setKbdStyle(false));
       }
-      // Fallback for browser/WebView resize
       if (window.visualViewport) {
         window.visualViewport.addEventListener('resize', () => {
-          const isKbd = window.visualViewport.height < window.innerHeight * 0.9;
+          const isKbd = window.visualViewport.height < window.innerHeight * 0.85;
           setKbdStyle(isKbd);
         });
       }
