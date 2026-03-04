@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Kiri-AI — Intelligence Refined</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <style>
+    :root {
+      --primary: #6750A4;
+      --primary-container: #EADDFF;
+      --on-primary: #fff;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --secondary-container: #E8DEF8;
+      --on-secondary-container: #1D192B;
+      --tertiary: #7D5260;
+      --tertiary-container: #FFD8E4;
+      --surface: #FEF7FF;
+      --surface-dim: #DED8E1;
+      --surface-bright: #FEF7FF;
+      --surface-container-lowest: #fff;
+      --surface-container-low: #F7F2FA;
+      --surface-container: #F3EDF7;
+      --surface-container-high: #ECE6F0;
+      --surface-container-highest: #E6E0E9;
+      --on-surface: #1C1B1F;
+      --on-surface-variant: #49454F;
+      --outline: #79747E;
+      --outline-variant: #CAC4D0;
+      --error: #B3261E;
+      --dark-surface: #141218;
+      --dark-surface-container: #211F26;
+      --dark-surface-container-high: #2B2930;
+      --dark-on-surface: #E6E1E5;
+      --dark-on-surface-variant: #CAC4D0;
+      --dark-outline: #938F99;
+      --accent-teal: #006A6A;
+      --gold: #FFB900;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --nav-height: 80px;
+      --header-height: 64px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-top: env(safe-area-inset-top, 0px);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+      font-family: var(--font-sans);
+      background: var(--dark-surface);
+      color: var(--dark-on-surface);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    svg {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ─── ROOT APP SHELL ─── */
+    #app {
+      display: flex;
+      flex-direction: column;
+      height: 100dvh;
+      background: var(--dark-surface);
+      position: relative;
+    }
+
+    /* ─── VIEWS ─── */
+    .view {
+      display: none;
+      flex-direction: column;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .view.active {
+      display: flex;
+    }
+
+    /* ══════════════════════════════════
+       LANDING VIEW
+    ══════════════════════════════════ */
+    #landingView {
+      background: #0D0D0F;
+      overflow-y: auto;
+      display: flex;
+      /* Script expects flex */
+    }
+
+    .landing-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 15% 10%, rgba(103, 80, 164, 0.35) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 85% 80%, rgba(0, 106, 106, 0.2) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 35% at 55% 25%, rgba(245, 200, 66, 0.07) 0%, transparent 50%);
+    }
+
+    .landing-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+
+    .landing-nav {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      padding-top: calc(20px + var(--safe-top));
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--accent-teal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .brand-name {
+      font-family: var(--font-serif);
+      font-size: 21px;
+      color: #fff;
+    }
+
+    .landing-hero {
+      position: relative;
+      z-index: 5;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 28px 40px;
+      text-align: center;
+    }
+
+    .hero-h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(44px, 12vw, 80px);
+      line-height: 1.0;
+      letter-spacing: -2px;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .hero-h1 .grad {
+      background: linear-gradient(135deg, #fff 20%, rgba(103, 80, 164, 0.85) 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-h1 .ital {
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.5);
+      -webkit-text-fill-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .hero-p {
+      font-size: clamp(15px, 3.5vw, 18px);
+      color: rgba(255, 255, 255, 0.45);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 460px;
+      margin: 20px auto 40px;
+    }
+
+    .hero-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .btn-primary-hero {
+      padding: 15px 32px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, var(--primary), var(--accent-teal));
+      color: #fff;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .btn-secondary-hero {
+      padding: 15px 32px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    /* ─── AUTH VIEWS ─── */
+    .auth-view {
+      background: var(--dark-surface);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: 24px;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 400px;
+      background: var(--dark-surface-container);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 28px;
+      padding: 32px 28px;
+    }
+
+    .field-group {
+      margin-bottom: 16px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 12px;
+      color: var(--dark-on-surface-variant);
+      margin-bottom: 8px;
+    }
+
+    .field-input {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 12px;
+      background: var(--dark-surface-container-high);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      color: var(--dark-on-surface);
+      outline: none;
+    }
+
+    .btn-auth {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, var(--primary), #5a44c7);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .err-msg {
+      background: rgba(179, 38, 30, 0.15);
+      border: 1px solid rgba(179, 38, 30, 0.35);
+      color: #F2B8B5;
+      padding: 11px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    /* ─── MAIN APP VIEW ─── */
+    #appView {
+      display: none;
+    }
+
+    #appView.active {
+      display: flex;
+      flex-direction: column;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    .top-app-bar {
+      display: flex;
+      align-items: center;
+      padding: 0 6px;
+      padding-top: var(--safe-top);
+      height: calc(56px + var(--safe-top));
+      flex-shrink: 0;
+      z-index: 100;
+      background: var(--dark-surface);
+    }
+
+    .top-icon-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      color: var(--dark-on-surface-variant);
+      cursor: pointer;
+    }
+
+    .top-title-group {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .top-title-text {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--dark-on-surface);
+    }
+
+    /* Drawer */
+    .drawer-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .drawer-overlay.open {
+      display: block;
+      opacity: 1;
+    }
+
+    .drawer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: min(300px, 85vw);
+      background: var(--dark-surface-container);
+      z-index: 201;
+      transform: translateX(-100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      border-radius: 0 20px 20px 0;
+    }
+
+    .drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 24px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* ─── APP CONTENT ─── */
+    .app-content {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .messages-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 0;
+      scroll-behavior: smooth;
+    }
+
+    .messages-scroll::-webkit-scrollbar {
+      width: 0;
+    }
+
+    .msg-row {
+      padding: 4px 16px;
+      display: flex;
+      margin-bottom: 12px;
+    }
+
+    .msg-row.user {
+      justify-content: flex-end;
+    }
+
+    .user-bubble {
+      max-width: 80%;
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      border-radius: 20px 20px 4px 20px;
+      padding: 12px 16px;
+      font-size: 15px;
+    }
+
+    .msg-row.ai {
+      gap: 10px;
+    }
+
+    .ai-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent-teal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .ai-bubble {
+      flex: 1;
+      color: var(--dark-on-surface);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* Input Bar */
+    .input-bar {
+      background: var(--dark-surface);
+      padding: 8px 12px calc(10px + var(--safe-bottom));
+    }
+
+    .input-wrapper {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      background: var(--dark-surface-container);
+      border-radius: 28px;
+      padding: 6px 6px 6px 12px;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .chat-textarea {
+      flex: 1;
+      border: none;
+      outline: none;
+      resize: none;
+      background: transparent;
+      color: var(--dark-on-surface);
+      font-size: 16px;
+      padding: 6px 0;
+      max-height: 140px;
+    }
+
+    .send-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      background: var(--dark-on-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      opacity: 0.3;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .send-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .send-btn svg {
+      width: 18px;
+      height: 18px;
+      color: var(--dark-surface);
+    }
+
+    /* PANELS (Settings, Pricing, etc) */
+    .inner-panel {
+      position: absolute;
+      inset: 0;
+      background: var(--dark-surface);
+      z-index: 150;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .inner-panel.show {
+      transform: translateX(0);
+    }
+
+    .panel-header {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .panel-title {
+      flex: 1;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    /* ─── MISC ─── */
+    #loadingScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: var(--dark-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #toastContainer {
+      position: fixed;
+      top: calc(16px + var(--safe-top));
+      right: 16px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .toast {
+      background: var(--dark-surface-container-high);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-size: 13px;
+      animation: toastIn 0.25s ease;
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    /* Pricing Card from Frontend */
+    .pricing-card {
+      background: var(--dark-surface-container);
+      border-radius: 24px;
+      padding: 24px;
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .popular {
+      border-color: var(--primary);
+    }
+
+    .plan-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--dark-on-surface-variant);
+      list-style: none;
+      margin-bottom: 8px;
+    }
+
+    .plan-cta {
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .plan-cta.filled {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .plan-cta.current {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--dark-on-surface-variant);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <div id="loadingScreen">
+      <div class="brand-icon" style="width:72px; height:72px; font-size:32px;">✦</div>
+    </div>
+    <div id="toastContainer"></div>
+
+    <!-- LANDING -->
+    <div class="view" id="landingView">
+      <div class="landing-bg"></div>
+      <div class="landing-grid"></div>
+      <nav class="landing-nav">
+        <div class="brand">
+          <div class="brand-icon">✦</div><span class="brand-name">Kiri-AI</span>
+        </div>
+        <button onclick="showView('loginView')"
+          style="padding:8px 18px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); color:#fff; border-radius:8px; cursor:pointer;">Sign
+          in</button>
+      </nav>
+      <div class="landing-hero">
+        <h1 class="hero-h1"><span class="grad">Intelligence</span><br><span class="ital">refined.</span></h1>
+        <p class="hero-p">Your personal AI companion — beautiful, simple, powerful.</p>
+        <div class="hero-btns">
+          <button class="btn-primary-hero" onclick="showView('registerView')">Get Started Free</button>
+          <button class="btn-secondary-hero" onclick="showView('loginView')">Sign In</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGIN -->
+    <div class="view auth-view" id="loginView">
+      <div class="auth-card">
+        <h2 style="text-align:center; font-family:var(--font-serif); margin-bottom:24px;">Sign In</h2>
+        <div class="err-msg" id="loginError"></div>
+        <div class="field-group"><label class="field-label">Email</label><input type="email" id="loginEmail"
+            class="field-input" /></div>
+        <div class="field-group"><label class="field-label">Password</label><input type="password" id="loginPassword"
+            class="field-input" onkeydown="if(event.key==='Enter')handleLogin()" /></div>
+        <button class="btn-auth" id="loginBtn" onclick="handleLogin()">Sign In</button>
+        <p style="text-align:center; margin-top:20px; font-size:14px;">New here? <a onclick="showView('registerView')"
+            style="color:#BB86FC; cursor:pointer;">Create account</a></p>
+      </div>
+    </div>
+
+    <!-- REGISTER -->
+    <div class="view auth-view" id="registerView">
+      <div class="auth-card">
+        <h2 style="text-align:center; font-family:var(--font-serif); margin-bottom:24px;">Create Account</h2>
+        <div class="err-msg" id="registerError"></div>
+        <div class="field-group"><label class="field-label">Name</label><input type="text" id="registerName"
+            class="field-input" /></div>
+        <div class="field-group"><label class="field-label">Email</label><input type="email" id="registerEmail"
+            class="field-input" /></div>
+        <div class="field-group"><label class="field-label">Password</label><input type="password" id="registerPassword"
+            class="field-input" onkeydown="if(event.key==='Enter')handleRegister()" /></div>
+        <button class="btn-auth" id="registerBtn" onclick="handleRegister()">Get Started</button>
+        <p style="text-align:center; margin-top:20px; font-size:14px;">Have an account? <a
+            onclick="showView('loginView')" style="color:#BB86FC; cursor:pointer;">Sign in</a></p>
+      </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <div class="view" id="appView">
+      <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+      <div class="drawer" id="appSidebar">
+        <div class="drawer-header"><button class="btn-auth" onclick="newChat(); closeDrawer();">+ New Chat</button>
+        </div>
+        <div id="convItems" style="flex:1; overflow-y:auto; padding:12px 8px;"></div>
+        <div style="padding:16px; border-top:1px solid rgba(255,255,255,0.06);">
+          <div id="sidebarName" style="font-weight:600;">User</div>
+          <div id="sidebarPlan" style="font-size:12px; opacity:0.6;">Free Plan</div>
+          <button onclick="logout()"
+            style="margin-top:12px; background:none; border:none; color:#F2B8B5; cursor:pointer; font-size:14px;">Sign
+            Out</button>
+        </div>
+      </div>
+
+      <div class="top-app-bar">
+        <button class="top-icon-btn" onclick="openDrawer()">☰</button>
+        <div class="top-title-group" onclick="openDrawer()"><span class="top-title-text" id="chatTitle">Kiri-AI</span>
+        </div>
+        <button class="top-icon-btn" onclick="newChat()">+</button>
+      </div>
+
+      <div class="app-content">
+        <!-- Chat View -->
+        <div id="chatView" style="display:flex; flex-direction:column; flex:1; overflow:hidden;">
+          <div class="messages-scroll" id="messagesContainer">
+            <div id="chatEmpty" style="padding:40px; text-align:center; color:var(--dark-on-surface-variant);">
+              <h2 style="font-family:var(--font-serif); font-size:32px; margin-bottom:12px;">Hello!</h2>
+              <p>How can I help you today?</p>
+            </div>
+          </div>
+          <div class="input-bar">
+            <div class="input-wrapper">
+              <textarea class="chat-textarea" id="chatInput" placeholder="Ask anything" rows="1"
+                onkeydown="handleInputKey(event)" oninput="autoResize(this)"></textarea>
+              <button class="send-btn" id="sendBtn" onclick="sendMessage()"><svg viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5">
+                  <polyline points="12 19 12 5 5 12 12 5 19 12" />
+                </svg></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings Panel -->
+        <div class="inner-panel" id="settingsView">
+          <div class="panel-header"><button class="top-icon-btn" onclick="showAppView('chat')">←</button><span
+              class="panel-title">Settings</span></div>
+          <div style="padding:20px; overflow-y:auto; flex:1;">
+            <div class="field-group"><label class="field-label">Name</label><input type="text" id="settingsName"
+                class="field-input" /></div>
+            <p id="settingsEmail" style="font-size:13px; opacity:0.7; margin-bottom:20px;"></p>
+            <button class="btn-auth" onclick="updateProfile()">Update Profile</button>
+            <div style="margin-top:32px; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px;">
+              <button onclick="confirmDeleteAll()" style="color:#F2B8B5; cursor:pointer;" class="btn-auth">Clear All
+                Chats</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ─── STATE ───
+    const API_URL = 'http://localhost:5000/api';
+    let currentModel = 'gemini-flash-latest';
+    let currentUser = null;
+    let currentConversationId = null;
+    let conversations = [];
+    let isLoading = false;
+    let modalCallback = null;
+
+    // ─── INIT ───
+    window.addEventListener('DOMContentLoaded', async () => {
+      const token = localStorage.getItem('kiri_token');
+      if (token) {
+        try {
+          const data = await apiCall('/auth/me');
+          currentUser = data.user;
+          hideLoadingScreen();
+          showView('appView');
+          initApp();
+        } catch {
+          localStorage.removeItem('kiri_token');
+          hideLoadingScreen();
+          showView('landingView');
+        }
+      } else {
+        hideLoadingScreen();
+        showView('landingView');
+      }
+    });
+
+    function hideLoadingScreen() {
+      const ls = document.getElementById('loadingScreen');
+      ls.style.opacity = '0';
+      ls.style.transition = 'opacity 0.3s';
+      setTimeout(() => ls.style.display = 'none', 300);
+    }
+
+    // ─── VIEW MANAGEMENT ───
+    const TOP_VIEWS = ['landingView', 'loginView', 'registerView', 'appView'];
+    const INTERNAL_VIEWS = ['chatView', 'settingsView'];
+
+    function showView(viewId) {
+      if (TOP_VIEWS.includes(viewId)) {
+        TOP_VIEWS.forEach(v => {
+          const el = el_id(v);
+          if (el) el.style.display = (v === viewId) ? (v === 'landingView' ? 'flex' : 'flex') : 'none';
+        });
+      }
+      if (INTERNAL_VIEWS.includes(viewId)) {
+        INTERNAL_VIEWS.forEach(v => {
+          const el = el_id(v);
+          if (el) el.classList.toggle('show', v === viewId);
+        });
+        if (viewId === 'settingsView') populateSettings();
+      }
+    }
+
+    function showAppView(v) {
+      if (v === 'chat') { el_id('settingsView').classList.remove('show'); }
+      else { showView(v + 'View'); }
+    }
+
+    function openDrawer() { el_id('appSidebar').classList.add('open'); el_id('drawerOverlay').classList.add('open'); }
+    function closeDrawer() { el_id('appSidebar').classList.remove('open'); el_id('drawerOverlay').classList.remove('open'); }
+
+    function scrollToBottom() {
+      const wrap = document.getElementById('messagesContainer');
+      if (wrap) { wrap.scrollTop = wrap.scrollHeight; }
+    }
+
+    // ─── API HELPER ───
+    async function apiCall(endpoint, method = 'GET', body = null) {
+      const token = localStorage.getItem('kiri_token');
+      const opts = { method, headers: { 'Content-Type': 'application/json' } };
+      if (token) opts.headers['Authorization'] = `Bearer ${token}`;
+      if (body) opts.body = JSON.stringify(body);
+      const res = await fetch(API_URL + endpoint, opts);
+      const data = await res.json();
+      if (!res.ok) throw { status: res.status, message: data.message, data };
+      return data;
+    }
+
+    async function handleLogin() {
+      const email = el_id('loginEmail').value.trim(), password = el_id('loginPassword').value, errEl = el_id('loginError'), btn = el_id('loginBtn');
+      errEl.style.display = 'none'; if (!email || !password) return;
+      btn.disabled = true; btn.textContent = 'Signing in...';
+      try {
+        const data = await apiCall('/auth/login', 'POST', { email, password });
+        localStorage.setItem('kiri_token', data.token); currentUser = data.user;
+        showView('appView'); initApp();
+        toast('Welcome back!', 'success');
+      } catch (err) { showError(errEl, err.message || 'Login failed.'); }
+      finally { btn.disabled = false; btn.textContent = 'Sign in'; }
+    }
+
+    async function handleRegister() {
+      const name = el_id('registerName').value.trim(), email = el_id('registerEmail').value.trim(), password = el_id('registerPassword').value, errEl = el_id('registerError'), btn = el_id('registerBtn');
+      errEl.style.display = 'none'; if (!name || !email || !password) return;
+      btn.disabled = true; btn.textContent = 'Creating account...';
+      try {
+        const data = await apiCall('/auth/register', 'POST', { name, email, password });
+        localStorage.setItem('kiri_token', data.token); currentUser = data.user;
+        showView('appView'); initApp();
+        toast('Welcome!', 'success');
+      } catch (err) { showError(errEl, err.message || 'Registration failed.'); }
+      finally { btn.disabled = false; btn.textContent = 'Create free account'; }
+    }
+
+    function showError(el, msg) { el.textContent = msg; el.style.display = 'block'; }
+    function logout() { localStorage.removeItem('kiri_token'); location.reload(); }
+
+    function initApp() { updateSidebar(); loadConversations(); updateRequestBadge(); }
+
+    function updateSidebar() {
+      if (!currentUser) return;
+      el_id('sidebarName').textContent = currentUser.name;
+      const planEl = el_id('sidebarPlan');
+      planEl.textContent = currentUser.isPremium ? '✦ Premium' : 'Free Plan';
+    }
+
+    function updateRequestBadge() { /* Implementation as needed */ }
+
+    async function loadConversations() {
+      try {
+        const data = await apiCall('/chat/conversations');
+        conversations = data.conversations || [];
+        renderConversations();
+      } catch (err) { console.error('Failed to load conversations:', err); }
+    }
+
+    function renderConversations() {
+      const list = el_id('convItems');
+      if (!conversations.length) { list.innerHTML = '<div style="padding:16px; opacity:0.5; text-align:center;">No chats</div>'; return; }
+      list.innerHTML = conversations.map(c => `<div style="padding:12px; cursor:pointer;" onclick="loadConversation('${c._id}')">${escapeHtml(c.title)}</div>`).join('');
+    }
+
+    async function loadConversation(id) {
+      currentConversationId = id; closeDrawer();
+      try {
+        const data = await apiCall(`/chat/conversations/${id}`);
+        const conv = data.conversation;
+        el_id('chatTitle').textContent = conv.title;
+        el_id('chatEmpty').style.display = 'none';
+        const container = el_id('messagesContainer');
+        container.innerHTML = conv.messages.map(m => renderMessage(m.role, m.content)).join('');
+        scrollToBottom();
+      } catch { toast('Failed to load.', 'error'); }
+    }
+
+    function el_id(id) { return document.getElementById(id); }
+
+    function newChat() {
+      currentConversationId = null; el_id('chatTitle').textContent = 'Kiri-AI';
+      el_id('chatEmpty').style.display = 'flex'; el_id('messagesContainer').innerHTML = '';
+      el_id('chatInput').value = ''; closeDrawer();
+    }
+
+    function handleInputKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }
+    function autoResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 160) + 'px'; el_id('sendBtn').classList.toggle('visible', el.value.length > 0); }
+
+    async function sendMessage() {
+      const input = el_id('chatInput'), msg = input.value.trim(); if (!msg || isLoading) return;
+      input.value = ''; isLoading = true;
+      const container = el_id('messagesContainer');
+      el_id('chatEmpty').style.display = 'none';
+      container.innerHTML += renderMessage('user', msg);
+      const typingId = 'typing_' + Date.now();
+      container.innerHTML += `<div id="${typingId}" class="msg-row ai"><div class="ai-avatar">K</div><div class="ai-bubble">...</div></div>`;
+      scrollToBottom();
+      try {
+        const data = await apiCall('/chat/message', 'POST', { message: msg, conversationId: currentConversationId });
+        el_id(typingId).remove();
+        if (!currentConversationId) { currentConversationId = data.conversationId; loadConversations(); }
+        container.innerHTML += renderMessage('assistant', data.message);
+        scrollToBottom();
+      } catch (err) {
+        if (document.getElementById(typingId)) document.getElementById(typingId).remove();
+        toast(err.message || 'Error', 'error');
+      } finally { isLoading = false; autoResize(input); }
+    }
+
+    function renderMessage(role, content) {
+      const isUser = role === 'user';
+      return `<div class="msg-row ${isUser ? 'user' : 'ai'}">${isUser ? `<div class="user-bubble">${escapeHtml(content)}</div>` : `<div class="ai-avatar">K</div><div class="ai-bubble">${marked.parse(content)}</div>`}</div>`;
+    }
+
+    function escapeHtml(text) { return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+    function populateSettings() { if (!currentUser) return; el_id('settingsName').value = currentUser.name; el_id('settingsEmail').textContent = currentUser.email; }
+    async function updateProfile() {
+      const name = el_id('settingsName').value.trim(); if (!name) return;
+      try { await apiCall('/auth/profile', 'PUT', { name }); currentUser.name = name; updateSidebar(); toast('Updated!', 'success'); } catch (err) { toast('Error', 'error'); }
+    }
+
+    async function confirmDeleteAll() {
+      if (confirm('Clear all chats?')) {
+        try { await apiCall('/chat/conversations', 'DELETE'); conversations = []; renderConversations(); newChat(); toast('Cleared!', 'info'); } catch { toast('Error', 'error'); }
+      }
+    }
+
+    function toast(message, type = 'info') {
+      const container = el_id('toastContainer'), t = document.createElement('div');
+      t.className = `toast ${type}`; t.textContent = message;
+      container.appendChild(t); setTimeout(() => t.remove(), 3500);
+    }
+  </script>
+</body>
+
+</html>
