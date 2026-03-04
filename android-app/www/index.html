@@ -884,10 +884,10 @@
 
     .user-bubble {
       max-width: 78%;
-      background: var(--primary-container);
-      color: var(--on-primary-container);
-      border-radius: 20px 20px 4px 20px;
-      padding: 12px 16px;
+      background: #2f2f2f;
+      color: #ffffff;
+      border-radius: 20px;
+      padding: 12px 18px;
       font-size: 15px;
       line-height: 1.55;
     }
@@ -900,12 +900,13 @@
     }
 
     .ai-avatar {
+      display: none;
+      /* Hidden to match reference UI */
       width: 32px;
       height: 32px;
       border-radius: 50%;
       flex-shrink: 0;
       background: linear-gradient(135deg, var(--primary), var(--accent-teal));
-      display: flex;
       align-items: center;
       justify-content: center;
       font-size: 13px;
@@ -2756,10 +2757,9 @@
       scrollDown();
 
       try {
-        const body = { message: msg, conversationId: activeConvId };
-        if (selectedImage) {
-          body.image = selectedImage;
-          removeImage(); // Clear after sending
+        if (selectedFiles.length > 0) {
+          body.attachments = selectedFiles.map(f => ({ data: f.data, mimeType: f.mimeType }));
+          clearFiles(); // Clear after sending
         }
 
         const d = await api('/chat/message', 'POST', body);
@@ -2800,45 +2800,84 @@
         toggleSendBtn(input.value);
         input.focus();
 
-        // If in voice mode, start listening again after AI speaks
-        if (voiceModeActive && !isBusy) {
-          setTimeout(() => { if (voiceModeActive) startMic(true); }, 500);
+        // If in voice mode, automatically read the response
+        if (voiceModeActive) {
+          speak(aiMsg);
         }
       }
     }
 
     // --- ATTACHMENT LOGIC ---
-    function handleImageSelect(input) {
-      const file = input.files[0];
-      if (!file) return;
-      if (!file.type.startsWith('image/')) {
-        toast('Please select an image file.', 'error');
+    function handleFileSelect(input) {
+      const files = Array.from(input.files);
+      if (!files.length) return;
+
+      if (selectedFiles.length + files.length > 8) {
+        toast('You can only attach up to 8 files.', 'error');
         return;
       }
 
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const base64 = e.target.result.split(',')[1];
-        selectedImage = { data: base64, mimeType: file.type };
+      files.forEach(file => {
+        const isImage = file.type.startsWith('image/');
+        const isPdf = file.type === 'application/pdf';
 
-        const previewEl = document.getElementById('image-preview');
-        previewEl.innerHTML = `
-          <div class="image-preview-item">
-            <img src="${e.target.result}" alt="Preview">
-            <button class="image-preview-remove" onclick="removeImage()">✕</button>
-          </div>
-        `;
-        previewEl.style.display = 'flex';
-        toggleSendBtn('text'); // Force send button visible
-      };
-      reader.readAsDataURL(file);
+        if (!isImage && !isPdf) {
+          toast(`Unsupported file type: ${file.name}`, 'error');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const base64 = e.target.result.split(',')[1];
+          selectedFiles.push({
+            data: base64,
+            mimeType: file.type,
+            name: file.name,
+            isImage: isImage,
+            preview: e.target.result
+          });
+          renderPreviews();
+          toggleSendBtn('text'); // Force send visible
+        };
+        reader.readAsDataURL(file);
+      });
+      input.value = ''; // Reset input
     }
 
-    function removeImage() {
-      selectedImage = null;
-      document.getElementById('image-input').value = '';
-      document.getElementById('image-preview').style.display = 'none';
+    function renderPreviews() {
+      const previewEl = document.getElementById('image-preview');
+      if (selectedFiles.length === 0) {
+        previewEl.style.display = 'none';
+        return;
+      }
+
+      previewEl.innerHTML = selectedFiles.map((file, index) => `
+        <div class="image-preview-item">
+          ${file.isImage
+          ? `<img src="${file.preview}" alt="Preview">`
+          : `<div class="file-preview-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                </svg>
+                <div class="file-name-tag">${esc(file.name)}</div>
+               </div>`
+        }
+          <button class="image-preview-remove" onclick="removeFile(${index})">✕</button>
+        </div>
+      `).join('');
+      previewEl.style.display = 'flex';
+      previewEl.scrollLeft = previewEl.scrollWidth;
+    }
+
+    function removeFile(index) {
+      selectedFiles.splice(index, 1);
+      renderPreviews();
       toggleSendBtn(document.getElementById('chat-input').value);
+    }
+
+    function clearFiles() {
+      selectedFiles = [];
+      renderPreviews();
     }
 
     // --- VOICE LOGIC (MIC & ASSISTANT) ---
@@ -2856,14 +2895,9 @@
 
       recognition.onresult = (event) => {
         const text = event.results[0][0].transcript;
-        if (voiceModeActive) {
-          document.getElementById('chat-input').value = text;
-          sendMessage();
-        } else {
-          document.getElementById('chat-input').value = text;
-          toggleSendBtn(text);
-          autoResize(document.getElementById('chat-input'));
-        }
+        document.getElementById('chat-input').value = text;
+        toggleSendBtn(text);
+        autoResize(document.getElementById('chat-input'));
       };
 
       recognition.onerror = (e) => {
@@ -2873,19 +2907,17 @@
       };
 
       recognition.onend = () => {
-        if (!voiceModeActive) document.getElementById('mic-btn').style.color = '';
+        document.getElementById('mic-btn').style.color = '';
       };
 
       return true;
     }
 
-    function startMic(autoSend = false) {
+    function startMic() {
       if (!initSpeech()) return;
       recognition.start();
-      if (!autoSend) {
-        document.getElementById('mic-btn').style.color = 'var(--primary)';
-        toast('Listening...', 'info');
-      }
+      document.getElementById('mic-btn').style.color = 'var(--primary)';
+      toast('Listening...', 'info');
     }
 
     function toggleVoiceMode() {
@@ -2895,10 +2927,17 @@
       if (voiceModeActive) {
         orb.classList.add('active');
         toast('Voice Assistant Active', 'success');
-        startMic(true);
+
+        // Find the last AI message in the DOM and read it
+        const aiBubbles = document.querySelectorAll('.ai-bubble:not(:has(.typing-bubble))');
+        if (aiBubbles.length > 0) {
+          const lastText = aiBubbles[aiBubbles.length - 1].innerText;
+          speak(lastText);
+        } else {
+          speak("Hi, I'm Kiri. How can I help you today?");
+        }
       } else {
         orb.classList.remove('active');
-        if (recognition) recognition.stop();
         if (synth) synth.cancel();
         toast('Voice Assistant Disabled', 'info');
       }
@@ -2912,9 +2951,6 @@
       const utter = new SpeechSynthesisUtterance(cleanText);
       utter.rate = 1.0;
       utter.pitch = 1.0;
-      utter.onend = () => {
-        if (voiceModeActive && !isBusy) startMic(true);
-      };
       synth.speak(utter);
     }
 
