@@ -1,5 +1,12 @@
 {
   "appId": "com.kiri.ai",
   "appName": "Kiri AI",
-  "webDir": "www"
+  "webDir": "www",
+  "plugins": {
+    "Keyboard": {
+      "resize": "body",
+      "style": "dark",
+      "resizeOnFullScreen": true
+    }
+  }
 }
