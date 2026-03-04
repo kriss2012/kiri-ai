@@ -9,7 +9,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 // @POST /api/chat/message - Send message to Gemini
 router.post('/message', protect, checkRequestLimit, async (req, res) => {
   try {
-    const { message, conversationId, model = 'gemini-flash-latest' } = req.body;
+    const { message, conversationId, model = 'gemini-1.5-flash' } = req.body;
 
     if (!message || !message.trim()) {
       return res.status(400).json({ success: false, message: 'Message is required.' });
