@@ -64,22 +64,27 @@
     html,
     body {
       height: 100%;
-      /* Do NOT lock height to 100% on body — let keyboard resize push layout up */
+      width: 100%;
       overflow: hidden;
       font-family: var(--font-sans);
       background: var(--dark-surface);
       color: var(--dark-on-surface);
       -webkit-font-smoothing: antialiased;
+      /* FIX: Prevent text size change on orientation */
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
 
     /* ─── ROOT APP SHELL ─── */
-    /* Resizes to 100% of parent (body), which Capacitor shrinks when keyboard is open */
     #app {
       display: flex;
       flex-direction: column;
-      height: 100%;
+      /* FIX: Use dvh for dynamic viewport height — shrinks when keyboard opens */
+      height: 100dvh;
+      max-height: 100dvh;
       background: var(--dark-surface);
       position: relative;
+      overflow: hidden;
     }
 
     /* ─── VIEWS ─── */
@@ -88,6 +93,7 @@
       flex-direction: column;
       flex: 1;
       overflow: hidden;
+      min-height: 0;
     }
 
     .view.active {
@@ -158,6 +164,7 @@
       justify-content: center;
       font-size: 16px;
       color: #fff;
+      overflow: hidden;
     }
 
     .brand-name {
@@ -371,7 +378,8 @@
       background: var(--dark-surface-container-high);
       border: 1.5px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
-      font-size: 15px;
+      /* 16px prevents iOS zoom on focus */
+      font-size: 16px;
       font-family: var(--font-sans);
       color: var(--dark-on-surface);
       outline: none;
@@ -407,6 +415,10 @@
       cursor: not-allowed;
     }
 
+    .btn-auth:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+
     .auth-switch {
       text-align: center;
       margin-top: 20px;
@@ -440,22 +452,25 @@
     }
 
     /* ══════════════════════════════════
-       MAIN APP (ANDROID STYLE)
+       MAIN APP VIEW
     ══════════════════════════════════ */
     #app-view {
       background: var(--dark-surface);
       display: none;
       position: relative;
+      overflow: hidden;
     }
 
     #app-view.active {
       display: flex;
       flex-direction: column;
+      /* FIX: Fill exactly the available space — shrinks with keyboard */
       height: 100%;
+      min-height: 0;
       overflow: hidden;
     }
 
-    /* ── TOP APP BAR — ChatGPT Android exact ── */
+    /* ── TOP APP BAR ── */
     .top-app-bar {
       display: flex;
       align-items: center;
@@ -465,6 +480,10 @@
       background: var(--dark-surface);
       flex-shrink: 0;
       z-index: 100;
+      /* FIX: Hardware accelerate the bar so it doesn't flicker */
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
     }
 
     .top-icon-btn {
@@ -495,7 +514,6 @@
       height: 22px;
     }
 
-    /* Hamburger icon styled like ChatGPT — 3 lines, slightly rounded */
     .hamburger-icon {
       display: flex;
       flex-direction: column;
@@ -521,7 +539,6 @@
       width: 22px;
     }
 
-    /* Compose icon button (rounded square bg, like ChatGPT) */
     .compose-btn {
       width: 38px;
       height: 38px;
@@ -546,7 +563,6 @@
       height: 18px;
     }
 
-    /* Center title — "Kiri-AI" pill (ChatGPT Style) */
     .top-title-group {
       flex: 1;
       display: flex;
@@ -582,21 +598,21 @@
       align-items: center;
     }
 
-    /* Right icon group */
     .top-right-icons {
       display: flex;
       align-items: center;
       gap: 0;
     }
 
-    /* ── MODEL SELECTOR (OpenRouter) ── */
+    /* ── MODEL SELECTOR ── */
     .model-selector-container {
-      padding: 10px 16px 2px 16px;
+      padding: 8px 16px 4px 16px;
       display: flex;
       gap: 8px;
       overflow-x: auto;
       scrollbar-width: none;
       -ms-overflow-style: none;
+      flex-shrink: 0;
     }
 
     .model-selector-container::-webkit-scrollbar {
@@ -611,16 +627,18 @@
       color: var(--dark-on-surface-variant);
       font-size: 13px;
       cursor: pointer;
-      border: 1px solid transparent;
+      border: 1.5px solid transparent;
       transition: all 0.2s;
+      flex-shrink: 0;
     }
 
     .model-pill.active {
-      background: var(--dark-primary-container);
-      color: var(--dark-on-primary-container);
-      border-color: var(--dark-primary);
+      background: rgba(103, 80, 164, 0.2);
+      color: #BB86FC;
+      border-color: rgba(103, 80, 164, 0.5);
     }
 
+    /* ── DRAWER ── */
     .drawer-overlay {
       position: absolute;
       inset: 0;
@@ -682,6 +700,7 @@
       color: #BB86FC;
       font-size: 14px;
       font-weight: 500;
+      width: 100%;
     }
 
     .drawer-new-chat:hover {
@@ -822,6 +841,8 @@
       display: flex;
       flex-direction: column;
       position: relative;
+      /* FIX: Allow shrink when keyboard appears */
+      min-height: 0;
     }
 
     /* ── CHAT PANEL ── */
@@ -830,39 +851,43 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      min-height: 0;
     }
 
     /* Messages scroll area */
     .messages-scroll {
       flex: 1;
       overflow-y: auto;
-      padding: 16px 0;
+      overflow-x: hidden;
+      padding: 12px 0;
       scroll-behavior: smooth;
       overscroll-behavior: contain;
+      /* FIX: Allow this to shrink when keyboard appears */
+      min-height: 0;
     }
 
     .messages-scroll::-webkit-scrollbar {
       width: 0;
     }
 
-    /* Empty state — ChatGPT exact: big centered question, no logo */
+    /* Empty state */
     .chat-empty {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100%;
-      padding: 40px 28px 20px;
+      padding: 32px 28px 20px;
       text-align: center;
     }
 
     .empty-h2 {
       font-family: var(--font-serif);
-      font-size: clamp(28px, 7vw, 38px);
+      font-size: clamp(26px, 7vw, 36px);
       color: var(--dark-on-surface);
       line-height: 1.2;
       letter-spacing: -0.5px;
-      margin-bottom: 36px;
+      margin-bottom: 28px;
       max-width: 340px;
     }
 
@@ -878,7 +903,7 @@
       background: var(--dark-surface-container);
       border: 1px solid rgba(255, 255, 255, 0.07);
       border-radius: 16px;
-      padding: 16px 14px;
+      padding: 14px 12px;
       cursor: pointer;
       text-align: left;
       transition: all 0.18s;
@@ -894,8 +919,8 @@
     }
 
     .sug-emoji {
-      font-size: 22px;
-      margin-bottom: 10px;
+      font-size: 20px;
+      margin-bottom: 8px;
     }
 
     .sug-text {
@@ -907,14 +932,14 @@
 
     /* Message bubbles */
     .msg-row {
-      padding: 4px 16px;
-      animation: msgSlide 0.25s ease-out;
+      padding: 3px 16px;
+      animation: msgSlide 0.22s ease-out;
     }
 
     @keyframes msgSlide {
       from {
         opacity: 0;
-        transform: translateY(8px)
+        transform: translateY(6px)
       }
 
       to {
@@ -933,7 +958,7 @@
       max-width: 78%;
       background: #2f2f2f;
       color: #ffffff;
-      border-radius: 20px;
+      border-radius: 20px 20px 4px 20px;
       padding: 12px 18px;
       font-size: 15px;
       line-height: 1.55;
@@ -948,7 +973,6 @@
 
     .ai-avatar {
       display: none;
-      /* Hidden to match reference UI */
       width: 32px;
       height: 32px;
       border-radius: 50%;
@@ -1066,15 +1090,14 @@
     }
 
     .msg-row.ai .msg-time {
-      padding-left: 42px;
+      padding-left: 0;
     }
 
     /* Action bar under AI message */
     .ai-actions {
       display: flex;
       gap: 4px;
-      margin-top: 6px;
-      padding-left: 42px;
+      margin-top: 4px;
     }
 
     .ai-action-btn {
@@ -1107,7 +1130,7 @@
       display: flex;
       gap: 5px;
       align-items: center;
-      padding: 14px 16px;
+      padding: 10px 0;
     }
 
     .t-dot {
@@ -1145,10 +1168,11 @@
       background: rgba(255, 165, 0, 0.1);
       border: 1px solid rgba(255, 165, 0, 0.3);
       border-radius: 14px;
-      padding: 14px 16px;
+      padding: 12px 16px;
       display: none;
       align-items: center;
       gap: 12px;
+      flex-shrink: 0;
     }
 
     .limit-banner.show {
@@ -1185,14 +1209,23 @@
       white-space: nowrap;
     }
 
-    /* ── INPUT BAR — ChatGPT Android exact ── */
+    /* ══════════════════════════════════
+       INPUT BAR — KEYBOARD FIX AREA
+       KEY: No fixed/absolute positioning.
+       It sits at bottom of flex column and
+       stays attached when keyboard opens.
+    ══════════════════════════════════ */
     .input-bar {
       background: var(--dark-surface);
-      padding: 8px 12px 10px;
+      /* FIX: Remove all padding-bottom that adds gap above keyboard */
+      padding: 6px 12px;
+      /* FIX: Account for home indicator on notched phones only */
+      padding-bottom: max(6px, env(safe-area-inset-bottom));
       flex-shrink: 0;
       position: relative;
-      /* Lock to bottom of flex container */
       width: 100%;
+      /* FIX: Ensure it's always at the very bottom */
+      z-index: 10;
     }
 
     .input-wrapper {
@@ -1200,22 +1233,20 @@
       align-items: flex-end;
       gap: 0;
       background: var(--dark-surface-container);
-      border: none;
       border-radius: 28px;
-      padding: 6px 6px 6px 12px;
-      transition: none;
+      padding: 5px 5px 5px 12px;
       box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+      transition: box-shadow 0.2s;
     }
 
     .input-wrapper:focus-within {
-      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 0 1.5px rgba(103, 80, 164, 0.5);
     }
 
-    /* + attachment button on the left */
     .input-plus-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 19px;
+      width: 36px;
+      height: 36px;
+      border-radius: 18px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
@@ -1227,6 +1258,7 @@
       margin-right: 6px;
       align-self: flex-end;
       transition: background 0.15s;
+      margin-bottom: 1px;
     }
 
     .input-plus-btn:hover {
@@ -1234,8 +1266,8 @@
     }
 
     .input-plus-btn svg {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
     }
 
     .chat-textarea {
@@ -1244,14 +1276,17 @@
       outline: none;
       resize: none;
       background: transparent;
+      /* FIX: 16px prevents iOS zoom on focus */
       font-size: 16px;
       font-family: var(--font-sans);
       color: var(--dark-on-surface);
-      line-height: 1.5;
-      max-height: 140px;
-      min-height: 26px;
+      line-height: 1.45;
+      /* FIX: Reduced max-height so keyboard doesn't push things badly */
+      max-height: 120px;
+      min-height: 24px;
       padding: 6px 4px 6px 0;
       align-self: flex-end;
+      overflow-y: auto;
     }
 
     .chat-textarea::placeholder {
@@ -1259,18 +1294,17 @@
       font-size: 16px;
     }
 
-    /* Right side buttons: mic + voice-wave orb */
     .input-right {
       display: flex;
       align-items: flex-end;
-      gap: 6px;
+      gap: 4px;
       flex-shrink: 0;
     }
 
     .mic-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 19px;
+      width: 36px;
+      height: 36px;
+      border-radius: 18px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
@@ -1281,6 +1315,7 @@
       cursor: pointer;
       transition: background 0.15s;
       align-self: flex-end;
+      margin-bottom: 1px;
     }
 
     .mic-btn:hover {
@@ -1288,15 +1323,14 @@
     }
 
     .mic-btn svg {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
     }
 
-    /* Voice orb — the dark circle with waveform lines like ChatGPT */
     .voice-orb {
-      width: 40px;
-      height: 40px;
-      border-radius: 20px;
+      width: 38px;
+      height: 38px;
+      border-radius: 19px;
       flex-shrink: 0;
       background: #2A2A2E;
       border: none;
@@ -1307,6 +1341,7 @@
       transition: background 0.15s;
       align-self: flex-end;
       gap: 2px;
+      margin-bottom: 1px;
     }
 
     .voice-orb:hover {
@@ -1320,30 +1355,29 @@
     }
 
     .voice-bar:nth-child(1) {
-      height: 8px;
+      height: 7px;
     }
 
     .voice-bar:nth-child(2) {
-      height: 14px;
+      height: 12px;
     }
 
     .voice-bar:nth-child(3) {
-      height: 20px;
+      height: 18px;
     }
 
     .voice-bar:nth-child(4) {
-      height: 14px;
+      height: 12px;
     }
 
     .voice-bar:nth-child(5) {
-      height: 8px;
+      height: 7px;
     }
 
-    /* Send button — only shown when there's text, replaces voice orb */
     .send-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 20px;
+      width: 38px;
+      height: 38px;
+      border-radius: 19px;
       flex-shrink: 0;
       background: var(--dark-on-surface);
       border: none;
@@ -1351,39 +1385,44 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.18s;
       align-self: flex-end;
+      margin-bottom: 1px;
     }
 
     .send-btn.visible {
       display: flex;
     }
 
+    .send-btn:active {
+      transform: scale(0.92);
+    }
+
     .send-btn svg {
-      width: 18px;
-      height: 18px;
+      width: 17px;
+      height: 17px;
       color: var(--dark-surface);
     }
 
     .input-hint {
       text-align: center;
       font-size: 11px;
-      color: rgba(255, 255, 255, 0.25);
-      margin-top: 7px;
+      color: rgba(255, 255, 255, 0.2);
+      margin-top: 5px;
+      /* FIX: Hide hint when keyboard is open to save vertical space */
+      transition: all 0.2s;
     }
 
-    /* Keyboard open state */
+    /* FIX: When keyboard is open, collapse padding to zero */
     body.keyboard-open .input-bar {
-      padding-bottom: 2px !important;
+      padding-bottom: 4px !important;
     }
 
     body.keyboard-open .input-hint {
       display: none !important;
     }
 
-    /* bottom nav removed */
-
-    /* ── INNER PANELS (Settings, Pricing, History) ── */
+    /* ── INNER PANELS ── */
     .inner-panel {
       position: absolute;
       inset: 0;
@@ -1791,6 +1830,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      pointer-events: none;
     }
 
     .toast {
@@ -1806,18 +1846,17 @@
       gap: 8px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
       animation: toastIn 0.25s ease;
-      pointer-events: none;
     }
 
     @keyframes toastIn {
       from {
         opacity: 0;
-        transform: translateY(-10px)
+        transform: translateY(-10px) translateX(10px)
       }
 
       to {
         opacity: 1;
-        transform: translateY(0)
+        transform: translateY(0) translateX(0)
       }
     }
 
@@ -1840,6 +1879,7 @@
       z-index: 999;
       background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       display: none;
       align-items: flex-end;
       justify-content: center;
@@ -1932,7 +1972,7 @@
       align-items: center;
       justify-content: center;
       gap: 32px;
-      transition: opacity 0.35s;
+      transition: opacity 0.4s;
     }
 
     .loading-icon {
@@ -1944,6 +1984,7 @@
       align-items: center;
       justify-content: center;
       font-size: 32px;
+      overflow: hidden;
       animation: iconPulse 1.5s ease-in-out infinite;
     }
 
@@ -2018,18 +2059,19 @@
     /* ─── IMAGE PREVIEW ─── */
     .image-preview-container {
       display: none;
-      padding: 8px 16px;
-      gap: 12px;
+      padding: 6px 16px;
+      gap: 10px;
       background: var(--dark-surface-container);
       border-top: 1px solid rgba(255, 255, 255, 0.06);
       align-items: center;
       overflow-x: auto;
+      flex-shrink: 0;
     }
 
     .image-preview-item {
       position: relative;
-      width: 60px;
-      height: 60px;
+      width: 56px;
+      height: 56px;
       border-radius: 8px;
       overflow: hidden;
       flex-shrink: 0;
@@ -2069,7 +2111,7 @@
       right: 2px;
       width: 18px;
       height: 18px;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.65);
       color: #fff;
       border: none;
       border-radius: 50%;
@@ -2083,7 +2125,7 @@
     .voice-orb.active {
       animation: voiceWave 1.2s infinite ease-in-out;
       background: var(--primary);
-      box-shadow: 0 0 20px var(--primary);
+      box-shadow: 0 0 20px rgba(103, 80, 164, 0.6);
     }
 
     @keyframes voiceWave {
@@ -2097,6 +2139,41 @@
         transform: scale(1.15);
       }
     }
+
+    /* ─── ENHANCED: Scrollbar for messages on desktop ─── */
+    @media (min-width: 600px) {
+      .messages-scroll::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      .messages-scroll::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .messages-scroll::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 2px;
+      }
+    }
+
+    /* ─── ENHANCED: Smooth send button appearance ─── */
+    .send-btn {
+      transform: scale(0.8);
+      opacity: 0;
+      transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.15s, background 0.15s;
+    }
+
+    .send-btn.visible {
+      display: flex;
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    /* ─── ENHANCED: mic/voice buttons fade out ─── */
+    .mic-btn,
+    .voice-orb {
+      transition: opacity 0.15s, background 0.15s;
+    }
   </style>
 </head>
 
@@ -2108,7 +2185,7 @@
     <div id="loading">
       <div class="loading-icon">
         <img src="assets/logo.png" alt="Logo"
-          style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; animation: logoAppearing 1.8s ease-out forwards;">
+          style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
       </div>
       <div class="loading-dots">
         <div class="l-dot"></div>
@@ -2182,12 +2259,12 @@
         <div class="err-msg" id="login-err"></div>
         <div class="field-group">
           <label class="field-label">Email address</label>
-          <input type="email" class="field-input" id="login-email" placeholder="you@example.com" />
+          <input type="email" class="field-input" id="login-email" placeholder="you@example.com" autocomplete="email" />
         </div>
         <div class="field-group">
           <label class="field-label">Password</label>
           <input type="password" class="field-input" id="login-pass" placeholder="••••••••"
-            onkeydown="if(event.key==='Enter')doLogin()" />
+            autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()" />
         </div>
         <button class="btn-auth" id="login-btn" onclick="doLogin()">Sign in</button>
         <div class="auth-switch">Don't have an account? <a onclick="showView('register-view')">Create one free</a></div>
@@ -2210,16 +2287,16 @@
         <div class="err-msg" id="reg-err"></div>
         <div class="field-group">
           <label class="field-label">Full name</label>
-          <input type="text" class="field-input" id="reg-name" placeholder="Alex Johnson" />
+          <input type="text" class="field-input" id="reg-name" placeholder="Alex Johnson" autocomplete="name" />
         </div>
         <div class="field-group">
           <label class="field-label">Email address</label>
-          <input type="email" class="field-input" id="reg-email" placeholder="you@example.com" />
+          <input type="email" class="field-input" id="reg-email" placeholder="you@example.com" autocomplete="email" />
         </div>
         <div class="field-group">
           <label class="field-label">Password</label>
           <input type="password" class="field-input" id="reg-pass" placeholder="Min. 6 characters"
-            onkeydown="if(event.key==='Enter')doRegister()" />
+            autocomplete="new-password" onkeydown="if(event.key==='Enter')doRegister()" />
         </div>
         <button class="btn-auth" id="reg-btn" onclick="doRegister()">Create free account</button>
         <div class="auth-switch">Already have an account? <a onclick="showView('login-view')">Sign in</a></div>
@@ -2267,16 +2344,14 @@
         </div>
       </div>
 
-      <!-- Top App Bar — ChatGPT Android style -->
+      <!-- Top App Bar -->
       <div class="top-app-bar">
-        <!-- Hamburger -->
         <button class="top-icon-btn" onclick="openDrawer()" style="margin-left:2px;">
           <div class="hamburger-icon">
             <span></span><span></span><span></span>
           </div>
         </button>
 
-        <!-- Center: Kiri-AI Pill -->
         <div class="top-title-group">
           <div class="top-title-pill" onclick="openDrawer()">
             <span class="top-title-text" id="top-title-text">Kiri-AI</span>
@@ -2290,7 +2365,6 @@
           </div>
         </div>
 
-        <!-- Right icons: Settings / More dots -->
         <div class="top-right-icons">
           <button class="top-icon-btn" title="Settings" onclick="openPanel('settings-panel')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2307,7 +2381,7 @@
 
         <!-- ─ CHAT PANEL ─ -->
         <div id="chat-panel">
-          <!-- OpenRouter Model Selector -->
+          <!-- Model Selector -->
           <div class="model-selector-container" id="model-selector">
             <div class="model-pill active" onclick="selectModel('google/gemini-2.0-flash-001', this)">Gemini 2.0</div>
             <div class="model-pill" onclick="selectModel('openai/gpt-4o-mini', this)">GPT-4o Mini</div>
@@ -2316,7 +2390,6 @@
           </div>
 
           <div class="messages-scroll" id="messages-scroll">
-
             <!-- Limit banner -->
             <div class="limit-banner" id="limit-banner">
               <span style="font-size:20px;">⚡</span>
@@ -2360,7 +2433,6 @@
           <!-- Input bar -->
           <div class="input-bar">
             <div class="input-wrapper">
-              <!-- + button (left) -->
               <input type="file" id="image-input" accept="image/*,.pdf" multiple style="display:none"
                 onchange="handleFileSelect(this)">
               <button class="input-plus-btn" title="Attach" onclick="document.getElementById('image-input').click()">
@@ -2369,10 +2441,8 @@
                   <line x1="5" y1="12" x2="19" y2="12" />
                 </svg>
               </button>
-              <!-- Textarea -->
               <textarea class="chat-textarea" id="chat-input" placeholder="Ask anything" rows="1"
                 onkeydown="handleKey(event)" oninput="autoResize(this); toggleSendBtn(this.value)"></textarea>
-              <!-- Right: mic + voice orb OR send -->
               <div class="input-right">
                 <button class="mic-btn" id="mic-btn" title="Voice input" onclick="startMic()">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -2478,10 +2548,11 @@
                   <div class="settings-row-label">Clear all conversations</div>
                   <div class="settings-row-sub">Cannot be undone</div>
                 </div>
-                <div class="settings-row-end"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
+                <div class="settings-row-end">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="9 18 15 12 9 6" />
-                  </svg></div>
+                  </svg>
+                </div>
               </div>
             </div>
 
@@ -2494,10 +2565,11 @@
                   <div class="settings-row-label">Sign out</div>
                   <div class="settings-row-sub">End current session</div>
                 </div>
-                <div class="settings-row-end"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
+                <div class="settings-row-end">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="9 18 15 12 9 6" />
-                  </svg></div>
+                  </svg>
+                </div>
               </div>
               <div class="settings-row" onclick="confirmDeleteAccount()">
                 <div class="settings-row-icon" style="background:rgba(179,38,30,0.15);">⚠️</div>
@@ -2505,10 +2577,11 @@
                   <div class="settings-row-label" style="color:#F2B8B5;">Delete account</div>
                   <div class="settings-row-sub">Permanently delete all data</div>
                 </div>
-                <div class="settings-row-end"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
+                <div class="settings-row-end">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="9 18 15 12 9 6" />
-                  </svg></div>
+                  </svg>
+                </div>
               </div>
             </div>
 
@@ -2561,8 +2634,7 @@
     }
 
     // --- INTERACTIVE FEATURES STATE ---
-    let selectedFiles = []; // Array of { data: base64, mimeType: string, name: string, isImage: bool }
-    let isVoiceMode = false;
+    let selectedFiles = [];
     let recognition = null;
     let synth = window.speechSynthesis;
     let voiceModeActive = false;
@@ -2571,9 +2643,7 @@
     // INIT
     // ══════════════════════════════════
     window.addEventListener('DOMContentLoaded', async () => {
-      // Force minimum 3 seconds loading screen
       const minLoadingTime = new Promise(resolve => setTimeout(resolve, 3000));
-
       const tok = localStorage.getItem('kiri_token');
 
       try {
@@ -2595,14 +2665,12 @@
         showView('landing-view');
       }
       renderPricingCards();
-
-      renderPricingCards();
     });
 
     function hideLoading() {
       const el = document.getElementById('loading');
       el.style.opacity = '0';
-      setTimeout(() => el.style.display = 'none', 500);
+      setTimeout(() => el.style.display = 'none', 400);
     }
 
     // ══════════════════════════════════
@@ -2630,7 +2698,7 @@
       const el = document.getElementById(id);
       if (el) {
         el.style.display = 'flex';
-        el.classList.add('active');
+        requestAnimationFrame(() => el.classList.add('active'));
       }
     }
 
@@ -2649,6 +2717,7 @@
       document.getElementById('drawer-overlay').classList.add('open');
       renderDrawerConvs();
     }
+
     function closeDrawer() {
       document.getElementById('drawer').classList.remove('open');
       document.getElementById('drawer-overlay').classList.remove('open');
@@ -2664,11 +2733,10 @@
       if (id === 'settings-panel') populateSettings();
       if (id === 'history-panel') renderHistory();
     }
+
     function closePanel(id) {
       document.getElementById(id).classList.remove('show');
     }
-
-    // Navigation handled via drawer and inner panels only
 
     // ══════════════════════════════════
     // TOP BAR
@@ -2710,34 +2778,34 @@
         return;
       }
       el.innerHTML = convs.map(c => `
-    <div class="conv-item ${activeConvId === c._id ? 'active' : ''}" onclick="loadConv('${c._id}'); closeDrawer();">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-      <span class="conv-title">${esc(c.title)}</span>
-      <button class="conv-del" onclick="event.stopPropagation(); deleteConv('${c._id}')">✕</button>
-    </div>
-  `).join('');
+        <div class="conv-item ${activeConvId === c._id ? 'active' : ''}" onclick="loadConv('${c._id}'); closeDrawer();">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <span class="conv-title">${esc(c.title)}</span>
+          <button class="conv-del" onclick="event.stopPropagation(); deleteConv('${c._id}')">✕</button>
+        </div>
+      `).join('');
     }
 
     function renderHistory() {
       const el = document.getElementById('history-list');
       if (!convs.length) {
         el.innerHTML = `
-      <div class="history-empty">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-        <p>No conversations yet.<br>Start chatting to see your history here.</p>
-      </div>`;
+          <div class="history-empty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            <p>No conversations yet.<br>Start chatting to see your history here.</p>
+          </div>`;
         return;
       }
       el.innerHTML = convs.map(c => `
-    <div class="history-conv-item" onclick="loadConv('${c._id}'); closePanel('history-panel'); activateNav('chat');">
-      <div class="history-conv-icon">💬</div>
-      <div class="history-conv-info">
-        <div class="history-conv-title">${esc(c.title)}</div>
-        <div class="history-conv-date">${c.updatedAt ? new Date(c.updatedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : ''}</div>
-      </div>
-      <button class="history-conv-del" onclick="event.stopPropagation(); deleteConv('${c._id}')">✕</button>
-    </div>
-  `).join('');
+        <div class="history-conv-item" onclick="loadConv('${c._id}'); closePanel('history-panel');">
+          <div class="history-conv-icon">💬</div>
+          <div class="history-conv-info">
+            <div class="history-conv-title">${esc(c.title)}</div>
+            <div class="history-conv-date">${c.updatedAt ? new Date(c.updatedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : ''}</div>
+          </div>
+          <button class="history-conv-del" onclick="event.stopPropagation(); deleteConv('${c._id}')">✕</button>
+        </div>
+      `).join('');
     }
 
     async function loadConv(id) {
@@ -2746,13 +2814,16 @@
       try {
         const d = await api('/chat/conversations/' + id);
         const conv = d.conversation;
-        document.getElementById('model-pill-name').textContent = conv.title && conv.title.length < 28 ? conv.title : 'Kiri Pro';
+        const shortTitle = conv.title && conv.title.length < 28 ? conv.title : 'Kiri-AI';
+        document.getElementById('top-title-text').textContent = shortTitle;
         document.getElementById('chat-empty').style.display = 'none';
         const msgs = document.getElementById('msgs');
         msgs.style.display = 'block';
         msgs.innerHTML = conv.messages.map(m => buildMsgHTML(m.role, m.content, m.timestamp)).join('');
         scrollDown();
-      } catch { toast('Failed to load conversation.', 'error'); }
+      } catch {
+        toast('Failed to load conversation.', 'error');
+      }
     }
 
     async function deleteConv(id) {
@@ -2763,7 +2834,9 @@
         renderDrawerConvs();
         renderHistory();
         toast('Conversation deleted.', 'info');
-      } catch { toast('Failed to delete.', 'error'); }
+      } catch {
+        toast('Failed to delete.', 'error');
+      }
     }
 
     function newChat() {
@@ -2782,42 +2855,67 @@
     // ══════════════════════════════════
     // MESSAGING
     // ══════════════════════════════════
-    document.getElementById('chat-input').addEventListener('input', function () {
-      toggleSendBtn(this.value);
-    });
-
     function toggleSendBtn(val) {
-      const hasText = val.trim().length > 0;
-      document.getElementById('send-btn').classList.toggle('visible', hasText);
-      document.getElementById('mic-btn').style.display = hasText ? 'none' : 'flex';
-      document.getElementById('voice-orb').style.display = hasText ? 'none' : 'flex';
+      const hasContent = val.trim().length > 0 || selectedFiles.length > 0;
+      const sendBtn = document.getElementById('send-btn');
+      const micBtn = document.getElementById('mic-btn');
+      const voiceOrb = document.getElementById('voice-orb');
+
+      if (hasContent) {
+        sendBtn.classList.add('visible');
+        micBtn.style.opacity = '0';
+        micBtn.style.pointerEvents = 'none';
+        micBtn.style.width = '0';
+        micBtn.style.margin = '0';
+        voiceOrb.style.opacity = '0';
+        voiceOrb.style.pointerEvents = 'none';
+        voiceOrb.style.width = '0';
+        voiceOrb.style.margin = '0';
+      } else {
+        sendBtn.classList.remove('visible');
+        micBtn.style.opacity = '';
+        micBtn.style.pointerEvents = '';
+        micBtn.style.width = '';
+        micBtn.style.margin = '';
+        voiceOrb.style.opacity = '';
+        voiceOrb.style.pointerEvents = '';
+        voiceOrb.style.width = '';
+        voiceOrb.style.margin = '';
+      }
     }
 
     function handleKey(e) {
-      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
     }
 
     function autoResize(el) {
       el.style.height = 'auto';
-      el.style.height = Math.min(el.scrollHeight, 140) + 'px';
+      el.style.height = Math.min(el.scrollHeight, 120) + 'px';
     }
 
     function scrollDown() {
       const el = document.getElementById('messages-scroll');
-      requestAnimationFrame(() => el.scrollTop = el.scrollHeight);
+      requestAnimationFrame(() => {
+        el.scrollTop = el.scrollHeight;
+      });
     }
 
     async function sendMessage() {
       const input = document.getElementById('chat-input');
       const msg = input.value.trim();
-      if (!msg || isBusy) return;
+      if ((!msg && selectedFiles.length === 0) || isBusy) return;
+
       if (!user.isPremium && (user.dailyRequests || 0) >= 50) {
         document.getElementById('limit-banner').classList.add('show');
         toast('Daily limit reached. Upgrade to Premium!', 'error');
         return;
       }
 
-      input.value = ''; input.style.height = 'auto';
+      input.value = '';
+      input.style.height = 'auto';
       toggleSendBtn('');
       isBusy = true;
 
@@ -2825,33 +2923,38 @@
       const msgs = document.getElementById('msgs');
       msgs.style.display = 'block';
 
-      msgs.innerHTML += buildMsgHTML('user', msg);
+      msgs.innerHTML += buildMsgHTML('user', msg || '📎 Attachment');
       const typId = 'typ_' + Date.now();
       msgs.innerHTML += `
-    <div class="msg-row ai" id="${typId}">
-      <div class="ai-avatar">K</div>
-      <div class="ai-content">
-        <div class="ai-bubble">
-          <div class="typing-bubble"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div></div>
-        </div>
-      </div>
-    </div>`;
+        <div class="msg-row ai" id="${typId}">
+          <div class="ai-avatar">K</div>
+          <div class="ai-content">
+            <div class="ai-bubble">
+              <div class="typing-bubble"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div></div>
+            </div>
+          </div>
+        </div>`;
       scrollDown();
 
-      let aiMsg = null;
-      // Only include conversationId if it's a valid non-null value
+      // Build request body
       const body = { message: msg, model: selectedModel };
-      if (activeConvId && activeConvId !== 'undefined' && activeConvId !== 'null') {
+      // FIX: Only attach valid conversationId
+      if (activeConvId && activeConvId !== 'undefined' && activeConvId !== 'null' && activeConvId !== null) {
         body.conversationId = activeConvId;
       }
-      try {
-        if (selectedFiles.length > 0) {
-          body.attachments = selectedFiles.map(f => ({ data: f.data, mimeType: f.mimeType }));
-          clearFiles(); // Clear after sending
-        }
+      // Attach files if any
+      if (selectedFiles.length > 0) {
+        body.attachments = selectedFiles.map(f => ({ data: f.data, mimeType: f.mimeType }));
+        clearFiles();
+      }
 
+      let aiMsg = null;
+
+      try {
         const d = await api('/chat/message', 'POST', body);
         document.getElementById(typId)?.remove();
+
+        // FIX: Only update activeConvId if we just started a new conversation
         if (!activeConvId) {
           activeConvId = d.conversationId;
           const shortTitle = (d.title || 'Kiri-AI').substring(0, 26);
@@ -2862,8 +2965,7 @@
         aiMsg = d.message;
         msgs.innerHTML += buildMsgHTML('assistant', aiMsg);
 
-        // Voice Assistant logic
-        if (voiceModeActive) {
+        if (voiceModeActive && aiMsg) {
           speak(aiMsg);
         }
 
@@ -2871,28 +2973,30 @@
         updateRequestBadge();
         renderDrawerConvs();
         scrollDown();
+
       } catch (err) {
         document.getElementById(typId)?.remove();
+
         if (err.status === 429) {
           document.getElementById('limit-banner').classList.add('show');
           user.dailyRequests = 50;
           updateRequestBadge();
           toast('Daily limit reached!', 'error');
+        } else if (err.status === 401) {
+          // FIX: Handle expired token gracefully
+          toast('Session expired. Please sign in again.', 'error');
+          setTimeout(() => doLogout(), 1500);
         } else {
-          const detail = err.data && err.data.message ? err.data.message : (err.message || 'Unknown server error');
-          msgs.innerHTML += buildMsgHTML('assistant', `⚠️ AI Error: ${detail}<br><small>If this persists, check your OpenRouter API key and backend settings.</small>`);
-          toast(`AI Error: ${detail}`, 'error');
+          const detail = (err.data && err.data.message) ? err.data.message : (err.message || 'Unknown server error');
+          msgs.innerHTML += buildMsgHTML('assistant',
+            `⚠️ Something went wrong: ${detail}\n\nPlease try again or check your connection.`);
+          toast(`Error: ${detail}`, 'error');
           scrollDown();
         }
       } finally {
         isBusy = false;
         toggleSendBtn(input.value);
         input.focus();
-
-        // If in voice mode, automatically read the response
-        if (voiceModeActive && aiMsg) {
-          speak(aiMsg);
-        }
       }
     }
 
@@ -2926,11 +3030,11 @@
             preview: e.target.result
           });
           renderPreviews();
-          toggleSendBtn('text'); // Force send visible
+          toggleSendBtn('text');
         };
         reader.readAsDataURL(file);
       });
-      input.value = ''; // Reset input
+      input.value = '';
     }
 
     function renderPreviews() {
@@ -2945,8 +3049,9 @@
           ${file.isImage
           ? `<img src="${file.preview}" alt="Preview">`
           : `<div class="file-preview-icon">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
                 </svg>
                 <div class="file-name-tag">${esc(file.name)}</div>
                </div>`
@@ -2969,7 +3074,7 @@
       renderPreviews();
     }
 
-    // --- VOICE LOGIC (MIC & ASSISTANT) ---
+    // --- VOICE LOGIC ---
     function initSpeech() {
       if (recognition) return true;
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -2987,7 +3092,6 @@
         for (let i = event.resultIndex; i < event.results.length; ++i) {
           transcript += event.results[i][0].transcript;
         }
-
         const inputEl = document.getElementById('chat-input');
         inputEl.value = (inputEl.value + ' ' + transcript).trim();
         toggleSendBtn(inputEl.value);
@@ -2996,8 +3100,9 @@
 
       recognition.onerror = (e) => {
         console.error('Speech error:', e);
-        if (voiceModeActive) voiceModeActive = false;
+        voiceModeActive = false;
         document.getElementById('voice-orb').classList.remove('active');
+        document.getElementById('mic-btn').style.color = '';
       };
 
       recognition.onend = () => {
@@ -3009,9 +3114,15 @@
 
     function startMic() {
       if (!initSpeech()) return;
-      recognition.start();
-      document.getElementById('mic-btn').style.color = 'var(--primary)';
-      toast('Listening...', 'info');
+      try {
+        recognition.start();
+        document.getElementById('mic-btn').style.color = 'var(--primary)';
+        toast('Listening…', 'info');
+      } catch (e) {
+        // Already started — abort and restart
+        recognition.abort();
+        setTimeout(() => startMic(), 200);
+      }
     }
 
     function toggleVoiceMode() {
@@ -3021,12 +3132,10 @@
       if (voiceModeActive) {
         orb.classList.add('active');
         toast('Voice Assistant Active', 'success');
-
-        // Find the last AI message in the DOM and read it
-        const aiBubbles = document.querySelectorAll('.ai-bubble:not(:has(.typing-bubble))');
-        if (aiBubbles.length > 0) {
-          const lastText = aiBubbles[aiBubbles.length - 1].innerText;
-          speak(lastText);
+        const aiBubbles = document.querySelectorAll('.ai-bubble');
+        const lastBubble = Array.from(aiBubbles).filter(b => !b.querySelector('.typing-bubble')).pop();
+        if (lastBubble) {
+          speak(lastBubble.innerText);
         } else {
           speak("Hi, I'm Kiri. How can I help you today?");
         }
@@ -3040,8 +3149,7 @@
     function speak(text) {
       if (!synth) return;
       synth.cancel();
-      // Remove markdown for cleaner speech
-      const cleanText = text.replace(/[*#`]/g, '').substring(0, 500);
+      const cleanText = text.replace(/[*#`_~]/g, '').substring(0, 600);
       const utter = new SpeechSynthesisUtterance(cleanText);
       utter.rate = 1.0;
       utter.pitch = 1.0;
@@ -3050,38 +3158,42 @@
 
     function sendSug(text) {
       document.getElementById('chat-input').value = text;
+      autoResize(document.getElementById('chat-input'));
+      toggleSendBtn(text);
       sendMessage();
     }
 
     function buildMsgHTML(role, content, ts) {
       const isUser = role === 'user';
       const time = ts ? new Date(ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Just now';
-      const avatar = isUser ? (user?.name?.charAt(0)?.toUpperCase() || 'U') : 'K';
       const html = isUser
         ? esc(content).replace(/\n/g, '<br>')
         : (typeof marked !== 'undefined' ? marked.parse(content) : esc(content).replace(/\n/g, '<br>'));
 
       if (isUser) {
         return `<div class="msg-row user">
-      <div>
-        <div class="user-bubble">${html}</div>
-        <div class="msg-time">${time}</div>
-      </div>
-    </div>`;
+          <div>
+            <div class="user-bubble">${html}</div>
+            <div class="msg-time">${time}</div>
+          </div>
+        </div>`;
       }
       return `<div class="msg-row ai">
-    <div class="ai-avatar">${avatar}</div>
-    <div class="ai-content">
-      <div class="ai-bubble">${html}</div>
-      <div class="ai-actions">
-        <button class="ai-action-btn" onclick="copyMsg(this)" title="Copy">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          Copy
-        </button>
-      </div>
-      <div class="msg-time">${time}</div>
-    </div>
-  </div>`;
+        <div class="ai-avatar">K</div>
+        <div class="ai-content">
+          <div class="ai-bubble">${html}</div>
+          <div class="ai-actions">
+            <button class="ai-action-btn" onclick="copyMsg(this)" title="Copy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+              </svg>
+              Copy
+            </button>
+          </div>
+          <div class="msg-time">${time}</div>
+        </div>
+      </div>`;
     }
 
     function copyMsg(btn) {
@@ -3098,15 +3210,20 @@
       errEl.style.display = 'none';
       if (!email || !pass) { showErr(errEl, 'Please fill in all fields.'); return; }
       const btn = document.getElementById('login-btn');
-      btn.disabled = true; btn.textContent = 'Signing in…';
+      btn.disabled = true;
+      btn.textContent = 'Signing in…';
       try {
         const d = await api('/auth/login', 'POST', { email, password: pass });
         localStorage.setItem('kiri_token', d.token);
         user = d.user;
         enterApp();
         toast('Welcome back, ' + user.name.split(' ')[0] + '!', 'success');
-      } catch (e) { showErr(errEl, e.message || 'Login failed.'); }
-      finally { btn.disabled = false; btn.textContent = 'Sign in'; }
+      } catch (e) {
+        showErr(errEl, e.message || 'Login failed. Check your credentials.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Sign in';
+      }
     }
 
     async function doRegister() {
@@ -3116,27 +3233,40 @@
       if (!name || !email || !pass) { showErr(errEl, 'Please fill in all fields.'); return; }
       if (pass.length < 6) { showErr(errEl, 'Password must be at least 6 characters.'); return; }
       const btn = document.getElementById('reg-btn');
-      btn.disabled = true; btn.textContent = 'Creating account…';
+      btn.disabled = true;
+      btn.textContent = 'Creating account…';
       try {
         const d = await api('/auth/register', 'POST', { name, email, password: pass });
         localStorage.setItem('kiri_token', d.token);
         user = d.user;
         enterApp();
         toast('Welcome to Kiri-AI, ' + user.name.split(' ')[0] + '!', 'success');
-      } catch (e) { showErr(errEl, e.message || 'Registration failed.'); }
-      finally { btn.disabled = false; btn.textContent = 'Create free account'; }
+      } catch (e) {
+        showErr(errEl, e.message || 'Registration failed. Try a different email.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Create free account';
+      }
     }
 
     function doLogout() {
       localStorage.removeItem('kiri_token');
-      user = null; convs = []; activeConvId = null;
-      showView('landing-view');
+      user = null;
+      convs = [];
+      activeConvId = null;
       closePanel('settings-panel');
+      showView('landing-view');
       toast('Signed out.', 'info');
     }
 
-    function showErr(el, msg) { el.textContent = msg; el.style.display = 'block'; }
-    function v(id) { return document.getElementById(id)?.value?.trim() || ''; }
+    function showErr(el, msg) {
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+
+    function v(id) {
+      return document.getElementById(id)?.value?.trim() || '';
+    }
 
     // ══════════════════════════════════
     // SETTINGS
@@ -3165,9 +3295,13 @@
       showModal('Clear all conversations', 'This will permanently delete all your chat history. This cannot be undone.', async () => {
         try {
           await api('/chat/conversations', 'DELETE');
-          convs = []; renderDrawerConvs(); newChat();
+          convs = [];
+          renderDrawerConvs();
+          newChat();
           toast('All conversations deleted.', 'info');
-        } catch { toast('Failed to delete.', 'error'); }
+        } catch {
+          toast('Failed to delete conversations.', 'error');
+        }
       });
     }
 
@@ -3176,12 +3310,14 @@
         try {
           await api('/auth/account', 'DELETE');
           doLogout();
-        } catch { toast('Failed.', 'error'); }
+        } catch {
+          toast('Failed to delete account.', 'error');
+        }
       });
     }
 
     // ══════════════════════════════════
-    // PRICING
+    // PRICING + RAZORPAY
     // ══════════════════════════════════
     const PLANS = [
       {
@@ -3203,35 +3339,42 @@
       const el = document.getElementById('pricing-cards');
       if (!el) return;
       el.innerHTML = PLANS.map(p => `
-    <div class="plan-card ${p.popular ? 'popular' : ''}">
-      ${p.popular ? '<div class="popular-badge-sm">⭐ Most Popular</div>' : ''}
-      <div class="plan-name">${p.name}</div>
-      <div class="plan-price">
-        <span class="price-cur">₹</span>
-        <span class="price-amt">${p.price}</span>
-        <span class="price-per">${p.period}</span>
-      </div>
-      ${p.savings ? `<div class="plan-savings">🎉 ${p.savings}</div>` : '<div style="height:20px;"></div>'}
-      <ul class="plan-feats">
-        ${p.feats.map(f => `<li><span class="ck">✓</span>${f}</li>`).join('')}
-      </ul>
-      <button class="btn-plan ${p.style}" onclick="handlePlan('${p.id}')">${p.cta}</button>
-    </div>
-  `).join('');
+        <div class="plan-card ${p.popular ? 'popular' : ''}">
+          ${p.popular ? '<div class="popular-badge-sm">⭐ Most Popular</div>' : ''}
+          <div class="plan-name">${p.name}</div>
+          <div class="plan-price">
+            <span class="price-cur">₹</span>
+            <span class="price-amt">${p.price}</span>
+            <span class="price-per">${p.period}</span>
+          </div>
+          ${p.savings ? `<div class="plan-savings">🎉 ${p.savings}</div>` : '<div style="height:20px;"></div>'}
+          <ul class="plan-feats">
+            ${p.feats.map(f => `<li><span class="ck">✓</span>${f}</li>`).join('')}
+          </ul>
+          <button class="btn-plan ${p.style}" onclick="handlePlan('${p.id}')">${p.cta}</button>
+        </div>
+      `).join('');
     }
 
     async function handlePlan(planId) {
       if (planId === 'free') return;
-      if (!user) { showView('register-view'); return; }
+      if (!user) {
+        showView('register-view');
+        return;
+      }
+
+      const btn = event.target;
+      btn.disabled = true;
+      btn.textContent = 'Loading…';
 
       try {
-        toast('Redirecting to checkout…', 'info');
+        toast('Preparing checkout…', 'info');
         const data = await api('/subscription/create-order', 'POST', { plan: planId });
 
         const options = {
           key: data.keyId,
           amount: data.amount,
-          currency: data.currency,
+          currency: data.currency || 'INR',
           name: 'Kiri-AI Premium',
           description: `Subscription: ${planId}`,
           order_id: data.orderId,
@@ -3243,39 +3386,66 @@
                 razorpay_signature: response.razorpay_signature,
                 plan: planId
               });
-
               if (verifyData.success) {
-                toast('Subscription activated!', 'success');
+                toast('🎉 Premium activated! Enjoy unlimited AI.', 'success');
                 user = verifyData.user;
-                setTimeout(() => window.location.reload(), 2000);
+                updateTopBar();
+                populateSettings();
+                updateRequestBadge();
+                closePanel('pricing-panel');
+              } else {
+                toast('Payment verification failed. Contact support.', 'error');
               }
             } catch (err) {
-              toast('Payment verification failed.', 'error');
+              toast('Payment verification failed: ' + (err.message || 'Unknown error'), 'error');
             }
           },
           prefill: {
             name: user.name,
             email: user.email
           },
-          theme: {
-            color: '#6750A4'
+          theme: { color: '#6750A4' },
+          modal: {
+            ondismiss: function () {
+              toast('Payment cancelled.', 'info');
+            }
           }
         };
 
-        if (typeof Capacitor !== 'undefined' && Capacitor.isNativePlatform() && Capacitor.Plugins.NativeRazorpay) {
+        // FIX: Proper Capacitor native vs web Razorpay handling
+        const isCapacitorNative = typeof Capacitor !== 'undefined' &&
+          Capacitor.isNativePlatform() &&
+          Capacitor.Plugins &&
+          Capacitor.Plugins.NativeRazorpay;
+
+        if (isCapacitorNative) {
           try {
             const res = await Capacitor.Plugins.NativeRazorpay.open(options);
-            options.handler(res);
+            await options.handler(res);
           } catch (err) {
-            toast('Payment cancelled or failed.', 'error');
-            console.error(err);
+            if (err.code !== 'CANCELLED') {
+              toast('Payment failed: ' + (err.message || 'Unknown error'), 'error');
+            } else {
+              toast('Payment cancelled.', 'info');
+            }
           }
         } else {
+          // Web Razorpay
+          if (typeof Razorpay === 'undefined') {
+            toast('Payment gateway unavailable. Please try again.', 'error');
+            return;
+          }
           const rzp = new Razorpay(options);
+          rzp.on('payment.failed', function (resp) {
+            toast('Payment failed: ' + (resp.error.description || 'Unknown error'), 'error');
+          });
           rzp.open();
         }
       } catch (err) {
-        toast('Failed to start checkout.', 'error');
+        toast('Failed to start checkout: ' + (err.message || 'Server error'), 'error');
+      } finally {
+        btn.disabled = false;
+        renderPricingCards();
       }
     }
 
@@ -3286,14 +3456,18 @@
       document.getElementById('modal-title').textContent = title;
       document.getElementById('modal-desc').textContent = desc;
       modalCb = cb;
-      const overlay = document.getElementById('modal-overlay');
-      overlay.classList.add('show');
-      document.getElementById('modal-confirm').onclick = () => { closeModal(); modalCb && modalCb(); };
+      document.getElementById('modal-overlay').classList.add('show');
+      document.getElementById('modal-confirm').onclick = () => {
+        closeModal();
+        if (modalCb) modalCb();
+      };
     }
+
     function closeModal() {
       document.getElementById('modal-overlay').classList.remove('show');
       modalCb = null;
     }
+
     document.getElementById('modal-overlay').addEventListener('click', e => {
       if (e.target === document.getElementById('modal-overlay')) closeModal();
     });
@@ -3307,35 +3481,77 @@
       el.className = 'toast ' + type;
       el.textContent = msg;
       root.appendChild(el);
-      setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity 0.3s'; setTimeout(() => el.remove(), 300); }, 3000);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transition = 'opacity 0.3s';
+        setTimeout(() => el.remove(), 300);
+      }, 3000);
     }
 
     // ══════════════════════════════════
     // UTILS
     // ══════════════════════════════════
     function esc(s) {
-      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     }
 
     // ══════════════════════════════════
-    // KEYBOARD ADAPTATION (Capacitor Native)
+    // KEYBOARD ADAPTATION
     // ══════════════════════════════════
     (function initKeyboardFix() {
       const setKbdStyle = (isOpen) => {
-        if (isOpen) document.body.classList.add('keyboard-open');
-        else document.body.classList.remove('keyboard-open');
-        setTimeout(scrollDown, 150);
+        if (isOpen) {
+          document.body.classList.add('keyboard-open');
+        } else {
+          document.body.classList.remove('keyboard-open');
+        }
+        // Small delay to let layout settle then scroll messages
+        setTimeout(scrollDown, 100);
       };
 
+      // Capacitor keyboard events (most reliable on Android)
       if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Keyboard) {
         const { Keyboard } = window.Capacitor.Plugins;
         Keyboard.addListener('keyboardWillShow', () => setKbdStyle(true));
         Keyboard.addListener('keyboardWillHide', () => setKbdStyle(false));
+        Keyboard.addListener('keyboardDidShow', () => scrollDown());
+        Keyboard.addListener('keyboardDidHide', () => setKbdStyle(false));
       }
+
+      // VisualViewport API fallback — works in most modern mobile browsers
       if (window.visualViewport) {
+        let lastHeight = window.visualViewport.height;
         window.visualViewport.addEventListener('resize', () => {
-          const isKbd = window.visualViewport.height < window.innerHeight * 0.85;
-          setKbdStyle(isKbd);
+          const currentHeight = window.visualViewport.height;
+          const diff = lastHeight - currentHeight;
+          // FIX: Threshold of 150px to detect real keyboard (not just browser chrome resize)
+          const isKbd = diff > 150;
+          if (isKbd !== document.body.classList.contains('keyboard-open')) {
+            setKbdStyle(isKbd);
+          }
+          lastHeight = currentHeight;
+        });
+      }
+
+      // Focus/blur based detection as last resort
+      const chatInput = document.getElementById('chat-input');
+      if (chatInput) {
+        chatInput.addEventListener('focus', () => {
+          // On mobile browsers without visualViewport support
+          if (!window.visualViewport) {
+            setTimeout(() => setKbdStyle(true), 300);
+          }
+          setTimeout(scrollDown, 400);
+        });
+        chatInput.addEventListener('blur', () => {
+          if (!window.visualViewport) {
+            setTimeout(() => setKbdStyle(false), 100);
+          }
         });
       }
     })();
