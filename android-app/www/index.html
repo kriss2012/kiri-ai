@@ -11,6 +11,7 @@
     href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <style>
     :root {
       --primary: #6750A4;
@@ -544,27 +545,40 @@
       height: 18px;
     }
 
-    /* Center title — "Kiri-AI ▾" */
+    /* Center title — "Kiri-AI" pill (ChatGPT Style) */
     .top-title-group {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 5px;
+    }
+
+    .top-title-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       cursor: pointer;
+      background: var(--dark-surface-container-high);
+      padding: 6px 16px;
+      border-radius: 20px;
+      transition: background 0.15s;
+    }
+
+    .top-title-pill:active {
+      background: var(--dark-outline);
     }
 
     .top-title-text {
-      font-size: 17px;
-      font-weight: 600;
+      font-size: 16px;
+      font-weight: 500;
       color: var(--dark-on-surface);
-      letter-spacing: -0.3px;
+      letter-spacing: -0.2px;
     }
 
-    .top-title-chevron {
-      font-size: 11px;
+    .top-title-edit {
       color: var(--dark-on-surface-variant);
-      margin-top: 1px;
+      display: flex;
+      align-items: center;
     }
 
     /* Right icon group */
@@ -2222,24 +2236,27 @@
           </div>
         </button>
 
-        <!-- Center: "Kiri-AI ▾" -->
-        <div class="top-title-group" onclick="openDrawer()">
-          <span class="top-title-text" id="top-title-text">Kiri-AI</span>
-          <span class="top-title-chevron">▾</span>
+        <!-- Center: Kiri-AI Pill -->
+        <div class="top-title-group">
+          <div class="top-title-pill" onclick="openDrawer()">
+            <span class="top-title-text" id="top-title-text">Kiri-AI</span>
+            <span class="top-title-edit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                style="width:14px; height:14px;">
+                <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+                <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+              </svg>
+            </span>
+          </div>
         </div>
 
-        <!-- Right icons: person-add + scan/search -->
+        <!-- Right icons: Settings / More dots -->
         <div class="top-right-icons">
-          <button class="top-icon-btn" title="Share chat">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path
-                d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
-            </svg>
-          </button>
-          <button class="compose-btn" onclick="newChat()" style="margin-right:6px;" title="New chat">
+          <button class="top-icon-btn" title="Settings" onclick="openPanel('settings-panel')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-              <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+              <circle cx="12" cy="12" r="1" />
+              <circle cx="12" cy="5" r="1" />
+              <circle cx="12" cy="19" r="1" />
             </svg>
           </button>
         </div>
@@ -3179,8 +3196,18 @@
           }
         };
 
-        const rzp = new Razorpay(options);
-        rzp.open();
+        if (typeof Capacitor !== 'undefined' && Capacitor.isNativePlatform() && Capacitor.Plugins.NativeRazorpay) {
+          try {
+            const res = await Capacitor.Plugins.NativeRazorpay.open(options);
+            options.handler(res);
+          } catch (err) {
+            toast('Payment cancelled or failed.', 'error');
+            console.error(err);
+          }
+        } else {
+          const rzp = new Razorpay(options);
+          rzp.open();
+        }
       } catch (err) {
         toast('Failed to start checkout.', 'error');
       }
