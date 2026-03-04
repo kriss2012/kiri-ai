@@ -41,7 +41,24 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
     }));
 
     // Initialize Gemini model
-    const geminiModel = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
+    const geminiModel = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+
+    // Prepare message parts (text + optional attachments)
+    const { attachments } = req.body; // Array of { data: base64, mimeType: string }
+    const messageParts = [{ text: message }];
+
+    if (attachments && Array.isArray(attachments)) {
+      attachments.forEach(file => {
+        if (file.data && file.mimeType) {
+          messageParts.push({
+            inlineData: {
+              data: file.data,
+              mimeType: file.mimeType
+            }
+          });
+        }
+      });
+    }
 
     // Start chat with history
     const chat = geminiModel.startChat({
@@ -55,7 +72,7 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
     });
 
     // Send message and get response
-    const result = await chat.sendMessage(message);
+    const result = await chat.sendMessage(messageParts);
     const response = await result.response;
     const assistantMessage = response.text();
 

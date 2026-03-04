@@ -1955,6 +1955,89 @@
     .ripple:active::after {
       opacity: 1;
     }
+
+    /* ─── IMAGE PREVIEW ─── */
+    .image-preview-container {
+      display: none;
+      padding: 8px 16px;
+      gap: 12px;
+      background: var(--dark-surface-container);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      align-items: center;
+      overflow-x: auto;
+    }
+
+    .image-preview-item {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .image-preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .file-preview-icon {
+      width: 100%;
+      height: 100%;
+      background: var(--dark-surface-container-high);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+    }
+
+    .file-name-tag {
+      font-size: 8px;
+      color: var(--dark-on-surface-variant);
+      max-width: 50px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+
+    .image-preview-remove {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 18px;
+      height: 18px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      cursor: pointer;
+    }
+
+    .voice-orb.active {
+      animation: voiceWave 1.2s infinite ease-in-out;
+      background: var(--primary);
+      box-shadow: 0 0 20px var(--primary);
+    }
+
+    @keyframes voiceWave {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.15);
+      }
+    }
   </style>
 </head>
 
@@ -1964,7 +2047,10 @@
 
     <!-- ── LOADING ── -->
     <div id="loading">
-      <div class="loading-icon">✦</div>
+      <div class="loading-icon">
+        <img src="assets/logo.png" alt="Logo"
+          style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; animation: logoAppearing 1.8s ease-out forwards;">
+      </div>
       <div class="loading-dots">
         <div class="l-dot"></div>
         <div class="l-dot"></div>
@@ -1994,7 +2080,10 @@
       <div class="landing-grid"></div>
       <nav class="landing-nav">
         <div class="brand">
-          <div class="brand-icon">✦</div>
+          <div class="brand-icon">
+            <img src="assets/logo.png" alt="Logo"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+          </div>
           <span class="brand-name">Kiri-AI</span>
         </div>
         <button onclick="showView('login-view')"
@@ -2023,7 +2112,10 @@
     <div class="view auth-view" id="login-view">
       <div class="auth-card">
         <div class="auth-brand">
-          <div class="brand-icon">✦</div>
+          <div class="brand-icon">
+            <img src="assets/logo.png" alt="Logo"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+          </div>
           <span style="font-family:var(--font-serif); font-size:22px; color:var(--dark-on-surface);">Kiri-AI</span>
         </div>
         <h2 class="auth-title">Welcome back</h2>
@@ -2048,7 +2140,10 @@
     <div class="view auth-view" id="register-view">
       <div class="auth-card">
         <div class="auth-brand">
-          <div class="brand-icon">✦</div>
+          <div class="brand-icon">
+            <img src="assets/logo.png" alt="Logo"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+          </div>
           <span style="font-family:var(--font-serif); font-size:22px; color:var(--dark-on-surface);">Kiri-AI</span>
         </div>
         <h2 class="auth-title">Create account</h2>
@@ -2083,7 +2178,10 @@
       <div class="drawer" id="drawer">
         <div class="drawer-header">
           <div class="drawer-brand">
-            <div class="brand-icon">✦</div>
+            <div class="brand-icon">
+              <img src="assets/logo.png" alt="Logo"
+                style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+            </div>
             <span style="font-family:var(--font-serif); font-size:19px; color:var(--dark-on-surface);">Kiri-AI</span>
           </div>
           <button class="drawer-new-chat ripple" onclick="newChat(); closeDrawer();">
@@ -2186,11 +2284,16 @@
             <div id="msgs" style="display:none; padding-bottom:8px;"></div>
           </div>
 
+          <!-- Image Preview Area -->
+          <div id="image-preview" class="image-preview-container"></div>
+
           <!-- Input bar -->
           <div class="input-bar">
             <div class="input-wrapper">
               <!-- + button (left) -->
-              <button class="input-plus-btn" title="Attach">
+              <input type="file" id="image-input" accept="image/*,.pdf" multiple style="display:none"
+                onchange="handleFileSelect(this)">
+              <button class="input-plus-btn" title="Attach" onclick="document.getElementById('image-input').click()">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                   <line x1="12" y1="5" x2="12" y2="19" />
                   <line x1="5" y1="12" x2="19" y2="12" />
@@ -2201,7 +2304,7 @@
                 onkeydown="handleKey(event)" oninput="autoResize(this); toggleSendBtn(this.value)"></textarea>
               <!-- Right: mic + voice orb OR send -->
               <div class="input-right">
-                <button class="mic-btn" id="mic-btn" title="Voice input">
+                <button class="mic-btn" id="mic-btn" title="Voice input" onclick="startMic()">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                     <rect x="9" y="2" width="6" height="12" rx="3" />
                     <path d="M5 10a7 7 0 0014 0" />
@@ -2209,7 +2312,7 @@
                     <line x1="8" y1="22" x2="16" y2="22" />
                   </svg>
                 </button>
-                <button class="voice-orb" id="voice-orb" title="Voice mode">
+                <button class="voice-orb" id="voice-orb" title="Voice mode" onclick="toggleVoiceMode()">
                   <div class="voice-bar"></div>
                   <div class="voice-bar"></div>
                   <div class="voice-bar"></div>
@@ -2380,6 +2483,13 @@
     let isBusy = false;
     let modalCb = null;
 
+    // --- INTERACTIVE FEATURES STATE ---
+    let selectedFiles = []; // Array of { data: base64, mimeType: string, name: string, isImage: bool }
+    let isVoiceMode = false;
+    let recognition = null;
+    let synth = window.speechSynthesis;
+    let voiceModeActive = false;
+
     // ══════════════════════════════════
     // INIT
     // ══════════════════════════════════
@@ -2405,8 +2515,11 @@
 
     function hideLoading() {
       const el = document.getElementById('loading');
-      el.style.opacity = '0';
-      setTimeout(() => el.style.display = 'none', 350);
+      // Increase screen time to 2.5s as requested
+      setTimeout(() => {
+        el.style.opacity = '0';
+        setTimeout(() => el.style.display = 'none', 500);
+      }, 2500);
     }
 
     // ══════════════════════════════════
@@ -2643,7 +2756,13 @@
       scrollDown();
 
       try {
-        const d = await api('/chat/message', 'POST', { message: msg, conversationId: activeConvId });
+        const body = { message: msg, conversationId: activeConvId };
+        if (selectedImage) {
+          body.image = selectedImage;
+          removeImage(); // Clear after sending
+        }
+
+        const d = await api('/chat/message', 'POST', body);
         document.getElementById(typId)?.remove();
         if (!activeConvId) {
           activeConvId = d.conversationId;
@@ -2651,7 +2770,15 @@
           document.getElementById('top-title-text').textContent = shortTitle;
           await loadConvs();
         }
-        msgs.innerHTML += buildMsgHTML('assistant', d.message);
+
+        const aiMsg = d.message;
+        msgs.innerHTML += buildMsgHTML('assistant', aiMsg);
+
+        // Voice Assistant logic
+        if (voiceModeActive) {
+          speak(aiMsg);
+        }
+
         user.dailyRequests = d.requestsUsed;
         updateRequestBadge();
         renderDrawerConvs();
@@ -2672,7 +2799,123 @@
         isBusy = false;
         toggleSendBtn(input.value);
         input.focus();
+
+        // If in voice mode, start listening again after AI speaks
+        if (voiceModeActive && !isBusy) {
+          setTimeout(() => { if (voiceModeActive) startMic(true); }, 500);
+        }
       }
+    }
+
+    // --- ATTACHMENT LOGIC ---
+    function handleImageSelect(input) {
+      const file = input.files[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        toast('Please select an image file.', 'error');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64 = e.target.result.split(',')[1];
+        selectedImage = { data: base64, mimeType: file.type };
+
+        const previewEl = document.getElementById('image-preview');
+        previewEl.innerHTML = `
+          <div class="image-preview-item">
+            <img src="${e.target.result}" alt="Preview">
+            <button class="image-preview-remove" onclick="removeImage()">✕</button>
+          </div>
+        `;
+        previewEl.style.display = 'flex';
+        toggleSendBtn('text'); // Force send button visible
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeImage() {
+      selectedImage = null;
+      document.getElementById('image-input').value = '';
+      document.getElementById('image-preview').style.display = 'none';
+      toggleSendBtn(document.getElementById('chat-input').value);
+    }
+
+    // --- VOICE LOGIC (MIC & ASSISTANT) ---
+    function initSpeech() {
+      if (recognition) return true;
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        toast('Speech recognition not supported in this browser.', 'error');
+        return false;
+      }
+      recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
+
+      recognition.onresult = (event) => {
+        const text = event.results[0][0].transcript;
+        if (voiceModeActive) {
+          document.getElementById('chat-input').value = text;
+          sendMessage();
+        } else {
+          document.getElementById('chat-input').value = text;
+          toggleSendBtn(text);
+          autoResize(document.getElementById('chat-input'));
+        }
+      };
+
+      recognition.onerror = (e) => {
+        console.error('Speech error:', e);
+        if (voiceModeActive) voiceModeActive = false;
+        document.getElementById('voice-orb').classList.remove('active');
+      };
+
+      recognition.onend = () => {
+        if (!voiceModeActive) document.getElementById('mic-btn').style.color = '';
+      };
+
+      return true;
+    }
+
+    function startMic(autoSend = false) {
+      if (!initSpeech()) return;
+      recognition.start();
+      if (!autoSend) {
+        document.getElementById('mic-btn').style.color = 'var(--primary)';
+        toast('Listening...', 'info');
+      }
+    }
+
+    function toggleVoiceMode() {
+      const orb = document.getElementById('voice-orb');
+      voiceModeActive = !voiceModeActive;
+
+      if (voiceModeActive) {
+        orb.classList.add('active');
+        toast('Voice Assistant Active', 'success');
+        startMic(true);
+      } else {
+        orb.classList.remove('active');
+        if (recognition) recognition.stop();
+        if (synth) synth.cancel();
+        toast('Voice Assistant Disabled', 'info');
+      }
+    }
+
+    function speak(text) {
+      if (!synth) return;
+      synth.cancel();
+      // Remove markdown for cleaner speech
+      const cleanText = text.replace(/[*#`]/g, '').substring(0, 500);
+      const utter = new SpeechSynthesisUtterance(cleanText);
+      utter.rate = 1.0;
+      utter.pitch = 1.0;
+      utter.onend = () => {
+        if (voiceModeActive && !isBusy) startMic(true);
+      };
+      synth.speak(utter);
     }
 
     function sendSug(text) {
