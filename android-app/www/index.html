@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
   <title>Kiri-AI — Intelligence Refined</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -63,6 +64,7 @@
     html,
     body {
       height: 100%;
+      /* Do NOT lock height to 100% on body — let keyboard resize push layout up */
       overflow: hidden;
       font-family: var(--font-sans);
       background: var(--dark-surface);
@@ -71,14 +73,14 @@
     }
 
     /* ─── ROOT APP SHELL ─── */
+    /* JS (visualViewport) overrides height dynamically to fix keyboard gap */
     #app {
       display: flex;
       flex-direction: column;
-      height: 100vh;
       height: 100dvh;
-      /* Supports mobile dynamic viewport */
       background: var(--dark-surface);
       position: relative;
+      transition: height 0s;
     }
 
     /* ─── VIEWS ─── */
@@ -3291,6 +3293,40 @@
     function esc(s) {
       return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
+
+    // ══════════════════════════════════
+    // KEYBOARD GAP FIX — Android WebView
+    // Uses visualViewport API to resize #app exactly to the visible area,
+    // so the input bar sticks right above the keyboard with zero gap.
+    // ══════════════════════════════════
+    (function fixKeyboardGap() {
+      const appEl = document.getElementById('app');
+
+      function applyViewportHeight() {
+        if (window.visualViewport) {
+          // Set app height to visible viewport (excludes keyboard)
+          appEl.style.height = window.visualViewport.height + 'px';
+          // Scroll to keep input visible when keyboard opens
+          appEl.style.top = window.visualViewport.offsetTop + 'px';
+          appEl.style.position = 'fixed';
+          appEl.style.width = '100%';
+          appEl.style.left = '0';
+        } else {
+          // Fallback for older WebView
+          appEl.style.height = window.innerHeight + 'px';
+        }
+      }
+
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', applyViewportHeight);
+        window.visualViewport.addEventListener('scroll', applyViewportHeight);
+      } else {
+        window.addEventListener('resize', applyViewportHeight);
+      }
+
+      // Initial call
+      applyViewportHeight();
+    })();
   </script>
 </body>
 
