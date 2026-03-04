@@ -10,7 +10,10 @@ kiri-ai/
 │   ├── server.js          ← Express API server
 │   └── package.json
 └── frontend/
-    └── index.html         ← Complete single-file frontend
+    ├── index.html         ← Complete single-file frontend
+    └── kiri-intro.html    ← 4K Logo intro animation
+├── android-app/           ← Capacitor Android project
+└── ...
 ```
 
 ---
@@ -20,7 +23,7 @@ kiri-ai/
 ### 1. Backend
 
 ```bash
-cd kiri-ai/backend
+cd backend
 npm install
 ```
 
@@ -50,6 +53,19 @@ cd frontend && npx serve .
 ```
 
 Then visit `http://localhost:8080`
+
+---
+
+## 🎨 Branding & Animations
+
+### Kiri AI Intro Animation
+Located at `frontend/kiri-intro.html`. This is a high-fidelity 4K-ready CSS/JS animation for app splash screens or video intros.
+
+**How to export as Video:**
+1. Open `frontend/kiri-intro.html` in Chrome.
+2. Press `F11` for full screen.
+3. Record with OBS Studio (3840x2160, 60fps).
+4. Use the resulting `.mp4` for your App Store preview or splash screen.
 
 ---
 
