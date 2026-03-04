@@ -9,7 +9,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 // @POST /api/chat/message - Send message to Gemini
 router.post('/message', protect, checkRequestLimit, async (req, res) => {
   try {
-    const { message, conversationId, model = 'gemini-2.5-flash' } = req.body;
+    const { message, conversationId, model = 'gemini-1.5-flash' } = req.body;
     // Sanitize conversationId - treat 'undefined' string as null
     const safeConvId = conversationId && conversationId !== 'undefined' && conversationId !== 'null' ? conversationId : null;
 
@@ -44,7 +44,7 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
     }));
 
     // Initialize Gemini model
-    const geminiModel = genAI.getGenerativeModel({ model: model || 'gemini-2.5-pro' });
+    const geminiModel = genAI.getGenerativeModel({ model: model || 'gemini-1.5-pro' });
 
     // Prepare message parts (text + optional attachments)
     const { attachments } = req.body; // Array of { data: base64, mimeType: string }

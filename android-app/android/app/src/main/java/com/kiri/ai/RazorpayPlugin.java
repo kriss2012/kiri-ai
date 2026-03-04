@@ -18,12 +18,14 @@ public class RazorpayPlugin extends Plugin {
         MainActivity.pendingPaymentCall = call;
 
         String key = call.getString("key");
-        String amount = call.getString("amount");
+        Object amountObj = call.getData().get("amount");
         String currency = call.getString("currency", "INR");
-        String name = call.getString("name");
-        String desc = call.getString("description");
+        String name = call.getString("name", "Kiri-AI");
+        String desc = call.getString("description", "Premium Subscription");
         String orderId = call.getString("order_id", "");
         
+        Log.d("RazorpayPlugin", "Opening checkout for order: " + orderId);
+
         JSObject prefillJS = call.getObject("prefill");
         String email = prefillJS != null ? prefillJS.getString("email") : "";
         String contact = prefillJS != null ? prefillJS.getString("contact") : "";
@@ -32,6 +34,10 @@ public class RazorpayPlugin extends Plugin {
         String color = themeJS != null ? themeJS.getString("color") : "#6750A4";
 
         Activity activity = getActivity();
+        if (activity == null) {
+            call.reject("Activity is null");
+            return;
+        }
         
         Checkout.preload(activity.getApplicationContext());
         Checkout checkout = new Checkout();
@@ -42,7 +48,15 @@ public class RazorpayPlugin extends Plugin {
             options.put("name", name);
             options.put("description", desc);
             options.put("currency", currency);
-            options.put("amount", amount);
+            
+            // Amount can be passed as String or Number from JS, Razorpay expects an Integer in paise
+            if (amountObj instanceof Number) {
+                options.put("amount", ((Number) amountObj).longValue());
+            } else if (amountObj instanceof String) {
+                options.put("amount", Long.parseLong((String) amountObj));
+            } else {
+                throw new Exception("Invalid amount type: " + (amountObj != null ? amountObj.getClass().getName() : "null"));
+            }
             
             if (orderId != null && !orderId.isEmpty()) {
                 options.put("order_id", orderId);
@@ -57,6 +71,7 @@ public class RazorpayPlugin extends Plugin {
             theme.put("color", color);
             options.put("theme", theme);
 
+            Log.d("RazorpayPlugin", "Checkout options: " + options.toString());
             checkout.open(activity, options);
         } catch(Exception e) {
             Log.e("Razorpay", "Error in starting Razorpay Checkout", e);
