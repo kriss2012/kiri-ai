@@ -2542,29 +2542,37 @@
 
       // ── Keyboard-aware padding fix ──
       // Remove bottom padding when keyboard is open to avoid the blank gap
+      const getInputBar = () => document.querySelector('.input-bar');
+
       window.addEventListener('resize', () => {
         const visualViewport = window.visualViewport;
-        const inputBar = document.getElementById('input-bar');
+        const inputBar = getInputBar();
         if (!inputBar) return;
         // If the window height shrinks significantly, keyboard is probably open
         if (visualViewport && visualViewport.height < window.screen.height * 0.75) {
-          inputBar.style.paddingBottom = '8px';
+          inputBar.style.paddingBottom = '4px';
         } else {
           inputBar.style.paddingBottom = '';
         }
       });
 
       // Also handle Capacitor keyboard plugin events if available
-      if (typeof window !== 'undefined') {
-        window.addEventListener('keyboardWillShow', () => {
-          const inputBar = document.getElementById('input-bar');
-          if (inputBar) inputBar.style.paddingBottom = '8px';
-        });
-        window.addEventListener('keyboardWillHide', () => {
-          const inputBar = document.getElementById('input-bar');
-          if (inputBar) inputBar.style.paddingBottom = '';
-        });
-      }
+      window.addEventListener('keyboardWillShow', () => {
+        const inputBar = getInputBar();
+        if (inputBar) inputBar.style.paddingBottom = '4px';
+      });
+      window.addEventListener('keyboardWillHide', () => {
+        const inputBar = getInputBar();
+        if (inputBar) inputBar.style.paddingBottom = '';
+      });
+      window.addEventListener('keyboardDidShow', () => {
+        const inputBar = getInputBar();
+        if (inputBar) inputBar.style.paddingBottom = '4px';
+      });
+      window.addEventListener('keyboardDidHide', () => {
+        const inputBar = getInputBar();
+        if (inputBar) inputBar.style.paddingBottom = '';
+      });
     });
 
     function hideLoading() {
@@ -2807,7 +2815,11 @@
       scrollDown();
 
       let aiMsg = null;
-      const body = { message: msg, conversationId: activeConvId };
+      // Only include conversationId if it's a valid non-null value
+      const body = { message: msg };
+      if (activeConvId && activeConvId !== 'undefined' && activeConvId !== 'null') {
+        body.conversationId = activeConvId;
+      }
       try {
         if (selectedFiles.length > 0) {
           body.attachments = selectedFiles.map(f => ({ data: f.data, mimeType: f.mimeType }));

@@ -9,7 +9,9 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 // @POST /api/chat/message - Send message to Gemini
 router.post('/message', protect, checkRequestLimit, async (req, res) => {
   try {
-    const { message, conversationId, model = 'gemini-2.5-pro' } = req.body;
+    const { message, conversationId, model = 'gemini-2.5-flash' } = req.body;
+    // Sanitize conversationId - treat 'undefined' string as null
+    const safeConvId = conversationId && conversationId !== 'undefined' && conversationId !== 'null' ? conversationId : null;
 
     if (!message || !message.trim()) {
       return res.status(400).json({ success: false, message: 'Message is required.' });
@@ -18,13 +20,14 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
     let conversation;
 
     // Get or create conversation
-    if (conversationId) {
+    if (safeConvId) {
       conversation = await Conversation.findOne({
-        _id: conversationId,
+        _id: safeConvId,
         user: req.user._id
       });
       if (!conversation) {
-        return res.status(404).json({ success: false, message: 'Conversation not found.' });
+        // If not found, create a new one instead of erroring
+        conversation = new Conversation({ user: req.user._id, model, messages: [] });
       }
     } else {
       conversation = new Conversation({

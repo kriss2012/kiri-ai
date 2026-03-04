@@ -8,6 +8,9 @@ const rateLimit = require('express-rate-limit');
 
 const app = express();
 
+// Required for Render/Heroku/etc. behind a reverse proxy
+app.set('trust proxy', 1);
+
 app.use(helmet({ contentSecurityPolicy: false }));
 if (process.env.NODE_ENV !== 'test') app.use(morgan('dev'));
 
