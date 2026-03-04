@@ -589,7 +589,38 @@
       gap: 0;
     }
 
-    /* ── DRAWER (Slide-in from left like ChatGPT) ── */
+    /* ── MODEL SELECTOR (OpenRouter) ── */
+    .model-selector-container {
+      padding: 10px 16px 2px 16px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .model-selector-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .model-pill {
+      white-space: nowrap;
+      padding: 6px 12px;
+      border-radius: 16px;
+      background: var(--dark-surface-container-high);
+      color: var(--dark-on-surface-variant);
+      font-size: 13px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .model-pill.active {
+      background: var(--dark-primary-container);
+      color: var(--dark-on-primary-container);
+      border-color: var(--dark-primary);
+    }
+
     .drawer-overlay {
       position: absolute;
       inset: 0;
@@ -2276,6 +2307,14 @@
 
         <!-- ─ CHAT PANEL ─ -->
         <div id="chat-panel">
+          <!-- OpenRouter Model Selector -->
+          <div class="model-selector-container" id="model-selector">
+            <div class="model-pill active" onclick="selectModel('google/gemini-2.0-flash-001', this)">Gemini 2.0</div>
+            <div class="model-pill" onclick="selectModel('openai/gpt-4o-mini', this)">GPT-4o Mini</div>
+            <div class="model-pill" onclick="selectModel('anthropic/claude-3-haiku', this)">Claude 3</div>
+            <div class="model-pill" onclick="selectModel('mistralai/mistral-7b-instruct', this)">Mistral 7B</div>
+          </div>
+
           <div class="messages-scroll" id="messages-scroll">
 
             <!-- Limit banner -->
@@ -2513,6 +2552,13 @@
     let activeConvId = null;
     let isBusy = false;
     let modalCb = null;
+    let selectedModel = 'google/gemini-2.0-flash-001';
+
+    function selectModel(id, el) {
+      selectedModel = id;
+      document.querySelectorAll('.model-pill').forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+    }
 
     // --- INTERACTIVE FEATURES STATE ---
     let selectedFiles = []; // Array of { data: base64, mimeType: string, name: string, isImage: bool }
@@ -2794,7 +2840,7 @@
 
       let aiMsg = null;
       // Only include conversationId if it's a valid non-null value
-      const body = { message: msg };
+      const body = { message: msg, model: selectedModel };
       if (activeConvId && activeConvId !== 'undefined' && activeConvId !== 'null') {
         body.conversationId = activeConvId;
       }
@@ -2834,7 +2880,7 @@
           toast('Daily limit reached!', 'error');
         } else {
           const detail = err.data && err.data.message ? err.data.message : (err.message || 'Unknown server error');
-          msgs.innerHTML += buildMsgHTML('assistant', `⚠️ AI Error: ${detail}<br><small>If this persists, check your Gemini API key and backend logs.</small>`);
+          msgs.innerHTML += buildMsgHTML('assistant', `⚠️ AI Error: ${detail}<br><small>If this persists, check your OpenRouter API key and backend settings.</small>`);
           toast(`AI Error: ${detail}`, 'error');
           scrollDown();
         }

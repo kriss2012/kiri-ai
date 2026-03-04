@@ -1,15 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const OpenAI = require('openai');
 const { protect, checkRequestLimit } = require('../middleware/auth');
 const Conversation = require('../models/Conversation');
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const openai = new OpenAI({
+  apiKey: process.env.OPENROUTER_API_KEY,
+  baseURL: 'https://openrouter.ai/api/v1',
+  defaultHeaders: {
+    'HTTP-Referer': 'https://kiri-ai.com', // Optional, for OpenRouter rankings
+    'X-Title': 'Kiri-AI', // Optional
+  }
+});
 
 // @POST /api/chat/message - Send message to Gemini
 router.post('/message', protect, checkRequestLimit, async (req, res) => {
   try {
-    const { message, conversationId, model = 'gemini-1.5-flash' } = req.body;
+    const { message, conversationId, model = 'google/gemini-2.0-flash-001' } = req.body;
     // Sanitize conversationId - treat 'undefined' string as null
     const safeConvId = conversationId && conversationId !== 'undefined' && conversationId !== 'null' ? conversationId : null;
 
@@ -37,47 +44,24 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
       });
     }
 
-    // Build chat history for Gemini
+    // Build chat history for OpenAI format
     const history = conversation.messages.map(msg => ({
-      role: msg.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: msg.content }]
+      role: msg.role === 'assistant' ? 'assistant' : 'user',
+      content: msg.content
     }));
 
-    // Initialize Gemini model
-    const geminiModel = genAI.getGenerativeModel({ model: model || 'gemini-1.5-pro' });
+    // Add current message to history
+    history.push({ role: 'user', content: message });
 
-    // Prepare message parts (text + optional attachments)
-    const { attachments } = req.body; // Array of { data: base64, mimeType: string }
-    const messageParts = [{ text: message }];
-
-    if (attachments && Array.isArray(attachments)) {
-      attachments.forEach(file => {
-        if (file.data && file.mimeType) {
-          messageParts.push({
-            inlineData: {
-              data: file.data,
-              mimeType: file.mimeType
-            }
-          });
-        }
-      });
-    }
-
-    // Start chat with history
-    const chat = geminiModel.startChat({
-      history,
-      generationConfig: {
-        maxOutputTokens: 2048,
-        temperature: 0.7,
-        topP: 0.8,
-        topK: 40
-      }
+    // Send message and get response from OpenRouter
+    const completion = await openai.chat.completions.create({
+      model: model || 'google/gemini-2.0-flash-001',
+      messages: history,
+      temperature: 0.7,
+      max_tokens: 2048
     });
 
-    // Send message and get response
-    const result = await chat.sendMessage(messageParts);
-    const response = await result.response;
-    const assistantMessage = response.text();
+    const assistantMessage = completion.choices[0].message.content;
 
     // Save messages to conversation
     conversation.messages.push({ role: 'user', content: message });
@@ -124,7 +108,7 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
 // @POST /api/chat/stream - Streaming response
 router.post('/stream', protect, checkRequestLimit, async (req, res) => {
   try {
-    const { message, conversationId, model = 'gemini-1.5-flash' } = req.body;
+    const { message, conversationId, model = 'google/gemini-2.0-flash-001' } = req.body;
 
     if (!message || !message.trim()) {
       return res.status(400).json({ success: false, message: 'Message is required.' });
@@ -149,24 +133,26 @@ router.post('/stream', protect, checkRequestLimit, async (req, res) => {
     }
 
     const history = conversation.messages.map(msg => ({
-      role: msg.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: msg.content }]
+      role: msg.role === 'assistant' ? 'assistant' : 'user',
+      content: msg.content
     }));
-
-    const geminiModel = genAI.getGenerativeModel({ model: model || 'gemini-1.5-flash' });
-    const chat = geminiModel.startChat({
-      history,
-      generationConfig: { maxOutputTokens: 2048, temperature: 0.7 }
-    });
+    history.push({ role: 'user', content: message });
 
     let fullResponse = '';
 
-    const result = await chat.sendMessageStream(message);
+    const stream = await openai.chat.completions.create({
+      model: model || 'google/gemini-2.0-flash-001',
+      messages: history,
+      stream: true,
+      max_tokens: 2048
+    });
 
-    for await (const chunk of result.stream) {
-      const chunkText = chunk.text();
-      fullResponse += chunkText;
-      res.write(`data: ${JSON.stringify({ chunk: chunkText, done: false })}\n\n`);
+    for await (const chunk of stream) {
+      const chunkText = chunk.choices[0]?.delta?.content || '';
+      if (chunkText) {
+        fullResponse += chunkText;
+        res.write(`data: ${JSON.stringify({ chunk: chunkText, done: false })}\n\n`);
+      }
     }
 
     // Save to DB
