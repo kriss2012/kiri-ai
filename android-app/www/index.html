@@ -2816,11 +2816,11 @@
         feats: ['50 AI requests per day', 'Gemini Pro model', 'Basic chat history', 'Standard speed']
       },
       {
-        id: 'monthly', name: 'Monthly', price: 149, period: '/month', cta: 'Get Premium Monthly', style: 'outline',
+        id: 'premium_monthly', name: 'Monthly', price: 149, period: '/month', cta: 'Get Premium Monthly', style: 'outline',
         feats: ['Unlimited AI requests', 'All Gemini models', 'Full chat history', 'Priority speed', 'Email support']
       },
       {
-        id: 'yearly', name: 'Yearly', price: 1500, period: '/year',
+        id: 'premium_yearly', name: 'Yearly', price: 1500, period: '/year',
         savings: 'Save ₹288 (₹125/mo)', popular: true, cta: 'Best Value ✦', style: 'filled',
         feats: ['Everything in Monthly', '₹125/month effective', 'Annual discount', 'Dedicated support', 'API access (soon)']
       }
@@ -2847,10 +2847,53 @@
   `).join('');
     }
 
-    function handlePlan(id) {
-      if (id === 'free') return;
+    async function handlePlan(planId) {
+      if (planId === 'free') return;
       if (!user) { showView('register-view'); return; }
-      toast('Redirecting to checkout…', 'info');
+
+      try {
+        toast('Redirecting to checkout…', 'info');
+        const data = await api('/subscription/create-order', 'POST', { plan: planId });
+
+        const options = {
+          key: data.keyId,
+          amount: data.amount,
+          currency: data.currency,
+          name: 'Kiri-AI Premium',
+          description: `Subscription: ${planId}`,
+          order_id: data.orderId,
+          handler: async function (response) {
+            try {
+              const verifyData = await api('/subscription/verify-payment', 'POST', {
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+                plan: planId
+              });
+
+              if (verifyData.success) {
+                toast('Subscription activated!', 'success');
+                user = verifyData.user;
+                setTimeout(() => window.location.reload(), 2000);
+              }
+            } catch (err) {
+              toast('Payment verification failed.', 'error');
+            }
+          },
+          prefill: {
+            name: user.name,
+            email: user.email
+          },
+          theme: {
+            color: '#6750A4'
+          }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+      } catch (err) {
+        toast('Failed to start checkout.', 'error');
+      }
     }
 
     // ══════════════════════════════════
