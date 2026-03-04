@@ -4,14 +4,22 @@ const OpenAI = require('openai');
 const { protect, checkRequestLimit } = require('../middleware/auth');
 const Conversation = require('../models/Conversation');
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENROUTER_API_KEY,
-  baseURL: 'https://openrouter.ai/api/v1',
-  defaultHeaders: {
-    'HTTP-Referer': 'https://kiri-ai.com', // Optional, for OpenRouter rankings
-    'X-Title': 'Kiri-AI', // Optional
+// Safe OpenAI initialization to prevent crash on startup if key is missing
+const getOpenAIClient = () => {
+  const apiKey = process.env.OPENROUTER_API_KEY;
+  if (!apiKey) {
+    console.error('❌ CRITICAL: OPENROUTER_API_KEY is missing in environment variables!');
+    throw new Error('OpenRouter API Key is not configured on the server.');
   }
-});
+  return new OpenAI({
+    apiKey: apiKey,
+    baseURL: 'https://openrouter.ai/api/v1',
+    defaultHeaders: {
+      'HTTP-Referer': 'https://kiri-ai.com',
+      'X-Title': 'Kiri-AI',
+    }
+  });
+};
 
 // @POST /api/chat/message - Send message to Gemini
 router.post('/message', protect, checkRequestLimit, async (req, res) => {
@@ -52,6 +60,9 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
 
     // Add current message to history
     history.push({ role: 'user', content: message });
+
+    // Get OpenAI client safely
+    const openai = getOpenAIClient();
 
     // Send message and get response from OpenRouter
     const completion = await openai.chat.completions.create({
@@ -139,6 +150,9 @@ router.post('/stream', protect, checkRequestLimit, async (req, res) => {
     history.push({ role: 'user', content: message });
 
     let fullResponse = '';
+
+    // Get OpenAI client safely
+    const openai = getOpenAIClient();
 
     const stream = await openai.chat.completions.create({
       model: model || 'google/gemini-2.0-flash-001',
