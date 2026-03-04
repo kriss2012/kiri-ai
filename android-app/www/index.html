@@ -73,14 +73,13 @@
     }
 
     /* ─── ROOT APP SHELL ─── */
-    /* JS (visualViewport) overrides height dynamically to fix keyboard gap */
+    /* Resizes to 100% of parent (body), which Capacitor shrinks when keyboard is open */
     #app {
       display: flex;
       flex-direction: column;
-      height: 100dvh;
+      height: 100%;
       background: var(--dark-surface);
       position: relative;
-      transition: height 0s;
     }
 
     /* ─── VIEWS ─── */
@@ -452,7 +451,7 @@
     #app-view.active {
       display: flex;
       flex-direction: column;
-      height: 100dvh;
+      height: 100%;
       overflow: hidden;
     }
 
@@ -2542,39 +2541,7 @@
       }
       renderPricingCards();
 
-      // ── Keyboard-aware padding fix ──
-      // Remove bottom padding when keyboard is open to avoid the blank gap
-      const getInputBar = () => document.querySelector('.input-bar');
-
-      window.addEventListener('resize', () => {
-        const visualViewport = window.visualViewport;
-        const inputBar = getInputBar();
-        if (!inputBar) return;
-        // If the window height shrinks significantly, keyboard is probably open
-        if (visualViewport && visualViewport.height < window.screen.height * 0.75) {
-          inputBar.style.paddingBottom = '4px';
-        } else {
-          inputBar.style.paddingBottom = '';
-        }
-      });
-
-      // Also handle Capacitor keyboard plugin events if available
-      window.addEventListener('keyboardWillShow', () => {
-        const inputBar = getInputBar();
-        if (inputBar) inputBar.style.paddingBottom = '4px';
-      });
-      window.addEventListener('keyboardWillHide', () => {
-        const inputBar = getInputBar();
-        if (inputBar) inputBar.style.paddingBottom = '';
-      });
-      window.addEventListener('keyboardDidShow', () => {
-        const inputBar = getInputBar();
-        if (inputBar) inputBar.style.paddingBottom = '4px';
-      });
-      window.addEventListener('keyboardDidHide', () => {
-        const inputBar = getInputBar();
-        if (inputBar) inputBar.style.paddingBottom = '';
-      });
+      renderPricingCards();
     });
 
     function hideLoading() {
@@ -3295,38 +3262,19 @@
     }
 
     // ══════════════════════════════════
-    // KEYBOARD GAP FIX — Android WebView
-    // Uses visualViewport API to resize #app exactly to the visible area,
-    // so the input bar sticks right above the keyboard with zero gap.
+    // KEYBOARD ADAPTATION
+    // Consistently handle the padding when the keyboard is open.
     // ══════════════════════════════════
-    (function fixKeyboardGap() {
-      const appEl = document.getElementById('app');
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => {
+        const inputBar = document.querySelector('.input-bar');
+        if (!inputBar) return;
 
-      function applyViewportHeight() {
-        if (window.visualViewport) {
-          // Set app height to visible viewport (excludes keyboard)
-          appEl.style.height = window.visualViewport.height + 'px';
-          // Scroll to keep input visible when keyboard opens
-          appEl.style.top = window.visualViewport.offsetTop + 'px';
-          appEl.style.position = 'fixed';
-          appEl.style.width = '100%';
-          appEl.style.left = '0';
-        } else {
-          // Fallback for older WebView
-          appEl.style.height = window.innerHeight + 'px';
-        }
-      }
-
-      if (window.visualViewport) {
-        window.visualViewport.addEventListener('resize', applyViewportHeight);
-        window.visualViewport.addEventListener('scroll', applyViewportHeight);
-      } else {
-        window.addEventListener('resize', applyViewportHeight);
-      }
-
-      // Initial call
-      applyViewportHeight();
-    })();
+        const isKeyboardOpen = window.visualViewport.height < window.innerHeight * 0.85;
+        // When keyboard is open, remove safety padding to stick input to keyboard top
+        inputBar.style.paddingBottom = isKeyboardOpen ? '6px' : '10px';
+      });
+    }
   </script>
 </body>
 
