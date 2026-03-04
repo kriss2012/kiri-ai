@@ -17,33 +17,33 @@ public class RazorpayPlugin extends Plugin {
     public void open(PluginCall call) {
         MainActivity.pendingPaymentCall = call;
 
-        String key = call.getString("key");
-        Object amountObj = call.getData().get("amount");
-        String currency = call.getString("currency", "INR");
-        String name = call.getString("name", "Kiri-AI");
-        String desc = call.getString("description", "Premium Subscription");
-        String orderId = call.getString("order_id", "");
-        
-        Log.d("RazorpayPlugin", "Opening checkout for order: " + orderId);
-
-        JSObject prefillJS = call.getObject("prefill");
-        String email = prefillJS != null ? prefillJS.getString("email") : "";
-        String contact = prefillJS != null ? prefillJS.getString("contact") : "";
-        
-        JSObject themeJS = call.getObject("theme");
-        String color = themeJS != null ? themeJS.getString("color") : "#6750A4";
-
-        Activity activity = getActivity();
-        if (activity == null) {
-            call.reject("Activity is null");
-            return;
-        }
-        
-        Checkout.preload(activity.getApplicationContext());
-        Checkout checkout = new Checkout();
-        checkout.setKeyID(key);
-
         try {
+            String key = call.getString("key");
+            Object amountObj = call.getData().get("amount");
+            String currency = call.getString("currency", "INR");
+            String name = call.getString("name", "Kiri-AI");
+            String desc = call.getString("description", "Premium Subscription");
+            String orderId = call.getString("order_id", "");
+            
+            Log.d("RazorpayPlugin", "Opening checkout for order: " + orderId);
+
+            JSObject prefillJS = call.getObject("prefill");
+            String email = prefillJS != null ? prefillJS.getString("email") : "";
+            String contact = prefillJS != null ? prefillJS.getString("contact") : "";
+            
+            JSObject themeJS = call.getObject("theme");
+            String color = themeJS != null ? themeJS.getString("color") : "#6750A4";
+
+            Activity activity = getActivity();
+            if (activity == null) {
+                call.reject("Activity is null");
+                return;
+            }
+            
+            Checkout.preload(activity.getApplicationContext());
+            Checkout checkout = new Checkout();
+            checkout.setKeyID(key);
+
             JSONObject options = new JSONObject();
             options.put("name", name);
             options.put("description", desc);
