@@ -2516,19 +2516,26 @@
     // INIT
     // ══════════════════════════════════
     window.addEventListener('DOMContentLoaded', async () => {
+      // Force minimum 3 seconds loading screen
+      const minLoadingTime = new Promise(resolve => setTimeout(resolve, 3000));
+
       const tok = localStorage.getItem('kiri_token');
-      if (tok) {
-        try {
+
+      try {
+        if (tok) {
           const d = await api('/auth/me');
           user = d.user;
+          await minLoadingTime;
           hideLoading();
           enterApp();
-        } catch {
-          localStorage.removeItem('kiri_token');
+        } else {
+          await minLoadingTime;
           hideLoading();
           showView('landing-view');
         }
-      } else {
+      } catch (err) {
+        localStorage.removeItem('kiri_token');
+        await minLoadingTime;
         hideLoading();
         showView('landing-view');
       }
@@ -2537,11 +2544,8 @@
 
     function hideLoading() {
       const el = document.getElementById('loading');
-      // Increase screen time to 2.5s as requested
-      setTimeout(() => {
-        el.style.opacity = '0';
-        setTimeout(() => el.style.display = 'none', 500);
-      }, 2500);
+      el.style.opacity = '0';
+      setTimeout(() => el.style.display = 'none', 500);
     }
 
     // ══════════════════════════════════
