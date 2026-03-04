@@ -2761,6 +2761,7 @@
       scrollDown();
 
       let aiMsg = null;
+      const body = { message: msg, conversationId: activeConvId };
       try {
         if (selectedFiles.length > 0) {
           body.attachments = selectedFiles.map(f => ({ data: f.data, mimeType: f.mimeType }));
