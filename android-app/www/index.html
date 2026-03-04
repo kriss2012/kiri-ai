@@ -73,8 +73,9 @@
     #app {
       display: flex;
       flex-direction: column;
-      height: 100%;
+      height: 100vh;
       height: 100dvh;
+      /* Supports mobile dynamic viewport */
       background: var(--dark-surface);
       position: relative;
     }
@@ -1144,6 +1145,9 @@
       padding: 8px 12px 10px;
       padding-bottom: calc(10px + var(--safe-bottom));
       flex-shrink: 0;
+      position: relative;
+      /* Lock to bottom of flex container */
+      width: 100%;
     }
 
     .input-wrapper {
@@ -2756,6 +2760,7 @@
     </div>`;
       scrollDown();
 
+      let aiMsg = null;
       try {
         if (selectedFiles.length > 0) {
           body.attachments = selectedFiles.map(f => ({ data: f.data, mimeType: f.mimeType }));
@@ -2771,7 +2776,7 @@
           await loadConvs();
         }
 
-        const aiMsg = d.message;
+        aiMsg = d.message;
         msgs.innerHTML += buildMsgHTML('assistant', aiMsg);
 
         // Voice Assistant logic
@@ -2801,7 +2806,7 @@
         input.focus();
 
         // If in voice mode, automatically read the response
-        if (voiceModeActive) {
+        if (voiceModeActive && aiMsg) {
           speak(aiMsg);
         }
       }
@@ -2894,10 +2899,15 @@
       recognition.lang = 'en-US';
 
       recognition.onresult = (event) => {
-        const text = event.results[0][0].transcript;
-        document.getElementById('chat-input').value = text;
-        toggleSendBtn(text);
-        autoResize(document.getElementById('chat-input'));
+        let transcript = '';
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          transcript += event.results[i][0].transcript;
+        }
+
+        const inputEl = document.getElementById('chat-input');
+        inputEl.value = (inputEl.value + ' ' + transcript).trim();
+        toggleSendBtn(inputEl.value);
+        autoResize(inputEl);
       };
 
       recognition.onerror = (e) => {
