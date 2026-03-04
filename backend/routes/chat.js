@@ -117,14 +117,14 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
     if (error.message && error.message.includes('SAFETY')) {
       return res.status(400).json({ success: false, message: 'Message blocked by safety filters. Please rephrase.' });
     }
-    res.status(500).json({ success: false, message: 'Failed to get AI response. Please try again.' });
+    res.status(500).json({ success: false, message: 'AI Error: ' + (error.message || 'Unknown error') });
   }
 });
 
 // @POST /api/chat/stream - Streaming response
 router.post('/stream', protect, checkRequestLimit, async (req, res) => {
   try {
-    const { message, conversationId, model = 'gemini-flash-latest' } = req.body;
+    const { message, conversationId, model = 'gemini-1.5-flash' } = req.body;
 
     if (!message || !message.trim()) {
       return res.status(400).json({ success: false, message: 'Message is required.' });
@@ -153,7 +153,7 @@ router.post('/stream', protect, checkRequestLimit, async (req, res) => {
       parts: [{ text: msg.content }]
     }));
 
-    const geminiModel = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
+    const geminiModel = genAI.getGenerativeModel({ model: model || 'gemini-1.5-flash' });
     const chat = geminiModel.startChat({
       history,
       generationConfig: { maxOutputTokens: 2048, temperature: 0.7 }

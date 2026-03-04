@@ -30,7 +30,7 @@ const ConversationSchema = new mongoose.Schema({
   messages: [MessageSchema],
   model: {
     type: String,
-    default: 'gemini-pro'
+    default: 'gemini-1.5-flash'
   },
   isArchived: {
     type: Boolean,
@@ -51,16 +51,16 @@ const ConversationSchema = new mongoose.Schema({
 });
 
 // Auto-generate title from first message
-ConversationSchema.methods.generateTitle = function() {
+ConversationSchema.methods.generateTitle = function () {
   if (this.messages.length > 0) {
     const firstMsg = this.messages[0].content;
-    this.title = firstMsg.length > 60 
-      ? firstMsg.substring(0, 60) + '...' 
+    this.title = firstMsg.length > 60
+      ? firstMsg.substring(0, 60) + '...'
       : firstMsg;
   }
 };
 
-ConversationSchema.pre('save', function(next) {
+ConversationSchema.pre('save', function (next) {
   this.updatedAt = Date.now();
   next();
 });
