@@ -3262,19 +3262,33 @@
     }
 
     // ══════════════════════════════════
-    // KEYBOARD ADAPTATION
-    // Consistently handle the padding when the keyboard is open.
+    // KEYBOARD ADAPTATION (Capacitor Native)
     // ══════════════════════════════════
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', () => {
-        const inputBar = document.querySelector('.input-bar');
-        if (!inputBar) return;
+    (function initKeyboardFix() {
+      const inputBar = document.querySelector('.input-bar');
+      const hint = document.querySelector('.input-hint');
 
-        const isKeyboardOpen = window.visualViewport.height < window.innerHeight * 0.85;
-        // When keyboard is open, remove safety padding to stick input to keyboard top
-        inputBar.style.paddingBottom = isKeyboardOpen ? '6px' : '10px';
-      });
-    }
+      const setKbdStyle = (isOpen) => {
+        if (!inputBar) return;
+        // Strip padding and hide hint when keyboard is open to stick to bottom
+        inputBar.style.paddingBottom = isOpen ? '2px' : '12px';
+        if (hint) hint.style.display = isOpen ? 'none' : 'block';
+        setTimeout(scrollDown, 100);
+      };
+
+      if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Keyboard) {
+        const { Keyboard } = window.Capacitor.Plugins;
+        Keyboard.addListener('keyboardWillShow', () => setKbdStyle(true));
+        Keyboard.addListener('keyboardWillHide', () => setKbdStyle(false));
+      }
+      // Fallback for browser/WebView resize
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', () => {
+          const isKbd = window.visualViewport.height < window.innerHeight * 0.9;
+          setKbdStyle(isKbd);
+        });
+      }
+    })();
   </script>
 </body>
 
