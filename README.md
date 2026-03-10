@@ -1,9 +1,13 @@
 # Kiri AI 🤖
+
 **A full-stack AI chat application powered by Google Gemini**
 
 ---
 
+APP From Here :=
+
 ## 🗂 Project Structure
+
 ```
 kiri-ai/
 ├── backend/
