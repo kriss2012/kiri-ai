@@ -12,6 +12,10 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
+import androidx.datastore.preferences.core.emptyPreferences
+import kotlinx.coroutines.flow.catch
+import java.io.IOException
+
 private val Context.dataStore by preferencesDataStore(name = "auth_prefs")
 
 @Singleton
@@ -22,19 +26,35 @@ class AuthDataStore @Inject constructor(
     private val TOKEN_KEY = stringPreferencesKey("jwt_token")
     private val USER_KEY = stringPreferencesKey("user_data")
 
-    val token: Flow<String?> = context.dataStore.data.map { preferences ->
-        preferences[TOKEN_KEY]
-    }
-
-    val user: Flow<User?> = context.dataStore.data.map { preferences ->
-        preferences[USER_KEY]?.let {
-            try {
-                gson.fromJson(it, User::class.java)
-            } catch (e: Exception) {
-                null
+    val token: Flow<String?> = context.dataStore.data
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
             }
         }
-    }
+        .map { preferences ->
+            preferences[TOKEN_KEY]
+        }
+
+    val user: Flow<User?> = context.dataStore.data
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }
+        .map { preferences ->
+            preferences[USER_KEY]?.let {
+                try {
+                    gson.fromJson(it, User::class.java)
+                } catch (e: Exception) {
+                    null
+                }
+            }
+        }
 
     suspend fun saveToken(token: String) {
         context.dataStore.edit { preferences ->

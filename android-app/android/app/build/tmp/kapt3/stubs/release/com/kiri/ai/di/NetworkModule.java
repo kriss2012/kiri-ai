@@ -5,7 +5,7 @@ package com.kiri.ai.di;
 @dagger.hilt.InstallIn(value = {dagger.hilt.components.SingletonComponent.class})
 public final class NetworkModule {
     @org.jetbrains.annotations.NotNull()
-    private static final java.lang.String BASE_URL = "https://kiri-ai-backend.onrender.com/";
+    private static final java.lang.String BASE_URL = "https://kiri-ai-backend.onrender.com/api/";
     @org.jetbrains.annotations.NotNull()
     public static final com.kiri.ai.di.NetworkModule INSTANCE = null;
     

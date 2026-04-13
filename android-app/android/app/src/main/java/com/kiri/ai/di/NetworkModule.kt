@@ -22,7 +22,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "https://kiri-ai-backend.onrender.com/" // Remote backend URL
+    private const val BASE_URL = "https://kiri-ai-backend.onrender.com/api/" // Corrected API path
 
     @Provides
     @Singleton

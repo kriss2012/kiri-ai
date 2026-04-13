@@ -1,6 +1,7 @@
 package com.kiri.ai.ui.theme
 
 import android.app.Activity
+import com.kiri.ai.utils.findActivity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -44,9 +45,11 @@ fun KiriTheme(
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
-            val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.background.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+            val window = (view.context.findActivity() as? Activity)?.window
+            window?.let {
+                it.statusBarColor = colorScheme.background.toArgb()
+                WindowCompat.getInsetsController(it, view).isAppearanceLightStatusBars = !darkTheme
+            }
         }
     }
 

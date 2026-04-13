@@ -13,12 +13,16 @@ data class User(
     val isVerified: Boolean? = false,
     val avatar: String? = null,
     val isPremium: Boolean? = false,
-    val dailyLimit: String? = "50"
-)
+    @SerializedName("dailyLimit")
+    private val _dailyLimit: Any? = null
+) {
+    val dailyLimit: String
+        get() = _dailyLimit?.toString() ?: "50"
+}
 
 data class AuthResponse(
-    val success: Boolean,
-    val message: String,
+    val success: Boolean? = null,
+    val message: String? = null,
     val token: String? = null,
     val user: User? = null
 )
@@ -60,7 +64,9 @@ data class ConversationDetailResponse(
 
 data class ChatMessage(
     val role: String? = "user", // "user" or "assistant"
-    val content: String? = ""
+    val content: String? = "",
+    @SerializedName("_id", alternate = ["id"])
+    val id: String? = null
 )
 
 data class ChatDetail(

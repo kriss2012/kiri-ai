@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
@@ -51,8 +52,15 @@ class ChatViewModel @Inject constructor(
             try {
                 uiState = uiState.copy(isLoadingMessages = true, currentConversationId = id, error = null)
                 chatRepository.getConversationDetail(id).onSuccess { detail ->
+                    // Ensure each message has a unique stable ID for LazyColumn
+                    val sanitizedMessages = detail.messages?.mapIndexed { index, msg ->
+                        if (msg.id == null) {
+                            msg.copy(id = "msg_${id}_${index}_${msg.role}")
+                        } else msg
+                    } ?: emptyList()
+
                     uiState = uiState.copy(
-                        messages = detail.messages ?: emptyList(),
+                        messages = sanitizedMessages,
                         isLoadingMessages = false,
                         currentTitle = detail.title ?: "Untitled Chat"
                     )
@@ -71,10 +79,15 @@ class ChatViewModel @Inject constructor(
     fun onMessageChange(msg: String) { uiState = uiState.copy(inputMessage = msg) }
 
     fun sendMessage() {
-        if (uiState.inputMessage.isBlank() || uiState.isSending) return
+        val input = uiState.inputMessage.trim()
+        if (input.isBlank() || uiState.isSending) return
         
-        val userMsg = ChatMessage("user", uiState.inputMessage)
-        val currentInput = uiState.inputMessage
+        val userMsgId = "user_${UUID.randomUUID()}"
+        val userMsg = ChatMessage(
+            role = "user", 
+            content = input,
+            id = userMsgId
+        )
         
         uiState = uiState.copy(
             messages = uiState.messages + userMsg,
@@ -85,12 +98,17 @@ class ChatViewModel @Inject constructor(
 
         viewModelScope.launch {
             try {
-                chatRepository.sendMessage(currentInput, uiState.currentConversationId).onSuccess { res ->
-                    val assistantMsg = ChatMessage("assistant", res.message ?: "")
+                chatRepository.sendMessage(input, uiState.currentConversationId).onSuccess { res ->
+                    val assistantMsg = ChatMessage(
+                        role = "assistant", 
+                        content = res.message ?: "",
+                        id = "ai_${UUID.randomUUID()}"
+                    )
+                    
                     uiState = uiState.copy(
                         messages = uiState.messages + assistantMsg,
                         isSending = false,
-                        currentConversationId = res.conversationId,
+                        currentConversationId = res.conversationId ?: uiState.currentConversationId,
                         currentTitle = res.title ?: uiState.currentTitle
                     )
                     loadConversations()
@@ -101,7 +119,10 @@ class ChatViewModel @Inject constructor(
                     )
                 }
             } catch (e: Exception) {
-                uiState = uiState.copy(isSending = false, error = e.message)
+                uiState = uiState.copy(
+                    isSending = false, 
+                    error = e.message ?: "An unexpected error occurred"
+                )
             }
         }
     }

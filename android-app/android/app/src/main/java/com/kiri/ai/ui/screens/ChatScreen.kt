@@ -214,23 +214,15 @@ fun ChatScreen(
                         modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
                         contentPadding = PaddingValues(bottom = 16.dp)
                     ) {
-                        state.messages?.let { messages ->
-                            items(messages) { msg ->
-                                // Soft entrance for messages
-                                var visible by remember { mutableStateOf(false) }
-                                LaunchedEffect(Unit) { visible = true }
-                                AnimatedVisibility(
-                                    visible = visible,
-                                    enter = fadeIn(animationSpec = androidx.compose.animation.core.tween(500)) +
-                                            slideInVertically(initialOffsetY = { 20 })
-                                ) {
-                                    KiriMessageBubble(msg)
-                                }
-                            }
+                        items(
+                            items = state.messages ?: emptyList(),
+                            key = { it.id ?: it.hashCode() }
+                        ) { msg ->
+                            KiriMessageBubble(msg)
                         }
                         
                         if (state.isSending) {
-                            item {
+                            item(key = "typing_indicator") {
                                 TypingIndicator()
                             }
                         }
