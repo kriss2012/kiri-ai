@@ -9,7 +9,7 @@ import javax.inject.Singleton
 class SubscriptionRepository @Inject constructor(
     private val subscriptionApi: SubscriptionApi
 ) {
-    suspend fun createOrder(plan: String): Result<Map<String, Any>> {
+    suspend fun createOrder(plan: String): Result<OrderResponse> {
         return try {
             val response = subscriptionApi.createOrder(mapOf("plan" to plan))
             if (response.isSuccessful && response.body() != null) {
