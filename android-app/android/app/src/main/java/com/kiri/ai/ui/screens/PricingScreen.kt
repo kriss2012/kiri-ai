@@ -32,6 +32,7 @@ import androidx.navigation.NavController
 import com.kiri.ai.ui.components.KiriButton
 import com.kiri.ai.ui.theme.*
 import com.kiri.ai.ui.viewmodels.SubscriptionViewModel
+import com.kiri.ai.utils.findActivity
 import com.razorpay.Checkout
 import org.json.JSONObject
 import android.app.Activity
@@ -63,7 +64,11 @@ fun PricingScreen(
                 prefill.put("email", "user@example.com") // Ideally from user data
                 options.put("prefill", prefill)
 
-                checkout.open(context as Activity, options)
+                context.findActivity()?.let { activity ->
+                    checkout.open(activity, options)
+                } ?: run {
+                    Toast.makeText(context, "Error: Could not find activity context", Toast.LENGTH_SHORT).show()
+                }
             } catch (e: Exception) {
                 Toast.makeText(context, "Error in payment: ${e.message}", Toast.LENGTH_LONG).show()
             }

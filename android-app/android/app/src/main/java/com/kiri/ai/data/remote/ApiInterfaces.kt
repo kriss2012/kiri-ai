@@ -5,46 +5,46 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface AuthApi {
-    @POST("api/auth/register")
+    @POST("auth/register")
     suspend fun register(@Body request: Map<String, String>): Response<AuthResponse>
 
-    @POST("api/auth/login")
+    @POST("auth/login")
     suspend fun login(@Body request: Map<String, String>): Response<AuthResponse>
 
-    @GET("api/auth/me")
+    @GET("auth/me")
     suspend fun getMe(): Response<AuthResponse>
 
-    @PUT("api/auth/profile")
+    @PUT("auth/profile")
     suspend fun updateProfile(@Body request: Map<String, String>): Response<AuthResponse>
 
-    @PUT("api/auth/change-password")
+    @PUT("auth/change-password")
     suspend fun changePassword(@Body request: Map<String, String>): Response<GenericResponse>
 }
 
 interface SubscriptionApi {
-    @POST("api/subscription/create-order")
+    @POST("subscription/create-order")
     suspend fun createOrder(@Body request: Map<String, String>): Response<OrderResponse>
 
-    @POST("api/subscription/verify-payment")
+    @POST("subscription/verify-payment")
     suspend fun verifyPayment(@Body request: Map<String, Any>): Response<AuthResponse>
 
-    @GET("api/subscription/status")
+    @GET("subscription/status")
     suspend fun getStatus(): Response<Map<String, Any>>
 }
 
 interface ChatApi {
-    @GET("api/chat/conversations")
+    @GET("chat/conversations")
     suspend fun getConversations(): Response<ConversationsResponse>
 
-    @GET("api/chat/conversations/{id}")
+    @GET("chat/conversations/{id}")
     suspend fun getConversation(@Path("id") id: String): Response<ConversationDetailResponse>
 
-    @POST("api/chat/message")
+    @POST("chat/message")
     suspend fun sendMessage(@Body request: ChatRequest): Response<ChatResponse>
 
-    @DELETE("api/chat/conversations/{id}")
+    @DELETE("chat/conversations/{id}")
     suspend fun deleteConversation(@Path("id") id: String): Response<GenericResponse>
 
-    @DELETE("api/chat/conversations")
+    @DELETE("chat/conversations")
     suspend fun deleteAllConversations(): Response<GenericResponse>
 }
