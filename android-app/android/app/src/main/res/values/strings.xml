@@ -1,7 +1,3 @@
-<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">Kiri AI</string>
-    <string name="title_activity_main">Kiri AI</string>
-    <string name="package_name">com.kiri.ai</string>
-    <string name="custom_url_scheme">com.kiri.ai</string>
 </resources>
