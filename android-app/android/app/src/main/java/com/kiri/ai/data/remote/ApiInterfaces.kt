@@ -23,7 +23,7 @@ interface AuthApi {
 
 interface SubscriptionApi {
     @POST("api/subscription/create-order")
-    suspend fun createOrder(@Body request: Map<String, String>): Response<Map<String, Any>>
+    suspend fun createOrder(@Body request: Map<String, String>): Response<OrderResponse>
 
     @POST("api/subscription/verify-payment")
     suspend fun verifyPayment(@Body request: Map<String, Any>): Response<AuthResponse>
