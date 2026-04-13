@@ -1,7 +1,9 @@
 package com.kiri.ai.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,82 +15,89 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kiri.ai.data.models.ChatMessage
 import com.kiri.ai.ui.theme.*
-import com.mikepenz.markdown.m3.Markdown
+import com.mikepenz.markdown.compose.Markdown
+import com.mikepenz.markdown.model.markdownTypography
+
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
+import com.kiri.ai.R
 
 @Composable
 fun KiriMessageBubble(message: ChatMessage) {
     val isUser = message.role == "user"
     
-    Row(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        horizontalArrangement = if (isUser) Arrangement.End else Arrangement.Start,
-        verticalAlignment = Alignment.Top
+            .padding(vertical = 12.dp),
+        horizontalAlignment = if (isUser) Alignment.End else Alignment.Start
     ) {
-        if (!isUser) {
-            AIAvatar()
-            Spacer(modifier = Modifier.width(12.dp))
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(bottom = 6.dp)
+        ) {
+            if (!isUser) {
+                AIAvatar()
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "Kiri AI",
+                    style = KiriTypography.labelMedium.copy(fontWeight = FontWeight.Bold, color = AnthropicNearBlack)
+                )
+            } else {
+                Text(
+                    text = "You",
+                    style = KiriTypography.labelMedium.copy(fontWeight = FontWeight.Bold, color = AnthropicNearBlack)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                UserAvatar()
+            }
         }
         
         Box(
             modifier = Modifier
-                .widthIn(max = 280.dp)
+                .widthIn(max = 320.dp)
                 .background(
-                    color = if (isUser) TerracottaBrand.copy(alpha = 0.1f) else Ivory,
-                    shape = RoundedCornerShape(
-                        topStart = 16.dp,
-                        topEnd = 16.dp,
-                        bottomStart = if (isUser) 16.dp else 4.dp,
-                        bottomEnd = if (isUser) 4.dp else 16.dp
-                    )
+                    color = if (isUser) TerracottaBrand.copy(alpha = 0.05f) else Ivory,
+                    shape = RoundedCornerShape(12.dp)
                 )
-                .padding(12.dp)
                 .let { 
-                    if (!isUser) it.background(Color.Transparent, RoundedCornerShape(16.dp)) 
+                    if (!isUser) it.border(1.dp, BorderCream, RoundedCornerShape(12.dp)) 
                     else it 
                 }
+                .padding(16.dp)
         ) {
             if (isUser) {
                 Text(
                     text = message.content,
                     style = KiriTypography.bodyMedium.copy(
                         color = AnthropicNearBlack,
-                        lineHeight = 22.sp
+                        lineHeight = 24.sp
                     )
                 )
             } else {
                 Markdown(
                     content = message.content,
-                    typography = com.mikepenz.markdown.model.markdownTypography(
-                        body1 = KiriTypography.bodyMedium,
-                        h1 = KiriTypography.headlineLarge,
-                        h2 = KiriTypography.headlineMedium
+                    typography = markdownTypography(
+                        paragraph = KiriTypography.bodyMedium,
+                        h1 = KiriTypography.headlineMedium,
+                        h2 = KiriTypography.titleLarge
                     )
                 )
             }
-        }
-        
-        if (isUser) {
-            Spacer(modifier = Modifier.width(12.dp))
-            UserAvatar()
         }
     }
 }
 
 @Composable
 fun AIAvatar() {
-    Box(
+    Image(
+        painter = painterResource(id = R.drawable.app_logo),
+        contentDescription = "Kiri AI",
         modifier = Modifier
             .size(36.dp)
-            .background(TerracottaBrand, androidx.compose.foundation.shape.CircleShape),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "K",
-            style = KiriTypography.labelLarge.copy(color = Ivory, fontWeight = FontWeight.ExtraBold)
-        )
-    }
+            .background(Color.White, CircleShape)
+            .padding(4.dp)
+    )
 }
 
 @Composable
@@ -96,7 +105,7 @@ fun UserAvatar() {
     Box(
         modifier = Modifier
             .size(36.dp)
-            .background(WarmSand, androidx.compose.foundation.shape.CircleShape),
+            .background(WarmSand, CircleShape),
         contentAlignment = Alignment.Center
     ) {
         Text(

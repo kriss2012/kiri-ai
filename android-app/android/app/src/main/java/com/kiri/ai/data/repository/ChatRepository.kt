@@ -25,23 +25,10 @@ class ChatRepository @Inject constructor(
     suspend fun getConversations(): Result<List<Conversation>> {
         return try {
             val response = chatApi.getConversations()
-            if (response.isSuccessful && response.body() != null) {
-                val body = response.body()!!
-                val conversationsRaw = body["conversations"] as? List<Map<String, Any>>
-                val conversations = conversationsRaw?.map { map ->
-                    Conversation(
-                        id = map["id"] as String,
-                        title = map["title"] as String,
-                        model = map["model"] as String,
-                        isPinned = map["isPinned"] as? Boolean ?: false,
-                        messageCount = (map["messageCount"] as? Double)?.toInt() ?: 0,
-                        lastMessage = map["lastMessage"] as? String ?: "",
-                        updatedAt = map["updatedAt"] as String
-                    )
-                } ?: emptyList()
-                Result.success(conversations)
+            if (response.isSuccessful) {
+                Result.success(response.body()?.conversations ?: emptyList())
             } else {
-                Result.failure(Exception(response.message()))
+                Result.failure(Exception("Error ${response.code()}: ${response.message()}"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -51,25 +38,15 @@ class ChatRepository @Inject constructor(
     suspend fun getConversationDetail(id: String): Result<ChatDetail> {
         return try {
             val response = chatApi.getConversation(id)
-            if (response.isSuccessful && response.body() != null) {
-                val body = response.body()!!
-                val convMap = body["conversation"] as Map<String, Any>
-                val messagesRaw = convMap["messages"] as List<Map<String, Any>>
-                val messages = messagesRaw.map { msg ->
-                    ChatMessage(
-                        role = msg["role"] as String,
-                        content = msg["content"] as String
-                    )
+            if (response.isSuccessful) {
+                val detail = response.body()?.conversation
+                if (detail != null) {
+                    Result.success(detail)
+                } else {
+                    Result.failure(Exception("Conversation detail is empty"))
                 }
-                Result.success(
-                    ChatDetail(
-                        id = convMap["_id"] as String,
-                        title = convMap["title"] as String,
-                        messages = messages
-                    )
-                )
             } else {
-                Result.failure(Exception(response.message()))
+                Result.failure(Exception("Error ${response.code()}: ${response.message()}"))
             }
         } catch (e: Exception) {
             Result.failure(e)

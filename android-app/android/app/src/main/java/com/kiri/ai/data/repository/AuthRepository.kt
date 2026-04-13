@@ -14,6 +14,7 @@ class AuthRepository @Inject constructor(
     private val authDataStore: AuthDataStore
 ) {
     val token: Flow<String?> = authDataStore.token
+    val user: Flow<com.kiri.ai.data.models.User?> = authDataStore.user
 
     suspend fun login(email: String, password: String): Result<AuthResponse> {
         return try {
@@ -21,6 +22,7 @@ class AuthRepository @Inject constructor(
             if (response.isSuccessful && response.body() != null) {
                 val authRes = response.body()!!
                 authRes.token?.let { authDataStore.saveToken(it) }
+                authRes.user?.let { authDataStore.saveUser(it) }
                 Result.success(authRes)
             } else {
                 Result.failure(Exception(response.message()))
@@ -36,6 +38,7 @@ class AuthRepository @Inject constructor(
             if (response.isSuccessful && response.body() != null) {
                 val authRes = response.body()!!
                 authRes.token?.let { authDataStore.saveToken(it) }
+                authRes.user?.let { authDataStore.saveUser(it) }
                 Result.success(authRes)
             } else {
                 Result.failure(Exception(response.message()))
@@ -49,7 +52,24 @@ class AuthRepository @Inject constructor(
         return try {
             val response = authApi.getMe()
             if (response.isSuccessful && response.body() != null) {
-                Result.success(response.body()!!)
+                val authRes = response.body()!!
+                authRes.user?.let { authDataStore.saveUser(it) }
+                Result.success(authRes)
+            } else {
+                Result.failure(Exception(response.message()))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun updateProfile(name: String): Result<AuthResponse> {
+        return try {
+            val response = authApi.updateProfile(mapOf("name" to name))
+            if (response.isSuccessful && response.body() != null) {
+                val authRes = response.body()!!
+                authRes.user?.let { authDataStore.saveUser(it) }
+                Result.success(authRes)
             } else {
                 Result.failure(Exception(response.message()))
             }

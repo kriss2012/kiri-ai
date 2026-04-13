@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.kiri.ai.app-mergeReleaseResources-60:/values-v31/values-v31.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\krishna\\.gradle\\caches\\transforms-4\\655719f2c1b2dfac5f15787144ef36ec\\transformed\\jetified-core-splashscreen-1.0.1\\res\\values-v31\\values-v31.xml",
+                    "from": {
+                        "startLines": "2,9",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,473",
+                        "endLines": "8,13",
+                        "endColumns": "12,12",
+                        "endOffsets": "468,697"
+                    }
+                }
+            ]
+        }
+    ]
+}

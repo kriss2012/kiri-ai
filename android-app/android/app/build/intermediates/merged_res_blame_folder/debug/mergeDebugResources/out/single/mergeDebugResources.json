@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "com.kiri.ai.app-debug-59:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.kiri.ai.app-main-61:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.kiri.ai.app-debug-59:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.kiri.ai.app-main-61:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.kiri.ai.app-debug-59:/xml_config.xml.flat",
+        "source": "com.kiri.ai.app-main-61:/xml/config.xml"
+    },
+    {
+        "merged": "com.kiri.ai.app-debug-59:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.kiri.ai.app-main-61:/drawable/ic_launcher_foreground.xml"
+    }
+]

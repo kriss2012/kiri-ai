@@ -1,10 +1,15 @@
 package com.kiri.ai.ui.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -40,7 +45,7 @@ fun LandingScreen(navController: NavController) {
         FadeUpAnimation(visible = animate, delayMillis = 100) {
             Box(
                 modifier = Modifier
-                    .background(TerracottaBrand.copy(alpha = 0.1f), shape = androidx.compose.foundation.shape.CircleShape)
+                    .background(TerracottaBrand.copy(alpha = 0.1f), shape = CircleShape)
                     .padding(horizontal = 16.dp, vertical = 6.dp)
             ) {
                 Text(
@@ -61,25 +66,23 @@ fun LandingScreen(navController: NavController) {
             Text(
                 text = "Kiri AI",
                 style = KiriTypography.displayLarge.copy(
-                    brush = Brush.linearGradient(
-                        colors = listOf(AnthropicNearBlack, TerracottaBrand)
-                    )
+                    color = AnthropicNearBlack
                 ),
                 textAlign = TextAlign.Center
             )
         }
         
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(24.dp))
         
         FadeUpAnimation(visible = animate, delayMillis = 300) {
             Text(
-                text = "Your intelligent assistant that thinks deeper, reasons sharper, and creates without limits. Powered by Google Gemini.",
+                text = "Your intelligent assistant that thinks deeper, reasons sharper, and creates without limits.",
                 style = KiriTypography.bodyLarge.copy(
                     color = OliveGray,
                     textAlign = TextAlign.Center,
-                    lineHeight = 28.sp
+                    lineHeight = 32.sp // More relaxed for editorial feel
                 ),
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier.padding(horizontal = 24.dp)
             )
         }
         
@@ -136,5 +139,47 @@ fun LandingScreen(navController: NavController) {
         }
         
         Spacer(modifier = Modifier.height(48.dp))
+    }
+}
+
+@Composable
+fun FeatureCard(
+    icon: String,
+    title: String,
+    desc: String
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(8.dp),
+        colors = CardDefaults.cardColors(containerColor = Ivory),
+        border = BorderStroke(1.dp, BorderCream)
+    ) {
+        Row(
+            modifier = Modifier.padding(20.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(48.dp)
+                    .background(Parchment, RoundedCornerShape(8.dp)),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = icon, fontSize = 24.sp)
+            }
+            Spacer(modifier = Modifier.width(16.dp))
+            Column {
+                Text(
+                    text = title,
+                    style = KiriTypography.titleMedium,
+                    color = AnthropicNearBlack
+                )
+                Text(
+                    text = desc,
+                    style = KiriTypography.bodySmall,
+                    color = OliveGray,
+                    lineHeight = 20.sp
+                )
+            }
+        }
     }
 }

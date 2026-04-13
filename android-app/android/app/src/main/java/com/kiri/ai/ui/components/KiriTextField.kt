@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
@@ -31,15 +32,13 @@ fun KiriTextField(
 ) {
     Column(modifier = modifier) {
         Text(
-            text = label.uppercase(),
-            style = KiriTypography.labelLarge.copy(
-                fontSize = 12.sp,
-                color = OliveGray,
-                letterSpacing = 0.5.sp,
-                fontWeight = FontWeight.Bold
+            text = label,
+            style = KiriTypography.labelMedium.copy(
+                fontWeight = FontWeight.SemiBold,
+                color = OliveGray
             )
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(6.dp))
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
@@ -53,11 +52,12 @@ fun KiriTextField(
             isError = isError,
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
-            shape = RoundedCornerShape(12.dp),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
+            shape = RoundedCornerShape(8.dp), // Comfortably rounded
+            colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = FocusBlue,
                 unfocusedBorderColor = BorderCream,
-                containerColor = Ivory,
+                focusedContainerColor = Ivory,
+                unfocusedContainerColor = Ivory,
                 cursorColor = AnthropicNearBlack,
                 errorBorderColor = ErrorCrimson
             ),
@@ -68,8 +68,8 @@ fun KiriTextField(
             Text(
                 text = errorMessage,
                 color = ErrorCrimson,
-                style = KiriTypography.labelLarge,
-                modifier = Modifier.fillMaxWidth()
+                style = KiriTypography.labelMedium,
+                modifier = Modifier.fillMaxWidth().padding(top = 4.dp)
             )
         }
     }

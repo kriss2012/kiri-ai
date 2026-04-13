@@ -21,12 +21,23 @@ interface AuthApi {
     suspend fun changePassword(@Body request: Map<String, String>): Response<GenericResponse>
 }
 
+interface SubscriptionApi {
+    @POST("api/subscription/create-order")
+    suspend fun createOrder(@Body request: Map<String, String>): Response<OrderResponse>
+
+    @POST("api/subscription/verify-payment")
+    suspend fun verifyPayment(@Body request: Map<String, Any>): Response<AuthResponse>
+
+    @GET("api/subscription/status")
+    suspend fun getStatus(): Response<Map<String, Any>>
+}
+
 interface ChatApi {
     @GET("api/chat/conversations")
-    suspend fun getConversations(): Response<Map<String, Any>> // Using map for flexibility on dynamic list
+    suspend fun getConversations(): Response<ConversationsResponse>
 
     @GET("api/chat/conversations/{id}")
-    suspend fun getConversation(@Path("id") id: String): Response<Map<String, Any>>
+    suspend fun getConversation(@Path("id") id: String): Response<ConversationDetailResponse>
 
     @POST("api/chat/message")
     suspend fun sendMessage(@Body request: ChatRequest): Response<ChatResponse>

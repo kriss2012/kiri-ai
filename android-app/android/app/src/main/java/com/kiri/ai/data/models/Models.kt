@@ -1,15 +1,18 @@
 package com.kiri.ai.data.models
 
+import com.google.gson.annotations.SerializedName
+
 data class User(
-    val id: String,
-    val name: String,
-    val email: String,
-    val plan: String,
-    val dailyRequests: Int,
-    val totalRequests: Int = 0,
-    val isVerified: Boolean = false,
+    @SerializedName("_id", alternate = ["id"])
+    val id: String? = null,
+    val name: String? = null,
+    val email: String? = null,
+    val plan: String? = "free",
+    val dailyRequests: Int? = 0,
+    val totalRequests: Int? = 0,
+    val isVerified: Boolean? = false,
     val avatar: String? = null,
-    val isPremium: Boolean = false,
+    val isPremium: Boolean? = false,
     val dailyLimit: String? = "50"
 )
 
@@ -21,29 +24,52 @@ data class AuthResponse(
 )
 
 data class GenericResponse(
-    val success: Boolean,
-    val message: String
+    val success: Boolean? = null,
+    val message: String? = null
+)
+
+data class OrderResponse(
+    val success: Boolean? = null,
+    val orderId: String? = null,
+    val amount: Int? = null,
+    val currency: String? = null,
+    val keyId: String? = null,
+    val message: String? = null
+)
+
+data class ConversationsResponse(
+    val success: Boolean? = null,
+    val conversations: List<Conversation>? = emptyList()
 )
 
 data class Conversation(
-    val id: String,
-    val title: String,
-    val model: String,
-    val isPinned: Boolean,
-    val messageCount: Int,
-    val lastMessage: String,
-    val updatedAt: String
+    @SerializedName("_id", alternate = ["id"])
+    val id: String? = null,
+    val title: String? = "Untitled",
+    val model: String? = null,
+    val isPinned: Boolean? = false,
+    val messageCount: Int? = 0,
+    val lastMessage: String? = "",
+    val updatedAt: String? = ""
+)
+
+data class ConversationDetailResponse(
+    val success: Boolean? = null,
+    val conversation: ChatDetail? = null
 )
 
 data class ChatMessage(
-    val role: String, // "user" or "assistant"
-    val content: String
+    val role: String = "user", // "user" or "assistant"
+    val content: String = ""
 )
 
 data class ChatDetail(
-    val id: String,
-    val title: String,
-    val messages: List<ChatMessage>
+    @SerializedName("_id", alternate = ["id"])
+    val id: String? = null,
+    val title: String? = "Untitled",
+    val messages: List<ChatMessage>? = emptyList(),
+    val model: String? = null,
+    val updatedAt: String? = null
 )
 
 data class ChatRequest(
@@ -53,10 +79,14 @@ data class ChatRequest(
 )
 
 data class ChatResponse(
-    val success: Boolean,
-    val message: String,
-    val conversationId: String,
-    val title: String,
-    val requestsUsed: Int,
+    val success: Boolean? = null,
+    val message: String? = null,
+    val conversationId: String? = null,
+    val title: String? = null,
+    val requestsUsed: Int? = null,
+    @SerializedName("requestsRemaining")
+    private val _requestsRemaining: Any? = null
+) {
     val requestsRemaining: String
-)
+        get() = _requestsRemaining?.toString() ?: "0"
+}
