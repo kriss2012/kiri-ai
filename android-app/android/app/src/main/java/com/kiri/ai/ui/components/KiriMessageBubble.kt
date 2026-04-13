@@ -68,7 +68,7 @@ fun KiriMessageBubble(message: ChatMessage) {
         ) {
             if (isUser) {
                 Text(
-                    text = message.content,
+                    text = message.content ?: "",
                     style = KiriTypography.bodyMedium.copy(
                         color = AnthropicNearBlack,
                         lineHeight = 24.sp
@@ -76,7 +76,7 @@ fun KiriMessageBubble(message: ChatMessage) {
                 )
             } else {
                 Markdown(
-                    content = message.content,
+                    content = message.content ?: "",
                     typography = markdownTypography(
                         paragraph = KiriTypography.bodyMedium,
                         h1 = KiriTypography.headlineMedium,

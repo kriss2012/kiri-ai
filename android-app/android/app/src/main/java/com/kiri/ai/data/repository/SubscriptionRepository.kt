@@ -1,6 +1,7 @@
 package com.kiri.ai.data.repository
 
 import com.kiri.ai.data.models.AuthResponse
+import com.kiri.ai.data.models.OrderResponse
 import com.kiri.ai.data.remote.SubscriptionApi
 import javax.inject.Inject
 import javax.inject.Singleton

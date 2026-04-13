@@ -1,5 +1,6 @@
 package com.kiri.ai.ui.screens
 
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
 import androidx.compose.animation.fadeIn
@@ -19,6 +20,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -108,7 +110,7 @@ fun ChatScreen(
                         NavigationDrawerItem(
                             label = { 
                                 Text(
-                                    conv.title, 
+                                    conv.title ?: "Untitled Chat", 
                                     color = if (conv.id == state.currentConversationId) Ivory else WarmSilver, 
                                     maxLines = 1,
                                     style = KiriTypography.bodySmall
@@ -116,7 +118,7 @@ fun ChatScreen(
                             },
                             selected = conv.id == state.currentConversationId,
                             onClick = {
-                                viewModel.selectConversation(conv.id)
+                                conv.id?.let { viewModel.selectConversation(it) }
                                 scope.launch { drawerState.close() }
                             },
                             colors = NavigationDrawerItemDefaults.colors(
@@ -174,7 +176,7 @@ fun ChatScreen(
                 TopAppBar(
                             title = { 
                         Text(
-                            state.currentTitle, 
+                            state.currentTitle ?: "Kiri AI", 
                             style = KiriTypography.titleMedium,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
@@ -204,7 +206,7 @@ fun ChatScreen(
             containerColor = Parchment
         ) { padding ->
             Box(modifier = Modifier.padding(padding).fillMaxSize()) {
-                if (state.messages.isEmpty() && !state.isLoadingMessages) {
+                if ((state.messages?.isEmpty() ?: true) && !state.isLoadingMessages) {
                     WelcomeScreen()
                 } else {
                     LazyColumn(
@@ -212,16 +214,18 @@ fun ChatScreen(
                         modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
                         contentPadding = PaddingValues(bottom = 16.dp)
                     ) {
-                        items(state.messages) { msg ->
-                            // Soft entrance for messages
-                            var visible by remember { mutableStateOf(false) }
-                            LaunchedEffect(Unit) { visible = true }
-                            AnimatedVisibility(
-                                visible = visible,
-                                enter = fadeIn(animationSpec = androidx.compose.animation.core.tween(500)) +
-                                        slideInVertically(initialOffsetY = { 20 })
-                            ) {
-                                KiriMessageBubble(msg)
+                        state.messages?.let { messages ->
+                            items(messages) { msg ->
+                                // Soft entrance for messages
+                                var visible by remember { mutableStateOf(false) }
+                                LaunchedEffect(Unit) { visible = true }
+                                AnimatedVisibility(
+                                    visible = visible,
+                                    enter = fadeIn(animationSpec = androidx.compose.animation.core.tween(500)) +
+                                            slideInVertically(initialOffsetY = { 20 })
+                                ) {
+                                    KiriMessageBubble(msg)
+                                }
                             }
                         }
                         
