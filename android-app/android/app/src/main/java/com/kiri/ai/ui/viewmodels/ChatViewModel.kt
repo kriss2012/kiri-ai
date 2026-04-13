@@ -75,10 +75,9 @@ class ChatViewModel @Inject constructor(
         
         val userMsg = ChatMessage("user", uiState.inputMessage)
         val currentInput = uiState.inputMessage
-        val prevMessages = uiState.messages
         
         uiState = uiState.copy(
-            messages = prevMessages + userMsg,
+            messages = uiState.messages + userMsg,
             inputMessage = "",
             isSending = true,
             error = null
@@ -92,7 +91,7 @@ class ChatViewModel @Inject constructor(
                         messages = uiState.messages + assistantMsg,
                         isSending = false,
                         currentConversationId = res.conversationId,
-                        currentTitle = res.title
+                        currentTitle = res.title ?: uiState.currentTitle
                     )
                     loadConversations()
                 }.onFailure { error ->
