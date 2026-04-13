@@ -60,7 +60,9 @@ data class ConversationDetailResponse(
 
 data class ChatMessage(
     val role: String? = "user", // "user" or "assistant"
-    val content: String? = ""
+    val content: String? = "",
+    @SerializedName("_id", alternate = ["id"])
+    val id: String? = null
 )
 
 data class ChatDetail(
