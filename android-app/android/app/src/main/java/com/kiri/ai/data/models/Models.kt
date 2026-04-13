@@ -29,8 +29,8 @@ data class GenericResponse(
 )
 
 data class ConversationsResponse(
-    val success: Boolean,
-    val conversations: List<Conversation>
+    val success: Boolean? = null,
+    val conversations: List<Conversation>? = emptyList()
 )
 
 data class Conversation(
@@ -45,7 +45,7 @@ data class Conversation(
 )
 
 data class ConversationDetailResponse(
-    val success: Boolean,
+    val success: Boolean? = null,
     val conversation: ChatDetail? = null
 )
 
