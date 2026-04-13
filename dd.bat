@@ -1,10 +1,27 @@
 @echo off
-title 🚀 Android Release Builder - Kiri Project
+title 🚀 Kiri Release Builder
 color 0A
 
-:: ==============================
-::   ANDROID BUILD AUTOMATION
-:: ==============================
+:: Try to locate gradlew automatically
+set PROJECT_DIR=%~dp0
+
+cd /d "%PROJECT_DIR%"
+
+if not exist gradlew.bat (
+    echo 🔍 Searching for gradlew.bat...
+
+    for /r %%i in (gradlew.bat) do (
+        set PROJECT_DIR=%%~dpi
+        goto found
+    )
+
+    echo ❌ ERROR: gradlew.bat not found anywhere!
+    pause
+    exit /b
+)
+
+:found
+cd /d "%PROJECT_DIR%"
 
 echo.
 echo ==========================================
@@ -12,75 +29,22 @@ echo        🚀 KIRI RELEASE BUILDER
 echo ==========================================
 echo.
 
-:: Check if gradlew exists
-if not exist gradlew.bat (
-    color 0C
-    echo ❌ ERROR: gradlew.bat not found!
-    pause
-    exit /b
-)
+echo 📁 Using project path:
+echo %PROJECT_DIR%
+echo.
 
-:: Step 1 - Clean project
+:: Clean
 echo 🧹 Cleaning project...
 call gradlew clean
-if %errorlevel% neq 0 (
-    color 0C
-    echo ❌ Clean failed!
-    pause
-    exit /b
-)
 
-:: Step 2 - Bundle Release
-color 0B
-echo.
-echo 📦 Building App Bundle (AAB)...
-echo ------------------------------------------
+:: Bundle
+echo 📦 Building AAB...
 call gradlew bundleRelease
-if %errorlevel% neq 0 (
-    color 0C
-    echo ❌ Bundle build failed!
-    pause
-    exit /b
-)
 
-echo ✅ AAB Generated Successfully!
-
-:: Step 3 - Build APK
-color 0E
-echo.
-echo 📱 Building Release APK...
-echo ------------------------------------------
+:: APK
+echo 📱 Building APK...
 call gradlew assembleRelease
-if %errorlevel% neq 0 (
-    color 0C
-    echo ❌ APK build failed!
-    pause
-    exit /b
-)
-
-echo ✅ APK Generated Successfully!
-
-:: Step 4 - Show output paths
-color 0A
-echo.
-echo ==========================================
-echo 🎉 BUILD COMPLETED SUCCESSFULLY!
-echo ==========================================
-echo.
-echo 📦 AAB Location:
-echo app\build\outputs\bundle\release\
-echo.
-echo 📱 APK Location:
-echo app\build\outputs\apk\release\
-echo.
-
-:: Optional - open folder
-choice /m "Open output folder?"
-if %errorlevel%==1 (
-    explorer app\build\outputs\
-)
 
 echo.
-echo 🔥 Done! Press any key to exit...
-pause >nul
-exit
+echo ✅ DONE!
+pause
