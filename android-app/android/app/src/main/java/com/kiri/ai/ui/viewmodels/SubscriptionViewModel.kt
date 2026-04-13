@@ -11,10 +11,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+import com.kiri.ai.data.models.OrderResponse
+
 data class SubscriptionUiState(
     val isLoading: Boolean = false,
     val error: String? = null,
-    val orderData: Map<String, Any>? = null,
+    val orderData: OrderResponse? = null,
     val success: Boolean = false,
     val pendingPlan: String? = null
 )
