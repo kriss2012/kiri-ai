@@ -23,8 +23,12 @@ import androidx.compose.ui.res.painterResource
 import com.kiri.ai.R
 
 @Composable
-fun KiriMessageBubble(message: ChatMessage) {
-    val isUser = message.role == "user"
+fun KiriMessageBubble(message: ChatMessage?) {
+    if (message == null) return
+
+    val role = message.role ?: "assistant"
+    val content = message.content ?: ""
+    val isUser = role == "user"
     
     Column(
         modifier = Modifier
@@ -68,15 +72,22 @@ fun KiriMessageBubble(message: ChatMessage) {
         ) {
             if (isUser) {
                 Text(
-                    text = message.content ?: "",
+                    text = content,
                     style = KiriTypography.bodyMedium.copy(
                         color = AnthropicNearBlack,
                         lineHeight = 24.sp
                     )
                 )
             } else {
+                // If content is somehow a complex object stringified by GSON
+                val displayContent = if (content.startsWith("{") || content.startsWith("[")) {
+                    "Message format error: $content"
+                } else {
+                    content
+                }
+
                 Markdown(
-                    content = message.content ?: "",
+                    content = displayContent,
                     typography = markdownTypography(
                         paragraph = KiriTypography.bodyMedium,
                         h1 = KiriTypography.headlineMedium,
