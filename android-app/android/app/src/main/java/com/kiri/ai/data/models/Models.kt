@@ -13,8 +13,12 @@ data class User(
     val isVerified: Boolean? = false,
     val avatar: String? = null,
     val isPremium: Boolean? = false,
-    val dailyLimit: String? = "50"
-)
+    @SerializedName("dailyLimit")
+    private val _dailyLimit: Any? = null
+) {
+    val dailyLimit: String
+        get() = _dailyLimit?.toString() ?: "50"
+}
 
 data class AuthResponse(
     val success: Boolean? = null,
