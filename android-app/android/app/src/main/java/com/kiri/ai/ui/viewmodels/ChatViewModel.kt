@@ -7,6 +7,8 @@ import com.kiri.ai.data.models.*
 import com.kiri.ai.data.repository.AuthRepository
 import com.kiri.ai.data.repository.ChatRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,15 +22,19 @@ class ChatViewModel @Inject constructor(
         private set
 
     init {
-        loadUser()
+        observeUserData()
         loadConversations()
     }
 
-    private fun loadUser() {
-        viewModelScope.launch {
-            authRepository.getMe().onSuccess { res ->
-                uiState = uiState.copy(user = res.user)
+    private fun observeUserData() {
+        authRepository.user
+            .onEach { user ->
+                uiState = uiState.copy(user = user)
             }
+            .launchIn(viewModelScope)
+
+        viewModelScope.launch {
+            authRepository.getMe()
         }
     }
 
@@ -42,13 +48,22 @@ class ChatViewModel @Inject constructor(
 
     fun selectConversation(id: String) {
         viewModelScope.launch {
-            uiState = uiState.copy(isLoadingMessages = true, currentConversationId = id)
-            chatRepository.getConversationDetail(id).onSuccess { detail ->
-                uiState = uiState.copy(
-                    messages = detail.messages,
-                    isLoadingMessages = false,
-                    currentTitle = detail.title
-                )
+            try {
+                uiState = uiState.copy(isLoadingMessages = true, currentConversationId = id, error = null)
+                chatRepository.getConversationDetail(id).onSuccess { detail ->
+                    uiState = uiState.copy(
+                        messages = detail.messages,
+                        isLoadingMessages = false,
+                        currentTitle = detail.title
+                    )
+                }.onFailure { error ->
+                    uiState = uiState.copy(
+                        isLoadingMessages = false,
+                        error = "Could not load conversation: ${error.message}"
+                    )
+                }
+            } catch (e: Exception) {
+                uiState = uiState.copy(isLoadingMessages = false, error = e.message)
             }
         }
     }
@@ -56,29 +71,38 @@ class ChatViewModel @Inject constructor(
     fun onMessageChange(msg: String) { uiState = uiState.copy(inputMessage = msg) }
 
     fun sendMessage() {
-        if (uiState.inputMessage.isBlank()) return
+        if (uiState.inputMessage.isBlank() || uiState.isSending) return
         
         val userMsg = ChatMessage("user", uiState.inputMessage)
         val currentInput = uiState.inputMessage
+        val prevMessages = uiState.messages
+        
         uiState = uiState.copy(
-            messages = uiState.messages + userMsg,
+            messages = prevMessages + userMsg,
             inputMessage = "",
-            isSending = true
+            isSending = true,
+            error = null
         )
 
         viewModelScope.launch {
-            chatRepository.sendMessage(currentInput, uiState.currentConversationId).onSuccess { res ->
-                val assistantMsg = ChatMessage("assistant", res.message)
-                uiState = uiState.copy(
-                    messages = uiState.messages + assistantMsg,
-                    isSending = false,
-                    currentConversationId = res.conversationId,
-                    currentTitle = res.title
-                )
-                loadConversations()
-                loadUser() // Update usage count
-            }.onFailure {
-                uiState = uiState.copy(isSending = false)
+            try {
+                chatRepository.sendMessage(currentInput, uiState.currentConversationId).onSuccess { res ->
+                    val assistantMsg = ChatMessage("assistant", res.message ?: "")
+                    uiState = uiState.copy(
+                        messages = uiState.messages + assistantMsg,
+                        isSending = false,
+                        currentConversationId = res.conversationId,
+                        currentTitle = res.title
+                    )
+                    loadConversations()
+                }.onFailure { error ->
+                    uiState = uiState.copy(
+                        isSending = false,
+                        error = error.message ?: "Failed to send message"
+                    )
+                }
+            } catch (e: Exception) {
+                uiState = uiState.copy(isSending = false, error = e.message)
             }
         }
     }

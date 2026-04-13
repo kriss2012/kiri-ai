@@ -45,6 +45,26 @@ class AuthViewModel @Inject constructor(
             }
         }
     }
+
+    fun updateProfile(name: String, onSuccess: () -> Unit) {
+        viewModelScope.launch {
+            uiState = uiState.copy(isLoading = true, error = null)
+            val result = authRepository.updateProfile(name)
+            uiState = if (result.isSuccess) {
+                onSuccess()
+                uiState.copy(isLoading = false)
+            } else {
+                uiState.copy(isLoading = false, error = result.exceptionOrNull()?.message ?: "Update failed")
+            }
+        }
+    }
+
+    fun logout(onSuccess: () -> Unit) {
+        viewModelScope.launch {
+            authRepository.logout()
+            onSuccess()
+        }
+    }
 }
 
 data class AuthUiState(

@@ -1,8 +1,10 @@
 package com.kiri.ai.ui.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -38,56 +40,50 @@ fun LoginScreen(
         verticalArrangement = Arrangement.Center
     ) {
         // Auth Card
-        androidx.compose.material3.Card(
+        Card(
             modifier = Modifier.fillMaxWidth(),
-            shape = androidx.compose.foundation.shape.RoundedCornerShape(20.dp),
-            colors = androidx.compose.material3.CardDefaults.cardColors(containerColor = Ivory),
-            border = androidx.compose.foundation.BorderStroke(1.dp, BorderCream)
+            shape = RoundedCornerShape(12.dp), // Generously rounded as per DESIGN.md
+            colors = CardDefaults.cardColors(containerColor = Ivory),
+            border = BorderStroke(1.dp, BorderCream)
         ) {
             Column(
-                modifier = Modifier.padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier.padding(32.dp), // More generous padding
+                horizontalAlignment = Alignment.Start // Left aligned for editorial look
             ) {
                 Text(
-                    text = "Kiri AI",
-                    style = KiriTypography.headlineLarge,
-                    color = TerracottaBrand
+                    text = "Sign in",
+                    style = KiriTypography.headlineMedium,
+                    color = AnthropicNearBlack
                 )
+                
+                Spacer(modifier = Modifier.height(8.dp))
+                
                 Text(
-                    text = "Think Deeper",
-                    style = KiriTypography.labelLarge,
-                    color = StoneGray
+                    text = "Welcome back to Kiri AI. Enter your credentials to continue.",
+                    style = KiriTypography.bodyMedium,
+                    color = OliveGray
                 )
                 
                 Spacer(modifier = Modifier.height(32.dp))
-                
-                Text(
-                    text = "Welcome back",
-                    style = KiriTypography.headlineMedium,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Start
-                )
-                
-                Spacer(modifier = Modifier.height(24.dp))
                 
                 if (state.error != null) {
                     Text(
                         text = state.error!!,
                         color = ErrorCrimson,
                         modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
-                        fontSize = 14.sp
+                        style = KiriTypography.labelLarge
                     )
                 }
                 
                 KiriTextField(
                     value = state.email,
                     onValueChange = { viewModel.onEmailChange(it) },
-                    label = "Email",
-                    placeholder = "you@example.com",
+                    label = "Email address",
+                    placeholder = "name@example.com",
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
                 )
                 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(20.dp))
                 
                 KiriTextField(
                     value = state.password,
@@ -98,10 +94,10 @@ fun LoginScreen(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
                 )
                 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(32.dp))
                 
                 KiriButton(
-                    text = "Sign In",
+                    text = "Continue",
                     onClick = { viewModel.login { navController.navigate("chat") } },
                     isLoading = state.isLoading
                 )
@@ -110,12 +106,12 @@ fun LoginScreen(
                 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.Start
                 ) {
-                    Text(text = "Don't have an account? ", style = KiriTypography.bodyMedium, color = OliveGray)
+                    Text(text = "New to Kiri? ", style = KiriTypography.bodySmall)
                     Text(
-                        text = "Create one",
-                        style = KiriTypography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                        text = "Create an account",
+                        style = KiriTypography.bodySmall.copy(fontWeight = FontWeight.Bold),
                         color = TerracottaBrand,
                         modifier = Modifier.clickable { navController.navigate("register") }
                     )

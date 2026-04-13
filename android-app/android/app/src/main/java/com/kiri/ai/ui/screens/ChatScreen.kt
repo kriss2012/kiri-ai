@@ -1,12 +1,16 @@
 package com.kiri.ai.ui.screens
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.*
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInVertically
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -15,14 +19,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.kiri.ai.R
 import com.kiri.ai.data.models.Conversation
-import com.kiri.ai.ui.components.FadeUpAnimation
-import com.kiri.ai.ui.components.KiriMessageBubble
+import com.kiri.ai.ui.components.*
 import com.kiri.ai.ui.theme.*
 import com.kiri.ai.ui.viewmodels.ChatViewModel
 import kotlinx.coroutines.launch
@@ -38,9 +45,10 @@ fun ChatScreen(
     val scope = rememberCoroutineScope()
     val scrollState = rememberLazyListState()
 
-    LaunchedEffect(state.messages.size) {
-        if (state.messages.isNotEmpty()) {
-            scrollState.animateScrollToItem(state.messages.size - 1)
+    val totalItems = state.messages.size + (if (state.isSending) 1 else 0)
+    LaunchedEffect(totalItems) {
+        if (totalItems > 0) {
+            scrollState.animateScrollToItem(totalItems - 1)
         }
     }
 
@@ -49,18 +57,20 @@ fun ChatScreen(
         drawerContent = {
             ModalDrawerSheet(
                 drawerContainerColor = DarkSurface,
-                drawerContentColor = Ivory
+                drawerContentColor = Ivory,
+                drawerShape = RoundedCornerShape(topEnd = 16.dp, bottomEnd = 16.dp)
             ) {
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(32.dp))
                 Text(
                     text = "Kiri AI",
-                    style = KiriTypography.headlineLarge,
+                    style = KiriTypography.headlineMedium,
                     modifier = Modifier.padding(horizontal = 24.dp),
                     color = Ivory
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 
-                Button(
+                KiriButton(
+                    text = "New Chat",
                     onClick = { 
                         viewModel.newChat()
                         scope.launch { drawerState.close() }
@@ -68,26 +78,34 @@ fun ChatScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = TerracottaBrand)
-                ) {
-                    Icon(Icons.Default.Add, contentDescription = null)
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text("New Chat")
-                }
+                    containerColor = TerracottaBrand,
+                    contentColor = Ivory,
+                    shape = RoundedCornerShape(8.dp)
+                )
                 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(24.dp))
                 
                 Text(
-                    "Recent",
-                    style = KiriTypography.labelLarge,
-                    color = StoneGray,
+                    "RECENT CONVERSATIONS",
+                    style = KiriTypography.labelMedium.copy(
+                        color = StoneGray,
+                        letterSpacing = 0.5.sp,
+                        fontWeight = FontWeight.Bold
+                    ),
                     modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp)
                 )
                 
                 LazyColumn(modifier = Modifier.weight(1f)) {
                     items(state.conversations) { conv ->
                         NavigationDrawerItem(
-                            label = { Text(conv.title, color = Ivory, maxLines = 1) },
+                            label = { 
+                                Text(
+                                    conv.title, 
+                                    color = if (conv.id == state.currentConversationId) Ivory else WarmSilver, 
+                                    maxLines = 1,
+                                    style = KiriTypography.bodySmall
+                                ) 
+                            },
                             selected = conv.id == state.currentConversationId,
                             onClick = {
                                 viewModel.selectConversation(conv.id)
@@ -95,28 +113,49 @@ fun ChatScreen(
                             },
                             colors = NavigationDrawerItemDefaults.colors(
                                 unselectedContainerColor = Color.Transparent,
-                                selectedContainerColor = TerracottaBrand.copy(alpha = 0.2f)
+                                selectedContainerColor = DarkSurface.copy(alpha = 0.5f),
+                                selectedIconColor = Ivory,
+                                unselectedIconColor = WarmSilver
                             ),
+                            shape = RoundedCornerShape(8.dp),
                             modifier = Modifier.padding(horizontal = 12.dp)
                         )
                     }
                 }
                 
-                HorizontalDivider(color = OliveGray)
+                HorizontalDivider(color = OliveGray.copy(alpha = 0.3f), modifier = Modifier.padding(vertical = 8.dp))
+                
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable { navController.navigate("profile") }
-                        .padding(16.dp),
+                        .padding(20.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Box(modifier = Modifier.size(40.dp).background(TerracottaBrand, androidx.compose.foundation.shape.CircleShape), contentAlignment = Alignment.Center) {
-                        Text(state.user?.name?.take(1) ?: "U", color = Ivory)
+                    Box(
+                        modifier = Modifier
+                            .size(36.dp)
+                            .background(WarmSand, CircleShape),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            state.user?.name?.take(1) ?: "U", 
+                            color = CharcoalWarm,
+                            style = KiriTypography.labelLarge.copy(fontWeight = FontWeight.Bold)
+                        )
                     }
                     Spacer(modifier = Modifier.width(12.dp))
                     Column {
-                        Text(state.user?.name ?: "User", color = Ivory, style = KiriTypography.bodyMedium)
-                        Text(state.user?.plan ?: "Free Plan", color = StoneGray, fontSize = 12.sp)
+                        Text(
+                            state.user?.name ?: "User", 
+                            color = Ivory, 
+                            style = KiriTypography.bodySmall.copy(fontWeight = FontWeight.SemiBold)
+                        )
+                        Text(
+                            state.user?.plan ?: "Free Plan", 
+                            color = StoneGray, 
+                            style = KiriTypography.labelMedium
+                        )
                     }
                 }
             }
@@ -125,15 +164,22 @@ fun ChatScreen(
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text(state.currentTitle, style = KiriTypography.titleLarge) },
+                            title = { 
+                        Text(
+                            state.currentTitle, 
+                            style = KiriTypography.titleMedium,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        ) 
+                    },
                     navigationIcon = {
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
-                            Icon(Icons.Default.Menu, contentDescription = "Menu")
+                            Icon(Icons.Default.Menu, contentDescription = "Menu", tint = AnthropicNearBlack)
                         }
                     },
                     actions = {
                         IconButton(onClick = { navController.navigate("pricing") }) {
-                            Icon(Icons.Default.Star, contentDescription = "Upgrade", color = TerracottaBrand)
+                            Icon(Icons.Default.Star, contentDescription = "Upgrade", tint = TerracottaBrand)
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(containerColor = Parchment)
@@ -170,6 +216,12 @@ fun ChatScreen(
                                 KiriMessageBubble(msg)
                             }
                         }
+                        
+                        if (state.isSending) {
+                            item {
+                                TypingIndicator()
+                            }
+                        }
                     }
                 }
                 
@@ -192,24 +244,74 @@ fun WelcomeScreen() {
         verticalArrangement = Arrangement.Center
     ) {
         FadeUpAnimation(visible = animate) {
-            Text("Kiri AI", style = KiriTypography.displayLarge, color = TerracottaBrand)
+            Image(
+                painter = painterResource(id = R.drawable.app_logo),
+                contentDescription = "Kiri AI Logo",
+                modifier = Modifier.size(100.dp)
+            )
+        }
+        Spacer(modifier = Modifier.height(24.dp))
+        FadeUpAnimation(visible = animate, delayMillis = 200) {
+            Text("Kiri AI", style = KiriTypography.displayLarge.copy(fontSize = 40.sp), color = TerracottaBrand)
         }
         Spacer(modifier = Modifier.height(16.dp))
-        FadeUpAnimation(visible = animate, delayMillis = 200) {
-            Text("What can I help you with today?", style = KiriTypography.bodyLarge, color = OliveGray)
-        }
-        Spacer(modifier = Modifier.height(32.dp))
-        // Welcome Illustration (organic, hand-drawn)
         FadeUpAnimation(visible = animate, delayMillis = 400) {
-            Box(
-                modifier = Modifier
-                    .size(200.dp)
-                    .background(Ivory, RoundedCornerShape(32.dp))
-                    .padding(24.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                // Mock for drawable/welcome_illustration.png
-                Text("Organic Illustration", color = StoneGray, textAlign = TextAlign.Center)
+            Text(
+                "Your intelligent companion for seamless conversations and creative insights.", 
+                style = KiriTypography.bodyLarge, 
+                color = OliveGray,
+                textAlign = TextAlign.Center
+            )
+        }
+    }
+}
+
+@Composable
+fun TypingIndicator() {
+    val infiniteTransition = rememberInfiniteTransition(label = "typing")
+    
+    val dot1 by infiniteTransition.animateFloat(
+        initialValue = 0.2f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(600, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ), label = "dot1"
+    )
+    val dot2 by infiniteTransition.animateFloat(
+        initialValue = 0.2f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(600, delayMillis = 200, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ), label = "dot2"
+    )
+    val dot3 by infiniteTransition.animateFloat(
+        initialValue = 0.2f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(600, delayMillis = 400, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ), label = "dot3"
+    )
+
+    Row(
+        modifier = Modifier
+            .padding(vertical = 12.dp)
+            .background(Ivory, RoundedCornerShape(12.dp))
+            .border(1.dp, BorderCream, RoundedCornerShape(12.dp))
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        AIAvatar()
+        Spacer(modifier = Modifier.width(12.dp))
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            listOf(dot1, dot2, dot3).forEach { alpha ->
+                Box(
+                    modifier = Modifier
+                        .size(6.dp)
+                        .background(TerracottaBrand.copy(alpha = alpha), CircleShape)
+                )
             }
         }
     }

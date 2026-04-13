@@ -1,11 +1,14 @@
 package com.kiri.ai.data.models
 
+import com.google.gson.annotations.SerializedName
+
 data class User(
-    val id: String,
-    val name: String,
-    val email: String,
-    val plan: String,
-    val dailyRequests: Int,
+    @SerializedName("_id", alternate = ["id"])
+    val id: String = "",
+    val name: String = "",
+    val email: String = "",
+    val plan: String = "free",
+    val dailyRequests: Int = 0,
     val totalRequests: Int = 0,
     val isVerified: Boolean = false,
     val avatar: String? = null,
@@ -25,25 +28,39 @@ data class GenericResponse(
     val message: String
 )
 
+data class ConversationsResponse(
+    val success: Boolean,
+    val conversations: List<Conversation>
+)
+
 data class Conversation(
-    val id: String,
-    val title: String,
-    val model: String,
-    val isPinned: Boolean,
-    val messageCount: Int,
-    val lastMessage: String,
-    val updatedAt: String
+    @SerializedName("_id", alternate = ["id"])
+    val id: String = "",
+    val title: String = "Untitled",
+    val model: String = "",
+    val isPinned: Boolean = false,
+    val messageCount: Int = 0,
+    val lastMessage: String = "",
+    val updatedAt: String = ""
+)
+
+data class ConversationDetailResponse(
+    val success: Boolean,
+    val conversation: ChatDetail? = null
 )
 
 data class ChatMessage(
-    val role: String, // "user" or "assistant"
-    val content: String
+    val role: String = "user", // "user" or "assistant"
+    val content: String = ""
 )
 
 data class ChatDetail(
-    val id: String,
-    val title: String,
-    val messages: List<ChatMessage>
+    @SerializedName("_id", alternate = ["id"])
+    val id: String = "",
+    val title: String = "Untitled",
+    val messages: List<ChatMessage> = emptyList(),
+    val model: String? = null,
+    val updatedAt: String? = null
 )
 
 data class ChatRequest(
@@ -58,5 +75,9 @@ data class ChatResponse(
     val conversationId: String,
     val title: String,
     val requestsUsed: Int,
+    @SerializedName("requestsRemaining")
+    private val _requestsRemaining: Any
+) {
     val requestsRemaining: String
-)
+        get() = _requestsRemaining.toString()
+}

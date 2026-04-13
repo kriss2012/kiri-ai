@@ -6,6 +6,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -19,7 +20,8 @@ fun KiriButton(
     enabled: Boolean = true,
     containerColor: Color = TerracottaBrand,
     contentColor: Color = Ivory,
-    isLoading: Boolean = false
+    isLoading: Boolean = false,
+    shape: Shape = RoundedCornerShape(12.dp)
 ) {
     Button(
         onClick = onClick,
@@ -27,7 +29,8 @@ fun KiriButton(
             .fillMaxWidth()
             .height(52.dp),
         enabled = enabled && !isLoading,
-        shape = RoundedCornerShape(12.dp),
+        shape = shape,
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
             contentColor = contentColor,
@@ -36,7 +39,9 @@ fun KiriButton(
         ),
         elevation = ButtonDefaults.buttonElevation(
             defaultElevation = 0.dp,
-            pressedElevation = 2.dp
+            pressedElevation = 0.dp,
+            hoveredElevation = 0.dp,
+            focusedElevation = 0.dp
         )
     ) {
         if (isLoading) {
@@ -49,7 +54,7 @@ fun KiriButton(
             Text(
                 text = text,
                 style = KiriTypography.bodyLarge.copy(
-                    fontWeight = FontWeight.Bold,
+                    fontWeight = FontWeight.SemiBold,
                     fontSize = 16.sp,
                     fontFamily = SansFont
                 )
@@ -65,13 +70,15 @@ fun KiriSecondaryButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true
 ) {
+    // Warm Sand button from DESIGN.md
     KiriButton(
         text = text,
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
         containerColor = WarmSand,
-        contentColor = CharcoalWarm
+        contentColor = CharcoalWarm,
+        shape = RoundedCornerShape(8.dp) // Comfortably rounded
     )
 }
 

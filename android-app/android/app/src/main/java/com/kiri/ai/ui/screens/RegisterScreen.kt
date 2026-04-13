@@ -1,8 +1,10 @@
 package com.kiri.ai.ui.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -37,44 +39,39 @@ fun RegisterScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        androidx.compose.material3.Card(
+        // Auth Card
+        Card(
             modifier = Modifier.fillMaxWidth(),
-            shape = androidx.compose.foundation.shape.RoundedCornerShape(20.dp),
-            colors = androidx.compose.material3.CardDefaults.cardColors(containerColor = Ivory),
-            border = androidx.compose.foundation.BorderStroke(1.dp, BorderCream)
+            shape = RoundedCornerShape(12.dp),
+            colors = CardDefaults.cardColors(containerColor = Ivory),
+            border = BorderStroke(1.dp, BorderCream)
         ) {
             Column(
-                modifier = Modifier.padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier.padding(32.dp),
+                horizontalAlignment = Alignment.Start
             ) {
                 Text(
-                    text = "Kiri AI",
-                    style = KiriTypography.headlineLarge,
-                    color = TerracottaBrand
+                    text = "Create account",
+                    style = KiriTypography.headlineMedium,
+                    color = AnthropicNearBlack
                 )
+                
+                Spacer(modifier = Modifier.height(8.dp))
+                
                 Text(
-                    text = "Think Deeper",
-                    style = KiriTypography.labelLarge,
-                    color = StoneGray
+                    text = "Join Kiri AI to start thinking deeper and creating without limits.",
+                    style = KiriTypography.bodyMedium,
+                    color = OliveGray
                 )
                 
                 Spacer(modifier = Modifier.height(32.dp))
-                
-                Text(
-                    text = "Create your account",
-                    style = KiriTypography.headlineMedium,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Start
-                )
-                
-                Spacer(modifier = Modifier.height(24.dp))
                 
                 if (state.error != null) {
                     Text(
                         text = state.error!!,
                         color = ErrorCrimson,
                         modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
-                        fontSize = 14.sp
+                        style = KiriTypography.labelLarge
                     )
                 }
                 
@@ -91,8 +88,8 @@ fun RegisterScreen(
                 KiriTextField(
                     value = state.email,
                     onValueChange = { viewModel.onEmailChange(it) },
-                    label = "Email",
-                    placeholder = "you@example.com",
+                    label = "Email address",
+                    placeholder = "name@example.com",
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
                 )
                 
@@ -107,7 +104,7 @@ fun RegisterScreen(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
                 )
                 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(32.dp))
                 
                 KiriButton(
                     text = "Create Account — It's Free",
@@ -119,12 +116,12 @@ fun RegisterScreen(
                 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.Start
                 ) {
-                    Text(text = "Already have an account? ", style = KiriTypography.bodyMedium, color = OliveGray)
+                    Text(text = "Already have an account? ", style = KiriTypography.bodySmall)
                     Text(
                         text = "Sign in",
-                        style = KiriTypography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                        style = KiriTypography.bodySmall.copy(fontWeight = FontWeight.Bold),
                         color = TerracottaBrand,
                         modifier = Modifier.clickable { navController.navigate("login") }
                     )
