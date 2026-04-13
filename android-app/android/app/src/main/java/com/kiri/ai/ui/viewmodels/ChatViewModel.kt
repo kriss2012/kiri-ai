@@ -71,10 +71,14 @@ class ChatViewModel @Inject constructor(
     fun onMessageChange(msg: String) { uiState = uiState.copy(inputMessage = msg) }
 
     fun sendMessage() {
-        if (uiState.inputMessage.isBlank() || uiState.isSending) return
+        val input = uiState.inputMessage.trim()
+        if (input.isBlank() || uiState.isSending) return
         
-        val userMsg = ChatMessage("user", uiState.inputMessage)
-        val currentInput = uiState.inputMessage
+        val userMsg = ChatMessage(
+            role = "user", 
+            content = input,
+            id = "user_${System.currentTimeMillis()}"
+        )
         
         uiState = uiState.copy(
             messages = uiState.messages + userMsg,
@@ -85,12 +89,17 @@ class ChatViewModel @Inject constructor(
 
         viewModelScope.launch {
             try {
-                chatRepository.sendMessage(currentInput, uiState.currentConversationId).onSuccess { res ->
-                    val assistantMsg = ChatMessage("assistant", res.message ?: "")
+                chatRepository.sendMessage(input, uiState.currentConversationId).onSuccess { res ->
+                    val assistantMsg = ChatMessage(
+                        role = "assistant", 
+                        content = res.message ?: "",
+                        id = "ai_${System.currentTimeMillis()}"
+                    )
+                    
                     uiState = uiState.copy(
                         messages = uiState.messages + assistantMsg,
                         isSending = false,
-                        currentConversationId = res.conversationId,
+                        currentConversationId = res.conversationId ?: uiState.currentConversationId,
                         currentTitle = res.title ?: uiState.currentTitle
                     )
                     loadConversations()
@@ -101,7 +110,10 @@ class ChatViewModel @Inject constructor(
                     )
                 }
             } catch (e: Exception) {
-                uiState = uiState.copy(isSending = false, error = e.message)
+                uiState = uiState.copy(
+                    isSending = false, 
+                    error = e.message ?: "An unexpected error occurred"
+                )
             }
         }
     }
