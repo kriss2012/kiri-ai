@@ -50,14 +50,14 @@ fun PricingScreen(
     LaunchedEffect(uiState.orderData) {
         uiState.orderData?.let { data ->
             val checkout = Checkout()
-            checkout.setKeyID(data["keyId"] as String)
+            data.keyId?.let { checkout.setKeyID(it) }
             try {
                 val options = JSONObject()
                 options.put("name", "Kiri AI")
                 options.put("description", "Premium Subscription")
-                options.put("order_id", data["orderId"])
-                options.put("currency", data["currency"])
-                options.put("amount", data["amount"])
+                options.put("order_id", data.orderId)
+                options.put("currency", data.currency ?: "INR")
+                options.put("amount", data.amount)
                 
                 val prefill = JSONObject()
                 prefill.put("email", "user@example.com") // Ideally from user data
