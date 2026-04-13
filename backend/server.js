@@ -55,8 +55,23 @@ app.use('/api/auth', authLimiter, require('./routes/auth'));
 app.use('/api/chat', require('./routes/chat'));
 app.use('/api/subscription', require('./routes/subscription'));
 
-app.get('/api/health', (req, res) => {
-  res.json({ success: true, status: 'Kiri-AI Backend is running 🚀', timestamp: new Date().toISOString() });
+app.get('/api/health', async (req, res) => {
+  try {
+    const dbStatus = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
+    res.json({
+      success: true,
+      status: 'Kiri-AI Backend is running 🚀',
+      timestamp: new Date().toISOString(),
+      services: {
+        database: dbStatus,
+        auth: 'active',
+        chat: 'active',
+        subscription: 'active'
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Partial service failure' });
+  }
 });
 
 app.use('*', (req, res) => {
