@@ -45,7 +45,15 @@ fun ChatScreen(
     val scope = rememberCoroutineScope()
     val scrollState = rememberLazyListState()
 
-    val totalItems = state.messages.size + (if (state.isSending) 1 else 0)
+    // Error handling
+    val context = LocalContext.current
+    LaunchedEffect(state.error) {
+        state.error?.let {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    val totalItems = (state.messages?.size ?: 0) + (if (state.isSending) 1 else 0)
     LaunchedEffect(totalItems) {
         if (totalItems > 0) {
             scrollState.animateScrollToItem(totalItems - 1)
