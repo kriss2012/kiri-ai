@@ -36,7 +36,7 @@ class SubscriptionViewModel @Inject constructor(
             repository.createOrder(plan).onSuccess {
                 uiState = uiState.copy(isLoading = false, orderData = it)
             }.onFailure {
-                uiState = uiState.copy(isLoading = false, error = it.message)
+                uiState = uiState.copy(isLoading = false, error = it.message ?: "Failed to create order")
             }
         }
     }

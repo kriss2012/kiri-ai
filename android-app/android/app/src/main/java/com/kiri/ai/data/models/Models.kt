@@ -59,8 +59,8 @@ data class ConversationDetailResponse(
 )
 
 data class ChatMessage(
-    val role: String = "user", // "user" or "assistant"
-    val content: String = ""
+    val role: String? = "user", // "user" or "assistant"
+    val content: String? = ""
 )
 
 data class ChatDetail(

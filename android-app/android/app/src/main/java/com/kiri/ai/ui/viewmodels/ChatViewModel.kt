@@ -52,9 +52,9 @@ class ChatViewModel @Inject constructor(
                 uiState = uiState.copy(isLoadingMessages = true, currentConversationId = id, error = null)
                 chatRepository.getConversationDetail(id).onSuccess { detail ->
                     uiState = uiState.copy(
-                        messages = detail.messages,
+                        messages = detail.messages ?: emptyList(),
                         isLoadingMessages = false,
-                        currentTitle = detail.title
+                        currentTitle = detail.title ?: "Untitled Chat"
                     )
                 }.onFailure { error ->
                     uiState = uiState.copy(

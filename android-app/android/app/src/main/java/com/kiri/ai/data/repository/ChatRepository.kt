@@ -43,7 +43,7 @@ class ChatRepository @Inject constructor(
                 if (detail != null) {
                     Result.success(detail)
                 } else {
-                    Result.failure(Exception("Conversation detail is empty"))
+                    Result.success(ChatDetail(id = id, title = "Untitled", messages = emptyList()))
                 }
             } else {
                 Result.failure(Exception("Error ${response.code()}: ${response.message()}"))
