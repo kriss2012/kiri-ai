@@ -120,4 +120,51 @@ router.get('/status', protect, async (req, res) => {
   }
 });
 
+// @POST /api/subscription/webhook
+// @DESC Razorpay Webhook to handle payment events
+router.post('/webhook', async (req, res) => {
+  const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
+  const signature = req.headers['x-razorpay-signature'];
+
+  try {
+    const expectedSignature = crypto
+      .createHmac('sha256', secret)
+      .update(JSON.stringify(req.body))
+      .digest('hex');
+
+    if (signature !== expectedSignature) {
+      return res.status(400).json({ success: false, message: 'Invalid webhook signature' });
+    }
+
+    const event = req.body.event;
+    const payload = req.body.payload.payment.entity;
+
+    if (event === 'payment.captured') {
+      const userId = payload.notes.userId;
+      const plan = payload.notes.plan;
+
+      const user = await User.findById(userId);
+      if (user && user.plan === 'free') {
+        user.plan = plan;
+        user.subscriptionStatus = 'active';
+        user.subscriptionStartDate = new Date();
+
+        const endDate = new Date();
+        if (plan === 'premium_monthly') endDate.setMonth(endDate.getMonth() + 1);
+        else if (plan === 'premium_yearly') endDate.setFullYear(endDate.getFullYear() + 1);
+
+        user.subscriptionEndDate = endDate;
+        user.razorpayPaymentId = payload.id;
+        user.razorpayOrderId = payload.order_id;
+        await user.save();
+      }
+    }
+
+    res.json({ status: 'ok' });
+  } catch (error) {
+    console.error('Webhook Error:', error);
+    res.status(500).json({ success: false });
+  }
+});
+
 module.exports = router;
