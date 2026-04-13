@@ -24,8 +24,17 @@ data class AuthResponse(
 )
 
 data class GenericResponse(
-    val success: Boolean,
-    val message: String
+    val success: Boolean? = null,
+    val message: String? = null
+)
+
+data class OrderResponse(
+    val success: Boolean? = null,
+    val orderId: String? = null,
+    val amount: Int? = null,
+    val currency: String? = null,
+    val keyId: String? = null,
+    val message: String? = null
 )
 
 data class ConversationsResponse(
