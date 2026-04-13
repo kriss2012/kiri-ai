@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="ic_launcher_background">#F5F4ED</color>
-    <string name="app_name">Kiri AI</string>
-    <style name="Theme.KiriAI" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">#F5F4ED</item>
-        <item name="android:windowLightStatusBar">true</item>
-    </style>
-</resources>
