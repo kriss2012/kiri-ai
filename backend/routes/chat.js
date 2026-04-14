@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const OpenAI = require('openai');
+const mongoose = require('mongoose');
 const { protect, checkRequestLimit } = require('../middleware/auth');
 const Conversation = require('../models/Conversation');
 
@@ -21,12 +22,15 @@ const getOpenAIClient = () => {
   });
 };
 
+// Helper to sanitize conversationId
+const sanitizeConvId = (id) =>
+  id && id !== 'undefined' && id !== 'null' && mongoose.Types.ObjectId.isValid(id) ? id : null;
+
 // @POST /api/chat/message - Send message to Gemini
 router.post('/message', protect, checkRequestLimit, async (req, res) => {
   try {
     const { message, conversationId, model = 'google/gemini-2.0-flash-001' } = req.body;
-    // Sanitize conversationId - treat 'undefined' string as null
-    const safeConvId = conversationId && conversationId !== 'undefined' && conversationId !== 'null' ? conversationId : null;
+    const safeConvId = sanitizeConvId(conversationId);
 
     if (!message || !message.trim()) {
       return res.status(400).json({ success: false, message: 'Message is required.' });
@@ -40,11 +44,9 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
         _id: safeConvId,
         user: req.user._id
       });
-      if (!conversation) {
-        // If not found, create a new one instead of erroring
-        conversation = new Conversation({ user: req.user._id, model, messages: [] });
-      }
-    } else {
+    }
+
+    if (!conversation) {
       conversation = new Conversation({
         user: req.user._id,
         model,
@@ -88,30 +90,19 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
     // Increment user request count
     await req.user.incrementRequest();
 
-    // Get updated request count
-    const updatedUser = req.user;
-
     res.json({
       success: true,
       message: assistantMessage,
       conversationId: conversation._id,
       title: conversation.title,
-      requestsUsed: updatedUser.dailyRequests,
-      requestsRemaining: updatedUser.isPremium()
+      requestsUsed: req.user.dailyRequests,
+      requestsRemaining: req.user.isPremium()
         ? 'unlimited'
-        : Math.max(0, parseInt(process.env.FREE_DAILY_REQUESTS || 50) - updatedUser.dailyRequests)
+        : Math.max(0, parseInt(process.env.FREE_DAILY_REQUESTS || 50) - req.user.dailyRequests)
     });
 
   } catch (error) {
-    const fs = require('fs');
-    fs.appendFileSync('error.log', `\n[${new Date().toISOString()}] Chat error: ${error.stack || error.message}\n`);
     console.error('Chat error:', error);
-    if (error.message && error.message.includes('API_KEY')) {
-      return res.status(500).json({ success: false, message: 'AI service configuration error.' });
-    }
-    if (error.message && error.message.includes('SAFETY')) {
-      return res.status(400).json({ success: false, message: 'Message blocked by safety filters. Please rephrase.' });
-    }
     res.status(500).json({ success: false, message: 'AI Error: ' + (error.message || 'Unknown error') });
   }
 });
@@ -120,9 +111,18 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
 router.post('/stream', protect, checkRequestLimit, async (req, res) => {
   try {
     const { message, conversationId, model = 'google/gemini-2.0-flash-001' } = req.body;
+    const safeConvId = sanitizeConvId(conversationId);
 
     if (!message || !message.trim()) {
       return res.status(400).json({ success: false, message: 'Message is required.' });
+    }
+
+    // Initialize OpenAI BEFORE setting SSE headers
+    let openai;
+    try {
+      openai = getOpenAIClient();
+    } catch (e) {
+      return res.status(500).json({ success: false, message: 'AI service not configured.' });
     }
 
     // Set SSE headers
@@ -132,14 +132,11 @@ router.post('/stream', protect, checkRequestLimit, async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', process.env.FRONTEND_URL || '*');
 
     let conversation;
+    if (safeConvId) {
+      conversation = await Conversation.findOne({ _id: safeConvId, user: req.user._id });
+    }
 
-    if (conversationId) {
-      conversation = await Conversation.findOne({ _id: conversationId, user: req.user._id });
-      if (!conversation) {
-        res.write(`data: ${JSON.stringify({ error: 'Conversation not found' })}\n\n`);
-        return res.end();
-      }
-    } else {
+    if (!conversation) {
       conversation = new Conversation({ user: req.user._id, model, messages: [] });
     }
 
@@ -150,10 +147,6 @@ router.post('/stream', protect, checkRequestLimit, async (req, res) => {
     history.push({ role: 'user', content: message });
 
     let fullResponse = '';
-
-    // Get OpenAI client safely
-    const openai = getOpenAIClient();
-
     const stream = await openai.chat.completions.create({
       model: model || 'google/gemini-2.0-flash-001',
       messages: history,
@@ -187,8 +180,10 @@ router.post('/stream', protect, checkRequestLimit, async (req, res) => {
 
   } catch (error) {
     console.error('Stream error:', error);
-    res.write(`data: ${JSON.stringify({ error: 'Stream failed. Please try again.' })}\n\n`);
-    res.end();
+    try {
+      res.write(`data: ${JSON.stringify({ error: 'Stream failed. Please try again.', done: true })}\n\n`);
+      res.end();
+    } catch (_) {}
   }
 });
 
