@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.kiri.ai.app-mergeReleaseResources-60:/values-fil/values-fil.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\24ad02ad48ada72ada8fd3477a72c88a\\transformed\\jetified-play-services-wallet-18.1.3\\res\\values-fil\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "203",
+                        "endColumns": "78",
+                        "endOffsets": "281"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "82",
+                        "endOffsets": "133"
+                    }
+                }
+            ]
+        }
+    ]
+}

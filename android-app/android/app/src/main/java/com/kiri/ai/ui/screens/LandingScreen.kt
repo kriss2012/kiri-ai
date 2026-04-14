@@ -77,12 +77,13 @@ fun LandingScreen(navController: NavController) {
             Text(
                 text = "Kiri AI",
                 style = KiriTypography.displayLarge.copy(
-                    color = AnthropicNearBlack,
                     brush = Brush.linearGradient(LogoGradient)
                 ),
                 textAlign = TextAlign.Center
             )
         }
+
+
 
         
         Spacer(modifier = Modifier.height(24.dp))

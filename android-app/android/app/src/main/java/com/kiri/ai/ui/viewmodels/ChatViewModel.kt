@@ -3,6 +3,9 @@ package com.kiri.ai.ui.viewmodels
 import android.app.Application
 import androidx.compose.runtime.*
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.viewModelScope
 import com.kiri.ai.data.models.*
 import com.kiri.ai.data.repository.AuthRepository
@@ -22,19 +25,34 @@ class ChatViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : AndroidViewModel(application) {
 
-    private var isAppInBackground = false
-
-    fun setAppBackgroundState(isInBackground: Boolean) {
-        isAppInBackground = isInBackground
-    }
-
-
     var uiState by mutableStateOf(ChatUiState())
         private set
+
+    private var isAppInBackground = false
+    
+    private val lifecycleObserver = LifecycleEventObserver { _, event ->
+        when (event) {
+            Lifecycle.Event.ON_STOP -> isAppInBackground = true
+            Lifecycle.Event.ON_START -> isAppInBackground = false
+            else -> {}
+        }
+    }
 
     init {
         observeUserData()
         loadConversations()
+        try {
+            ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
+        } catch (e: Exception) {
+            // Fallback or log if ProcessLifecycleOwner is not available
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        try {
+            ProcessLifecycleOwner.get().lifecycle.removeObserver(lifecycleObserver)
+        } catch (e: Exception) {}
     }
 
     private fun observeUserData() {
@@ -53,6 +71,8 @@ class ChatViewModel @Inject constructor(
         viewModelScope.launch {
             chatRepository.getConversations().onSuccess { list ->
                 uiState = uiState.copy(conversations = list)
+            }.onFailure { error ->
+                uiState = uiState.copy(error = "Failed to load chats: ${error.message}")
             }
         }
     }

@@ -34,14 +34,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
 
     private val subscriptionViewModel: SubscriptionViewModel by viewModels()
-    private val chatViewModel: ChatViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         
         requestPermissions()
-        observeLifecycle()
 
         setContent {
             KiriTheme {
@@ -74,16 +72,6 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                 }
             }
         }
-    }
-
-    private fun observeLifecycle() {
-        lifecycle.addObserver(LifecycleEventObserver { _, event ->
-            when (event) {
-                Lifecycle.Event.ON_PAUSE -> chatViewModel.setAppBackgroundState(true)
-                Lifecycle.Event.ON_RESUME -> chatViewModel.setAppBackgroundState(false)
-                else -> {}
-            }
-        })
     }
 
     private fun requestPermissions() {
