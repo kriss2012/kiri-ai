@@ -4,18 +4,19 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.kiri.ai.data.models.ChatMessage
 import com.kiri.ai.ui.theme.*
 import com.mikepenz.markdown.compose.Markdown
@@ -39,6 +40,7 @@ fun KiriMessageBubble(message: ChatMessage?) {
     val content = message.content ?: ""
     val isUser = role == "user"
     val clipboardManager = LocalClipboardManager.current
+    val colorScheme = MaterialTheme.colorScheme
     
     // Auto-structure logic: Look for explicit delimiters or professional markers
     val sections = if (!isUser) {
@@ -60,48 +62,81 @@ fun KiriMessageBubble(message: ChatMessage?) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 16.dp),
+            .padding(vertical = 12.dp, horizontal = 16.dp),
         horizontalAlignment = if (isUser) Alignment.End else Alignment.Start
     ) {
         // Technical Header Row
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(bottom = 8.dp)
+            modifier = Modifier.padding(bottom = 4.dp)
         ) {
             Text(
-                text = if (isUser) "CLIENT // QUERY" else "KIRI // RESPONSE",
+                text = if (isUser) "YOU" else "KIRI AI",
                 style = KiriTypography.labelMedium.copy(
-                    color = if (isUser) SilverMist else ShowroomWhite,
-                    letterSpacing = 2.sp
+                    color = colorScheme.onBackground.copy(alpha = 0.6f),
+                    letterSpacing = 1.sp
                 )
             )
-            Spacer(modifier = Modifier.weight(1f))
-            // Global Copy Button
-            IconButton(
-                onClick = { clipboardManager.setText(AnnotatedString(content)) },
-                modifier = Modifier.size(24.dp)
-            ) {
-                Icon(
-                    Icons.Default.ContentCopy, 
-                    contentDescription = "Copy All", 
-                    tint = SilverMist.copy(alpha = 0.5f),
-                    modifier = Modifier.size(16.dp)
-                )
+            if (!isUser) {
+                Spacer(modifier = Modifier.width(8.dp))
+                // Global Copy Button
+                IconButton(
+                    onClick = { clipboardManager.setText(AnnotatedString(content)) },
+                    modifier = Modifier.size(24.dp)
+                ) {
+                    Icon(
+                        Icons.Default.ContentCopy, 
+                        contentDescription = "Copy All", 
+                        tint = colorScheme.onBackground.copy(alpha = 0.4f),
+                        modifier = Modifier.size(14.dp)
+                    )
+                }
             }
         }
         
         // Structured Content Area
         Box(
             modifier = Modifier
-                .widthIn(max = 340.dp)
-                .background(if (isUser) DarkGray else Color.Transparent)
-                .then(if (isUser) Modifier.padding(12.dp) else Modifier)
+                .widthIn(max = 300.dp)
+                .background(
+                    color = if (isUser) colorScheme.primary else colorScheme.surfaceVariant,
+                    shape = RoundedCornerShape(
+                        topStart = 16.dp,
+                        topEnd = 16.dp,
+                        bottomStart = if (isUser) 16.dp else 4.dp,
+                        bottomEnd = if (isUser) 4.dp else 16.dp
+                    )
+                )
+                .padding(12.dp)
         ) {
             if (isUser) {
-                Text(
-                    text = content,
-                    style = KiriTypography.bodyMedium.copy(color = ShowroomWhite)
-                )
+                Column {
+                    // Check for image URI in content
+                    val imageRegex = Regex("\\[IMAGE_URI: (.*?)\\]")
+                    val match = imageRegex.find(content)
+                    val displayText = if (match != null) content.replace(match.value, "").trim() else content
+
+                    if (match != null) {
+                        val uri = match.groupValues[1]
+                        AsyncImage(
+                            model = uri,
+                            contentDescription = "Attached Image",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .heightIn(max = 200.dp)
+                                .padding(bottom = 8.dp)
+                                .clip(RoundedCornerShape(8.dp)),
+                            contentScale = ContentScale.Crop
+                        )
+                    }
+
+                    if (displayText.isNotEmpty()) {
+                        Text(
+                            text = displayText,
+                            style = KiriTypography.bodyMedium.copy(color = colorScheme.onPrimary)
+                        )
+                    }
+                }
             } else {
                 Column {
                     sections.forEachIndexed { index, section ->
@@ -115,8 +150,8 @@ fun KiriMessageBubble(message: ChatMessage?) {
                         if (sectionLabel != null) {
                             Text(
                                 text = "// $sectionLabel",
-                                style = KiriTypography.labelMedium.copy(color = SilverMist, fontSize = 10.sp),
-                                modifier = Modifier.padding(top = if (index > 0) 16.dp else 4.dp, bottom = 4.dp)
+                                style = KiriTypography.labelMedium.copy(color = colorScheme.onSurfaceVariant.copy(alpha = 0.7f), fontSize = 10.sp),
+                                modifier = Modifier.padding(top = if (index > 0) 12.dp else 0.dp, bottom = 4.dp)
                             )
                         }
 
@@ -124,22 +159,22 @@ fun KiriMessageBubble(message: ChatMessage?) {
                         Markdown(
                             content = section.trim(),
                             colors = markdownColor(
-                                text = ShowroomWhite,
-                                codeText = SilverMist,
-                                linkText = BugattiBlue
+                                text = colorScheme.onSurfaceVariant,
+                                codeText = colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                                linkText = BrandPink
                             ),
                             typography = markdownTypography(
-                                h1 = KiriTypography.headlineLarge.copy(color = ShowroomWhite),
-                                h2 = KiriTypography.headlineMedium.copy(color = ShowroomWhite),
-                                paragraph = KiriTypography.bodyMedium.copy(color = ShowroomWhite, lineHeight = 26.sp)
+                                h1 = KiriTypography.headlineLarge.copy(color = colorScheme.onSurfaceVariant),
+                                h2 = KiriTypography.headlineMedium.copy(color = colorScheme.onSurfaceVariant),
+                                paragraph = KiriTypography.bodyMedium.copy(color = colorScheme.onSurfaceVariant, lineHeight = 22.sp)
                             ),
                             modifier = Modifier.fillMaxWidth()
                         )
 
                         if (index < sections.size - 1) {
                             HorizontalDivider(
-                                color = SilverMist.copy(alpha = 0.1f),
-                                modifier = Modifier.padding(top = 12.dp)
+                                color = colorScheme.onSurfaceVariant.copy(alpha = 0.1f),
+                                modifier = Modifier.padding(top = 8.dp)
                             )
                         }
                     }

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.kiri.ai.app-mergeReleaseResources-67:/values-mn/values-mn.xml",
+            "outputFile": "com.kiri.ai.app-mergeReleaseResources-69:/values-mn/values-mn.xml",
             "map": [
                 {
                     "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\65cd2cd19f394efa67d0a8ae618e6b69\\transformed\\core-1.12.0\\res\\values-mn\\values-mn.xml",

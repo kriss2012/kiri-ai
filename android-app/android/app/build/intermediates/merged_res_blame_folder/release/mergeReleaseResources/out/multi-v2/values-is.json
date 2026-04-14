@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.kiri.ai.app-mergeReleaseResources-67:/values-is/values-is.xml",
+            "outputFile": "com.kiri.ai.app-mergeReleaseResources-69:/values-is/values-is.xml",
             "map": [
                 {
                     "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\3a85539a086632b11bef5b5ed6482b07\\transformed\\jetified-ui-release\\res\\values-is\\values-is.xml",

@@ -172,7 +172,7 @@ class ChatViewModel @Inject constructor(
         val userMsgId = "user_${java.util.UUID.randomUUID()}"
         val userMsg = ChatMessage(
             role = "user", 
-            content = input + (if (fileUri != null) "\n[Attached: ${uiState.selectedFileName}]" else ""),
+            content = input + (if (fileUri != null) "\n[IMAGE_URI: $fileUri]" else ""),
             id = userMsgId
         )
         
@@ -240,7 +240,11 @@ class ChatViewModel @Inject constructor(
 
             val requestFile = file.asRequestBody(contentResolver.getType(uri)?.toMediaTypeOrNull())
             val body = MultipartBody.Part.createFormData("file", uiState.selectedFileName ?: file.name, requestFile)
-            val contentBody = message.toRequestBody("text/plain".toMediaTypeOrNull())
+            
+            // AI Analysis: If message is empty, provide a default analysis prompt
+            val prompt = if (message.trim().isEmpty()) "Analyze this image and explain what is shown in it." else message
+            
+            val contentBody = prompt.toRequestBody("text/plain".toMediaTypeOrNull())
             val convIdBody = uiState.currentConversationId?.toRequestBody("text/plain".toMediaTypeOrNull())
 
             chatRepository.sendMessageWithFile(contentBody, convIdBody, body)

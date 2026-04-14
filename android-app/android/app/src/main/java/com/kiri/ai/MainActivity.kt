@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import android.content.ClipboardManager
 import android.content.ClipData
 import android.content.Context
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.ui.unit.dp
@@ -25,10 +26,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.kiri.ai.ui.screens.*
-import com.kiri.ai.ui.theme.KiriTheme
-import com.kiri.ai.ui.theme.VelvetBlack
-import com.kiri.ai.ui.theme.ShowroomWhite
-import com.kiri.ai.ui.theme.SilverMist
+import com.kiri.ai.ui.theme.*
 import com.kiri.ai.ui.viewmodels.MainViewModel
 import com.kiri.ai.ui.viewmodels.SubscriptionViewModel
 import com.razorpay.PaymentData
@@ -43,7 +41,6 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
     private val requestPermissionLauncher = registerForActivityResult(
         androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions()
     ) { _ ->
-        // After permissions are granted, ensure service is running if notification permission was granted
         startKiriService()
     }
 
@@ -53,7 +50,6 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
             try {
                 startService(android.content.Intent(this, com.kiri.ai.services.KiriBackgroundService::class.java))
             } catch (e: Exception) {
-                // Handle background start restriction if necessary
             }
         }
     }
@@ -67,33 +63,37 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
         val lastCrash = com.kiri.ai.utils.KiriCrashHandler.getAndClearLastCrash(this)
 
         setContent {
-            KiriTheme {
-                if (lastCrash != null) {
-                    CrashDialog(lastCrash)
-                }
+            val themeMode = remember { mutableStateOf(true) } // default dark
+            
+            CompositionLocalProvider(LocalThemeMode provides themeMode) {
+                KiriTheme {
+                    if (lastCrash != null) {
+                        CrashDialog(lastCrash)
+                    }
 
-                val viewModel: MainViewModel = hiltViewModel()
-                val startDestination by viewModel.startDestination.collectAsState()
+                    val viewModel: MainViewModel = hiltViewModel()
+                    val startDestination by viewModel.startDestination.collectAsState()
 
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = VelvetBlack
-                ) {
-                    if (startDestination != null) {
-                        val navController = rememberNavController()
-                        CompositionLocalProvider(
-                            androidx.compose.ui.platform.LocalContext provides this
-                        ) {
-                            NavHost(
-                                navController = navController,
-                                startDestination = startDestination!!
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        if (startDestination != null) {
+                            val navController = rememberNavController()
+                            CompositionLocalProvider(
+                                androidx.compose.ui.platform.LocalContext provides this
                             ) {
-                                composable("landing") { LandingScreen(navController) }
-                                composable("login") { LoginScreen(navController) }
-                                composable("register") { RegisterScreen(navController) }
-                                composable("chat") { ChatScreen(navController) }
-                                composable("profile") { ProfileScreen(navController) }
-                                composable("pricing") { PricingScreen(navController, subscriptionViewModel) }
+                                NavHost(
+                                    navController = navController,
+                                    startDestination = startDestination!!
+                                ) {
+                                    composable("landing") { LandingScreen(navController) }
+                                    composable("login") { LoginScreen(navController) }
+                                    composable("register") { RegisterScreen(navController) }
+                                    composable("chat") { ChatScreen(navController) }
+                                    composable("profile") { ProfileScreen(navController) }
+                                    composable("pricing") { PricingScreen(navController, subscriptionViewModel) }
+                                }
                             }
                         }
                     }
@@ -144,14 +144,11 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
 
     private fun requestPermissions() {
         val permissions = mutableListOf<String>()
-        
-        // Notification permission (Android 13+)
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             permissions.add(android.Manifest.permission.POST_NOTIFICATIONS)
             permissions.add(android.Manifest.permission.READ_MEDIA_IMAGES)
             permissions.add(android.Manifest.permission.READ_MEDIA_VIDEO)
         } else {
-            // Legacy storage permission
             permissions.add(android.Manifest.permission.READ_EXTERNAL_STORAGE)
         }
         

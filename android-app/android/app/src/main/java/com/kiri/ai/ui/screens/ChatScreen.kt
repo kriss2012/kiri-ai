@@ -112,7 +112,10 @@ fun ChatScreen(
                 )
                 
                 LazyColumn(modifier = Modifier.weight(1f)) {
-                    items(state.conversations) { conv ->
+                    items(
+                        items = state.conversations,
+                        key = { it.id ?: "conv_${it.hashCode()}" }
+                    ) { conv ->
                         NavigationDrawerItem(
                             label = { 
                                 Text(
@@ -206,12 +209,15 @@ fun ChatScreen(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(16.dp)
                 ) {
-                    items(state.messages) { msg ->
+                    items(
+                        items = state.messages,
+                        key = { it.id ?: "msg_${it.hashCode()}" }
+                    ) { msg ->
                         KiriMessageBubble(msg)
                     }
                     
                     if (state.isSending) {
-                        item { TypingIndicator() }
+                        item(key = "typing_indicator") { TypingIndicator() }
                     }
                 }
 
