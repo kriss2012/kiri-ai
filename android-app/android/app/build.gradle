@@ -106,6 +106,9 @@ dependencies {
     implementation(libs.multiplatform.markdown.renderer)
     implementation(libs.multiplatform.markdown.renderer.m3)
     
+    // Coil for Image Loading
+    implementation("io.coil-kt:coil-compose:2.6.0")
+    
     // Icons
     implementation(libs.androidx.compose.material.icons.extended)
     
