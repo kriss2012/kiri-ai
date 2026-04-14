@@ -221,17 +221,6 @@ fun ChatScreen(
             },
             containerColor = MaterialTheme.colorScheme.background
         ) { padding ->
-            // NUCLEAR_RENDER_SAFEGUARD: Disable hardware acceleration specifically for the chat area 
-            // if we hit the rendering crash loop. Software rendering is 100% stable for text.
-            val view = androidx.compose.ui.platform.LocalView.current
-            DisposableEffect(view) {
-                val originalLayerType = view.layerType
-                view.setLayerType(android.view.View.LAYER_TYPE_SOFTWARE, null)
-                onDispose {
-                    view.setLayerType(originalLayerType, null)
-                }
-            }
-
             Column(
                 modifier = Modifier
                     .fillMaxSize()
