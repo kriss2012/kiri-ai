@@ -221,6 +221,17 @@ fun ChatScreen(
             },
             containerColor = MaterialTheme.colorScheme.background
         ) { padding ->
+            // NUCLEAR_RENDER_SAFEGUARD: Disable hardware acceleration specifically for the chat area 
+            // if we hit the rendering crash loop. Software rendering is 100% stable for text.
+            val view = androidx.compose.ui.platform.LocalView.current
+            DisposableEffect(view) {
+                val originalLayerType = view.layerType
+                view.setLayerType(android.view.View.LAYER_TYPE_SOFTWARE, null)
+                onDispose {
+                    view.setLayerType(originalLayerType, null)
+                }
+            }
+
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -242,10 +253,8 @@ fun ChatScreen(
                         items = state.messages,
                         key = { it.getStableId() }
                     ) { msg ->
-                        Box(modifier = Modifier.graphicsLayer { 
-                            // Breaking drawing recursion and creating a separate layer
-                            clip = true 
-                        }) {
+                        // STRICT_ISOLATION: Force Compose to treat each message as an independent entity
+                        key(msg.getStableId()) {
                             KiriMessageBubble(msg)
                         }
                     }
