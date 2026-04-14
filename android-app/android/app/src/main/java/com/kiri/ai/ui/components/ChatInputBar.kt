@@ -31,6 +31,7 @@ fun ChatInputBar(
     onMessageChange: (String) -> Unit,
     onSend: () -> Unit,
     onAttachClick: () -> Unit,
+    selectedFileUri: android.net.Uri? = null,
     selectedFileName: String? = null,
     onClearFile: () -> Unit = {},
     isSending: Boolean = false,
@@ -61,14 +62,14 @@ fun ChatInputBar(
                         it.endsWith(".jpg") || it.endsWith(".jpeg") || it.endsWith(".png") || it.endsWith(".webp")
                     }
                     
-                    if (isImage) {
+                    if (isImage && selectedFileUri != null) {
                         coil.compose.AsyncImage(
-                            model = message, // Note: In a real app, we'd pass the actual Uri, but here we show the concept
+                            model = selectedFileUri,
                             contentDescription = null,
                             modifier = Modifier
                                 .size(40.dp)
-                                .background(Color.Black.copy(alpha = 0.05f), RoundedCornerShape(4.dp))
-                                .padding(2.dp),
+                                .clip(RoundedCornerShape(6.dp))
+                                .background(Color.Black.copy(alpha = 0.05f)),
                             contentScale = androidx.compose.ui.layout.ContentScale.Crop
                         )
                         Spacer(modifier = Modifier.width(12.dp))
