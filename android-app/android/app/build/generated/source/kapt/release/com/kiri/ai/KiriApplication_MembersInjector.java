@@ -14,8 +14,7 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava",
-    "cast"
+    "KotlinInternalInJava"
 })
 public final class KiriApplication_MembersInjector implements MembersInjector<KiriApplication> {
   private final Provider<HiltWorkerFactory> workerFactoryProvider;

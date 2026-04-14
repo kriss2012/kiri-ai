@@ -12,7 +12,6 @@ import com.kiri.ai.data.repository.AuthRepository
 import com.kiri.ai.data.repository.ChatRepository
 import com.kiri.ai.utils.NotificationHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.UUID
 import javax.inject.Inject
 import android.net.Uri
 import androidx.work.Constraints
@@ -26,6 +25,10 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.launchIn
+import java.util.UUID
 
 @HiltViewModel
 class ChatViewModel @Inject constructor(
@@ -166,7 +169,7 @@ class ChatViewModel @Inject constructor(
         val fileUri = uiState.selectedFileUri
         if (input.isBlank() && fileUri == null || uiState.isSending) return
         
-        val userMsgId = "user_${UUID.randomUUID()}"
+        val userMsgId = "user_${java.util.UUID.randomUUID()}"
         val userMsg = ChatMessage(
             role = "user", 
             content = input + (if (fileUri != null) "\n[Attached: ${uiState.selectedFileName}]" else ""),
@@ -193,7 +196,7 @@ class ChatViewModel @Inject constructor(
                         val assistantMsg = ChatMessage(
                             role = "assistant", 
                             content = res.message ?: "",
-                            id = "ai_${UUID.randomUUID()}"
+                            id = "ai_${java.util.UUID.randomUUID()}"
                         )
                         
                         uiState = uiState.copy(

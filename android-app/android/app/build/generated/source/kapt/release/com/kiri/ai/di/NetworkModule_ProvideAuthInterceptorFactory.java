@@ -17,8 +17,7 @@ import okhttp3.Interceptor;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava",
-    "cast"
+    "KotlinInternalInJava"
 })
 public final class NetworkModule_ProvideAuthInterceptorFactory implements Factory<Interceptor> {
   private final Provider<AuthDataStore> authDataStoreProvider;

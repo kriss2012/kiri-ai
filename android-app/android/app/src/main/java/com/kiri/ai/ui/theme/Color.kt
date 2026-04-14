@@ -12,10 +12,24 @@ import androidx.compose.ui.graphics.Color
 // Core Canvas
 val VelvetBlack = Color(0xFF000000)
 val ShowroomWhite = Color(0xFFFFFFFF)
+val SilverMist = Color(0xFF999999)
+val DarkGray = Color(0xFF1A1A1A)
+
+// Legacy Aliases for technical stability during transition
+val Ivory = ShowroomWhite
+val Parchment = VelvetBlack
+val OliveGray = SilverMist
+val StoneGray = SilverMist
+val TerracottaBrand = ShowroomWhite
+val ErrorCrimson = Color(0xFF990000)
+val AnthropicNearBlack = VelvetBlack
+val BorderCream = SilverMist
+val LogoGradient = ShowroomWhite
+val WarmSand = SilverMist
+val CharcoalWarm = DarkGray
+val SerifFont = androidx.compose.ui.text.font.FontFamily.SansSerif
 
 // Technical / Semantic
-val SilverMist = Color(0xFF999999) // Mid Gray for tertiary elements
-val DarkGray = Color(0xFF1A1A1A)   // For rare containers that need subtle depth
 val ObsidianSurface = Color(0xFF030303) // Near-pure black for slight surface separation
 
 // Interaction states (High Contrast)

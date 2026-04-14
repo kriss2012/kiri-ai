@@ -2,11 +2,11 @@
 package com.kiri.ai.data.repository;
 
 import android.content.Context;
+import com.kiri.ai.data.remote.ChatApi;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
-import error.NonExistentClass;
 import javax.inject.Provider;
 
 @ScopeMetadata("javax.inject.Singleton")
@@ -16,15 +16,14 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava",
-    "cast"
+    "KotlinInternalInJava"
 })
 public final class ChatRepository_Factory implements Factory<ChatRepository> {
-  private final Provider<NonExistentClass> chatApiProvider;
+  private final Provider<ChatApi> chatApiProvider;
 
   private final Provider<Context> contextProvider;
 
-  public ChatRepository_Factory(Provider<NonExistentClass> chatApiProvider,
+  public ChatRepository_Factory(Provider<ChatApi> chatApiProvider,
       Provider<Context> contextProvider) {
     this.chatApiProvider = chatApiProvider;
     this.contextProvider = contextProvider;
@@ -35,12 +34,12 @@ public final class ChatRepository_Factory implements Factory<ChatRepository> {
     return newInstance(chatApiProvider.get(), contextProvider.get());
   }
 
-  public static ChatRepository_Factory create(Provider<NonExistentClass> chatApiProvider,
+  public static ChatRepository_Factory create(Provider<ChatApi> chatApiProvider,
       Provider<Context> contextProvider) {
     return new ChatRepository_Factory(chatApiProvider, contextProvider);
   }
 
-  public static ChatRepository newInstance(NonExistentClass chatApi, Context context) {
+  public static ChatRepository newInstance(ChatApi chatApi, Context context) {
     return new ChatRepository(chatApi, context);
   }
 }

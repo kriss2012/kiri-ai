@@ -1,6 +1,6 @@
 [versions]
-agp = "8.13.2"
-kotlin = "1.9.23"
+agp = "8.3.2"
+kotlin = "1.9.24"
 coreKtx = "1.12.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
@@ -11,12 +11,12 @@ activityCompose = "1.8.2"
 composeBom = "2024.04.01"
 retrofit = "2.9.0"
 okhttp = "4.12.0"
-hilt = "2.51"
+hilt = "2.48.1"
 datastore = "1.0.0"
 navigationCompose = "2.7.7"
-markdown = "0.11.0"
-hiltNavigationCompose = "1.2.0"
-hiltWork = "1.2.0"
+markdown = "0.29.0"
+hiltNavigationCompose = "1.1.0"
+hiltWork = "1.1.0"
 razorpay = "1.6.38"
 splashscreen = "1.0.1"
 workManager = "2.9.0"
@@ -53,6 +53,8 @@ androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navig
 androidx-hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltWork" }
 androidx-hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltWork" }
 multiplatform-markdown-renderer = { group = "com.mikepenz", name = "multiplatform-markdown-renderer", version.ref = "markdown" }
+multiplatform-markdown-renderer-m3 = { group = "com.mikepenz", name = "multiplatform-markdown-renderer-m3", version.ref = "markdown" }
+androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 razorpay-android = { group = "com.razorpay", name = "checkout", version.ref = "razorpay" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 androidx-work-runtime = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workManager" }

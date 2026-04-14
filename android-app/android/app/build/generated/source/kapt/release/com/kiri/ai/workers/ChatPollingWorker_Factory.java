@@ -16,8 +16,7 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava",
-    "cast"
+    "KotlinInternalInJava"
 })
 public final class ChatPollingWorker_Factory {
   private final Provider<ChatRepository> chatRepositoryProvider;

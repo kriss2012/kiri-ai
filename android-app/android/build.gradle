@@ -4,3 +4,15 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.hilt) apply false
 }
+
+allprojects {
+    configurations.all {
+        resolutionStrategy {
+            force "org.jetbrains.kotlin:kotlin-stdlib:1.9.24"
+            force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.24"
+            force "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.24"
+            force "org.jetbrains.kotlin:kotlin-stdlib-common:1.9.24"
+            force "org.jetbrains.kotlin:kotlin-reflect:1.9.24"
+        }
+    }
+}

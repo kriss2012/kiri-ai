@@ -17,8 +17,7 @@ import retrofit2.Retrofit;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava",
-    "cast"
+    "KotlinInternalInJava"
 })
 public final class NetworkModule_ProvideChatApiFactory implements Factory<ChatApi> {
   private final Provider<Retrofit> retrofitProvider;

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.kiri.ai.app-mergeReleaseResources-68:/values-v23/values-v23.xml",
+            "outputFile": "com.kiri.ai.app-mergeReleaseResources-67:/values-v23/values-v23.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\4ed3eccac61d39a882d0d945164103aa\\transformed\\work-runtime-2.9.0\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\bc4a88a64fc96a39d9b1e23e4e8b49dc\\transformed\\work-runtime-2.9.0\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

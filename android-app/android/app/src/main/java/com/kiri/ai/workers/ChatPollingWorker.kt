@@ -16,12 +16,12 @@ class ChatPollingWorker @AssistedInject constructor(
     private val chatRepository: ChatRepository
 ) : CoroutineWorker(appContext, workerParams) {
 
-    override fun doWork(): Result {
+    override suspend fun doWork(): Result {
         // Simple polling logic: Check for new conversations/messages
         return try {
             // Note: In a real app, you'd compare the last known message ID
             // For now, we'll fetch conversations and if there's a recent one, notify
-            val res = kotlinx.coroutines.runBlocking { chatRepository.getConversations() }
+            val res = chatRepository.getConversations()
             
             res.onSuccess { conversations ->
                 val lastConv = conversations.firstOrNull()

@@ -1,27 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.kiri.ai.app-mergeReleaseResources-68:/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "com.kiri.ai.app-mergeReleaseResources-67:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\be61666a96c569427124b9f5f743ea64\\transformed\\jetified-core-splashscreen-1.0.1\\res\\values-watch-v20\\values-watch-v20.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,129,205,280,357,428,496,566",
-                        "endColumns": "73,75,74,76,70,67,69,67",
-                        "endOffsets": "124,200,275,352,423,491,561,629"
-                    },
-                    "to": {
-                        "startLines": "10,11,12,13,14,15,16,17",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "715,789,865,940,1017,1088,1156,1226",
-                        "endColumns": "73,75,74,76,70,67,69,67",
-                        "endOffsets": "784,860,935,1012,1083,1151,1221,1289"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\254d4bb64dabcb86fc6e7f751092afb4\\transformed\\jetified-play-services-auth-17.0.0\\res\\values-watch-v20\\values.xml",
+                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\e013cf763159baa5ee064e46f2656393\\transformed\\jetified-play-services-auth-17.0.0\\res\\values-watch-v20\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",
@@ -35,6 +18,23 @@
                         "startOffsets": "55,134,214,293,372,463,544,635",
                         "endColumns": "78,79,78,78,90,80,90,79",
                         "endOffsets": "129,209,288,367,458,539,630,710"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\55942c84aeaa48b6398f477407ee7665\\transformed\\jetified-core-splashscreen-1.0.1\\res\\values-watch-v20\\values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,129,205,280,357,428,496,566",
+                        "endColumns": "73,75,74,76,70,67,69,67",
+                        "endOffsets": "124,200,275,352,423,491,561,629"
+                    },
+                    "to": {
+                        "startLines": "10,11,12,13,14,15,16,17",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "715,789,865,940,1017,1088,1156,1226",
+                        "endColumns": "73,75,74,76,70,67,69,67",
+                        "endOffsets": "784,860,935,1012,1083,1151,1221,1289"
                     }
                 }
             ]

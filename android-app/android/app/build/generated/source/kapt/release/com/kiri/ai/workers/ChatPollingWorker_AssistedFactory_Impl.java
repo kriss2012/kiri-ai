@@ -12,8 +12,7 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava",
-    "cast"
+    "KotlinInternalInJava"
 })
 public final class ChatPollingWorker_AssistedFactory_Impl implements ChatPollingWorker_AssistedFactory {
   private final ChatPollingWorker_Factory delegateFactory;
@@ -28,11 +27,6 @@ public final class ChatPollingWorker_AssistedFactory_Impl implements ChatPolling
   }
 
   public static Provider<ChatPollingWorker_AssistedFactory> create(
-      ChatPollingWorker_Factory delegateFactory) {
-    return InstanceFactory.create(new ChatPollingWorker_AssistedFactory_Impl(delegateFactory));
-  }
-
-  public static dagger.internal.Provider<ChatPollingWorker_AssistedFactory> createFactoryProvider(
       ChatPollingWorker_Factory delegateFactory) {
     return InstanceFactory.create(new ChatPollingWorker_AssistedFactory_Impl(delegateFactory));
   }

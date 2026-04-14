@@ -128,7 +128,7 @@ fun KiriMessageBubble(message: ChatMessage?) {
                             typography = markdownTypography(
                                 h1 = KiriTypography.headlineLarge.copy(color = ShowroomWhite),
                                 h2 = KiriTypography.headlineMedium.copy(color = ShowroomWhite),
-                                body = KiriTypography.bodyMedium.copy(color = ShowroomWhite, lineHeight = 26.sp),
+                                paragraph = KiriTypography.bodyMedium.copy(color = ShowroomWhite, lineHeight = 26.sp),
                                 code = KiriTypography.labelMedium.copy(color = SilverMist, background = DarkGray)
                             ),
                             components = markdownComponents(

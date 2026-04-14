@@ -3,6 +3,7 @@ package com.kiri.ai.ui.viewmodels;
 
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
+import dagger.internal.Preconditions;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 
@@ -13,12 +14,11 @@ import dagger.internal.ScopeMetadata;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava",
-    "cast"
+    "KotlinInternalInJava"
 })
-public final class MainViewModel_HiltModules_KeyModule_ProvideFactory implements Factory<Boolean> {
+public final class MainViewModel_HiltModules_KeyModule_ProvideFactory implements Factory<String> {
   @Override
-  public Boolean get() {
+  public String get() {
     return provide();
   }
 
@@ -26,8 +26,8 @@ public final class MainViewModel_HiltModules_KeyModule_ProvideFactory implements
     return InstanceHolder.INSTANCE;
   }
 
-  public static boolean provide() {
-    return MainViewModel_HiltModules.KeyModule.provide();
+  public static String provide() {
+    return Preconditions.checkNotNullFromProvides(MainViewModel_HiltModules.KeyModule.provide());
   }
 
   private static final class InstanceHolder {
