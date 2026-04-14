@@ -88,10 +88,12 @@ fun ChatScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
-                    containerColor = TerracottaBrand,
+                    containerColor = Color.Transparent,
                     contentColor = Ivory,
-                    shape = RoundedCornerShape(8.dp)
+                    shape = RoundedCornerShape(8.dp),
+                    border = BorderStroke(1.dp, Brush.linearGradient(LogoGradient))
                 )
+
                 
                 Spacer(modifier = Modifier.height(24.dp))
                 
@@ -106,7 +108,10 @@ fun ChatScreen(
                 )
                 
                 LazyColumn(modifier = Modifier.weight(1f)) {
-                    items(state.conversations) { conv ->
+                    items(
+                        items = state.conversations,
+                        key = { it.getStableId() }
+                    ) { conv ->
                         NavigationDrawerItem(
                             label = { 
                                 Text(
@@ -216,7 +221,7 @@ fun ChatScreen(
                     ) {
                         items(
                             items = state.messages ?: emptyList(),
-                            key = { it.id ?: it.hashCode() }
+                            key = { it.getStableId() }
                         ) { msg ->
                             KiriMessageBubble(msg)
                         }
@@ -256,8 +261,16 @@ fun WelcomeScreen() {
         }
         Spacer(modifier = Modifier.height(24.dp))
         FadeUpAnimation(visible = animate, delayMillis = 200) {
-            Text("Kiri AI", style = KiriTypography.displayLarge.copy(fontSize = 40.sp), color = TerracottaBrand)
+            Text(
+                "Kiri AI", 
+                style = KiriTypography.displayLarge.copy(
+                    fontSize = 40.sp,
+                    brush = Brush.linearGradient(LogoGradient)
+                ), 
+                color = TerracottaBrand
+            )
         }
+
         Spacer(modifier = Modifier.height(16.dp))
         FadeUpAnimation(visible = animate, delayMillis = 400) {
             Text(

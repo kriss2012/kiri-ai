@@ -9,10 +9,12 @@ val WarmSand = Color(0xFFE8E6DC)
 val BorderCream = Color(0xFFF0EEE6)
 
 // Brand & Accents
-val TerracottaBrand = Color(0xFFC96442)
-val CoralAccent = Color(0xFFD97757)
+val TerracottaBrand = Color(0xFF7B61FF) // Vibrant Purple from new logo
+val CoralAccent = Color(0xFF00C2FF) // Vibrant Blue from new logo
 val ErrorCrimson = Color(0xFFB53333)
 val FocusBlue = Color(0xFF3898EC)
+val LogoGradient = listOf(Color(0xFF7B61FF), Color(0xFF00C2FF))
+
 
 // Neutrals & Text
 val AnthropicNearBlack = Color(0xFF141413)

@@ -1,10 +1,12 @@
 package com.kiri.ai.ui.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
@@ -21,7 +23,8 @@ fun KiriButton(
     containerColor: Color = TerracottaBrand,
     contentColor: Color = Ivory,
     isLoading: Boolean = false,
-    shape: Shape = RoundedCornerShape(12.dp)
+    shape: Shape = RoundedCornerShape(12.dp),
+    border: BorderStroke? = null
 ) {
     Button(
         onClick = onClick,
@@ -37,7 +40,9 @@ fun KiriButton(
             disabledContainerColor = containerColor.copy(alpha = 0.5f),
             disabledContentColor = contentColor.copy(alpha = 0.7f)
         ),
+        border = border,
         elevation = ButtonDefaults.buttonElevation(
+
             defaultElevation = 0.dp,
             pressedElevation = 0.dp,
             hoveredElevation = 0.dp,

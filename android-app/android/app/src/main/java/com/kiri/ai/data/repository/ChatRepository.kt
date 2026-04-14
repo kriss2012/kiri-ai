@@ -12,11 +12,29 @@ class ChatRepository @Inject constructor(
     suspend fun sendMessage(message: String, conversationId: String? = null): Result<ChatResponse> {
         return try {
             val response = chatApi.sendMessage(ChatRequest(message, conversationId))
-            if (response.isSuccessful && response.body() != null) {
-                Result.success(response.body()!!)
+            if (response.isSuccessful) {
+                val body = response.body()
+                if (body != null) {
+                    Result.success(body)
+                } else {
+                    Result.failure(Exception("Response body is null"))
+                }
             } else {
-                Result.failure(Exception(response.message()))
+                val errorMsg = try {
+                    val errorBody = response.errorBody()?.string()
+                    // Try to parse error message from JSON if possible
+                    if (errorBody?.contains("message") == true) {
+                         com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message
+                    } else {
+                        "Error ${response.code()}: ${response.message()}"
+                    }
+                } catch (e: Exception) {
+                    "Error ${response.code()}: ${response.message()}"
+                }
+                Result.failure(Exception(errorMsg ?: "Unknown error"))
             }
+        } catch (e: java.net.UnknownHostException) {
+            Result.failure(Exception("No internet connection. Please check your network."))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -28,8 +46,10 @@ class ChatRepository @Inject constructor(
             if (response.isSuccessful) {
                 Result.success(response.body()?.conversations ?: emptyList())
             } else {
-                Result.failure(Exception("Error ${response.code()}: ${response.message()}"))
+                Result.failure(Exception("Failed to load conversations (${response.code()})"))
             }
+        } catch (e: java.net.UnknownHostException) {
+            Result.failure(Exception("Offline: Conversations could not be loaded."))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -46,8 +66,10 @@ class ChatRepository @Inject constructor(
                     Result.success(ChatDetail(id = id, title = "Untitled", messages = emptyList()))
                 }
             } else {
-                Result.failure(Exception("Error ${response.code()}: ${response.message()}"))
+                Result.failure(Exception("Conversation not found or server error (${response.code()})"))
             }
+        } catch (e: java.net.UnknownHostException) {
+            Result.failure(Exception("Offline: Message history unavailable."))
         } catch (e: Exception) {
             Result.failure(e)
         }
