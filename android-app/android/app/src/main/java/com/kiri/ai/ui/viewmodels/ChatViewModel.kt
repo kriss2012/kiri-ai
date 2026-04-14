@@ -73,7 +73,7 @@ class ChatViewModel @Inject constructor(
                 // Sanitize IDs to prevent LazyColumn key collisions
                 val seenIds = mutableSetOf<String>()
                 val sanitized = list.mapIndexed { index, conv ->
-                    val baseId = conv.id ?: "conv_${index}"
+                    val baseId = if (conv.id.isNullOrBlank()) "conv_${index}" else conv.id!!
                     var finalId = baseId
                     var counter = 1
                     while (seenIds.contains(finalId)) {
@@ -97,8 +97,9 @@ class ChatViewModel @Inject constructor(
                 chatRepository.getConversationDetail(id).onSuccess { detail ->
                     // Ensure each message has a unique stable ID for LazyColumn to prevent crashes
                     val seenIds = mutableSetOf<String>()
-                    val sanitizedMessages = detail?.messages?.mapIndexed { index, msg ->
-                        val baseId = msg.id ?: "msg_${id}_${index}"
+                    val sanitizedMessages = detail.messages?.mapIndexed { index, msg ->
+                        // More robust ID generation: check if null, blank or duplicate
+                        val baseId = if (msg.id.isNullOrBlank()) "msg_${id}_${index}" else msg.id!!
                         var finalId = baseId
                         var counter = 1
                         while (seenIds.contains(finalId)) {
@@ -112,7 +113,7 @@ class ChatViewModel @Inject constructor(
                     uiState = uiState.copy(
                         messages = sanitizedMessages,
                         isLoadingMessages = false,
-                        currentTitle = detail?.title ?: "Untitled Chat"
+                        currentTitle = detail.title ?: "Untitled Chat"
                     )
                 }.onFailure { error ->
                     uiState = uiState.copy(
