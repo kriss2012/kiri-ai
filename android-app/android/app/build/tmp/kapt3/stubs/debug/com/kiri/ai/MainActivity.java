@@ -16,6 +16,16 @@ public final class MainActivity extends androidx.activity.ComponentActivity impl
         return null;
     }
     
+    /**
+     * ARCHITECTURAL_STABILITY_NOTICE
+     * This application uses a flat, technical design system to prevent native rendering
+     * recursion crashes (dispatchGetDisplayList). 
+     *
+     * CORE_GUIDELINES:
+     * 1. Avoid nesting NavHosts or multiple Scaffolds.
+     * 2. Ensure all screens handle WindowInsets (IME, status, and navigation bars) at the root.
+     * 3. chat-related components must use explicit drawing layers (graphicsLayer).
+     */
     private final void startKiriService() {
     }
     
