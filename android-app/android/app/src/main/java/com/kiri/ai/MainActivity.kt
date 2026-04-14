@@ -48,16 +48,20 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                 ) {
                     if (startDestination != null) {
                         val navController = rememberNavController()
-                        NavHost(
-                            navController = navController,
-                            startDestination = startDestination!!
+                        CompositionLocalProvider(
+                            androidx.compose.ui.platform.LocalContext provides this
                         ) {
-                            composable("landing") { LandingScreen(navController) }
-                            composable("login") { LoginScreen(navController) }
-                            composable("register") { RegisterScreen(navController) }
-                            composable("chat") { ChatScreen(navController) }
-                            composable("profile") { ProfileScreen(navController) }
-                            composable("pricing") { PricingScreen(navController, subscriptionViewModel) }
+                            NavHost(
+                                navController = navController,
+                                startDestination = startDestination!!
+                            ) {
+                                composable("landing") { LandingScreen(navController) }
+                                composable("login") { LoginScreen(navController) }
+                                composable("register") { RegisterScreen(navController) }
+                                composable("chat") { ChatScreen(navController) }
+                                composable("profile") { ProfileScreen(navController) }
+                                composable("pricing") { PricingScreen(navController, subscriptionViewModel) }
+                            }
                         }
                     }
                 }
