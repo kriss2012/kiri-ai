@@ -26,7 +26,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.kiri.ai.ui.screens.*
 import com.kiri.ai.ui.theme.KiriTheme
-import com.kiri.ai.ui.theme.Parchment
+import com.kiri.ai.ui.theme.VelvetBlack
+import com.kiri.ai.ui.theme.ShowroomWhite
+import com.kiri.ai.ui.theme.SilverMist
 import com.kiri.ai.ui.viewmodels.MainViewModel
 import com.kiri.ai.ui.viewmodels.SubscriptionViewModel
 import com.razorpay.PaymentData
@@ -38,11 +40,30 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
 
     private val subscriptionViewModel: SubscriptionViewModel by viewModels()
 
+    private val requestPermissionLauncher = registerForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions()
+    ) { _ ->
+        // After permissions are granted, ensure service is running if notification permission was granted
+        startKiriService()
+    }
+
+    private fun startKiriService() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU || 
+            checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            try {
+                startService(android.content.Intent(this, com.kiri.ai.services.KiriBackgroundService::class.java))
+            } catch (e: Exception) {
+                // Handle background start restriction if necessary
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         
         requestPermissions()
+        startKiriService()
         val lastCrash = com.kiri.ai.utils.KiriCrashHandler.getAndClearLastCrash(this)
 
         setContent {
@@ -56,7 +77,7 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
 
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = Parchment
+                    color = VelvetBlack
                 ) {
                     if (startDestination != null) {
                         val navController = rememberNavController()
@@ -88,13 +109,16 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
         if (showDialog) {
             androidx.compose.material3.AlertDialog(
                 onDismissRequest = { showDialog = false },
-                title = { Text("Kiri AI: Crash Detected") },
+                containerColor = VelvetBlack,
+                titleContentColor = ShowroomWhite,
+                textContentColor = ShowroomWhite,
+                title = { Text("KIRI // CRASH_DETECTED", style = KiriTypography.labelLarge) },
                 text = { 
                     androidx.compose.foundation.lazy.LazyColumn(modifier = Modifier.heightIn(max = 400.dp)) {
                         item {
                             Text(
-                                text = "The app closed unexpectedly. Error detail:\n\n$crashTrace",
-                                style = KiriTypography.bodySmall
+                                text = "TECHNICAL_TRACE:\n\n$crashTrace",
+                                style = KiriTypography.bodySmall.copy(color = SilverMist)
                             )
                         }
                     }
@@ -104,14 +128,14 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                         val clip = ClipData.newPlainText("Kiri AI Crash", crashTrace)
                         clipboard.setPrimaryClip(clip)
-                        android.widget.Toast.makeText(this, "Error copied to clipboard.", android.widget.Toast.LENGTH_SHORT).show()
+                        android.widget.Toast.makeText(this, "TRACE_COPIED", android.widget.Toast.LENGTH_SHORT).show()
                     }) {
-                        Text("Copy & Close")
+                        Text("COPY_TRACE", style = KiriTypography.labelMedium)
                     }
                 },
                 dismissButton = {
                     androidx.compose.material3.TextButton(onClick = { showDialog = false }) {
-                        Text("Dismiss")
+                        Text("DISMISS", style = KiriTypography.labelMedium)
                     }
                 }
             )
@@ -120,13 +144,16 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
 
     private fun requestPermissions() {
         val permissions = mutableListOf<String>()
+        
+        // Notification permission (Android 13+)
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             permissions.add(android.Manifest.permission.POST_NOTIFICATIONS)
+            permissions.add(android.Manifest.permission.READ_MEDIA_IMAGES)
+            permissions.add(android.Manifest.permission.READ_MEDIA_VIDEO)
+        } else {
+            // Legacy storage permission
+            permissions.add(android.Manifest.permission.READ_EXTERNAL_STORAGE)
         }
-        
-        val requestPermissionLauncher = registerForActivityResult(
-            androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions()
-        ) { _ -> }
         
         if (permissions.isNotEmpty()) {
             requestPermissionLauncher.launch(permissions.toTypedArray())

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.kiri.ai.app-mergeReleaseResources-60:/values-en-rSG/values-en-rSG.xml",
+            "outputFile": "com.kiri.ai.app-mergeReleaseResources-68:/values-en-rSG/values-en-rSG.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\7ad8e86f6bce6ac1ebdfbfdbed3af206\\transformed\\jetified-play-services-wallet-18.1.3\\res\\values-en-rSG\\values.xml",
+                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\cb0a37c955bf8307cf29d60db3f7ee0e\\transformed\\jetified-play-services-wallet-18.1.3\\res\\values-en-rSG\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",

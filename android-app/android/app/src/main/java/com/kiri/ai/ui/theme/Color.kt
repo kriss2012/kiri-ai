@@ -2,28 +2,30 @@ package com.kiri.ai.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Claude Inspired Palette (Parchment & Warm Neutrals)
-val Parchment = Color(0xFFF5F4ED)
-val Ivory = Color(0xFFFAF9F5)
-val WarmSand = Color(0xFFE8E6DC)
-val BorderCream = Color(0xFFF0EEE6)
+/**
+ * Bugatti Design System Palette
+ * 
+ * Based on the extreme monochromatic showroom aesthetic:
+ * Pure Black, Brilliant White, and Technical Gray.
+ */
 
-// Brand & Accents
-val TerracottaBrand = Color(0xFF7B61FF) // Vibrant Purple from new logo
-val CoralAccent = Color(0xFF00C2FF) // Vibrant Blue from new logo
-val ErrorCrimson = Color(0xFFB53333)
+// Core Canvas
+val VelvetBlack = Color(0xFF000000)
+val ShowroomWhite = Color(0xFFFFFFFF)
+
+// Technical / Semantic
+val SilverMist = Color(0xFF999999) // Mid Gray for tertiary elements
+val DarkGray = Color(0xFF1A1A1A)   // For rare containers that need subtle depth
+val ObsidianSurface = Color(0xFF030303) // Near-pure black for slight surface separation
+
+// Interaction states (High Contrast)
+val HoverOverlay = Color(0x1AFFFFFF) // 10% white for hover on black
+val ActiveOverlay = Color(0x33FFFFFF) // 20% white for active state
+
+// Logic fallback (In case any non-theme elements need standard error/blue)
 val FocusBlue = Color(0xFF3898EC)
-val LogoGradient = listOf(Color(0xFF7B61FF), Color(0xFF00C2FF))
+val ErrorNeutral = Color(0xFF999999) // Bugatti uses gray for errors
 
-
-// Neutrals & Text
-val AnthropicNearBlack = Color(0xFF141413)
-val DarkSurface = Color(0xFF30302E)
-val OliveGray = Color(0xFF5E5D59)
-val CharcoalWarm = Color(0xFF4D4C48)
-val StoneGray = Color(0xFF87867F)
-val WarmSilver = Color(0xFFB0AEA5)
-
-// Shadows / Rings
-val RingWarm = Color(0xFFD1CFC5)
-val RingDeep = Color(0xFFC2C0B6)
+// Logo & Brand
+val BugattiBlue = Color(0xFF00AEEF) // Optional: Pure EB Blue for small brand moments if needed
+val BrandGradient = listOf(Color(0xFFFFFFFF), Color(0xFF999999))

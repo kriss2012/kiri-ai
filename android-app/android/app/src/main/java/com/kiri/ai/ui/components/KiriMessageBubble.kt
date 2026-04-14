@@ -1,26 +1,37 @@
 package com.kiri.ai.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kiri.ai.data.models.ChatMessage
 import com.kiri.ai.ui.theme.*
 import com.mikepenz.markdown.compose.Markdown
+import com.mikepenz.markdown.m3.MarkdownHighlightedCodeBlock
+import com.mikepenz.markdown.m3.MarkdownHighlightedCodeFence
+import com.mikepenz.markdown.m3.markdownComponents
 import com.mikepenz.markdown.model.markdownTypography
 
-import androidx.compose.foundation.Image
-import androidx.compose.ui.res.painterResource
-import com.kiri.ai.R
+/**
+ * Bugatti v2 Professional Message Bubble
+ * 
+ * Aesthetic:
+ * - Direct typography on Cinema Black
+ * - Structured segments (CONTEXT // OUTPUT // NEXT)
+ * - Code copy functionality enabled via headers
+ */
 
 @Composable
 fun KiriMessageBubble(message: ChatMessage?) {
@@ -29,99 +40,125 @@ fun KiriMessageBubble(message: ChatMessage?) {
     val role = message.role ?: "assistant"
     val content = message.content ?: ""
     val isUser = role == "user"
+    val clipboardManager = LocalClipboardManager.current
     
+    // Auto-structure logic: Look for explicit delimiters or professional markers
+    val sections = if (!isUser) {
+        if (content.contains("---")) {
+            content.split("---")
+        } else {
+            // Support common AI sectioning patterns
+            val patterns = listOf("QUESTION:", "OUTPUT:", "SUGGESTIONS:", "NEXT STEPS:", "NEXT:")
+            var currentContent = content
+            patterns.forEach { p ->
+                currentContent = currentContent.replace(p, "\n---\n$p")
+            }
+            if (currentContent.contains("---")) currentContent.split("---") else listOf(content)
+        }
+    } else {
+        listOf(content)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 12.dp),
+            .padding(vertical = 16.dp),
         horizontalAlignment = if (isUser) Alignment.End else Alignment.Start
     ) {
+        // Technical Header Row
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(bottom = 6.dp)
+            modifier = Modifier.padding(bottom = 8.dp)
         ) {
-            if (!isUser) {
-                AIAvatar()
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = "Kiri AI",
-                    style = KiriTypography.labelMedium.copy(fontWeight = FontWeight.Bold, color = AnthropicNearBlack)
+            Text(
+                text = if (isUser) "CLIENT // QUERY" else "KIRI // RESPONSE",
+                style = KiriTypography.labelMedium.copy(
+                    color = if (isUser) SilverMist else ShowroomWhite,
+                    letterSpacing = 2.sp
                 )
-            } else {
-                Text(
-                    text = "You",
-                    style = KiriTypography.labelMedium.copy(fontWeight = FontWeight.Bold, color = AnthropicNearBlack)
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            // Global Copy Button
+            IconButton(
+                onClick = { clipboardManager.setText(AnnotatedString(content)) },
+                modifier = Modifier.size(24.dp)
+            ) {
+                Icon(
+                    Icons.Default.ContentCopy, 
+                    contentDescription = "Copy All", 
+                    tint = SilverMist.copy(alpha = 0.5f),
+                    modifier = Modifier.size(16.dp)
                 )
-                Spacer(modifier = Modifier.width(8.dp))
-                UserAvatar()
             }
         }
         
+        // Structured Content Area
         Box(
             modifier = Modifier
-                .widthIn(max = 320.dp)
-                .background(
-                    color = if (isUser) TerracottaBrand.copy(alpha = 0.05f) else Ivory,
-                    shape = RoundedCornerShape(12.dp)
-                )
-                .let { 
-                    if (!isUser) it.border(1.dp, BorderCream, RoundedCornerShape(12.dp)) 
-                    else it 
-                }
-                .padding(16.dp)
+                .widthIn(max = 340.dp)
+                .background(if (isUser) DarkGray else Color.Transparent)
+                .then(if (isUser) Modifier.padding(12.dp) else Modifier)
         ) {
             if (isUser) {
                 Text(
                     text = content,
-                    style = KiriTypography.bodyMedium.copy(
-                        color = AnthropicNearBlack,
-                        lineHeight = 24.sp
-                    )
+                    style = KiriTypography.bodyMedium.copy(color = ShowroomWhite)
                 )
             } else {
-                // Defensive Markdown rendering - sanitize content before passing
-                val displayContent = when {
-                    content.isBlank() -> " "
-                    content.startsWith("{") || content.startsWith("[") -> "**Error:** Unexpected response format."
-                    else -> content
+                Column {
+                    sections.forEachIndexed { index, section ->
+                        val sectionLabel = when(index) {
+                            0 -> if (sections.size > 1) "CONTEXT" else null
+                            1 -> "OUTPUT"
+                            2 -> "NEXT_STEPS"
+                            else -> null
+                        }
+
+                        if (sectionLabel != null) {
+                            Text(
+                                text = "// $sectionLabel",
+                                style = KiriTypography.labelMedium.copy(color = SilverMist, fontSize = 10.sp),
+                                modifier = Modifier.padding(top = if (index > 0) 16.dp else 4.dp, bottom = 4.dp)
+                            )
+                        }
+
+                        // Bugatti Styled Markdown with Code Headers
+                        Markdown(
+                            content = section.trim(),
+                            typography = markdownTypography(
+                                h1 = KiriTypography.headlineLarge.copy(color = ShowroomWhite),
+                                h2 = KiriTypography.headlineMedium.copy(color = ShowroomWhite),
+                                body = KiriTypography.bodyMedium.copy(color = ShowroomWhite, lineHeight = 26.sp),
+                                code = KiriTypography.labelMedium.copy(color = SilverMist, background = DarkGray)
+                            ),
+                            components = markdownComponents(
+                                codeBlock = {
+                                    MarkdownHighlightedCodeBlock(
+                                        content = it.content,
+                                        node = it.node,
+                                        showHeader = true
+                                    )
+                                },
+                                codeFence = {
+                                    MarkdownHighlightedCodeFence(
+                                        content = it.content,
+                                        node = it.node,
+                                        showHeader = true
+                                    )
+                                }
+                            ),
+                            modifier = Modifier.fillMaxWidth()
+                        )
+
+                        if (index < sections.size - 1) {
+                            HorizontalDivider(
+                                color = SilverMist.copy(alpha = 0.1f),
+                                modifier = Modifier.padding(top = 12.dp)
+                            )
+                        }
+                    }
                 }
-                
-                // TEMPORARY: Disabled Markdown to diagnose if the library causes crashes
-                Text(
-                    text = displayContent,
-                    style = KiriTypography.bodyMedium.copy(
-                        color = AnthropicNearBlack,
-                        lineHeight = 24.sp
-                    )
-                )
             }
         }
-    }
-}
-
-@Composable
-fun AIAvatar() {
-    Image(
-        painter = painterResource(id = R.drawable.app_logo),
-        contentDescription = "Kiri AI",
-        modifier = Modifier
-            .size(36.dp)
-            .background(Color.White, CircleShape)
-            .padding(4.dp)
-    )
-}
-
-@Composable
-fun UserAvatar() {
-    Box(
-        modifier = Modifier
-            .size(36.dp)
-            .background(WarmSand, CircleShape),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "U",
-            style = KiriTypography.labelLarge.copy(color = CharcoalWarm, fontWeight = FontWeight.Bold)
-        )
     }
 }

@@ -3,12 +3,13 @@
     <color name="ic_launcher_background">#F5F4ED</color>
     <string name="app_name">Kiri AI</string>
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">#F5F4ED</item>
+        <item name="windowSplashScreenBackground">#000000</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/app_logo</item>
         <item name="postSplashScreenTheme">@style/Theme.KiriAI</item>
     </style>
-    <style name="Theme.KiriAI" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">#F5F4ED</item>
-        <item name="android:windowLightStatusBar">true</item>
+    <style name="Theme.KiriAI" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">#000000</item>
+        <item name="android:windowBackground">#000000</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

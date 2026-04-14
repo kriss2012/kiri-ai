@@ -17,6 +17,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kiri.ai.ui.theme.*
 
+/**
+ * Bugatti Monogram Input Field
+ * 
+ * Aesthetic:
+ * - Technical Monochrome (#000000 / #FFFFFF)
+ * - 6px subtle corner radius
+ * - Monospace CAPS label
+ */
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun KiriTextField(
@@ -31,45 +40,46 @@ fun KiriTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default
 ) {
     Column(modifier = modifier) {
+        // Technical Mono Label
         Text(
-            text = label,
-            style = KiriTypography.labelMedium.copy(
-                fontWeight = FontWeight.SemiBold,
-                color = OliveGray
-            )
+            text = label.uppercase(),
+            style = KiriTypography.labelMedium.copy(color = SilverMist)
         )
-        Spacer(modifier = Modifier.height(6.dp))
+        Spacer(modifier = Modifier.height(8.dp))
+        
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
             modifier = Modifier.fillMaxWidth(),
             placeholder = {
                 Text(
-                    text = placeholder,
-                    style = KiriTypography.bodyMedium.copy(color = StoneGray)
+                    text = placeholder.uppercase(),
+                    style = KiriTypography.labelMedium.copy(color = SilverMist.copy(alpha = 0.5f))
                 )
             },
             isError = isError,
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
-            shape = RoundedCornerShape(8.dp), // Comfortably rounded
+            shape = RoundedCornerShape(6.dp), // Bugatti subtle radius
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = FocusBlue,
-                unfocusedBorderColor = BorderCream,
-                focusedContainerColor = Ivory,
-                unfocusedContainerColor = Ivory,
-                cursorColor = AnthropicNearBlack,
-                errorBorderColor = ErrorCrimson
+                focusedBorderColor = ShowroomWhite,
+                unfocusedBorderColor = SilverMist.copy(alpha = 0.3f),
+                focusedContainerColor = VelvetBlack,
+                unfocusedContainerColor = VelvetBlack,
+                cursorColor = ShowroomWhite,
+                focusedTextColor = ShowroomWhite,
+                unfocusedTextColor = ShowroomWhite,
+                errorBorderColor = SilverMist
             ),
             singleLine = true,
             textStyle = KiriTypography.bodyMedium
         )
         if (isError && errorMessage != null) {
             Text(
-                text = errorMessage,
-                color = ErrorCrimson,
+                text = errorMessage.uppercase(),
+                color = SilverMist,
                 style = KiriTypography.labelMedium,
-                modifier = Modifier.fillMaxWidth().padding(top = 4.dp)
+                modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
             )
         }
     }
