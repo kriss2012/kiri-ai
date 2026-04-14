@@ -98,7 +98,13 @@ fun LoginScreen(
                 
                 KiriButton(
                     text = "Continue",
-                    onClick = { viewModel.login { navController.navigate("chat") } },
+                    onClick = {
+                        viewModel.login {
+                            navController.navigate("chat") {
+                                popUpTo(0) { inclusive = true }
+                            }
+                        }
+                    },
                     isLoading = state.isLoading
                 )
                 
@@ -125,7 +131,7 @@ fun LoginScreen(
             text = "← Back to home",
             style = KiriTypography.bodyMedium,
             color = StoneGray,
-            modifier = Modifier.clickable { navController.navigate("landing") }
+            modifier = Modifier.clickable { navController.popBackStack() }
         )
     }
 }
