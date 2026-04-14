@@ -45,13 +45,16 @@ fun LandingScreen(navController: NavController) {
         FadeUpAnimation(visible = animate, delayMillis = 100) {
             Box(
                 modifier = Modifier
-                    .background(TerracottaBrand.copy(alpha = 0.1f), shape = CircleShape)
+                    .background(
+                        brush = Brush.linearGradient(LogoGradient),
+                        shape = CircleShape
+                    )
                     .padding(horizontal = 16.dp, vertical = 6.dp)
             ) {
                 Text(
                     text = "✦ AI-POWERED INTELLIGENCE",
                     style = KiriTypography.labelLarge.copy(
-                        color = TerracottaBrand,
+                        color = Color.White,
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
                         letterSpacing = 1.sp
@@ -63,14 +66,25 @@ fun LandingScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(24.dp))
         
         FadeUpAnimation(visible = animate, delayMillis = 200) {
+            Image(
+                painter = painterResource(id = com.kiri.ai.R.drawable.app_logo),
+                contentDescription = "Kiri AI Logo",
+                modifier = Modifier.size(120.dp)
+            )
+        }
+        
+        FadeUpAnimation(visible = animate, delayMillis = 250) {
             Text(
                 text = "Kiri AI",
                 style = KiriTypography.displayLarge.copy(
-                    color = AnthropicNearBlack
+                    brush = Brush.linearGradient(LogoGradient)
                 ),
                 textAlign = TextAlign.Center
             )
         }
+
+
+
         
         Spacer(modifier = Modifier.height(24.dp))
         

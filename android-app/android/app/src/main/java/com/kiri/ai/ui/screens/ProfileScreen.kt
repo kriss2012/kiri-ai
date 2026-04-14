@@ -21,7 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.compose.ui.graphics.Brush
 import com.kiri.ai.ui.components.KiriButton
+
 import com.kiri.ai.ui.components.KiriTextField
 import com.kiri.ai.ui.theme.*
 import com.kiri.ai.ui.viewmodels.AuthViewModel
@@ -80,7 +82,7 @@ fun ProfileScreen(
                         Box(
                             modifier = Modifier
                                 .size(72.dp)
-                                .background(TerracottaBrand, CircleShape),
+                                .background(Brush.linearGradient(LogoGradient), CircleShape),
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
@@ -88,6 +90,7 @@ fun ProfileScreen(
                                 style = KiriTypography.headlineLarge.copy(color = Ivory)
                             )
                         }
+
                         Spacer(modifier = Modifier.width(20.dp))
                         Column {
                             Text(

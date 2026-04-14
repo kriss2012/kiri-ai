@@ -1,11 +1,16 @@
 package com.kiri.ai.ui.viewmodels
 
+import android.app.Application
 import androidx.compose.runtime.*
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.viewModelScope
 import com.kiri.ai.data.models.*
 import com.kiri.ai.data.repository.AuthRepository
 import com.kiri.ai.data.repository.ChatRepository
+import com.kiri.ai.utils.NotificationHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -15,16 +20,39 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ChatViewModel @Inject constructor(
+    application: Application,
     private val chatRepository: ChatRepository,
     private val authRepository: AuthRepository
-) : ViewModel() {
+) : AndroidViewModel(application) {
 
     var uiState by mutableStateOf(ChatUiState())
         private set
 
+    private var isAppInBackground = false
+    
+    private val lifecycleObserver = LifecycleEventObserver { _, event ->
+        when (event) {
+            Lifecycle.Event.ON_STOP -> isAppInBackground = true
+            Lifecycle.Event.ON_START -> isAppInBackground = false
+            else -> {}
+        }
+    }
+
     init {
         observeUserData()
         loadConversations()
+        try {
+            ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
+        } catch (e: Exception) {
+            // Fallback or log if ProcessLifecycleOwner is not available
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        try {
+            ProcessLifecycleOwner.get().lifecycle.removeObserver(lifecycleObserver)
+        } catch (e: Exception) {}
     }
 
     private fun observeUserData() {
@@ -43,6 +71,8 @@ class ChatViewModel @Inject constructor(
         viewModelScope.launch {
             chatRepository.getConversations().onSuccess { list ->
                 uiState = uiState.copy(conversations = list)
+            }.onFailure { error ->
+                uiState = uiState.copy(error = "Failed to load chats: ${error.message}")
             }
         }
     }
@@ -52,17 +82,24 @@ class ChatViewModel @Inject constructor(
             try {
                 uiState = uiState.copy(isLoadingMessages = true, currentConversationId = id, error = null)
                 chatRepository.getConversationDetail(id).onSuccess { detail ->
-                    // Ensure each message has a unique stable ID for LazyColumn
-                    val sanitizedMessages = detail.messages?.mapIndexed { index, msg ->
-                        if (msg.id == null) {
-                            msg.copy(id = "msg_${id}_${index}_${msg.role}")
-                        } else msg
+                    // Ensure each message has a unique stable ID for LazyColumn to prevent crashes
+                    val seenIds = mutableSetOf<String>()
+                    val sanitizedMessages = detail?.messages?.mapIndexed { index, msg ->
+                        val baseId = msg.id ?: "msg_${id}_${index}"
+                        var finalId = baseId
+                        var counter = 1
+                        while (seenIds.contains(finalId)) {
+                            finalId = "${baseId}_${counter}"
+                            counter++
+                        }
+                        seenIds.add(finalId)
+                        msg.copy(id = finalId)
                     } ?: emptyList()
 
                     uiState = uiState.copy(
                         messages = sanitizedMessages,
                         isLoadingMessages = false,
-                        currentTitle = detail.title ?: "Untitled Chat"
+                        currentTitle = detail?.title ?: "Untitled Chat"
                     )
                 }.onFailure { error ->
                     uiState = uiState.copy(
@@ -71,7 +108,7 @@ class ChatViewModel @Inject constructor(
                     )
                 }
             } catch (e: Exception) {
-                uiState = uiState.copy(isLoadingMessages = false, error = e.message)
+                uiState = uiState.copy(isLoadingMessages = false, error = "Error: ${e.message}")
             }
         }
     }
@@ -99,19 +136,36 @@ class ChatViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 chatRepository.sendMessage(input, uiState.currentConversationId).onSuccess { res ->
-                    val assistantMsg = ChatMessage(
-                        role = "assistant", 
-                        content = res.message ?: "",
-                        id = "ai_${UUID.randomUUID()}"
-                    )
-                    
-                    uiState = uiState.copy(
-                        messages = uiState.messages + assistantMsg,
-                        isSending = false,
-                        currentConversationId = res.conversationId ?: uiState.currentConversationId,
-                        currentTitle = res.title ?: uiState.currentTitle
-                    )
-                    loadConversations()
+                    if (res?.success == true) {
+                        val assistantMsg = ChatMessage(
+                            role = "assistant", 
+                            content = res.message ?: "",
+                            id = "ai_${UUID.randomUUID()}"
+                        )
+                        
+                        uiState = uiState.copy(
+                            messages = uiState.messages + assistantMsg,
+                            isSending = false,
+                            currentConversationId = res.conversationId ?: uiState.currentConversationId,
+                            currentTitle = res.title ?: uiState.currentTitle
+                        )
+                        
+                        if (isAppInBackground) {
+                            NotificationHelper.showResponseNotification(
+                                getApplication(),
+                                "Kiri AI Response",
+                                assistantMsg.content ?: "You have a new message"
+                            )
+                        }
+                        
+                        loadConversations()
+
+                    } else {
+                        uiState = uiState.copy(
+                            isSending = false,
+                            error = res?.message ?: "Server returned error"
+                        )
+                    }
                 }.onFailure { error ->
                     uiState = uiState.copy(
                         isSending = false,
@@ -121,7 +175,7 @@ class ChatViewModel @Inject constructor(
             } catch (e: Exception) {
                 uiState = uiState.copy(
                     isSending = false, 
-                    error = e.message ?: "An unexpected error occurred"
+                    error = "Unexpected error: ${e.message}"
                 )
             }
         }

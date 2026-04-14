@@ -42,6 +42,7 @@ import dagger.hilt.android.internal.lifecycle.DefaultViewModelFactories_Internal
 import dagger.hilt.android.internal.managers.ActivityRetainedComponentManager_LifecycleModule_ProvideActivityRetainedLifecycleFactory;
 import dagger.hilt.android.internal.managers.SavedStateHandleHolder;
 import dagger.hilt.android.internal.modules.ApplicationContextModule;
+import dagger.hilt.android.internal.modules.ApplicationContextModule_ProvideApplicationFactory;
 import dagger.hilt.android.internal.modules.ApplicationContextModule_ProvideContextFactory;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.DoubleCheck;
@@ -406,19 +407,19 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String com_kiri_ai_ui_viewmodels_MainViewModel = "com.kiri.ai.ui.viewmodels.MainViewModel";
-
       static String com_kiri_ai_ui_viewmodels_ChatViewModel = "com.kiri.ai.ui.viewmodels.ChatViewModel";
+
+      static String com_kiri_ai_ui_viewmodels_MainViewModel = "com.kiri.ai.ui.viewmodels.MainViewModel";
 
       static String com_kiri_ai_ui_viewmodels_SubscriptionViewModel = "com.kiri.ai.ui.viewmodels.SubscriptionViewModel";
 
       static String com_kiri_ai_ui_viewmodels_AuthViewModel = "com.kiri.ai.ui.viewmodels.AuthViewModel";
 
       @KeepFieldType
-      MainViewModel com_kiri_ai_ui_viewmodels_MainViewModel2;
+      ChatViewModel com_kiri_ai_ui_viewmodels_ChatViewModel2;
 
       @KeepFieldType
-      ChatViewModel com_kiri_ai_ui_viewmodels_ChatViewModel2;
+      MainViewModel com_kiri_ai_ui_viewmodels_MainViewModel2;
 
       @KeepFieldType
       SubscriptionViewModel com_kiri_ai_ui_viewmodels_SubscriptionViewModel2;
@@ -474,13 +475,16 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
+      static String com_kiri_ai_ui_viewmodels_SubscriptionViewModel = "com.kiri.ai.ui.viewmodels.SubscriptionViewModel";
+
       static String com_kiri_ai_ui_viewmodels_AuthViewModel = "com.kiri.ai.ui.viewmodels.AuthViewModel";
 
       static String com_kiri_ai_ui_viewmodels_ChatViewModel = "com.kiri.ai.ui.viewmodels.ChatViewModel";
 
       static String com_kiri_ai_ui_viewmodels_MainViewModel = "com.kiri.ai.ui.viewmodels.MainViewModel";
 
-      static String com_kiri_ai_ui_viewmodels_SubscriptionViewModel = "com.kiri.ai.ui.viewmodels.SubscriptionViewModel";
+      @KeepFieldType
+      SubscriptionViewModel com_kiri_ai_ui_viewmodels_SubscriptionViewModel2;
 
       @KeepFieldType
       AuthViewModel com_kiri_ai_ui_viewmodels_AuthViewModel2;
@@ -490,9 +494,6 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
 
       @KeepFieldType
       MainViewModel com_kiri_ai_ui_viewmodels_MainViewModel2;
-
-      @KeepFieldType
-      SubscriptionViewModel com_kiri_ai_ui_viewmodels_SubscriptionViewModel2;
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {
@@ -520,7 +521,7 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
           return (T) new AuthViewModel(singletonCImpl.authRepositoryProvider.get());
 
           case 1: // com.kiri.ai.ui.viewmodels.ChatViewModel 
-          return (T) new ChatViewModel(singletonCImpl.chatRepositoryProvider.get(), singletonCImpl.authRepositoryProvider.get());
+          return (T) new ChatViewModel(ApplicationContextModule_ProvideApplicationFactory.provideApplication(singletonCImpl.applicationContextModule), singletonCImpl.chatRepositoryProvider.get(), singletonCImpl.authRepositoryProvider.get());
 
           case 2: // com.kiri.ai.ui.viewmodels.MainViewModel 
           return (T) new MainViewModel(singletonCImpl.authRepositoryProvider.get());

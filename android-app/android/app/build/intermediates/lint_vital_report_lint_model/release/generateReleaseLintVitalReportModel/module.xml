@@ -3,10 +3,10 @@
     dir="D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app"
     name=":app"
     type="APP"
-    maven="Kiri AI:app:"
-    agpVersion="8.3.2"
+    maven="Kiri AI:app:unspecified"
+    agpVersion="8.13.2"
     buildFolder="build"
-    bootClassPath="C:\Users\krishna\AppData\Local\Android\sdk\platforms\android-34\android.jar;C:\Users\krishna\AppData\Local\Android\sdk\build-tools\34.0.0\core-lambda-stubs.jar"
+    bootClassPath="C:\Users\krishna\AppData\Local\Android\Sdk\platforms\android-34\android.jar;C:\Users\krishna\AppData\Local\Android\Sdk\build-tools\35.0.0\core-lambda-stubs.jar"
     javaSourceLevel="1.8"
     compileTarget="android-34"
     neverShrinking="true">

@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInVertically
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,7 +20,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -88,10 +91,12 @@ fun ChatScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
-                    containerColor = TerracottaBrand,
+                    containerColor = Color.Transparent,
                     contentColor = Ivory,
-                    shape = RoundedCornerShape(8.dp)
+                    shape = RoundedCornerShape(8.dp),
+                    border = BorderStroke(1.dp, Brush.linearGradient(LogoGradient))
                 )
+
                 
                 Spacer(modifier = Modifier.height(24.dp))
                 
@@ -106,7 +111,10 @@ fun ChatScreen(
                 )
                 
                 LazyColumn(modifier = Modifier.weight(1f)) {
-                    items(state.conversations) { conv ->
+                    items(
+                        items = state.conversations,
+                        key = { it.getStableId() }
+                    ) { conv ->
                         NavigationDrawerItem(
                             label = { 
                                 Text(
@@ -216,7 +224,7 @@ fun ChatScreen(
                     ) {
                         items(
                             items = state.messages ?: emptyList(),
-                            key = { it.id ?: it.hashCode() }
+                            key = { it.getStableId() }
                         ) { msg ->
                             KiriMessageBubble(msg)
                         }
@@ -256,8 +264,16 @@ fun WelcomeScreen() {
         }
         Spacer(modifier = Modifier.height(24.dp))
         FadeUpAnimation(visible = animate, delayMillis = 200) {
-            Text("Kiri AI", style = KiriTypography.displayLarge.copy(fontSize = 40.sp), color = TerracottaBrand)
+            Text(
+                "Kiri AI", 
+                style = KiriTypography.displayLarge.copy(
+                    fontSize = 40.sp,
+                    brush = Brush.linearGradient(LogoGradient)
+                ), 
+                color = TerracottaBrand
+            )
         }
+
         Spacer(modifier = Modifier.height(16.dp))
         FadeUpAnimation(visible = animate, delayMillis = 400) {
             Text(
