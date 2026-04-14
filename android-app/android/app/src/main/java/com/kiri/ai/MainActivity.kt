@@ -88,7 +88,19 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
     }
 
     private fun requestPermissions() {
-
+        val permissions = mutableListOf<String>()
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            permissions.add(android.Manifest.permission.POST_NOTIFICATIONS)
+        }
+        
+        val requestPermissionLauncher = registerForActivityResult(
+            androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions()
+        ) { _ -> }
+        
+        if (permissions.isNotEmpty()) {
+            requestPermissionLauncher.launch(permissions.toTypedArray())
+        }
+    }
     override fun onPaymentSuccess(razorpayPaymentId: String?, paymentData: PaymentData?) {
         paymentData?.let {
             subscriptionViewModel.onPaymentSuccess(
