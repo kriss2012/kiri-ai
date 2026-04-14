@@ -279,6 +279,7 @@ fun ChatScreen(
                     onMessageChange = { viewModel.onMessageChange(it) },
                     onSend = { viewModel.sendMessage() },
                     onAttachClick = { filePickerLauncher.launch(arrayOf("*/*")) },
+                    selectedFileUri = state.selectedFileUri,
                     selectedFileName = state.selectedFileName,
                     onClearFile = { viewModel.clearSelectedFile() },
                     isSending = state.isSending
