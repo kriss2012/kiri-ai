@@ -169,7 +169,7 @@ fun ProfileScreen(
                 onClick = { 
                     authViewModel.logout {
                         navController.navigate("landing") {
-                            popUpTo("chat") { inclusive = true }
+                            popUpTo(0) { inclusive = true }
                         }
                     }
                 },
