@@ -793,37 +793,88 @@ PLandroidx/fragment/app/FragmentViewLifecycleOwner;->performSave(Landroid/os/Bun
 PLandroidx/fragment/app/FragmentViewLifecycleOwner;->setCurrentState(Landroidx/lifecycle/Lifecycle$State;)V
 PLandroidx/fragment/app/SpecialEffectsController;->enqueueRemove(Landroidx/fragment/app/FragmentStateManager;)V
 
-# Baseline profile rules for androidx.compose.animation.core
-# =============================================
-# In practice it seems like almost every class in animation/core ends up getting loaded in even a
-# relatively small sample, and most end up getting marked as "HSP". Since Animation is a high value
-# target for performance - fade in, scroll, etc we are going to be liberal in the animation profile
-# rules and just mark the entire module.
+# Baseline profiles for lifecycle-livedata
 
-HSPLandroidx/compose/animation/core/**->**(**)**
+HSPLandroidx/lifecycle/MediatorLiveData$Source;-><init>(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/Observer;)V
+HSPLandroidx/lifecycle/MediatorLiveData$Source;->onChanged(Ljava/lang/Object;)V
+HSPLandroidx/lifecycle/MediatorLiveData$Source;->plug()V
+HSPLandroidx/lifecycle/MediatorLiveData$Source;->unplug()V
+HSPLandroidx/lifecycle/MediatorLiveData;-><init>()V
+HSPLandroidx/lifecycle/MediatorLiveData;->addSource(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/Observer;)V
+HSPLandroidx/lifecycle/MediatorLiveData;->onActive()V
+HSPLandroidx/lifecycle/MediatorLiveData;->onInactive()V
+HSPLandroidx/lifecycle/MediatorLiveData;->removeSource(Landroidx/lifecycle/LiveData;)V
+HSPLandroidx/lifecycle/Transformations$1;-><init>(Landroidx/lifecycle/MediatorLiveData;Landroidx/arch/core/util/Function;)V
+HSPLandroidx/lifecycle/Transformations$1;->onChanged(Ljava/lang/Object;)V
+HSPLandroidx/lifecycle/Transformations$2$1;-><init>(Landroidx/lifecycle/Transformations$2;)V
+HSPLandroidx/lifecycle/Transformations$2$1;->onChanged(Ljava/lang/Object;)V
+HSPLandroidx/lifecycle/Transformations$2;-><init>(Landroidx/arch/core/util/Function;Landroidx/lifecycle/MediatorLiveData;)V
+HSPLandroidx/lifecycle/Transformations$2;->onChanged(Ljava/lang/Object;)V
+HSPLandroidx/lifecycle/Transformations;->map(Landroidx/lifecycle/LiveData;Landroidx/arch/core/util/Function;)Landroidx/lifecycle/LiveData;
+HSPLandroidx/lifecycle/Transformations;->switchMap(Landroidx/lifecycle/LiveData;Landroidx/arch/core/util/Function;)Landroidx/lifecycle/LiveData;
+Landroidx/lifecycle/MediatorLiveData$Source;
+Landroidx/lifecycle/MediatorLiveData;
+Landroidx/lifecycle/Transformations$1;
+Landroidx/lifecycle/Transformations$2$1;
+Landroidx/lifecycle/Transformations$2;
+Landroidx/lifecycle/Transformations;
 
-Landroidx/compose/animation/core/**;
+# Baseline profiles for lifecycle-livedata-core
 
-# Baseline profile rules for androidx.compose.material.ripple
-# =============================================
-HSPLandroidx/compose/material/ripple/AndroidRippleIndicationInstance;->**(**)**
-HSPLandroidx/compose/material/ripple/PlatformRipple;->**(**)**
-HSPLandroidx/compose/material/ripple/DebugRippleTheme;->**(**)**
-HSPLandroidx/compose/material/ripple/Ripple;->**(**)**
-HSPLandroidx/compose/material/ripple/RippleAlpha;->**(**)**
-HSPLandroidx/compose/material/ripple/RippleContainer;->**(**)**
-HSPLandroidx/compose/material/ripple/RippleHostMap;->**(**)**
-HSPLandroidx/compose/material/ripple/UnprojectedRipple;->**(**)**
-HSPLandroidx/compose/material/ripple/RippleHostView;->**(**)**
-HSPLandroidx/compose/material/ripple/RippleIndicationInstance;->**(**)**
-HSPLandroidx/compose/material/ripple/RippleKt;->**(**)**
-HSPLandroidx/compose/material/ripple/RippleHostMap;->**(**)**
-HSPLandroidx/compose/material/ripple/RippleContainer;->**(**)**
-HSPLandroidx/compose/material/ripple/RippleAlpha;->**(**)**
-HSPLandroidx/compose/material/ripple/RippleThemeKt**->**(**)**
-HSPLandroidx/compose/material/ripple/StateLayer;->**(**)**
+HSPLandroidx/lifecycle/LiveData$1;-><init>(Landroidx/lifecycle/LiveData;)V
+HSPLandroidx/lifecycle/LiveData$1;->run()V
+HSPLandroidx/lifecycle/LiveData$AlwaysActiveObserver;-><init>(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/Observer;)V
+HSPLandroidx/lifecycle/LiveData$AlwaysActiveObserver;->shouldBeActive()Z
+HSPLandroidx/lifecycle/LiveData$LifecycleBoundObserver;-><init>(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroidx/lifecycle/Observer;)V
+HSPLandroidx/lifecycle/LiveData$LifecycleBoundObserver;->onStateChanged(Landroidx/lifecycle/LifecycleOwner;Landroidx/lifecycle/Lifecycle$Event;)V
+HSPLandroidx/lifecycle/LiveData$LifecycleBoundObserver;->shouldBeActive()Z
+HSPLandroidx/lifecycle/LiveData$ObserverWrapper;-><init>(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/Observer;)V
+HSPLandroidx/lifecycle/LiveData$ObserverWrapper;->activeStateChanged(Z)V
+HSPLandroidx/lifecycle/LiveData$ObserverWrapper;->detachObserver()V
+HSPLandroidx/lifecycle/LiveData;-><clinit>()V
+HSPLandroidx/lifecycle/LiveData;-><init>()V
+HSPLandroidx/lifecycle/LiveData;->assertMainThread(Ljava/lang/String;)V
+HSPLandroidx/lifecycle/LiveData;->changeActiveCounter(I)V
+HSPLandroidx/lifecycle/LiveData;->considerNotify(Landroidx/lifecycle/LiveData$ObserverWrapper;)V
+HSPLandroidx/lifecycle/LiveData;->dispatchingValue(Landroidx/lifecycle/LiveData$ObserverWrapper;)V
+HSPLandroidx/lifecycle/LiveData;->getValue()Ljava/lang/Object;
+HSPLandroidx/lifecycle/LiveData;->getVersion()I
+HSPLandroidx/lifecycle/LiveData;->hasActiveObservers()Z
+HSPLandroidx/lifecycle/LiveData;->observe(Landroidx/lifecycle/LifecycleOwner;Landroidx/lifecycle/Observer;)V
+HSPLandroidx/lifecycle/LiveData;->observeForever(Landroidx/lifecycle/Observer;)V
+HSPLandroidx/lifecycle/LiveData;->onActive()V
+HSPLandroidx/lifecycle/LiveData;->onInactive()V
+HSPLandroidx/lifecycle/LiveData;->postValue(Ljava/lang/Object;)V
+HSPLandroidx/lifecycle/LiveData;->removeObserver(Landroidx/lifecycle/Observer;)V
+HSPLandroidx/lifecycle/LiveData;->setValue(Ljava/lang/Object;)V
+HSPLandroidx/lifecycle/MediatorLiveData$Source;-><init>(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/Observer;)V
+HSPLandroidx/lifecycle/MediatorLiveData$Source;->onChanged(Ljava/lang/Object;)V
+HSPLandroidx/lifecycle/MediatorLiveData$Source;->plug()V
+HSPLandroidx/lifecycle/MediatorLiveData$Source;->unplug()V
+HSPLandroidx/lifecycle/MediatorLiveData;-><init>()V
+HSPLandroidx/lifecycle/MediatorLiveData;->addSource(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/Observer;)V
+HSPLandroidx/lifecycle/MediatorLiveData;->onActive()V
+HSPLandroidx/lifecycle/MediatorLiveData;->onInactive()V
+HSPLandroidx/lifecycle/MediatorLiveData;->removeSource(Landroidx/lifecycle/LiveData;)V
+HSPLandroidx/lifecycle/MutableLiveData;-><init>()V
+HSPLandroidx/lifecycle/MutableLiveData;->setValue(Ljava/lang/Object;)V
+PLandroidx/lifecycle/LiveData$LifecycleBoundObserver;->detachObserver()V
 
-Landroidx/compose/material/ripple/*;
+# Baseline profiles for Lifecycle ViewModel
+
+HSPLandroidx/lifecycle/ViewModel;-><init>()V
+HSPLandroidx/lifecycle/ViewModelLazy;-><init>(Lkotlin/reflect/KClass;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V
+HSPLandroidx/lifecycle/ViewModelLazy;->getValue()Landroidx/lifecycle/ViewModel;
+HSPLandroidx/lifecycle/ViewModelLazy;->getValue()Ljava/lang/Object;
+HSPLandroidx/lifecycle/ViewModelProvider;-><init>(Landroidx/lifecycle/ViewModelStore;Landroidx/lifecycle/ViewModelProvider$Factory;)V
+HSPLandroidx/lifecycle/ViewModelProvider;->get(Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
+HSPLandroidx/lifecycle/ViewModelProvider;->get(Ljava/lang/String;Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
+HSPLandroidx/lifecycle/ViewModelStore;-><init>()V
+HSPLandroidx/lifecycle/ViewModelStore;->get(Ljava/lang/String;)Landroidx/lifecycle/ViewModel;
+HSPLandroidx/lifecycle/ViewModelStore;->put(Ljava/lang/String;Landroidx/lifecycle/ViewModel;)V
+PLandroidx/lifecycle/ViewModel;->clear()V
+PLandroidx/lifecycle/ViewModel;->onCleared()V
+PLandroidx/lifecycle/ViewModelStore;->clear()V
 
 Lcoil/compose/AsyncImageKt;
 HPLcoil/compose/AsyncImageKt;->AsyncImage-MvsnxeU(Ljava/lang/Object;Ljava/lang/String;Lcoil/ImageLoader;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Alignment;Landroidx/compose/ui/layout/ContentScale;FLandroidx/compose/ui/graphics/ColorFilter;ILandroidx/compose/runtime/Composer;III)V
@@ -1154,449 +1205,6 @@ HPLcoil/compose/UtilsKt$transformOf$1;->invoke(Lcoil/compose/AsyncImagePainter$S
 HSPLcoil/compose/UtilsKt$transformOf$1;->invoke(Lcoil/compose/AsyncImagePainter$State;)Lcoil/compose/AsyncImagePainter$State;
 HPLcoil/compose/UtilsKt$transformOf$1;->invoke(Ljava/lang/Object;)Ljava/lang/Object;
 HSPLcoil/compose/UtilsKt$transformOf$1;->invoke(Ljava/lang/Object;)Ljava/lang/Object;
-# Baseline profile rules for androidx.compose.foundation
-# =============================================
-#
-# Include all methods in common top level classes
-HSPLandroidx/compose/foundation/AbstractClickable**->**(**)**
-HSPLandroidx/compose/foundation/AndroidEdgeEffectOverscrollEffect**->**(**)**
-HSPLandroidx/compose/foundation/AndroidOverscroll_**->**(**)**
-HSPLandroidx/compose/foundation/BackgroundElement;->**(**)**
-HSPLandroidx/compose/foundation/BackgroundNode;->**(**)**
-HSPLandroidx/compose/foundation/BorderKt**->**(**)**
-HSPLandroidx/compose/foundation/BorderStroke;->**(**)**
-HSPLandroidx/compose/foundation/CanvasKt**->**(**)**
-HSPLandroidx/compose/foundation/Clickable**->**(**)**
-HSPLandroidx/compose/foundation/DrawOverscrollModifier;->**(**)**
-HSPLandroidx/compose/foundation/EdgeEffectWrapper;->**(**)**
-HSPLandroidx/compose/foundation/Focusable**->**(**)**
-HSPLandroidx/compose/foundation/FocusedBounds**->**(**)**
-HSPLandroidx/compose/foundation/Hoverable**->**(**)**
-HSPLandroidx/compose/foundation/ImageKt**->**(**)**
-HSPLandroidx/compose/foundation/IndicationKt**->**(**)**
-HSPLandroidx/compose/foundation/IndicationModifier;->**(**)**
-HSPLandroidx/compose/foundation/MutatePriority;->**(**)**
-HSPLandroidx/compose/foundation/MutatorMutex**->**(**)**
-HSPLandroidx/compose/foundation/PinnableParentConsumer;->**(**)**
-HSPLandroidx/compose/foundation/ScrollKt**->**(**)**
-HSPLandroidx/compose/foundation/ScrollState**->**(**)**
-HSPLandroidx/compose/foundation/ScrollingLayoutModifier**->**(**)**
-#
-# Include everything inside of the gestures namespace
-HSPLandroidx/compose/foundation/gestures/**->**(**)**
-#
-# Include everything inside of the interaction namespace
-HSPLandroidx/compose/foundation/interaction/*;->**(**)**
-
-# Include everything inside of the lazy namespaces
-HSPLandroidx/compose/foundation/lazy/**->**(**)**
-
-# Include everything inside relocation namespace
-HSPLandroidx/compose/foundation/relocation/**->**(**)**
-
-# Include everything inside selection namespace
-HSPLandroidx/compose/foundation/selection/**->**(**)**
-
-#
-# common shape classes
-HSPLandroidx/compose/foundation/shape/CornerBasedShape;->**(**)**
-HSPLandroidx/compose/foundation/shape/CornerSizeKt;->**(**)**
-HSPLandroidx/compose/foundation/shape/DpCornerSize;->**(**)**
-HSPLandroidx/compose/foundation/shape/RoundedCornerShape;->**(**)**
-HSPLandroidx/compose/foundation/shape/PercentCornerSize;->**(**)**
-#
-
-# Include everything inside of the text namespace
-HSPLandroidx/compose/foundation/text/*;->**(**)**
-HSPLandroidx/compose/foundation/text/modifiers/**->**(**)**
-HSPLandroidx/compose/foundation/text/selection/SimpleLayoutKt**->**(**)**
-HSPLandroidx/compose/foundation/text/selection/TextFieldSelectionManager;->**(**)**
-
-#
-# Include all of foundation
-Landroidx/compose/foundation/**;
-
-# Baseline profile rules for androidx.compose.animation
-# =============================================
-HSPLandroidx/compose/animation/AndroidFlingSpline**;->**(**)**
-HSPLandroidx/compose/animation/AnimatedVisibilityKt**->**(**)**
-HSPLandroidx/compose/animation/AnimatedVisibilityScope;-><init>(**)V
-HSPLandroidx/compose/animation/ChangeSize;->**(**)**
-HSPLandroidx/compose/animation/ColorVectorConverterKt**->**(**)**
-HSPLandroidx/compose/animation/CrossfadeAnimationItem;->**(**)**
-HSPLandroidx/compose/animation/CrossfadeKt**->**(**)**
-HSPLandroidx/compose/animation/EnterExitTransitionKt;->**(**)**
-HSPLandroidx/compose/animation/FlingCalculator**;->**(**)**
-HSPLandroidx/compose/animation/SingleValueAnimationKt;->**(**)**
-HSPLandroidx/compose/animation/SplineBasedFloatDecayAnimationSpec**->**(**)**
-HSPLandroidx/compose/animation/SplineBasedDecayKt;->**(**)**
-HSPLandroidx/compose/animation/TransitionData;->**(**)**
-
-# Include all of androidx.compose.animation
-Landroidx/compose/animation/*;
-# Baseline profile rules for androidx.compose.foundation.layout
-# =============================================
-# Layout is incredibly important for performance, and represents many hot code paths. For now, we
-# will include all of the layout namespace
-HSPLandroidx/compose/foundation/layout/**->**(**)**
-Landroidx/compose/foundation/layout/**;
-# Baseline profile rules for androidx.compose.ui.unit
-# =============================================
-# everything in unit is relatively small and in the hot path, so we just add everything
-HSPLandroidx/compose/ui/unit/**->**(**)**
-Landroidx/compose/ui/unit/**
-
-# Baseline profile rules for androidx.compose.ui.geometry
-# =============================================
-# All of geometry is highly used, small, and mathy, so we include everything
-HSPLandroidx/compose/ui/geometry/*;->**(**)**
-Landroidx/compose/ui/geometry/*;
-# Baseline profile rules for androidx.compose.ui.util
-# =============================================
-HSPLandroidx/compose/ui/util/MathHelpersKt;->lerp(FFF)F
-Landroidx/compose/ui/util/MathHelpersKt;
-
-# Baseline profile rules for androidx.compose.ui.graphics
-# =============================================
-HSPLandroidx/compose/ui/graphics/AndroidCanvas**->**(**)**
-HSPLandroidx/compose/ui/graphics/AndroidColorFilter_androidKt;->**(**)**
-HSPLandroidx/compose/ui/graphics/AndroidImageBitmap;->**(**)**
-HSPLandroidx/compose/ui/graphics/AndroidImageBitmap_androidKt;->**(**)**
-HSPLandroidx/compose/ui/graphics/AndroidMatrixConversions_androidKt;->**(**)**
-HSPLandroidx/compose/ui/graphics/AndroidPaint;->**(**)**
-HSPLandroidx/compose/ui/graphics/AndroidPaint_androidKt;->**(**)**
-HSPLandroidx/compose/ui/graphics/AndroidPath;->**(**)**
-HSPLandroidx/compose/ui/graphics/AndroidPath_androidKt;->**(**)**
-HSPLandroidx/compose/ui/graphics/AndroidPathMeasure;->**(**)**
-HSPLandroidx/compose/ui/graphics/BlendMode**->**(**)**
-HSPLandroidx/compose/ui/graphics/BlockGraphicsLayerModifier**->**(**)**
-HSPLandroidx/compose/ui/graphics/Brush;->**(**)**
-HSPLandroidx/compose/ui/graphics/Canvas$DefaultImpls;->**(**)**
-HSPLandroidx/compose/ui/graphics/CanvasHolder;->**(**)**
-HSPLandroidx/compose/ui/graphics/CanvasKt;->**(**)**
-HSPLandroidx/compose/ui/graphics/CanvasUtils;->**(**)**
-HSPLandroidx/compose/ui/graphics/CanvasZHelper**->**(**)**
-HSPLandroidx/compose/ui/graphics/ClipOp**->**(**)**
-HSPLandroidx/compose/ui/graphics/Color**->**(**)**
-HSPLandroidx/compose/ui/graphics/ColorFilter**->**(**)**
-HSPLandroidx/compose/ui/graphics/ColorKt;->**(**)**
-HSPLandroidx/compose/ui/graphics/Float16**->**(**)**
-HSPLandroidx/compose/ui/graphics/GraphicsLayerModifierKt;->**(**)**
-HSPLandroidx/compose/ui/graphics/Matrix;->**(**)**
-HSPLandroidx/compose/ui/graphics/ImageBitmapConfig**->**(**)**
-HSPLandroidx/compose/ui/graphics/MatrixKt;->**(**)**
-HSPLandroidx/compose/ui/graphics/Outline**->**(**)**
-HSPLandroidx/compose/ui/graphics/PaintingStyle**->**(**)**
-HSPLandroidx/compose/ui/graphics/PathFillType**->**(**)**
-HSPLandroidx/compose/ui/graphics/RectangleShapeKt;->**(**)**
-HSPLandroidx/compose/ui/graphics/RectHelper_androidKt;->**(**)**
-HSPLandroidx/compose/ui/graphics/ReusableGraphicsLayerScope;->**(**)**
-HSPLandroidx/compose/ui/graphics/Shadow;->**(**)**
-HSPLandroidx/compose/ui/graphics/SimpleGraphicsLayerModifier**->**(**)**
-HSPLandroidx/compose/ui/graphics/SolidColor;->**(**)**
-HSPLandroidx/compose/ui/graphics/StrokeCap**->**(**)**
-HSPLandroidx/compose/ui/graphics/StrokeJoin**->**(**)**
-HSPLandroidx/compose/ui/graphics/TransformOrigin**->**(**)**
-HSPLandroidx/compose/ui/graphics/painter/BitmapPainter;->**(**)**
-HSPLandroidx/compose/ui/graphics/painter/Painter**->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/DrawCache;->**(**)**
-#
-# All of colorspace
-HSPLandroidx/compose/ui/graphics/colorspace/**->**(**)**
-#
-# All of drawscope
-HSPLandroidx/compose/ui/graphics/drawscope/**->**(**)**
-#
-# Vector stuff
-HSPLandroidx/compose/ui/graphics/vector/DefaultVectorOverride;->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/DrawCache;->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/GroupComponent;->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/ImageVector**->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/PathBuilder;->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/PathComponent;->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/PathNode**->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/PathParser**->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/Stack;->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/VNode;->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/VectorApplier;->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/VectorComponent;->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/VectorComposeKt**->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/VectorGroup;->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/VectorKt;->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/VectorPainter**->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/VectorPath;->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/compat/AndroidVectorResources;->**(**)**
-HSPLandroidx/compose/ui/graphics/vector/compat/XmlVectorParser_androidKt;->**(**)**
-#
-# Assume ~all classes will get loaded
-Landroidx/compose/ui/graphics/**;
-# Baseline profile rules for androidx.compose.ui.text
-# =============================================
-
-HSPLandroidx/compose/ui/text/AndroidParagraph**->**(**)**
-HSPLandroidx/compose/ui/text/AnnotatedString**->**(**)**
-HSPLandroidx/compose/ui/text/MultiParagraph;->**(**)**
-HSPLandroidx/compose/ui/text/MultiParagraphIntrinsics**->**(**)**
-HSPLandroidx/compose/ui/text/ParagraphInfo;->**(**)**
-HSPLandroidx/compose/ui/text/ParagraphIntrinsicInfo;->**(**)**
-HSPLandroidx/compose/ui/text/ParagraphStyle;->**(**)**
-HSPLandroidx/compose/ui/text/ParagraphStyleKt;->**(**)**
-HSPLandroidx/compose/ui/text/ParagraphKt;->**(**)**
-HSPLandroidx/compose/ui/text/PlatformTextStyle;->**(**)**
-HSPLandroidx/compose/ui/text/SpanStyle;->**(**)**
-HSPLandroidx/compose/ui/text/SpanStyleKt;->**(**)**
-HSPLandroidx/compose/ui/text/TextLayoutInput;->**(**)**
-HSPLandroidx/compose/ui/text/TextLayoutResult;->**(**)**
-HSPLandroidx/compose/ui/text/TextPainter;->**(**)**
-HSPLandroidx/compose/ui/text/TextRange**->**(**)**
-HSPLandroidx/compose/ui/text/TextStyle**->**(**)**
-HSPLandroidx/compose/ui/text/android/BoringLayoutFactory**->**(**)**
-HSPLandroidx/compose/ui/text/android/CharSequenceCharacterIterator;->**(**)**
-HSPLandroidx/compose/ui/text/android/LayoutIntrinsics**->**(**)**
-HSPLandroidx/compose/ui/text/android/Paint**->**(**)**
-HSPLandroidx/compose/ui/text/android/StaticLayoutFactory**->**(**)**
-HSPLandroidx/compose/ui/text/android/StaticLayoutParams;->**(**)**
-HSPLandroidx/compose/ui/text/android/TextAlignmentAdapter;->**(**)**
-HSPLandroidx/compose/ui/text/android/TextLayout;->**(**)**
-HSPLandroidx/compose/ui/text/android/TextLayoutKt;->**(**)**
-HSPLandroidx/compose/ui/text/android/style/BaselineShiftSpan;->**(**)**
-HSPLandroidx/compose/ui/text/android/style/LetterSpacingSpanPx;->**(**)**
-HSPLandroidx/compose/ui/text/android/style/LineHeightSpan;->**(**)**
-HSPLandroidx/compose/ui/text/android/style/TypefaceSpan;->**(**)**
-HSPLandroidx/compose/ui/text/caches/LruCache;->**(**)**
-HSPLandroidx/compose/ui/text/caches/SimpleArrayMap;->**(**)**
-HSPLandroidx/compose/ui/text/font/AndroidFontLoader;->**(**)**
-HSPLandroidx/compose/ui/text/font/AndroidFontResolveInterceptor**->**(**)**
-HSPLandroidx/compose/ui/text/font/AsyncTypefaceCache;->**(**)**
-HSPLandroidx/compose/ui/text/font/DefaultFontFamily;->**(**)**
-HSPLandroidx/compose/ui/text/font/FileBasedFontFamily;->**(**)**
-HSPLandroidx/compose/ui/text/font/FontFamily**->**(**)**
-HSPLandroidx/compose/ui/text/font/FontFamilyResolverImpl**->**(**)**
-HSPLandroidx/compose/ui/text/font/FontListFontFamilyTypefaceAdapter**->**(**)**
-HSPLandroidx/compose/ui/text/font/FontKt;->**(**)**
-HSPLandroidx/compose/ui/text/font/FontListFontFamily;->**(**)**
-HSPLandroidx/compose/ui/text/font/FontMatcher;->**(**)**
-HSPLandroidx/compose/ui/text/font/FontStyle;->**(**)**
-HSPLandroidx/compose/ui/text/font/FontSynthesis;->**(**)**
-HSPLandroidx/compose/ui/text/font/FontWeight**->**(**)**
-HSPLandroidx/compose/ui/text/font/PlatformFontFamilyTypefaceAdapter;->**(**)**
-HSPLandroidx/compose/ui/text/font/PlatformTypefacesApi28;->**(**)**
-HSPLandroidx/compose/ui/text/font/GenericFontFamily;->**(**)**
-HSPLandroidx/compose/ui/text/font/SystemFontFamily;->**(**)**
-HSPLandroidx/compose/ui/text/font/TypefaceRequest**->**(**)**
-HSPLandroidx/compose/ui/text/font/ResourceFont;->**(**)**
-HSPLandroidx/compose/ui/text/font/SystemFontFamily;->**(**)**
-HSPLandroidx/compose/ui/text/input/InputMethodManagerImpl**->**(**)**
-HSPLandroidx/compose/ui/text/input/EditProcessor;->**(**)**
-HSPLandroidx/compose/ui/text/input/EditingBuffer;->**(**)**
-HSPLandroidx/compose/ui/text/input/ImeAction**->**(**)**
-HSPLandroidx/compose/ui/text/input/ImeOptions**->**(**)**
-HSPLandroidx/compose/ui/text/input/KeyboardType**->**(**)**
-HSPLandroidx/compose/ui/text/input/TextFieldValue;->**(**)**
-HSPLandroidx/compose/ui/text/input/TextInputService**->**(**)**
-HSPLandroidx/compose/ui/text/input/TransformedText;->**(**)**
-HSPLandroidx/compose/ui/text/intl/AndroidLocale**->**(**)**
-HSPLandroidx/compose/ui/text/intl/Locale**->**(**)**
-HSPLandroidx/compose/ui/text/platform/AndroidAccessibility**->**(**)**
-HSPLandroidx/compose/ui/text/platform/AndroidParagraphIntrinsics**->**(**)**
-HSPLandroidx/compose/ui/text/platform/AndroidParagraph_androidKt;->**(**)**
-HSPLandroidx/compose/ui/text/platform/AndroidTextPaint;->**(**)**
-HSPLandroidx/compose/ui/text/platform/DefaultImpl;->**(**)**
-HSPLandroidx/compose/ui/text/platform/DispatcherKt;->**(**)**
-HSPLandroidx/compose/ui/text/platform/EmojiCompatStatus;->**(**)**
-HSPLandroidx/compose/ui/text/platform/ImmutableBool;->**(**)**
-HSPLandroidx/compose/ui/text/platform/SynchronizedObject;->**(**)**
-HSPLandroidx/compose/ui/text/platform/TypefaceDirtyTracker;->**(**)**
-HSPLandroidx/compose/ui/text/platform/TypefaceAdapter;->**(**)**
-HSPLandroidx/compose/ui/text/platform/TypefaceAdapterHelperMethods;->**(**)**
-HSPLandroidx/compose/ui/text/platform/URLSpanCache;->**(**)**
-HSPLandroidx/compose/ui/text/platform/extensions/SpanRange;->**(**)**
-HSPLandroidx/compose/ui/text/platform/extensions/SpannableExtensions_androidKt;->**(**)**
-HSPLandroidx/compose/ui/text/platform/extensions/TextPaintExtensions_androidKt;->**(**)**
-HSPLandroidx/compose/ui/text/style/BaselineShift**->**(**)**
-HSPLandroidx/compose/ui/text/style/ColorStyle;->**(**)**
-HSPLandroidx/compose/ui/text/style/LineHeightStyle;->**(**)**
-HSPLandroidx/compose/ui/text/style/LineHeightStyle$Alignment;->**(**)**
-HSPLandroidx/compose/ui/text/style/ResolvedTextDirection;->**(**)**
-HSPLandroidx/compose/ui/text/style/TextAlign;->**(**)**
-HSPLandroidx/compose/ui/text/style/TextDecoration;->**(**)**
-HSPLandroidx/compose/ui/text/style/TextDrawStyle**->**(**)**
-HSPLandroidx/compose/ui/text/style/TextDirection;->**(**)**
-HSPLandroidx/compose/ui/text/style/TextForegroundStyle**;->**(**)**
-HSPLandroidx/compose/ui/text/style/TextGeometricTransform;->**(**)**
-HSPLandroidx/compose/ui/text/style/TextIndent;->**(**)**
-HSPLandroidx/compose/ui/text/style/TextMotion;->**(**)**
-
-Landroidx/compose/ui/text/**;
-
-#
-# We rely heavily on some text methods in kotlin stdlib, so makes sense to include them here
-HSPLkotlin/text/CharsKt__CharJVMKt;->isWhitespace(C)Z
-HSPLkotlin/text/MatcherMatchResult$groups$1;-><init>(Lkotlin/text/MatcherMatchResult;)V
-HSPLkotlin/text/MatcherMatchResult;-><init>(Ljava/util/regex/Matcher;Ljava/lang/CharSequence;)V
-HSPLkotlin/text/MatcherMatchResult;->getMatchResult()Ljava/util/regex/MatchResult;
-HSPLkotlin/text/MatcherMatchResult;->getRange()Lkotlin/ranges/IntRange;
-HSPLkotlin/text/MatcherMatchResult;->getValue()Ljava/lang/String;
-HSPLkotlin/text/MatcherMatchResult;->next()Lkotlin/text/MatchResult;
-HSPLkotlin/text/Regex$Companion;-><init>()V
-HSPLkotlin/text/Regex$Companion;-><init>(Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-HSPLkotlin/text/Regex$findAll$1;-><init>(Lkotlin/text/Regex;Ljava/lang/CharSequence;I)V
-HSPLkotlin/text/Regex$findAll$1;->invoke()Ljava/lang/Object;
-HSPLkotlin/text/Regex$findAll$1;->invoke()Lkotlin/text/MatchResult;
-HSPLkotlin/text/Regex$findAll$2;-><init>()V
-HSPLkotlin/text/Regex$findAll$2;->invoke(Ljava/lang/Object;)Ljava/lang/Object;
-HSPLkotlin/text/Regex$findAll$2;->invoke(Lkotlin/text/MatchResult;)Lkotlin/text/MatchResult;
-HSPLkotlin/text/Regex;-><init>(Ljava/lang/String;)V
-HSPLkotlin/text/Regex;-><init>(Ljava/util/regex/Pattern;)V
-HSPLkotlin/text/Regex;->find(Ljava/lang/CharSequence;I)Lkotlin/text/MatchResult;
-HSPLkotlin/text/Regex;->findAll$default(Lkotlin/text/Regex;Ljava/lang/CharSequence;IILjava/lang/Object;)Lkotlin/sequences/Sequence;
-HSPLkotlin/text/Regex;->findAll(Ljava/lang/CharSequence;I)Lkotlin/sequences/Sequence;
-HSPLkotlin/text/RegexKt;->access$findNext(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Lkotlin/text/MatchResult;
-HSPLkotlin/text/RegexKt;->access$range(Ljava/util/regex/MatchResult;)Lkotlin/ranges/IntRange;
-HSPLkotlin/text/RegexKt;->findNext(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Lkotlin/text/MatchResult;
-HSPLkotlin/text/RegexKt;->range(Ljava/util/regex/MatchResult;)Lkotlin/ranges/IntRange;
-HSPLkotlin/text/StringsKt__StringsJVMKt;->endsWith$default(Ljava/lang/String;Ljava/lang/String;ZILjava/lang/Object;)Z
-HSPLkotlin/text/StringsKt__StringsJVMKt;->endsWith(Ljava/lang/String;Ljava/lang/String;Z)Z
-HSPLkotlin/text/StringsKt__StringsJVMKt;->isBlank(Ljava/lang/CharSequence;)Z
-HSPLkotlin/text/StringsKt__StringsJVMKt;->repeat(Ljava/lang/CharSequence;I)Ljava/lang/String;
-HSPLkotlin/text/StringsKt__StringsKt;->endsWith$default(Ljava/lang/CharSequence;Ljava/lang/CharSequence;ZILjava/lang/Object;)Z
-HSPLkotlin/text/StringsKt__StringsKt;->endsWith(Ljava/lang/CharSequence;Ljava/lang/CharSequence;Z)Z
-HSPLkotlin/text/StringsKt__StringsKt;->getIndices(Ljava/lang/CharSequence;)Lkotlin/ranges/IntRange;
-HSPLkotlin/text/StringsKt__StringsKt;->getLastIndex(Ljava/lang/CharSequence;)I
-HSPLkotlin/text/StringsKt__StringsKt;->lastIndexOf$default(Ljava/lang/CharSequence;CIZILjava/lang/Object;)I
-HSPLkotlin/text/StringsKt__StringsKt;->lastIndexOf(Ljava/lang/CharSequence;CIZ)I
-HSPLkotlin/text/StringsKt__StringsKt;->substring(Ljava/lang/String;Lkotlin/ranges/IntRange;)Ljava/lang/String;
-HSPLkotlin/text/StringsKt__StringsKt;->substringAfterLast$default(Ljava/lang/String;CLjava/lang/String;ILjava/lang/Object;)Ljava/lang/String;
-HSPLkotlin/text/StringsKt__StringsKt;->substringAfterLast(Ljava/lang/String;CLjava/lang/String;)Ljava/lang/String;
-HSPLkotlin/text/StringsKt__StringsKt;->trim(Ljava/lang/String;[C)Ljava/lang/String;
-HSPLkotlin/text/StringsKt___StringsKt;->first(Ljava/lang/CharSequence;)C
-HSPLkotlin/text/StringsKt___StringsKt;->slice(Ljava/lang/String;Lkotlin/ranges/IntRange;)Ljava/lang/String;
-
-# Baseline profiles for lifecycle-process
-
-HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;-><init>()V
-HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
-HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityResumed(Landroid/app/Activity;)V
-HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityStarted(Landroid/app/Activity;)V
-HSPLandroidx/lifecycle/LifecycleDispatcher$DispatcherActivityCallback;-><init>()V
-HSPLandroidx/lifecycle/LifecycleDispatcher$DispatcherActivityCallback;->onActivityCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
-HSPLandroidx/lifecycle/LifecycleDispatcher;-><clinit>()V
-HSPLandroidx/lifecycle/LifecycleDispatcher;->init(Landroid/content/Context;)V
-HSPLandroidx/lifecycle/ProcessLifecycleInitializer;-><init>()V
-HSPLandroidx/lifecycle/ProcessLifecycleInitializer;->create(Landroid/content/Context;)Landroidx/lifecycle/LifecycleOwner;
-HSPLandroidx/lifecycle/ProcessLifecycleInitializer;->create(Landroid/content/Context;)Ljava/lang/Object;
-HSPLandroidx/lifecycle/ProcessLifecycleInitializer;->dependencies()Ljava/util/List;
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$1;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$2;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$3$1;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner$3;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$3$1;->onActivityPostResumed(Landroid/app/Activity;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$3$1;->onActivityPostStarted(Landroid/app/Activity;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$3;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityPreCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;-><clinit>()V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;-><init>()V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;->activityResumed()V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;->activityStarted()V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;->attach(Landroid/content/Context;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;->get()Landroidx/lifecycle/LifecycleOwner;
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;->getLifecycle()Landroidx/lifecycle/Lifecycle;
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;->init(Landroid/content/Context;)V
-PLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityDestroyed(Landroid/app/Activity;)V
-PLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityPaused(Landroid/app/Activity;)V
-PLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityStopped(Landroid/app/Activity;)V
-PLandroidx/lifecycle/LifecycleDispatcher$DispatcherActivityCallback;->onActivityStopped(Landroid/app/Activity;)V
-PLandroidx/lifecycle/ProcessLifecycleOwner$1;->run()V
-PLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityPaused(Landroid/app/Activity;)V
-PLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityStopped(Landroid/app/Activity;)V
-PLandroidx/lifecycle/ProcessLifecycleOwner;->activityPaused()V
-PLandroidx/lifecycle/ProcessLifecycleOwner;->activityStopped()V
-PLandroidx/lifecycle/ProcessLifecycleOwner;->dispatchPauseIfNeeded()V
-PLandroidx/lifecycle/ProcessLifecycleOwner;->dispatchStopIfNeeded()V
-
-# Baseline profiles for lifecycle-livedata
-
-HSPLandroidx/lifecycle/MediatorLiveData$Source;-><init>(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/Observer;)V
-HSPLandroidx/lifecycle/MediatorLiveData$Source;->onChanged(Ljava/lang/Object;)V
-HSPLandroidx/lifecycle/MediatorLiveData$Source;->plug()V
-HSPLandroidx/lifecycle/MediatorLiveData$Source;->unplug()V
-HSPLandroidx/lifecycle/MediatorLiveData;-><init>()V
-HSPLandroidx/lifecycle/MediatorLiveData;->addSource(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/Observer;)V
-HSPLandroidx/lifecycle/MediatorLiveData;->onActive()V
-HSPLandroidx/lifecycle/MediatorLiveData;->onInactive()V
-HSPLandroidx/lifecycle/MediatorLiveData;->removeSource(Landroidx/lifecycle/LiveData;)V
-HSPLandroidx/lifecycle/Transformations$1;-><init>(Landroidx/lifecycle/MediatorLiveData;Landroidx/arch/core/util/Function;)V
-HSPLandroidx/lifecycle/Transformations$1;->onChanged(Ljava/lang/Object;)V
-HSPLandroidx/lifecycle/Transformations$2$1;-><init>(Landroidx/lifecycle/Transformations$2;)V
-HSPLandroidx/lifecycle/Transformations$2$1;->onChanged(Ljava/lang/Object;)V
-HSPLandroidx/lifecycle/Transformations$2;-><init>(Landroidx/arch/core/util/Function;Landroidx/lifecycle/MediatorLiveData;)V
-HSPLandroidx/lifecycle/Transformations$2;->onChanged(Ljava/lang/Object;)V
-HSPLandroidx/lifecycle/Transformations;->map(Landroidx/lifecycle/LiveData;Landroidx/arch/core/util/Function;)Landroidx/lifecycle/LiveData;
-HSPLandroidx/lifecycle/Transformations;->switchMap(Landroidx/lifecycle/LiveData;Landroidx/arch/core/util/Function;)Landroidx/lifecycle/LiveData;
-Landroidx/lifecycle/MediatorLiveData$Source;
-Landroidx/lifecycle/MediatorLiveData;
-Landroidx/lifecycle/Transformations$1;
-Landroidx/lifecycle/Transformations$2$1;
-Landroidx/lifecycle/Transformations$2;
-Landroidx/lifecycle/Transformations;
-
-# Baseline profiles for lifecycle-livedata-core
-
-HSPLandroidx/lifecycle/LiveData$1;-><init>(Landroidx/lifecycle/LiveData;)V
-HSPLandroidx/lifecycle/LiveData$1;->run()V
-HSPLandroidx/lifecycle/LiveData$AlwaysActiveObserver;-><init>(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/Observer;)V
-HSPLandroidx/lifecycle/LiveData$AlwaysActiveObserver;->shouldBeActive()Z
-HSPLandroidx/lifecycle/LiveData$LifecycleBoundObserver;-><init>(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroidx/lifecycle/Observer;)V
-HSPLandroidx/lifecycle/LiveData$LifecycleBoundObserver;->onStateChanged(Landroidx/lifecycle/LifecycleOwner;Landroidx/lifecycle/Lifecycle$Event;)V
-HSPLandroidx/lifecycle/LiveData$LifecycleBoundObserver;->shouldBeActive()Z
-HSPLandroidx/lifecycle/LiveData$ObserverWrapper;-><init>(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/Observer;)V
-HSPLandroidx/lifecycle/LiveData$ObserverWrapper;->activeStateChanged(Z)V
-HSPLandroidx/lifecycle/LiveData$ObserverWrapper;->detachObserver()V
-HSPLandroidx/lifecycle/LiveData;-><clinit>()V
-HSPLandroidx/lifecycle/LiveData;-><init>()V
-HSPLandroidx/lifecycle/LiveData;->assertMainThread(Ljava/lang/String;)V
-HSPLandroidx/lifecycle/LiveData;->changeActiveCounter(I)V
-HSPLandroidx/lifecycle/LiveData;->considerNotify(Landroidx/lifecycle/LiveData$ObserverWrapper;)V
-HSPLandroidx/lifecycle/LiveData;->dispatchingValue(Landroidx/lifecycle/LiveData$ObserverWrapper;)V
-HSPLandroidx/lifecycle/LiveData;->getValue()Ljava/lang/Object;
-HSPLandroidx/lifecycle/LiveData;->getVersion()I
-HSPLandroidx/lifecycle/LiveData;->hasActiveObservers()Z
-HSPLandroidx/lifecycle/LiveData;->observe(Landroidx/lifecycle/LifecycleOwner;Landroidx/lifecycle/Observer;)V
-HSPLandroidx/lifecycle/LiveData;->observeForever(Landroidx/lifecycle/Observer;)V
-HSPLandroidx/lifecycle/LiveData;->onActive()V
-HSPLandroidx/lifecycle/LiveData;->onInactive()V
-HSPLandroidx/lifecycle/LiveData;->postValue(Ljava/lang/Object;)V
-HSPLandroidx/lifecycle/LiveData;->removeObserver(Landroidx/lifecycle/Observer;)V
-HSPLandroidx/lifecycle/LiveData;->setValue(Ljava/lang/Object;)V
-HSPLandroidx/lifecycle/MediatorLiveData$Source;-><init>(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/Observer;)V
-HSPLandroidx/lifecycle/MediatorLiveData$Source;->onChanged(Ljava/lang/Object;)V
-HSPLandroidx/lifecycle/MediatorLiveData$Source;->plug()V
-HSPLandroidx/lifecycle/MediatorLiveData$Source;->unplug()V
-HSPLandroidx/lifecycle/MediatorLiveData;-><init>()V
-HSPLandroidx/lifecycle/MediatorLiveData;->addSource(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/Observer;)V
-HSPLandroidx/lifecycle/MediatorLiveData;->onActive()V
-HSPLandroidx/lifecycle/MediatorLiveData;->onInactive()V
-HSPLandroidx/lifecycle/MediatorLiveData;->removeSource(Landroidx/lifecycle/LiveData;)V
-HSPLandroidx/lifecycle/MutableLiveData;-><init>()V
-HSPLandroidx/lifecycle/MutableLiveData;->setValue(Ljava/lang/Object;)V
-PLandroidx/lifecycle/LiveData$LifecycleBoundObserver;->detachObserver()V
-
-# Baseline profiles for Lifecycle ViewModel
-
-HSPLandroidx/lifecycle/ViewModel;-><init>()V
-HSPLandroidx/lifecycle/ViewModelLazy;-><init>(Lkotlin/reflect/KClass;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V
-HSPLandroidx/lifecycle/ViewModelLazy;->getValue()Landroidx/lifecycle/ViewModel;
-HSPLandroidx/lifecycle/ViewModelLazy;->getValue()Ljava/lang/Object;
-HSPLandroidx/lifecycle/ViewModelProvider;-><init>(Landroidx/lifecycle/ViewModelStore;Landroidx/lifecycle/ViewModelProvider$Factory;)V
-HSPLandroidx/lifecycle/ViewModelProvider;->get(Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
-HSPLandroidx/lifecycle/ViewModelProvider;->get(Ljava/lang/String;Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
-HSPLandroidx/lifecycle/ViewModelStore;-><init>()V
-HSPLandroidx/lifecycle/ViewModelStore;->get(Ljava/lang/String;)Landroidx/lifecycle/ViewModel;
-HSPLandroidx/lifecycle/ViewModelStore;->put(Ljava/lang/String;Landroidx/lifecycle/ViewModel;)V
-PLandroidx/lifecycle/ViewModel;->clear()V
-PLandroidx/lifecycle/ViewModel;->onCleared()V
-PLandroidx/lifecycle/ViewModelStore;->clear()V
-
 Lcoil/Coil;
 HSPLcoil/Coil;-><clinit>()V
 PLcoil/Coil;-><clinit>()V
@@ -3315,6 +2923,398 @@ PLandroidx/lifecycle/ReportFragment$LifecycleCallbacks;->onActivityStopped(Landr
 PLandroidx/lifecycle/ReportFragment;->onDestroy()V
 PLandroidx/lifecycle/ReportFragment;->onPause()V
 PLandroidx/lifecycle/ReportFragment;->onStop()V
+
+# Baseline profile rules for androidx.compose.animation.core
+# =============================================
+# In practice it seems like almost every class in animation/core ends up getting loaded in even a
+# relatively small sample, and most end up getting marked as "HSP". Since Animation is a high value
+# target for performance - fade in, scroll, etc we are going to be liberal in the animation profile
+# rules and just mark the entire module.
+
+HSPLandroidx/compose/animation/core/**->**(**)**
+
+Landroidx/compose/animation/core/**;
+
+# Baseline profile rules for androidx.compose.material.ripple
+# =============================================
+HSPLandroidx/compose/material/ripple/AndroidRippleIndicationInstance;->**(**)**
+HSPLandroidx/compose/material/ripple/PlatformRipple;->**(**)**
+HSPLandroidx/compose/material/ripple/DebugRippleTheme;->**(**)**
+HSPLandroidx/compose/material/ripple/Ripple;->**(**)**
+HSPLandroidx/compose/material/ripple/RippleAlpha;->**(**)**
+HSPLandroidx/compose/material/ripple/RippleContainer;->**(**)**
+HSPLandroidx/compose/material/ripple/RippleHostMap;->**(**)**
+HSPLandroidx/compose/material/ripple/UnprojectedRipple;->**(**)**
+HSPLandroidx/compose/material/ripple/RippleHostView;->**(**)**
+HSPLandroidx/compose/material/ripple/RippleIndicationInstance;->**(**)**
+HSPLandroidx/compose/material/ripple/RippleKt;->**(**)**
+HSPLandroidx/compose/material/ripple/RippleHostMap;->**(**)**
+HSPLandroidx/compose/material/ripple/RippleContainer;->**(**)**
+HSPLandroidx/compose/material/ripple/RippleAlpha;->**(**)**
+HSPLandroidx/compose/material/ripple/RippleThemeKt**->**(**)**
+HSPLandroidx/compose/material/ripple/StateLayer;->**(**)**
+
+Landroidx/compose/material/ripple/*;
+
+# Baseline profile rules for androidx.compose.foundation
+# =============================================
+#
+# Include all methods in common top level classes
+HSPLandroidx/compose/foundation/AbstractClickable**->**(**)**
+HSPLandroidx/compose/foundation/AndroidEdgeEffectOverscrollEffect**->**(**)**
+HSPLandroidx/compose/foundation/AndroidOverscroll_**->**(**)**
+HSPLandroidx/compose/foundation/BackgroundElement;->**(**)**
+HSPLandroidx/compose/foundation/BackgroundNode;->**(**)**
+HSPLandroidx/compose/foundation/BorderKt**->**(**)**
+HSPLandroidx/compose/foundation/BorderStroke;->**(**)**
+HSPLandroidx/compose/foundation/CanvasKt**->**(**)**
+HSPLandroidx/compose/foundation/Clickable**->**(**)**
+HSPLandroidx/compose/foundation/DrawOverscrollModifier;->**(**)**
+HSPLandroidx/compose/foundation/EdgeEffectWrapper;->**(**)**
+HSPLandroidx/compose/foundation/Focusable**->**(**)**
+HSPLandroidx/compose/foundation/FocusedBounds**->**(**)**
+HSPLandroidx/compose/foundation/Hoverable**->**(**)**
+HSPLandroidx/compose/foundation/ImageKt**->**(**)**
+HSPLandroidx/compose/foundation/IndicationKt**->**(**)**
+HSPLandroidx/compose/foundation/IndicationModifier;->**(**)**
+HSPLandroidx/compose/foundation/MutatePriority;->**(**)**
+HSPLandroidx/compose/foundation/MutatorMutex**->**(**)**
+HSPLandroidx/compose/foundation/PinnableParentConsumer;->**(**)**
+HSPLandroidx/compose/foundation/ScrollKt**->**(**)**
+HSPLandroidx/compose/foundation/ScrollState**->**(**)**
+HSPLandroidx/compose/foundation/ScrollingLayoutModifier**->**(**)**
+#
+# Include everything inside of the gestures namespace
+HSPLandroidx/compose/foundation/gestures/**->**(**)**
+#
+# Include everything inside of the interaction namespace
+HSPLandroidx/compose/foundation/interaction/*;->**(**)**
+
+# Include everything inside of the lazy namespaces
+HSPLandroidx/compose/foundation/lazy/**->**(**)**
+
+# Include everything inside relocation namespace
+HSPLandroidx/compose/foundation/relocation/**->**(**)**
+
+# Include everything inside selection namespace
+HSPLandroidx/compose/foundation/selection/**->**(**)**
+
+#
+# common shape classes
+HSPLandroidx/compose/foundation/shape/CornerBasedShape;->**(**)**
+HSPLandroidx/compose/foundation/shape/CornerSizeKt;->**(**)**
+HSPLandroidx/compose/foundation/shape/DpCornerSize;->**(**)**
+HSPLandroidx/compose/foundation/shape/RoundedCornerShape;->**(**)**
+HSPLandroidx/compose/foundation/shape/PercentCornerSize;->**(**)**
+#
+
+# Include everything inside of the text namespace
+HSPLandroidx/compose/foundation/text/*;->**(**)**
+HSPLandroidx/compose/foundation/text/modifiers/**->**(**)**
+HSPLandroidx/compose/foundation/text/selection/SimpleLayoutKt**->**(**)**
+HSPLandroidx/compose/foundation/text/selection/TextFieldSelectionManager;->**(**)**
+
+#
+# Include all of foundation
+Landroidx/compose/foundation/**;
+
+# Baseline profile rules for androidx.compose.animation
+# =============================================
+HSPLandroidx/compose/animation/AndroidFlingSpline**;->**(**)**
+HSPLandroidx/compose/animation/AnimatedVisibilityKt**->**(**)**
+HSPLandroidx/compose/animation/AnimatedVisibilityScope;-><init>(**)V
+HSPLandroidx/compose/animation/ChangeSize;->**(**)**
+HSPLandroidx/compose/animation/ColorVectorConverterKt**->**(**)**
+HSPLandroidx/compose/animation/CrossfadeAnimationItem;->**(**)**
+HSPLandroidx/compose/animation/CrossfadeKt**->**(**)**
+HSPLandroidx/compose/animation/EnterExitTransitionKt;->**(**)**
+HSPLandroidx/compose/animation/FlingCalculator**;->**(**)**
+HSPLandroidx/compose/animation/SingleValueAnimationKt;->**(**)**
+HSPLandroidx/compose/animation/SplineBasedFloatDecayAnimationSpec**->**(**)**
+HSPLandroidx/compose/animation/SplineBasedDecayKt;->**(**)**
+HSPLandroidx/compose/animation/TransitionData;->**(**)**
+
+# Include all of androidx.compose.animation
+Landroidx/compose/animation/*;
+# Baseline profile rules for androidx.compose.foundation.layout
+# =============================================
+# Layout is incredibly important for performance, and represents many hot code paths. For now, we
+# will include all of the layout namespace
+HSPLandroidx/compose/foundation/layout/**->**(**)**
+Landroidx/compose/foundation/layout/**;
+# Baseline profile rules for androidx.compose.ui.unit
+# =============================================
+# everything in unit is relatively small and in the hot path, so we just add everything
+HSPLandroidx/compose/ui/unit/**->**(**)**
+Landroidx/compose/ui/unit/**
+
+# Baseline profile rules for androidx.compose.ui.geometry
+# =============================================
+# All of geometry is highly used, small, and mathy, so we include everything
+HSPLandroidx/compose/ui/geometry/*;->**(**)**
+Landroidx/compose/ui/geometry/*;
+# Baseline profile rules for androidx.compose.ui.util
+# =============================================
+HSPLandroidx/compose/ui/util/MathHelpersKt;->lerp(FFF)F
+Landroidx/compose/ui/util/MathHelpersKt;
+
+# Baseline profile rules for androidx.compose.ui.graphics
+# =============================================
+HSPLandroidx/compose/ui/graphics/AndroidCanvas**->**(**)**
+HSPLandroidx/compose/ui/graphics/AndroidColorFilter_androidKt;->**(**)**
+HSPLandroidx/compose/ui/graphics/AndroidImageBitmap;->**(**)**
+HSPLandroidx/compose/ui/graphics/AndroidImageBitmap_androidKt;->**(**)**
+HSPLandroidx/compose/ui/graphics/AndroidMatrixConversions_androidKt;->**(**)**
+HSPLandroidx/compose/ui/graphics/AndroidPaint;->**(**)**
+HSPLandroidx/compose/ui/graphics/AndroidPaint_androidKt;->**(**)**
+HSPLandroidx/compose/ui/graphics/AndroidPath;->**(**)**
+HSPLandroidx/compose/ui/graphics/AndroidPath_androidKt;->**(**)**
+HSPLandroidx/compose/ui/graphics/AndroidPathMeasure;->**(**)**
+HSPLandroidx/compose/ui/graphics/BlendMode**->**(**)**
+HSPLandroidx/compose/ui/graphics/BlockGraphicsLayerModifier**->**(**)**
+HSPLandroidx/compose/ui/graphics/Brush;->**(**)**
+HSPLandroidx/compose/ui/graphics/Canvas$DefaultImpls;->**(**)**
+HSPLandroidx/compose/ui/graphics/CanvasHolder;->**(**)**
+HSPLandroidx/compose/ui/graphics/CanvasKt;->**(**)**
+HSPLandroidx/compose/ui/graphics/CanvasUtils;->**(**)**
+HSPLandroidx/compose/ui/graphics/CanvasZHelper**->**(**)**
+HSPLandroidx/compose/ui/graphics/ClipOp**->**(**)**
+HSPLandroidx/compose/ui/graphics/Color**->**(**)**
+HSPLandroidx/compose/ui/graphics/ColorFilter**->**(**)**
+HSPLandroidx/compose/ui/graphics/ColorKt;->**(**)**
+HSPLandroidx/compose/ui/graphics/Float16**->**(**)**
+HSPLandroidx/compose/ui/graphics/GraphicsLayerModifierKt;->**(**)**
+HSPLandroidx/compose/ui/graphics/Matrix;->**(**)**
+HSPLandroidx/compose/ui/graphics/ImageBitmapConfig**->**(**)**
+HSPLandroidx/compose/ui/graphics/MatrixKt;->**(**)**
+HSPLandroidx/compose/ui/graphics/Outline**->**(**)**
+HSPLandroidx/compose/ui/graphics/PaintingStyle**->**(**)**
+HSPLandroidx/compose/ui/graphics/PathFillType**->**(**)**
+HSPLandroidx/compose/ui/graphics/RectangleShapeKt;->**(**)**
+HSPLandroidx/compose/ui/graphics/RectHelper_androidKt;->**(**)**
+HSPLandroidx/compose/ui/graphics/ReusableGraphicsLayerScope;->**(**)**
+HSPLandroidx/compose/ui/graphics/Shadow;->**(**)**
+HSPLandroidx/compose/ui/graphics/SimpleGraphicsLayerModifier**->**(**)**
+HSPLandroidx/compose/ui/graphics/SolidColor;->**(**)**
+HSPLandroidx/compose/ui/graphics/StrokeCap**->**(**)**
+HSPLandroidx/compose/ui/graphics/StrokeJoin**->**(**)**
+HSPLandroidx/compose/ui/graphics/TransformOrigin**->**(**)**
+HSPLandroidx/compose/ui/graphics/painter/BitmapPainter;->**(**)**
+HSPLandroidx/compose/ui/graphics/painter/Painter**->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/DrawCache;->**(**)**
+#
+# All of colorspace
+HSPLandroidx/compose/ui/graphics/colorspace/**->**(**)**
+#
+# All of drawscope
+HSPLandroidx/compose/ui/graphics/drawscope/**->**(**)**
+#
+# Vector stuff
+HSPLandroidx/compose/ui/graphics/vector/DefaultVectorOverride;->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/DrawCache;->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/GroupComponent;->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/ImageVector**->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/PathBuilder;->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/PathComponent;->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/PathNode**->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/PathParser**->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/Stack;->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/VNode;->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/VectorApplier;->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/VectorComponent;->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/VectorComposeKt**->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/VectorGroup;->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/VectorKt;->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/VectorPainter**->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/VectorPath;->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/compat/AndroidVectorResources;->**(**)**
+HSPLandroidx/compose/ui/graphics/vector/compat/XmlVectorParser_androidKt;->**(**)**
+#
+# Assume ~all classes will get loaded
+Landroidx/compose/ui/graphics/**;
+# Baseline profile rules for androidx.compose.ui.text
+# =============================================
+
+HSPLandroidx/compose/ui/text/AndroidParagraph**->**(**)**
+HSPLandroidx/compose/ui/text/AnnotatedString**->**(**)**
+HSPLandroidx/compose/ui/text/MultiParagraph;->**(**)**
+HSPLandroidx/compose/ui/text/MultiParagraphIntrinsics**->**(**)**
+HSPLandroidx/compose/ui/text/ParagraphInfo;->**(**)**
+HSPLandroidx/compose/ui/text/ParagraphIntrinsicInfo;->**(**)**
+HSPLandroidx/compose/ui/text/ParagraphStyle;->**(**)**
+HSPLandroidx/compose/ui/text/ParagraphStyleKt;->**(**)**
+HSPLandroidx/compose/ui/text/ParagraphKt;->**(**)**
+HSPLandroidx/compose/ui/text/PlatformTextStyle;->**(**)**
+HSPLandroidx/compose/ui/text/SpanStyle;->**(**)**
+HSPLandroidx/compose/ui/text/SpanStyleKt;->**(**)**
+HSPLandroidx/compose/ui/text/TextLayoutInput;->**(**)**
+HSPLandroidx/compose/ui/text/TextLayoutResult;->**(**)**
+HSPLandroidx/compose/ui/text/TextPainter;->**(**)**
+HSPLandroidx/compose/ui/text/TextRange**->**(**)**
+HSPLandroidx/compose/ui/text/TextStyle**->**(**)**
+HSPLandroidx/compose/ui/text/android/BoringLayoutFactory**->**(**)**
+HSPLandroidx/compose/ui/text/android/CharSequenceCharacterIterator;->**(**)**
+HSPLandroidx/compose/ui/text/android/LayoutIntrinsics**->**(**)**
+HSPLandroidx/compose/ui/text/android/Paint**->**(**)**
+HSPLandroidx/compose/ui/text/android/StaticLayoutFactory**->**(**)**
+HSPLandroidx/compose/ui/text/android/StaticLayoutParams;->**(**)**
+HSPLandroidx/compose/ui/text/android/TextAlignmentAdapter;->**(**)**
+HSPLandroidx/compose/ui/text/android/TextLayout;->**(**)**
+HSPLandroidx/compose/ui/text/android/TextLayoutKt;->**(**)**
+HSPLandroidx/compose/ui/text/android/style/BaselineShiftSpan;->**(**)**
+HSPLandroidx/compose/ui/text/android/style/LetterSpacingSpanPx;->**(**)**
+HSPLandroidx/compose/ui/text/android/style/LineHeightSpan;->**(**)**
+HSPLandroidx/compose/ui/text/android/style/TypefaceSpan;->**(**)**
+HSPLandroidx/compose/ui/text/caches/LruCache;->**(**)**
+HSPLandroidx/compose/ui/text/caches/SimpleArrayMap;->**(**)**
+HSPLandroidx/compose/ui/text/font/AndroidFontLoader;->**(**)**
+HSPLandroidx/compose/ui/text/font/AndroidFontResolveInterceptor**->**(**)**
+HSPLandroidx/compose/ui/text/font/AsyncTypefaceCache;->**(**)**
+HSPLandroidx/compose/ui/text/font/DefaultFontFamily;->**(**)**
+HSPLandroidx/compose/ui/text/font/FileBasedFontFamily;->**(**)**
+HSPLandroidx/compose/ui/text/font/FontFamily**->**(**)**
+HSPLandroidx/compose/ui/text/font/FontFamilyResolverImpl**->**(**)**
+HSPLandroidx/compose/ui/text/font/FontListFontFamilyTypefaceAdapter**->**(**)**
+HSPLandroidx/compose/ui/text/font/FontKt;->**(**)**
+HSPLandroidx/compose/ui/text/font/FontListFontFamily;->**(**)**
+HSPLandroidx/compose/ui/text/font/FontMatcher;->**(**)**
+HSPLandroidx/compose/ui/text/font/FontStyle;->**(**)**
+HSPLandroidx/compose/ui/text/font/FontSynthesis;->**(**)**
+HSPLandroidx/compose/ui/text/font/FontWeight**->**(**)**
+HSPLandroidx/compose/ui/text/font/PlatformFontFamilyTypefaceAdapter;->**(**)**
+HSPLandroidx/compose/ui/text/font/PlatformTypefacesApi28;->**(**)**
+HSPLandroidx/compose/ui/text/font/GenericFontFamily;->**(**)**
+HSPLandroidx/compose/ui/text/font/SystemFontFamily;->**(**)**
+HSPLandroidx/compose/ui/text/font/TypefaceRequest**->**(**)**
+HSPLandroidx/compose/ui/text/font/ResourceFont;->**(**)**
+HSPLandroidx/compose/ui/text/font/SystemFontFamily;->**(**)**
+HSPLandroidx/compose/ui/text/input/InputMethodManagerImpl**->**(**)**
+HSPLandroidx/compose/ui/text/input/EditProcessor;->**(**)**
+HSPLandroidx/compose/ui/text/input/EditingBuffer;->**(**)**
+HSPLandroidx/compose/ui/text/input/ImeAction**->**(**)**
+HSPLandroidx/compose/ui/text/input/ImeOptions**->**(**)**
+HSPLandroidx/compose/ui/text/input/KeyboardType**->**(**)**
+HSPLandroidx/compose/ui/text/input/TextFieldValue;->**(**)**
+HSPLandroidx/compose/ui/text/input/TextInputService**->**(**)**
+HSPLandroidx/compose/ui/text/input/TransformedText;->**(**)**
+HSPLandroidx/compose/ui/text/intl/AndroidLocale**->**(**)**
+HSPLandroidx/compose/ui/text/intl/Locale**->**(**)**
+HSPLandroidx/compose/ui/text/platform/AndroidAccessibility**->**(**)**
+HSPLandroidx/compose/ui/text/platform/AndroidParagraphIntrinsics**->**(**)**
+HSPLandroidx/compose/ui/text/platform/AndroidParagraph_androidKt;->**(**)**
+HSPLandroidx/compose/ui/text/platform/AndroidTextPaint;->**(**)**
+HSPLandroidx/compose/ui/text/platform/DefaultImpl;->**(**)**
+HSPLandroidx/compose/ui/text/platform/DispatcherKt;->**(**)**
+HSPLandroidx/compose/ui/text/platform/EmojiCompatStatus;->**(**)**
+HSPLandroidx/compose/ui/text/platform/ImmutableBool;->**(**)**
+HSPLandroidx/compose/ui/text/platform/SynchronizedObject;->**(**)**
+HSPLandroidx/compose/ui/text/platform/TypefaceDirtyTracker;->**(**)**
+HSPLandroidx/compose/ui/text/platform/TypefaceAdapter;->**(**)**
+HSPLandroidx/compose/ui/text/platform/TypefaceAdapterHelperMethods;->**(**)**
+HSPLandroidx/compose/ui/text/platform/URLSpanCache;->**(**)**
+HSPLandroidx/compose/ui/text/platform/extensions/SpanRange;->**(**)**
+HSPLandroidx/compose/ui/text/platform/extensions/SpannableExtensions_androidKt;->**(**)**
+HSPLandroidx/compose/ui/text/platform/extensions/TextPaintExtensions_androidKt;->**(**)**
+HSPLandroidx/compose/ui/text/style/BaselineShift**->**(**)**
+HSPLandroidx/compose/ui/text/style/ColorStyle;->**(**)**
+HSPLandroidx/compose/ui/text/style/LineHeightStyle;->**(**)**
+HSPLandroidx/compose/ui/text/style/LineHeightStyle$Alignment;->**(**)**
+HSPLandroidx/compose/ui/text/style/ResolvedTextDirection;->**(**)**
+HSPLandroidx/compose/ui/text/style/TextAlign;->**(**)**
+HSPLandroidx/compose/ui/text/style/TextDecoration;->**(**)**
+HSPLandroidx/compose/ui/text/style/TextDrawStyle**->**(**)**
+HSPLandroidx/compose/ui/text/style/TextDirection;->**(**)**
+HSPLandroidx/compose/ui/text/style/TextForegroundStyle**;->**(**)**
+HSPLandroidx/compose/ui/text/style/TextGeometricTransform;->**(**)**
+HSPLandroidx/compose/ui/text/style/TextIndent;->**(**)**
+HSPLandroidx/compose/ui/text/style/TextMotion;->**(**)**
+
+Landroidx/compose/ui/text/**;
+
+#
+# We rely heavily on some text methods in kotlin stdlib, so makes sense to include them here
+HSPLkotlin/text/CharsKt__CharJVMKt;->isWhitespace(C)Z
+HSPLkotlin/text/MatcherMatchResult$groups$1;-><init>(Lkotlin/text/MatcherMatchResult;)V
+HSPLkotlin/text/MatcherMatchResult;-><init>(Ljava/util/regex/Matcher;Ljava/lang/CharSequence;)V
+HSPLkotlin/text/MatcherMatchResult;->getMatchResult()Ljava/util/regex/MatchResult;
+HSPLkotlin/text/MatcherMatchResult;->getRange()Lkotlin/ranges/IntRange;
+HSPLkotlin/text/MatcherMatchResult;->getValue()Ljava/lang/String;
+HSPLkotlin/text/MatcherMatchResult;->next()Lkotlin/text/MatchResult;
+HSPLkotlin/text/Regex$Companion;-><init>()V
+HSPLkotlin/text/Regex$Companion;-><init>(Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+HSPLkotlin/text/Regex$findAll$1;-><init>(Lkotlin/text/Regex;Ljava/lang/CharSequence;I)V
+HSPLkotlin/text/Regex$findAll$1;->invoke()Ljava/lang/Object;
+HSPLkotlin/text/Regex$findAll$1;->invoke()Lkotlin/text/MatchResult;
+HSPLkotlin/text/Regex$findAll$2;-><init>()V
+HSPLkotlin/text/Regex$findAll$2;->invoke(Ljava/lang/Object;)Ljava/lang/Object;
+HSPLkotlin/text/Regex$findAll$2;->invoke(Lkotlin/text/MatchResult;)Lkotlin/text/MatchResult;
+HSPLkotlin/text/Regex;-><init>(Ljava/lang/String;)V
+HSPLkotlin/text/Regex;-><init>(Ljava/util/regex/Pattern;)V
+HSPLkotlin/text/Regex;->find(Ljava/lang/CharSequence;I)Lkotlin/text/MatchResult;
+HSPLkotlin/text/Regex;->findAll$default(Lkotlin/text/Regex;Ljava/lang/CharSequence;IILjava/lang/Object;)Lkotlin/sequences/Sequence;
+HSPLkotlin/text/Regex;->findAll(Ljava/lang/CharSequence;I)Lkotlin/sequences/Sequence;
+HSPLkotlin/text/RegexKt;->access$findNext(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Lkotlin/text/MatchResult;
+HSPLkotlin/text/RegexKt;->access$range(Ljava/util/regex/MatchResult;)Lkotlin/ranges/IntRange;
+HSPLkotlin/text/RegexKt;->findNext(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Lkotlin/text/MatchResult;
+HSPLkotlin/text/RegexKt;->range(Ljava/util/regex/MatchResult;)Lkotlin/ranges/IntRange;
+HSPLkotlin/text/StringsKt__StringsJVMKt;->endsWith$default(Ljava/lang/String;Ljava/lang/String;ZILjava/lang/Object;)Z
+HSPLkotlin/text/StringsKt__StringsJVMKt;->endsWith(Ljava/lang/String;Ljava/lang/String;Z)Z
+HSPLkotlin/text/StringsKt__StringsJVMKt;->isBlank(Ljava/lang/CharSequence;)Z
+HSPLkotlin/text/StringsKt__StringsJVMKt;->repeat(Ljava/lang/CharSequence;I)Ljava/lang/String;
+HSPLkotlin/text/StringsKt__StringsKt;->endsWith$default(Ljava/lang/CharSequence;Ljava/lang/CharSequence;ZILjava/lang/Object;)Z
+HSPLkotlin/text/StringsKt__StringsKt;->endsWith(Ljava/lang/CharSequence;Ljava/lang/CharSequence;Z)Z
+HSPLkotlin/text/StringsKt__StringsKt;->getIndices(Ljava/lang/CharSequence;)Lkotlin/ranges/IntRange;
+HSPLkotlin/text/StringsKt__StringsKt;->getLastIndex(Ljava/lang/CharSequence;)I
+HSPLkotlin/text/StringsKt__StringsKt;->lastIndexOf$default(Ljava/lang/CharSequence;CIZILjava/lang/Object;)I
+HSPLkotlin/text/StringsKt__StringsKt;->lastIndexOf(Ljava/lang/CharSequence;CIZ)I
+HSPLkotlin/text/StringsKt__StringsKt;->substring(Ljava/lang/String;Lkotlin/ranges/IntRange;)Ljava/lang/String;
+HSPLkotlin/text/StringsKt__StringsKt;->substringAfterLast$default(Ljava/lang/String;CLjava/lang/String;ILjava/lang/Object;)Ljava/lang/String;
+HSPLkotlin/text/StringsKt__StringsKt;->substringAfterLast(Ljava/lang/String;CLjava/lang/String;)Ljava/lang/String;
+HSPLkotlin/text/StringsKt__StringsKt;->trim(Ljava/lang/String;[C)Ljava/lang/String;
+HSPLkotlin/text/StringsKt___StringsKt;->first(Ljava/lang/CharSequence;)C
+HSPLkotlin/text/StringsKt___StringsKt;->slice(Ljava/lang/String;Lkotlin/ranges/IntRange;)Ljava/lang/String;
+
+# Baseline profiles for lifecycle-process
+
+HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;-><init>()V
+HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
+HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityResumed(Landroid/app/Activity;)V
+HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityStarted(Landroid/app/Activity;)V
+HSPLandroidx/lifecycle/LifecycleDispatcher$DispatcherActivityCallback;-><init>()V
+HSPLandroidx/lifecycle/LifecycleDispatcher$DispatcherActivityCallback;->onActivityCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
+HSPLandroidx/lifecycle/LifecycleDispatcher;-><clinit>()V
+HSPLandroidx/lifecycle/LifecycleDispatcher;->init(Landroid/content/Context;)V
+HSPLandroidx/lifecycle/ProcessLifecycleInitializer;-><init>()V
+HSPLandroidx/lifecycle/ProcessLifecycleInitializer;->create(Landroid/content/Context;)Landroidx/lifecycle/LifecycleOwner;
+HSPLandroidx/lifecycle/ProcessLifecycleInitializer;->create(Landroid/content/Context;)Ljava/lang/Object;
+HSPLandroidx/lifecycle/ProcessLifecycleInitializer;->dependencies()Ljava/util/List;
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$1;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$2;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$3$1;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner$3;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$3$1;->onActivityPostResumed(Landroid/app/Activity;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$3$1;->onActivityPostStarted(Landroid/app/Activity;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$3;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityPreCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;-><clinit>()V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;-><init>()V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;->activityResumed()V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;->activityStarted()V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;->attach(Landroid/content/Context;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;->get()Landroidx/lifecycle/LifecycleOwner;
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;->getLifecycle()Landroidx/lifecycle/Lifecycle;
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;->init(Landroid/content/Context;)V
+PLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityDestroyed(Landroid/app/Activity;)V
+PLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityPaused(Landroid/app/Activity;)V
+PLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityStopped(Landroid/app/Activity;)V
+PLandroidx/lifecycle/LifecycleDispatcher$DispatcherActivityCallback;->onActivityStopped(Landroid/app/Activity;)V
+PLandroidx/lifecycle/ProcessLifecycleOwner$1;->run()V
+PLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityPaused(Landroid/app/Activity;)V
+PLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityStopped(Landroid/app/Activity;)V
+PLandroidx/lifecycle/ProcessLifecycleOwner;->activityPaused()V
+PLandroidx/lifecycle/ProcessLifecycleOwner;->activityStopped()V
+PLandroidx/lifecycle/ProcessLifecycleOwner;->dispatchPauseIfNeeded()V
+PLandroidx/lifecycle/ProcessLifecycleOwner;->dispatchStopIfNeeded()V
 
 # Baseline profile rules for androidx.compose.ui
 # =============================================

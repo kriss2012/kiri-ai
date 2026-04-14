@@ -407,16 +407,16 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String com_kiri_ai_ui_viewmodels_ChatViewModel = "com.kiri.ai.ui.viewmodels.ChatViewModel";
+      static String com_kiri_ai_ui_viewmodels_AuthViewModel = "com.kiri.ai.ui.viewmodels.AuthViewModel";
 
       static String com_kiri_ai_ui_viewmodels_MainViewModel = "com.kiri.ai.ui.viewmodels.MainViewModel";
 
       static String com_kiri_ai_ui_viewmodels_SubscriptionViewModel = "com.kiri.ai.ui.viewmodels.SubscriptionViewModel";
 
-      static String com_kiri_ai_ui_viewmodels_AuthViewModel = "com.kiri.ai.ui.viewmodels.AuthViewModel";
+      static String com_kiri_ai_ui_viewmodels_ChatViewModel = "com.kiri.ai.ui.viewmodels.ChatViewModel";
 
       @KeepFieldType
-      ChatViewModel com_kiri_ai_ui_viewmodels_ChatViewModel2;
+      AuthViewModel com_kiri_ai_ui_viewmodels_AuthViewModel2;
 
       @KeepFieldType
       MainViewModel com_kiri_ai_ui_viewmodels_MainViewModel2;
@@ -425,7 +425,7 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
       SubscriptionViewModel com_kiri_ai_ui_viewmodels_SubscriptionViewModel2;
 
       @KeepFieldType
-      AuthViewModel com_kiri_ai_ui_viewmodels_AuthViewModel2;
+      ChatViewModel com_kiri_ai_ui_viewmodels_ChatViewModel2;
     }
   }
 
@@ -475,25 +475,25 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String com_kiri_ai_ui_viewmodels_SubscriptionViewModel = "com.kiri.ai.ui.viewmodels.SubscriptionViewModel";
-
       static String com_kiri_ai_ui_viewmodels_AuthViewModel = "com.kiri.ai.ui.viewmodels.AuthViewModel";
-
-      static String com_kiri_ai_ui_viewmodels_ChatViewModel = "com.kiri.ai.ui.viewmodels.ChatViewModel";
 
       static String com_kiri_ai_ui_viewmodels_MainViewModel = "com.kiri.ai.ui.viewmodels.MainViewModel";
 
-      @KeepFieldType
-      SubscriptionViewModel com_kiri_ai_ui_viewmodels_SubscriptionViewModel2;
+      static String com_kiri_ai_ui_viewmodels_SubscriptionViewModel = "com.kiri.ai.ui.viewmodels.SubscriptionViewModel";
+
+      static String com_kiri_ai_ui_viewmodels_ChatViewModel = "com.kiri.ai.ui.viewmodels.ChatViewModel";
 
       @KeepFieldType
       AuthViewModel com_kiri_ai_ui_viewmodels_AuthViewModel2;
 
       @KeepFieldType
-      ChatViewModel com_kiri_ai_ui_viewmodels_ChatViewModel2;
+      MainViewModel com_kiri_ai_ui_viewmodels_MainViewModel2;
 
       @KeepFieldType
-      MainViewModel com_kiri_ai_ui_viewmodels_MainViewModel2;
+      SubscriptionViewModel com_kiri_ai_ui_viewmodels_SubscriptionViewModel2;
+
+      @KeepFieldType
+      ChatViewModel com_kiri_ai_ui_viewmodels_ChatViewModel2;
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {

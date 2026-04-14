@@ -27,6 +27,6 @@
       applicationId="com.kiri.ai"
       generatedSourceFolders="build\generated\source\kapt\release;build\generated\ap_generated_sources\release\out"
       generatedResourceFolders="build\generated\res\resValues\release"
-      desugaredMethodsFiles="C:\Users\krishna\.gradle\caches\8.13\transforms\2d426a4badc9fc81c3f9dd5ada5e97b2\transformed\D8BackportedDesugaredMethods.txt">
+      desugaredMethodsFiles="C:\Users\krishna\.gradle\caches\8.13\transforms\a4c366a8c11581ae8138ef79c6c1074d\transformed\D8BackportedDesugaredMethods.txt">
   </artifact>
 </variant>
