@@ -41,10 +41,12 @@ class ChatViewModel @Inject constructor(
     init {
         observeUserData()
         loadConversations()
-        try {
-            ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
-        } catch (e: Exception) {
-            // Fallback or log if ProcessLifecycleOwner is not available
+        viewModelScope.launch {
+            try {
+                ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
+            } catch (e: Exception) {
+                // Fallback if ProcessLifecycleOwner is not available in certain environments
+            }
         }
     }
 
@@ -70,7 +72,20 @@ class ChatViewModel @Inject constructor(
     fun loadConversations() {
         viewModelScope.launch {
             chatRepository.getConversations().onSuccess { list ->
-                uiState = uiState.copy(conversations = list)
+                // Sanitize IDs to prevent LazyColumn key collisions
+                val seenIds = mutableSetOf<String>()
+                val sanitized = list.mapIndexed { index, conv ->
+                    val baseId = conv.id ?: "conv_${index}"
+                    var finalId = baseId
+                    var counter = 1
+                    while (seenIds.contains(finalId)) {
+                        finalId = "${baseId}_${counter}"
+                        counter++
+                    }
+                    seenIds.add(finalId)
+                    conv.copy(id = finalId)
+                }
+                uiState = uiState.copy(conversations = sanitized)
             }.onFailure { error ->
                 uiState = uiState.copy(error = "Failed to load chats: ${error.message}")
             }
