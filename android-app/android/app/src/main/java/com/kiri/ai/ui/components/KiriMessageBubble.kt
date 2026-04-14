@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import com.kiri.ai.data.models.ChatMessage
 import com.kiri.ai.ui.theme.*
 import com.mikepenz.markdown.compose.Markdown
-import com.mikepenz.markdown.m3.markdownColors
+import com.mikepenz.markdown.m3.markdownColor
 import com.mikepenz.markdown.m3.markdownTypography
 
 /**
@@ -123,7 +123,7 @@ fun KiriMessageBubble(message: ChatMessage?) {
                         // Bugatti Styled Markdown
                         Markdown(
                             content = section.trim(),
-                            colors = markdownColors(
+                            colors = markdownColor(
                                 text = ShowroomWhite,
                                 codeText = SilverMist,
                                 linkText = BugattiBlue

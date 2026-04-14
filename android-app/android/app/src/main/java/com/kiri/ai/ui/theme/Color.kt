@@ -14,6 +14,10 @@ val VelvetBlack = Color(0xFF000000)
 val ShowroomWhite = Color(0xFFFFFFFF)
 val SilverMist = Color(0xFF999999)
 val DarkGray = Color(0xFF1A1A1A)
+val SoftGray = Color(0xFFF5F5F5)
+val BrandPink = Color(0xFFFF4081)
+val InputBackgroundDark = Color(0xFF212121)
+val InputBackgroundLight = Color(0xFFE0E0E0)
 
 // Legacy Aliases for technical stability during transition
 val Ivory = ShowroomWhite
