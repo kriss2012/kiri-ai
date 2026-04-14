@@ -95,16 +95,15 @@ UserSchema.methods.canMakeRequest = function () {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-  // Reset daily count if new day
-  if (!this.lastRequestDate || new Date(this.lastRequestDate) < today) {
-    this.dailyRequests = 0;
-  }
+  // Use a temporary variable to check the limit without mutating the DB object here
+  const effectiveDailyRequests = (!this.lastRequestDate || new Date(this.lastRequestDate) < today)
+    ? 0 : this.dailyRequests;
 
   // Premium users have unlimited requests
   if (this.isPremium()) return true;
 
   // Free users: 50 requests per day
-  return this.dailyRequests < parseInt(process.env.FREE_DAILY_REQUESTS || 50);
+  return effectiveDailyRequests < parseInt(process.env.FREE_DAILY_REQUESTS || 50);
 };
 
 // Check if premium
