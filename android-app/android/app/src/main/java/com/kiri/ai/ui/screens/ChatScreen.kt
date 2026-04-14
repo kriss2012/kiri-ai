@@ -61,7 +61,12 @@ fun ChatScreen(
     val totalItems = (state.messages?.size ?: 0) + (if (state.isSending) 1 else 0)
     LaunchedEffect(totalItems) {
         if (totalItems > 0) {
-            scrollState.animateScrollToItem(totalItems - 1)
+            try {
+                val lastIndex = totalItems - 1
+                scrollState.animateScrollToItem(lastIndex)
+            } catch (e: Exception) {
+                // Ignore scroll errors to prevent app crash
+            }
         }
     }
 
