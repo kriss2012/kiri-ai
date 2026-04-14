@@ -102,7 +102,34 @@ fun LandingScreen(navController: NavController) {
         
         Spacer(modifier = Modifier.height(32.dp))
         
-        Spacer(modifier = Modifier.height(8.dp))
+        // Hero Illustration
+        FadeUpAnimation(visible = animate, delayMillis = 400) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(240.dp)
+                    .padding(vertical = 16.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                // Professional placeholder for the organic illustration
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Icon(
+                        imageVector = androidx.compose.material.icons.Icons.Default.Face,
+                        contentDescription = null,
+                        modifier = Modifier.size(64.dp),
+                        tint = OliveGray.copy(alpha = 0.3f)
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        "Visual Intelligence Assistant",
+                        style = KiriTypography.labelLarge,
+                        color = OliveGray.copy(alpha = 0.5f)
+                    )
+                }
+            }
+        }
+        
+        Spacer(modifier = Modifier.height(16.dp))
         
         FadeUpAnimation(visible = animate, delayMillis = 500) {
             Column {
