@@ -108,7 +108,13 @@ fun RegisterScreen(
                 
                 KiriButton(
                     text = "Create Account — It's Free",
-                    onClick = { viewModel.register { navController.navigate("chat") } },
+                    onClick = {
+                        viewModel.register {
+                            navController.navigate("chat") {
+                                popUpTo(0) { inclusive = true }
+                            }
+                        }
+                    },
                     isLoading = state.isLoading
                 )
                 
@@ -135,7 +141,7 @@ fun RegisterScreen(
             text = "← Back to home",
             style = KiriTypography.bodyMedium,
             color = StoneGray,
-            modifier = Modifier.clickable { navController.navigate("landing") }
+            modifier = Modifier.clickable { navController.popBackStack() }
         )
     }
 }
