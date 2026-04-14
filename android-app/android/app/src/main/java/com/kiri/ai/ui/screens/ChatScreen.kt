@@ -58,10 +58,12 @@ fun ChatScreen(
         }
     }
 
-    val totalItems = (state.messages?.size ?: 0) + (if (state.isSending) 1 else 0)
+    val totalItems = state.messages.size + (if (state.isSending) 1 else 0)
     LaunchedEffect(totalItems) {
         if (totalItems > 0) {
             try {
+                // Small delay to allow LazyColumn layout to settle before scrolling
+                kotlinx.coroutines.delay(100)
                 val lastIndex = totalItems - 1
                 scrollState.animateScrollToItem(lastIndex)
             } catch (e: Exception) {
@@ -219,27 +221,29 @@ fun ChatScreen(
             containerColor = Parchment
         ) { padding ->
             Box(modifier = Modifier.padding(padding).fillMaxSize()) {
-                if ((state.messages?.isEmpty() ?: true) && !state.isLoadingMessages) {
-                    WelcomeScreen()
-                } else {
-                    LazyColumn(
-                        state = scrollState,
-                        modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
-                        contentPadding = PaddingValues(bottom = 16.dp)
-                    ) {
-                        items(
-                            items = state.messages ?: emptyList(),
-                            key = { it.getStableId() }
-                        ) { msg ->
-                            KiriMessageBubble(msg)
-                        }
-                        
-                        if (state.isSending) {
-                            item(key = "typing_indicator") {
-                                TypingIndicator()
-                            }
+                // Keep LazyColumn always in composition to prevent state/scrolling race conditions
+                LazyColumn(
+                    state = scrollState,
+                    modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
+                    contentPadding = PaddingValues(bottom = 16.dp)
+                ) {
+                    items(
+                        items = state.messages,
+                        key = { it.getStableId() }
+                    ) { msg ->
+                        KiriMessageBubble(msg)
+                    }
+                    
+                    if (state.isSending) {
+                        item(key = "typing_indicator") {
+                            TypingIndicator()
                         }
                     }
+                }
+
+                // Show Welcome screen on top if empty
+                if (state.messages.isEmpty() && !state.isLoadingMessages) {
+                    WelcomeScreen()
                 }
                 
                 if (state.isLoadingMessages) {
