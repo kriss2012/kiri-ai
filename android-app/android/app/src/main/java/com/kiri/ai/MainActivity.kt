@@ -15,6 +15,10 @@ import androidx.compose.ui.Modifier
 import android.content.ClipboardManager
 import android.content.ClipData
 import android.content.Context
+import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.ui.unit.dp
+import com.kiri.ai.ui.theme.KiriTypography
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
