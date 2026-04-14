@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
@@ -52,21 +51,16 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                 ) {
                     if (startDestination != null) {
                         val navController = rememberNavController()
-                        
-                        CompositionLocalProvider(
-                            LocalContext provides this
+                        NavHost(
+                            navController = navController,
+                            startDestination = startDestination!!
                         ) {
-                            NavHost(
-                                navController = navController,
-                                startDestination = startDestination!!
-                            ) {
-                                composable("landing") { LandingScreen(navController) }
-                                composable("login") { LoginScreen(navController) }
-                                composable("register") { RegisterScreen(navController) }
-                                composable("chat") { ChatScreen(navController) }
-                                composable("profile") { ProfileScreen(navController) }
-                                composable("pricing") { PricingScreen(navController, subscriptionViewModel) }
-                            }
+                            composable("landing") { LandingScreen(navController) }
+                            composable("login") { LoginScreen(navController) }
+                            composable("register") { RegisterScreen(navController) }
+                            composable("chat") { ChatScreen(navController) }
+                            composable("profile") { ProfileScreen(navController) }
+                            composable("pricing") { PricingScreen(navController, subscriptionViewModel) }
                         }
                     }
                 }
