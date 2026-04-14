@@ -102,20 +102,7 @@ fun LandingScreen(navController: NavController) {
         
         Spacer(modifier = Modifier.height(32.dp))
         
-        // Hero Illustration
-        FadeUpAnimation(visible = animate, delayMillis = 400) {
-            /* 
-               Note: In a real project, hero_illustration would be in res/drawable.
-               Using a placeholder that represents the generated organic illustration.
-            */
-            Box(modifier = Modifier.fillMaxWidth().height(240.dp), contentAlignment = Alignment.Center) {
-                // Mocking the Image load since I can't actually compile/run android here
-                // But I've placed the file in drawable/hero_illustration.png
-                Text("Organic Hand-Drawn Illustration Placeholder", color = OliveGray)
-            }
-        }
-        
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(8.dp))
         
         FadeUpAnimation(visible = animate, delayMillis = 500) {
             Column {
