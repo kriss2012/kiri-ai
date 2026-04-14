@@ -19,10 +19,8 @@ import androidx.compose.ui.unit.sp
 import com.kiri.ai.data.models.ChatMessage
 import com.kiri.ai.ui.theme.*
 import com.mikepenz.markdown.compose.Markdown
-import com.mikepenz.markdown.m3.MarkdownHighlightedCodeBlock
-import com.mikepenz.markdown.m3.MarkdownHighlightedCodeFence
-import com.mikepenz.markdown.m3.markdownComponents
-import com.mikepenz.markdown.model.markdownTypography
+import com.mikepenz.markdown.m3.markdownColors
+import com.mikepenz.markdown.m3.markdownTypography
 
 /**
  * Bugatti v2 Professional Message Bubble
@@ -122,30 +120,18 @@ fun KiriMessageBubble(message: ChatMessage?) {
                             )
                         }
 
-                        // Bugatti Styled Markdown with Code Headers
+                        // Bugatti Styled Markdown
                         Markdown(
                             content = section.trim(),
+                            colors = markdownColors(
+                                text = ShowroomWhite,
+                                codeText = SilverMist,
+                                linkText = BugattiBlue
+                            ),
                             typography = markdownTypography(
                                 h1 = KiriTypography.headlineLarge.copy(color = ShowroomWhite),
                                 h2 = KiriTypography.headlineMedium.copy(color = ShowroomWhite),
-                                paragraph = KiriTypography.bodyMedium.copy(color = ShowroomWhite, lineHeight = 26.sp),
-                                code = KiriTypography.labelMedium.copy(color = SilverMist, background = DarkGray)
-                            ),
-                            components = markdownComponents(
-                                codeBlock = {
-                                    MarkdownHighlightedCodeBlock(
-                                        content = it.content,
-                                        node = it.node,
-                                        showHeader = true
-                                    )
-                                },
-                                codeFence = {
-                                    MarkdownHighlightedCodeFence(
-                                        content = it.content,
-                                        node = it.node,
-                                        showHeader = true
-                                    )
-                                }
+                                paragraph = KiriTypography.bodyMedium.copy(color = ShowroomWhite, lineHeight = 26.sp)
                             ),
                             modifier = Modifier.fillMaxWidth()
                         )

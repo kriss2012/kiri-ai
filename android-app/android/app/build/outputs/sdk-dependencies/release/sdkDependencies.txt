@@ -5,10 +5,10 @@ library {
   maven_library {
     groupId: "org.jetbrains.kotlin"
     artifactId: "kotlin-stdlib"
-    version: "1.9.24"
+    version: "1.9.23"
   }
   digests {
-    sha256: "\205\213\220&\226\332\234\365\205\253\235\230\377\301\302q\"i\202\203T\337\351\020~7\021\260\204\243dh"
+    sha256: "\211\020\314#\210\a\330n\365P\313\037\v\020\335^\324\v5\244\354\032RR_v\n\355\350N\2557"
   }
   repo_index {
     value: 1
@@ -31,10 +31,10 @@ library {
   maven_library {
     groupId: "org.jetbrains.kotlin"
     artifactId: "kotlin-stdlib-jdk8"
-    version: "1.9.24"
+    version: "1.9.23"
   }
   digests {
-    sha256: "[[\277\263\341\030K^\0231|=B#\177\242J\335D;.w\201\226\036\3523M\2616\255\261"
+    sha256: "\326$\306\f\301\264r\241\334\276\343\255\036\304\352\225\362\373\240\003!R\335\261Y\005\306 \177w\030\354"
   }
   repo_index {
     value: 1
@@ -44,10 +44,10 @@ library {
   maven_library {
     groupId: "org.jetbrains.kotlin"
     artifactId: "kotlin-stdlib-jdk7"
-    version: "1.9.24"
+    version: "1.9.23"
   }
   digests {
-    sha256: "\266i\233\205\v\240x\237.\220By\315\213\334{\352\2210\377\321W\315\272\000\037\307B]\212G\267"
+    sha256: "4\261\337\367\356NB\257E-\312\036<\000\0365+\315\236\236\302}\375\324x\273~v\347\277\243\341"
   }
   repo_index {
     value: 1
@@ -57,7 +57,7 @@ library {
   maven_library {
     groupId: "org.jetbrains.kotlin"
     artifactId: "kotlin-stdlib-common"
-    version: "1.9.24"
+    version: "1.9.23"
   }
   repo_index {
     value: 1
