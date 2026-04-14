@@ -79,32 +79,20 @@ fun KiriMessageBubble(message: ChatMessage?) {
                     )
                 )
             } else {
-                // Defensive Markdown rendering to prevent parser crashes
-                val displayContent = if (content.startsWith("{") || content.startsWith("[")) {
-                    "Message format error: $content"
-                } else {
-                    content
+                // Defensive Markdown rendering - sanitize content before passing
+                val displayContent = when {
+                    content.isBlank() -> " "
+                    content.startsWith("{") || content.startsWith("[") -> "**Error:** Unexpected response format."
+                    else -> content
                 }
-
-                try {
-                    Markdown(
-                        content = displayContent,
-                        typography = markdownTypography(
-                            paragraph = KiriTypography.bodyMedium,
-                            h1 = KiriTypography.headlineMedium,
-                            h2 = KiriTypography.titleLarge
-                        )
+                Markdown(
+                    content = displayContent,
+                    typography = markdownTypography(
+                        paragraph = KiriTypography.bodyMedium,
+                        h1 = KiriTypography.headlineMedium,
+                        h2 = KiriTypography.titleLarge
                     )
-                } catch (e: Exception) {
-                    // Fallback to plain text if Markdown parser crashes
-                    Text(
-                        text = displayContent,
-                        style = KiriTypography.bodyMedium.copy(
-                            color = AnthropicNearBlack,
-                            lineHeight = 24.sp
-                        )
-                    )
-                }
+                )
             }
         }
     }
