@@ -72,10 +72,33 @@ fun KiriMessageBubble(message: ChatMessage?) {
         ) {
             Box(modifier = Modifier.padding(12.dp)) {
                 if (isUser) {
-                    Text(
-                        text = content,
-                        style = KiriTypography.bodyMedium.copy(color = colorScheme.onPrimary)
-                    )
+                    Column {
+                        // Check for image URI in content
+                        val imageRegex = Regex("\\[IMAGE_URI: (.*?)\\]")
+                        val match = imageRegex.find(content)
+                        val displayText = if (match != null) content.replace(match.value, "").trim() else content
+
+                        if (match != null) {
+                            val uri = match.groupValues[1]
+                            AsyncImage(
+                                model = uri,
+                                contentDescription = "Attached Image",
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .heightIn(max = 200.dp)
+                                    .padding(bottom = 8.dp)
+                                    .clip(RoundedCornerShape(8.dp)),
+                                contentScale = ContentScale.Crop
+                            )
+                        }
+
+                        if (displayText.isNotEmpty()) {
+                            Text(
+                                text = displayText,
+                                style = KiriTypography.bodyMedium.copy(color = colorScheme.onPrimary)
+                            )
+                        }
+                    }
                 } else {
                     // FLATTENED RENDERER: We minimize the number of Composable levels
                     val markdownText = if (content.contains("---")) {
