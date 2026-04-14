@@ -125,7 +125,6 @@ class ChatViewModel @Inject constructor(
                     // Ensure each message has a unique stable ID for LazyColumn to prevent crashes
                     val seenIds = mutableSetOf<String>()
                     val sanitizedMessages = detail.messages?.mapIndexed { index, msg ->
-                        // More robust ID generation: check if null, blank or duplicate
                         val baseId = if (msg.id.isNullOrBlank()) "msg_${id}_${index}" else msg.id!!
                         var finalId = baseId
                         var counter = 1
@@ -134,7 +133,15 @@ class ChatViewModel @Inject constructor(
                             counter++
                         }
                         seenIds.add(finalId)
-                        msg.copy(id = finalId)
+                        
+                        // SANITIZE_CONTENT: Permanent stability truncation at the source
+                        val cleanContent = if ((msg.content?.length ?: 0) > 10000) {
+                            msg.content?.take(10000) + "\n\n... [TRUNCATED_FOR_STABILITY]"
+                        } else {
+                            msg.content ?: ""
+                        }
+                        
+                        msg.copy(id = finalId, content = cleanContent)
                     } ?: emptyList()
 
                     uiState = uiState.copy(
@@ -193,9 +200,16 @@ class ChatViewModel @Inject constructor(
 
                 result.onSuccess { res ->
                     if (res?.success == true) {
+                        // SANITIZE_AI_RESPONSE: Permanent stability truncation for incoming AI logs
+                        val cleanAiMsg = if ((res.message?.length ?: 0) > 10000) {
+                            res.message?.take(10000) + "\n\n... [TRUNCATED_FOR_STABILITY]"
+                        } else {
+                            res.message ?: ""
+                        }
+
                         val assistantMsg = ChatMessage(
                             role = "assistant", 
-                            content = res.message ?: "",
+                            content = cleanAiMsg,
                             id = "ai_${java.util.UUID.randomUUID()}"
                         )
                         
