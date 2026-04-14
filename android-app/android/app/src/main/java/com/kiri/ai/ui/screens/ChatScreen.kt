@@ -25,6 +25,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -37,8 +38,21 @@ import androidx.navigation.NavController
 import com.kiri.ai.R
 import com.kiri.ai.ui.components.*
 import com.kiri.ai.ui.theme.*
+import com.kiri.ai.data.models.*
+import com.kiri.ai.ui.viewmodels.MainViewModel
 import com.kiri.ai.ui.viewmodels.ChatViewModel
 import kotlinx.coroutines.launch
+
+/**
+ * CRITICAL_STABILITY_NOTICE
+ * This screen handles high-frequency UI updates (typing, scrolling, IME transitions).
+ * 
+ * RULES_FOR_STABILITY:
+ * 1. LazyColumn items MUST use stable keys to prevent redundant recompositions.
+ * 2. Avoid nesting the LazyColumn inside other scrollable containers.
+ * 3. IME (keyboard) padding must be handled at the root level to prevent remeasure loops.
+ * 4. Keep the hierarchy flat to avoid 'dispatchGetDisplayList' recursion crashes.
+ */
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -143,38 +157,7 @@ fun ChatScreen(
                 }
                 
                 HorizontalDivider(color = SilverMist.copy(alpha = 0.1f))
-                
-                // Theme Toggle Row
-                val mainViewModel: MainViewModel = hiltViewModel()
-                val isDarkMode by mainViewModel.isDarkMode.collectAsState()
-                
-                NavigationDrawerItem(
-                    label = { 
-                        Text(
-                            if (isDarkMode) "LIGHT_MODE_ACTIVE" else "DARK_MODE_ACTIVE", 
-                            style = KiriTypography.labelMedium
-                        ) 
-                    },
-                    icon = { 
-                        Icon(
-                            if (isDarkMode) Icons.Default.LightMode else Icons.Default.DarkMode, 
-                            contentDescription = null,
-                            modifier = Modifier.size(20.dp)
-                        ) 
-                    },
-                    selected = false,
-                    onClick = { mainViewModel.toggleTheme() },
-                    colors = NavigationDrawerItemDefaults.colors(
-                        unselectedContainerColor = Color.Transparent,
-                        unselectedTextColor = SilverMist,
-                        unselectedIconColor = SilverMist
-                    ),
-                    shape = RoundedCornerShape(0.dp),
-                    modifier = Modifier.padding(horizontal = 12.dp)
-                )
 
-                HorizontalDivider(color = SilverMist.copy(alpha = 0.1f))
-                
                 // Profile Row (Technical)
                 Row(
                     modifier = Modifier
@@ -205,23 +188,83 @@ fun ChatScreen(
                             overflow = TextOverflow.Ellipsis
                         ) 
                     },
+                    modifier = Modifier.statusBarsPadding(), // Handles status bar
                     navigationIcon = {
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
-                            Icon(Icons.Default.Menu, contentDescription = "Menu", tint = ShowroomWhite)
+                            Icon(Icons.Default.Menu, contentDescription = "Menu")
                         }
                     },
                     actions = {
+                        // High-Visibility Theme Toggle
+                        val mainViewModel: MainViewModel = hiltViewModel()
+                        val isDarkMode by mainViewModel.isDarkMode.collectAsState()
+                        IconButton(onClick = { mainViewModel.toggleTheme() }) {
+                            Icon(
+                                if (isDarkMode) Icons.Default.LightMode else Icons.Default.DarkMode, 
+                                contentDescription = "Toggle Theme"
+                            )
+                        }
                         IconButton(onClick = { navController.navigate("pricing") }) {
-                            Icon(Icons.Default.Star, contentDescription = "Premium", tint = ShowroomWhite)
+                            Icon(Icons.Default.Star, contentDescription = "Premium")
                         }
                     },
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                        containerColor = VelvetBlack,
-                        titleContentColor = ShowroomWhite
+                        containerColor = MaterialTheme.colorScheme.background,
+                        titleContentColor = MaterialTheme.colorScheme.onBackground,
+                        navigationIconContentColor = MaterialTheme.colorScheme.onBackground,
+                        actionIconContentColor = MaterialTheme.colorScheme.onBackground
                     )
                 )
             },
             bottomBar = {
+                // Moved into content for better IME control
+            },
+            containerColor = MaterialTheme.colorScheme.background
+        ) { padding ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+                    .navigationBarsPadding() // Handles bottom home handle
+                    .imePadding() // Handles keyboard
+            ) {
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth()
+                ) {
+                LazyColumn(
+                    state = scrollState,
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(16.dp)
+                ) {
+                    items(
+                        items = state.messages,
+                        key = { it.getStableId() }
+                    ) { msg ->
+                        Box(modifier = Modifier.graphicsLayer { 
+                            // Breaking drawing recursion and creating a separate layer
+                            clip = true 
+                        }) {
+                            KiriMessageBubble(msg)
+                        }
+                    }
+                    
+                    if (state.isSending) {
+                        item(key = "typing_indicator") { 
+                            Box(modifier = Modifier.graphicsLayer { clip = true }) {
+                                TypingIndicator() 
+                            }
+                        }
+                    }
+                }
+
+                    if (state.isLoadingMessages) {
+                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center), color = MaterialTheme.colorScheme.primary)
+                    }
+                }
+
+                // Chat Input Bar at the bottom of the Column
                 ChatInputBar(
                     message = state.inputMessage,
                     onMessageChange = { viewModel.onMessageChange(it) },
@@ -231,44 +274,6 @@ fun ChatScreen(
                     onClearFile = { viewModel.clearSelectedFile() },
                     isSending = state.isSending
                 )
-            },
-            containerColor = VelvetBlack
-        ) { padding ->
-            Box(
-                modifier = Modifier
-                    .padding(padding)
-                    .fillMaxSize()
-                    .imePadding() // CRITICAL: Moves UI up when keyboard appears
-            ) {
-                LazyColumn(
-                    state = scrollState,
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(16.dp)
-                ) {
-                    items(
-                        items = state.messages,
-                        key = { it.id ?: "msg_${it.hashCode()}" }
-                    ) { msg ->
-                        KiriMessageBubble(msg)
-                    }
-                    
-                    if (state.isSending) {
-                        item(key = "typing_indicator") { TypingIndicator() }
-                    }
-                }
-
-                if (state.messages.isEmpty() && !state.isLoadingMessages) {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text(
-                            "READY_FOR_INPUT",
-                            style = KiriTypography.labelLarge.copy(color = SilverMist.copy(alpha = 0.2f))
-                        )
-                    }
-                }
-                
-                if (state.isLoadingMessages) {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center), color = ShowroomWhite)
-                }
             }
         }
     }

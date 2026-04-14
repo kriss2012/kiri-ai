@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.kiri.ai.app-mergeDebugResources-71:/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "com.kiri.ai.app-mergeDebugResources-73:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
                     "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\524ab93da02e9d4a3b8e0c2d3470b25d\\transformed\\jetified-play-services-auth-17.0.0\\res\\values-watch-v20\\values.xml",

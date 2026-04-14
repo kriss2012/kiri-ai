@@ -21,6 +21,7 @@ import com.kiri.ai.data.remote.SubscriptionApi;
 import com.kiri.ai.data.repository.AuthRepository;
 import com.kiri.ai.data.repository.ChatRepository;
 import com.kiri.ai.data.repository.SubscriptionRepository;
+import com.kiri.ai.data.repository.ThemeRepository;
 import com.kiri.ai.di.NetworkModule;
 import com.kiri.ai.di.NetworkModule_ProvideAuthApiFactory;
 import com.kiri.ai.di.NetworkModule_ProvideAuthInterceptorFactory;
@@ -500,7 +501,7 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
           return (T) new ChatViewModel(ApplicationContextModule_ProvideApplicationFactory.provideApplication(singletonCImpl.applicationContextModule), singletonCImpl.chatRepositoryProvider.get(), singletonCImpl.authRepositoryProvider.get());
 
           case 2: // com.kiri.ai.ui.viewmodels.MainViewModel 
-          return (T) new MainViewModel(singletonCImpl.authRepositoryProvider.get());
+          return (T) new MainViewModel(singletonCImpl.authRepositoryProvider.get(), singletonCImpl.themeRepositoryProvider.get());
 
           case 3: // com.kiri.ai.ui.viewmodels.SubscriptionViewModel 
           return (T) new SubscriptionViewModel(singletonCImpl.subscriptionRepositoryProvider.get(), singletonCImpl.authDataStoreProvider.get());
@@ -602,6 +603,8 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
 
     private Provider<AuthRepository> authRepositoryProvider;
 
+    private Provider<ThemeRepository> themeRepositoryProvider;
+
     private Provider<SubscriptionApi> provideSubscriptionApiProvider;
 
     private Provider<SubscriptionRepository> subscriptionRepositoryProvider;
@@ -632,8 +635,9 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
       this.chatPollingWorker_AssistedFactoryProvider = SingleCheck.provider(new SwitchingProvider<ChatPollingWorker_AssistedFactory>(singletonCImpl, 0));
       this.provideAuthApiProvider = DoubleCheck.provider(new SwitchingProvider<AuthApi>(singletonCImpl, 8));
       this.authRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<AuthRepository>(singletonCImpl, 7));
-      this.provideSubscriptionApiProvider = DoubleCheck.provider(new SwitchingProvider<SubscriptionApi>(singletonCImpl, 10));
-      this.subscriptionRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<SubscriptionRepository>(singletonCImpl, 9));
+      this.themeRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<ThemeRepository>(singletonCImpl, 9));
+      this.provideSubscriptionApiProvider = DoubleCheck.provider(new SwitchingProvider<SubscriptionApi>(singletonCImpl, 11));
+      this.subscriptionRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<SubscriptionRepository>(singletonCImpl, 10));
     }
 
     @Override
@@ -707,10 +711,13 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
           case 8: // com.kiri.ai.data.remote.AuthApi 
           return (T) NetworkModule_ProvideAuthApiFactory.provideAuthApi(singletonCImpl.provideRetrofitProvider.get());
 
-          case 9: // com.kiri.ai.data.repository.SubscriptionRepository 
+          case 9: // com.kiri.ai.data.repository.ThemeRepository 
+          return (T) new ThemeRepository(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 10: // com.kiri.ai.data.repository.SubscriptionRepository 
           return (T) new SubscriptionRepository(singletonCImpl.provideSubscriptionApiProvider.get());
 
-          case 10: // com.kiri.ai.data.remote.SubscriptionApi 
+          case 11: // com.kiri.ai.data.remote.SubscriptionApi 
           return (T) NetworkModule_ProvideSubscriptionApiFactory.provideSubscriptionApi(singletonCImpl.provideRetrofitProvider.get());
 
           default: throw new AssertionError(id);

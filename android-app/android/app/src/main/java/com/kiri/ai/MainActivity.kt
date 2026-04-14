@@ -45,6 +45,17 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
         startKiriService()
     }
 
+    /**
+     * ARCHITECTURAL_STABILITY_NOTICE
+     * This application uses a flat, technical design system to prevent native rendering
+     * recursion crashes (dispatchGetDisplayList). 
+     * 
+     * CORE_GUIDELINES:
+     * 1. Avoid nesting NavHosts or multiple Scaffolds.
+     * 2. Ensure all screens handle WindowInsets (IME, status, and navigation bars) at the root.
+     * 3. chat-related components must use explicit drawing layers (graphicsLayer).
+     */
+
     private fun startKiriService() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU || 
             checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
@@ -106,11 +117,11 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
 
     @Composable
     private fun CrashDialog(crashTrace: String) {
-        var showDialog by remember { mutableStateOf(true) }
+        val showDialog = remember { mutableStateOf(true) }
         
-        if (showDialog) {
+        if (showDialog.value) {
             androidx.compose.material3.AlertDialog(
-                onDismissRequest = { showDialog = false },
+                onDismissRequest = { showDialog.value = false },
                 containerColor = VelvetBlack,
                 titleContentColor = ShowroomWhite,
                 textContentColor = ShowroomWhite,
@@ -136,7 +147,7 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                     }
                 },
                 dismissButton = {
-                    androidx.compose.material3.TextButton(onClick = { showDialog = false }) {
+                    androidx.compose.material3.TextButton(onClick = { showDialog.value = false }) {
                         Text("DISMISS", style = KiriTypography.labelMedium)
                     }
                 }

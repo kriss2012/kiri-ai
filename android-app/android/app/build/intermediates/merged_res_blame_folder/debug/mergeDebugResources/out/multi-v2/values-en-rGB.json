@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.kiri.ai.app-mergeDebugResources-71:/values-en-rGB/values-en-rGB.xml",
+            "outputFile": "com.kiri.ai.app-mergeDebugResources-73:/values-en-rGB/values-en-rGB.xml",
             "map": [
                 {
                     "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\dd7bfa62523cbe42afa8f9376fa801d3\\transformed\\jetified-play-services-basement-17.6.0\\res\\values-en-rGB\\values.xml",

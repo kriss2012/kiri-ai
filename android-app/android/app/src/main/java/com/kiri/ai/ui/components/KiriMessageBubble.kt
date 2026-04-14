@@ -7,10 +7,12 @@ import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
@@ -24,12 +26,15 @@ import com.mikepenz.markdown.m3.markdownColor
 import com.mikepenz.markdown.m3.markdownTypography
 
 /**
- * Bugatti v2 Professional Message Bubble
+ * DANGER // CRITICAL_RENDERING_LAYER
+ * This file handles the core message bubble rendering. The layout here is EXTREMELY
+ * sensitive to nesting. Deep nesting or excessive text will trigger a native 
+ * 'dispatchGetDisplayList' recursive crash on the Android hardware renderer.
  * 
- * Aesthetic:
- * - Direct typography on Cinema Black
- * - Structured segments (CONTEXT // OUTPUT // NEXT)
- * - Code copy functionality enabled via headers
+ * CORE_RULES:
+ * 1. Maintain a flat hierarchy (Surface > Box > Column/Text).
+ * 2. Always use graphicsLayer(clip = true) on the Surface to break drawing recursion.
+ * 3. Never allow unbounded AI output to render raw; use the safety truncation.
  */
 
 @Composable
@@ -41,6 +46,15 @@ fun KiriMessageBubble(message: ChatMessage?) {
     val isUser = role == "user"
     val clipboardManager = LocalClipboardManager.current
     val colorScheme = MaterialTheme.colorScheme
+
+    // SAFETY_TRUNCATION: Prevents the hardware renderer from blowing its stack on massive outputs
+    val safeContent = remember(content) {
+        if (content.length > 15000) {
+            content.take(15000) + "\n\n... [TRUNCATED_FOR_STABILITY]"
+        } else {
+            content
+        }
+    }
     
     // REDUCED NESTING: Flat structure to prevent native rendering recursion
     Column(
@@ -68,7 +82,14 @@ fun KiriMessageBubble(message: ChatMessage?) {
                 bottomStart = if (isUser) 16.dp else 4.dp,
                 bottomEnd = if (isUser) 4.dp else 16.dp
             ),
-            modifier = Modifier.widthIn(max = 300.dp)
+            modifier = Modifier
+                .widthIn(max = 300.dp)
+                .graphicsLayer { 
+                    // ENFORCE_DRAWING_BOUNDARY: Forces the renderer to treat this as a separate layer, 
+                    // preventing recursive display list builds during hardware acceleration.
+                    this.clip = true
+                    this.shape = RoundedCornerShape(16.dp)
+                }
         ) {
             Box(modifier = Modifier.padding(12.dp)) {
                 if (isUser) {
@@ -101,10 +122,10 @@ fun KiriMessageBubble(message: ChatMessage?) {
                     }
                 } else {
                     // FLATTENED RENDERER: We minimize the number of Composable levels
-                    val markdownText = if (content.contains("---")) {
-                        content.replace("---", "\n\n***\n\n")
+                    val markdownText = if (safeContent.contains("---")) {
+                        safeContent.replace("---", "\n\n***\n\n")
                     } else {
-                        content
+                        safeContent
                     }
 
                     Markdown(

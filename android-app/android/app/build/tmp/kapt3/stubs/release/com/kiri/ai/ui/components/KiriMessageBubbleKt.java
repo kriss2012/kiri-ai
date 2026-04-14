@@ -4,12 +4,15 @@ package com.kiri.ai.ui.components;
 public final class KiriMessageBubbleKt {
     
     /**
-     * Bugatti v2 Professional Message Bubble
+     * DANGER // CRITICAL_RENDERING_LAYER
+     * This file handles the core message bubble rendering. The layout here is EXTREMELY
+     * sensitive to nesting. Deep nesting or excessive text will trigger a native 
+     * 'dispatchGetDisplayList' recursive crash on the Android hardware renderer.
      *
-     * Aesthetic:
-     * - Direct typography on Cinema Black
-     * - Structured segments (CONTEXT // OUTPUT // NEXT)
-     * - Code copy functionality enabled via headers
+     * CORE_RULES:
+     * 1. Maintain a flat hierarchy (Surface > Box > Column/Text).
+     * 2. Always use graphicsLayer(clip = true) on the Surface to break drawing recursion.
+     * 3. Never allow unbounded AI output to render raw; use the safety truncation.
      */
     @androidx.compose.runtime.Composable()
     public static final void KiriMessageBubble(@org.jetbrains.annotations.Nullable()

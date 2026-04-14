@@ -91,10 +91,14 @@ fun PricingScreen(
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Parchment)
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                    titleContentColor = MaterialTheme.colorScheme.onBackground,
+                    navigationIconContentColor = MaterialTheme.colorScheme.onBackground
+                )
             )
         },
-        containerColor = Parchment
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
@@ -107,6 +111,7 @@ fun PricingScreen(
             Text(
                 text = "Unlock the full power of Kiri AI",
                 style = KiriTypography.displayLarge.copy(fontSize = 28.sp),
+                color = MaterialTheme.colorScheme.onBackground,
                 textAlign = TextAlign.Center
             )
             
@@ -131,7 +136,7 @@ fun PricingScreen(
                     ) {
                         Text(
                             label,
-                            color = if (selected) Ivory else OliveGray,
+                            color = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
                             style = KiriTypography.labelLarge
                         )
                     }
@@ -160,7 +165,7 @@ fun PricingScreen(
             Text(
                 text = "Secure payment powered by Razorpay",
                 style = KiriTypography.labelMedium,
-                color = StoneGray
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             if (uiState.error != null) {
@@ -201,14 +206,16 @@ fun PricingPlanCardEnhanced(
                 2.dp,
                 Brush.linearGradient(
                     colors = listOf(
-                        TerracottaBrand.copy(alpha = borderAlpha),
-                        Color(0xFF6200EE).copy(alpha = borderAlpha)
+                        MaterialTheme.colorScheme.primary.copy(alpha = borderAlpha),
+                        MaterialTheme.colorScheme.secondary.copy(alpha = borderAlpha)
                     )
                 ),
                 RoundedCornerShape(24.dp)
             ),
         shape = RoundedCornerShape(24.dp),
-        colors = CardDefaults.cardColors(containerColor = Ivory)
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        )
     ) {
         Column(modifier = Modifier.padding(32.dp)) {
             Box(
@@ -229,11 +236,15 @@ fun PricingPlanCardEnhanced(
             Spacer(modifier = Modifier.height(16.dp))
             
             Row(verticalAlignment = Alignment.Bottom) {
-                Text(text = "₹$price", style = KiriTypography.displayLarge.copy(fontSize = 56.sp))
+                Text(
+                    text = "₹$price", 
+                    style = KiriTypography.displayLarge.copy(fontSize = 56.sp),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
                 Text(
                     text = period, 
                     style = KiriTypography.titleLarge, 
-                    color = StoneGray, 
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f), 
                     modifier = Modifier.padding(bottom = 12.dp, start = 4.dp)
                 )
             }
@@ -241,7 +252,7 @@ fun PricingPlanCardEnhanced(
             Text(
                 text = "Perfect for power users who want more.",
                 style = KiriTypography.bodySmall,
-                color = OliveGray
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
             )
             
             Spacer(modifier = Modifier.height(32.dp))
@@ -257,12 +268,16 @@ fun PricingPlanCardEnhanced(
                         Icon(
                             Icons.Default.Check, 
                             contentDescription = null, 
-                            tint = TerracottaBrand, 
+                            tint = MaterialTheme.colorScheme.primary, 
                             modifier = Modifier.size(14.dp)
                         )
                     }
                     Spacer(modifier = Modifier.width(16.dp))
-                    Text(text = feature, style = KiriTypography.bodyMedium, color = AnthropicNearBlack)
+                    Text(
+                        text = feature, 
+                        style = KiriTypography.bodyMedium, 
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 }
             }
             

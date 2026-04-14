@@ -20,7 +20,7 @@ private val KiriDarkColorScheme = darkColorScheme(
     secondary = SilverMist,
     tertiary = DarkGray,
     background = VelvetBlack,
-    surface = Color(0xFF121212), // Elevated dark surface
+    surface = Color(0xFF0A0A0A), // Slightly elevated from pure black
     onPrimary = VelvetBlack,
     onSecondary = ShowroomWhite,
     onBackground = ShowroomWhite,
@@ -28,30 +28,30 @@ private val KiriDarkColorScheme = darkColorScheme(
     onSurfaceVariant = SilverMist,
     error = Color(0xFFCF6679),
     outline = SilverMist,
-    surfaceVariant = Color(0xFF1E1E1E)
+    surfaceVariant = Color(0xFF1A1A1A)
 )
 
 private val KiriLightColorScheme = lightColorScheme(
     primary = VelvetBlack,
     secondary = DarkGray,
     tertiary = SilverMist,
-    background = Color(0xFFFBFBFB), // Clean Paper White
+    background = Color(0xFFF9F7F2), // Premium Parchment White
     surface = Color.White,
     onPrimary = Color.White,
     onSecondary = VelvetBlack,
-    onBackground = VelvetBlack,
-    onSurface = VelvetBlack,
-    onSurfaceVariant = Color(0xFF424242),
+    onBackground = Color(0xFF1C1C1C), // Off-black for better readability
+    onSurface = Color(0xFF1C1C1C),
+    onSurfaceVariant = Color(0xFF4A4A4A),
     error = Color(0xFFB00020),
-    outline = Color(0xFF757575),
-    surfaceVariant = Color(0xFFF1F1F1) // Soft background for input/bubbles
+    outline = Color(0xFF8E8E8E),
+    surfaceVariant = Color(0xFFECEAE4) // Slightly warmer variant
 )
 
-val LocalThemeMode = compositionLocalOf { mutableStateOf(true) } // true = dark
+val LocalThemeMode = compositionLocalOf { true } // true = dark
 
 @Composable
 fun KiriTheme(
-    darkTheme: Boolean = LocalThemeMode.current.value,
+    darkTheme: Boolean = LocalThemeMode.current,
     content: @Composable () -> Unit
 ) {
     val colorScheme = if (darkTheme) KiriDarkColorScheme else KiriLightColorScheme
