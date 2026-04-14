@@ -14,15 +14,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.kiri.ai.ui.screens.*
 import com.kiri.ai.ui.theme.KiriTheme
 import com.kiri.ai.ui.theme.Parchment
-import com.kiri.ai.ui.viewmodels.ChatViewModel
 import com.kiri.ai.ui.viewmodels.MainViewModel
 import com.kiri.ai.ui.viewmodels.SubscriptionViewModel
 import com.razorpay.PaymentData
