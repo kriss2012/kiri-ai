@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
 import android.content.ClipboardManager
 import android.content.ClipData
 import android.content.Context
@@ -60,18 +61,19 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
         
         requestPermissions()
         startKiriService()
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         val lastCrash = com.kiri.ai.utils.KiriCrashHandler.getAndClearLastCrash(this)
 
         setContent {
-            val themeMode = remember { mutableStateOf(true) } // default dark
+            val viewModel: MainViewModel = hiltViewModel()
+            val themeMode by viewModel.isDarkMode.collectAsState()
             
             CompositionLocalProvider(LocalThemeMode provides themeMode) {
-                KiriTheme {
+                KiriTheme(darkTheme = themeMode) {
                     if (lastCrash != null) {
                         CrashDialog(lastCrash)
                     }
 
-                    val viewModel: MainViewModel = hiltViewModel()
                     val startDestination by viewModel.startDestination.collectAsState()
 
                     Surface(

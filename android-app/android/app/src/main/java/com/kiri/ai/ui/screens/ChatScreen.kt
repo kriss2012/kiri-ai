@@ -144,6 +144,37 @@ fun ChatScreen(
                 
                 HorizontalDivider(color = SilverMist.copy(alpha = 0.1f))
                 
+                // Theme Toggle Row
+                val mainViewModel: MainViewModel = hiltViewModel()
+                val isDarkMode by mainViewModel.isDarkMode.collectAsState()
+                
+                NavigationDrawerItem(
+                    label = { 
+                        Text(
+                            if (isDarkMode) "LIGHT_MODE_ACTIVE" else "DARK_MODE_ACTIVE", 
+                            style = KiriTypography.labelMedium
+                        ) 
+                    },
+                    icon = { 
+                        Icon(
+                            if (isDarkMode) Icons.Default.LightMode else Icons.Default.DarkMode, 
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp)
+                        ) 
+                    },
+                    selected = false,
+                    onClick = { mainViewModel.toggleTheme() },
+                    colors = NavigationDrawerItemDefaults.colors(
+                        unselectedContainerColor = Color.Transparent,
+                        unselectedTextColor = SilverMist,
+                        unselectedIconColor = SilverMist
+                    ),
+                    shape = RoundedCornerShape(0.dp),
+                    modifier = Modifier.padding(horizontal = 12.dp)
+                )
+
+                HorizontalDivider(color = SilverMist.copy(alpha = 0.1f))
+                
                 // Profile Row (Technical)
                 Row(
                     modifier = Modifier
@@ -203,7 +234,12 @@ fun ChatScreen(
             },
             containerColor = VelvetBlack
         ) { padding ->
-            Box(modifier = Modifier.padding(padding).fillMaxSize()) {
+            Box(
+                modifier = Modifier
+                    .padding(padding)
+                    .fillMaxSize()
+                    .imePadding() // CRITICAL: Moves UI up when keyboard appears
+            ) {
                 LazyColumn(
                     state = scrollState,
                     modifier = Modifier.fillMaxSize(),

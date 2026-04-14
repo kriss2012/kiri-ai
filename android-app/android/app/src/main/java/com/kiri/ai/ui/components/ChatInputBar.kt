@@ -11,8 +11,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Mic
-import androidx.compose.material.icons.filled.Mood
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -84,22 +82,14 @@ fun ChatInputBar(
                         color = colorScheme.surfaceVariant,
                         shape = RoundedCornerShape(24.dp)
                     )
-                    .padding(horizontal = 4.dp)
+                    .padding(horizontal = 16.dp)
             ) {
-                IconButton(onClick = { /* Emoji action */ }) {
-                    Icon(
-                        Icons.Default.Mood,
-                        contentDescription = "Emoji",
-                        tint = colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
-                    )
-                }
-
                 BasicTextField(
                     value = message,
                     onValueChange = onMessageChange,
                     modifier = Modifier
                         .weight(1f)
-                        .padding(vertical = 8.dp),
+                        .padding(vertical = 12.dp),
                     textStyle = TextStyle(
                         color = colorScheme.onSurface,
                         fontSize = 16.sp
@@ -127,33 +117,23 @@ fun ChatInputBar(
                         }
                     )
                 )
-
-                IconButton(onClick = onAttachClick) {
-                    Icon(
-                        Icons.Default.AttachFile,
-                        contentDescription = "Attach",
-                        tint = colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
-                    )
-                }
             }
 
             Spacer(modifier = Modifier.width(8.dp))
 
-            // Action Button (Send or Mic)
+            // Action Button (Send)
             val showSend = message.isNotBlank() || selectedFileName != null
             
             Box(
                 modifier = Modifier
                     .size(48.dp)
                     .background(
-                        color = if (showSend) colorScheme.primary else BrandPink,
+                        color = if (showSend) colorScheme.primary else colorScheme.primary.copy(alpha = 0.3f),
                         shape = CircleShape
                     )
                     .clickable(
-                        enabled = !isSending,
-                        onClick = {
-                            if (showSend) onSend() else { /* Voice record action */ }
-                        }
+                        enabled = showSend && !isSending,
+                        onClick = onSend
                     ),
                 contentAlignment = Alignment.Center
             ) {
@@ -165,9 +145,9 @@ fun ChatInputBar(
                     )
                 } else {
                     Icon(
-                        imageVector = if (showSend) Icons.Default.Send else Icons.Default.Mic,
-                        contentDescription = if (showSend) "Send" else "Record",
-                        tint = if (showSend) colorScheme.onPrimary else Color.White
+                        imageVector = Icons.Default.Send,
+                        contentDescription = "Send",
+                        tint = if (showSend) colorScheme.onPrimary else colorScheme.onPrimary.copy(alpha = 0.5f)
                     )
                 }
             }

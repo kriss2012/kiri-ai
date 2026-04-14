@@ -20,29 +20,31 @@ private val KiriDarkColorScheme = darkColorScheme(
     secondary = SilverMist,
     tertiary = DarkGray,
     background = VelvetBlack,
-    surface = VelvetBlack,
+    surface = Color(0xFF121212), // Elevated dark surface
     onPrimary = VelvetBlack,
     onSecondary = ShowroomWhite,
     onBackground = ShowroomWhite,
     onSurface = ShowroomWhite,
-    error = SilverMist,
+    onSurfaceVariant = SilverMist,
+    error = Color(0xFFCF6679),
     outline = SilverMist,
-    surfaceVariant = InputBackgroundDark
+    surfaceVariant = Color(0xFF1E1E1E)
 )
 
 private val KiriLightColorScheme = lightColorScheme(
     primary = VelvetBlack,
     secondary = DarkGray,
     tertiary = SilverMist,
-    background = SoftGray,
+    background = Color(0xFFFBFBFB), // Clean Paper White
     surface = Color.White,
     onPrimary = Color.White,
     onSecondary = VelvetBlack,
     onBackground = VelvetBlack,
     onSurface = VelvetBlack,
-    error = Color.Red,
-    outline = SilverMist,
-    surfaceVariant = InputBackgroundLight
+    onSurfaceVariant = Color(0xFF424242),
+    error = Color(0xFFB00020),
+    outline = Color(0xFF757575),
+    surfaceVariant = Color(0xFFF1F1F1) // Soft background for input/bubbles
 )
 
 val LocalThemeMode = compositionLocalOf { mutableStateOf(true) } // true = dark

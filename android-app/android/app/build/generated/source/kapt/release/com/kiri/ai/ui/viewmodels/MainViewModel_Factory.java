@@ -2,6 +2,7 @@
 package com.kiri.ai.ui.viewmodels;
 
 import com.kiri.ai.data.repository.AuthRepository;
+import com.kiri.ai.data.repository.ThemeRepository;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
@@ -20,20 +21,26 @@ import javax.inject.Provider;
 public final class MainViewModel_Factory implements Factory<MainViewModel> {
   private final Provider<AuthRepository> authRepositoryProvider;
 
-  public MainViewModel_Factory(Provider<AuthRepository> authRepositoryProvider) {
+  private final Provider<ThemeRepository> themeRepositoryProvider;
+
+  public MainViewModel_Factory(Provider<AuthRepository> authRepositoryProvider,
+      Provider<ThemeRepository> themeRepositoryProvider) {
     this.authRepositoryProvider = authRepositoryProvider;
+    this.themeRepositoryProvider = themeRepositoryProvider;
   }
 
   @Override
   public MainViewModel get() {
-    return newInstance(authRepositoryProvider.get());
+    return newInstance(authRepositoryProvider.get(), themeRepositoryProvider.get());
   }
 
-  public static MainViewModel_Factory create(Provider<AuthRepository> authRepositoryProvider) {
-    return new MainViewModel_Factory(authRepositoryProvider);
+  public static MainViewModel_Factory create(Provider<AuthRepository> authRepositoryProvider,
+      Provider<ThemeRepository> themeRepositoryProvider) {
+    return new MainViewModel_Factory(authRepositoryProvider, themeRepositoryProvider);
   }
 
-  public static MainViewModel newInstance(AuthRepository authRepository) {
-    return new MainViewModel(authRepository);
+  public static MainViewModel newInstance(AuthRepository authRepository,
+      ThemeRepository themeRepository) {
+    return new MainViewModel(authRepository, themeRepository);
   }
 }
