@@ -8,8 +8,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -114,7 +117,7 @@ fun LandingScreen(navController: NavController) {
                 // Professional placeholder for the organic illustration
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(
-                        imageVector = androidx.compose.material.icons.Icons.Default.Face,
+                        imageVector = Icons.Default.Face,
                         contentDescription = null,
                         modifier = Modifier.size(64.dp),
                         tint = OliveGray.copy(alpha = 0.3f)
