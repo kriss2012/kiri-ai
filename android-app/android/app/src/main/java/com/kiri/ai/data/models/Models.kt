@@ -57,7 +57,7 @@ data class Conversation(
     val updatedAt: String? = ""
 ) {
     // Helper to ensure we always have a non-null ID for LazyColumn keys
-    fun getStableId(): String = id ?: "conv_${hashCode()}"
+    fun getStableId(): String = id ?: "conv_${System.identityHashCode(this)}"
 }
 
 data class ConversationDetailResponse(
