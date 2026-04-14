@@ -85,12 +85,13 @@ fun KiriMessageBubble(message: ChatMessage?) {
                     content.startsWith("{") || content.startsWith("[") -> "**Error:** Unexpected response format."
                     else -> content
                 }
-                Markdown(
-                    content = displayContent,
-                    typography = markdownTypography(
-                        paragraph = KiriTypography.bodyMedium,
-                        h1 = KiriTypography.headlineMedium,
-                        h2 = KiriTypography.titleLarge
+                
+                // TEMPORARY: Disabled Markdown to diagnose if the library causes crashes
+                Text(
+                    text = displayContent,
+                    style = KiriTypography.bodyMedium.copy(
+                        color = AnthropicNearBlack,
+                        lineHeight = 24.sp
                     )
                 )
             }

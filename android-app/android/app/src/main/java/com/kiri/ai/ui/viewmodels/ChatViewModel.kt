@@ -28,31 +28,13 @@ class ChatViewModel @Inject constructor(
     var uiState by mutableStateOf(ChatUiState())
         private set
 
-    private var isAppInBackground = false
-    
-    private val lifecycleObserver = LifecycleEventObserver { _, event ->
-        when (event) {
-            Lifecycle.Event.ON_STOP -> isAppInBackground = true
-            Lifecycle.Event.ON_START -> isAppInBackground = false
-            else -> {}
-        }
-    }
-
     init {
         observeUserData()
         loadConversations()
-        try {
-            ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
-        } catch (e: Exception) {
-            // Fallback if ProcessLifecycleOwner is not available in certain environments
-        }
     }
 
     override fun onCleared() {
         super.onCleared()
-        try {
-            ProcessLifecycleOwner.get().lifecycle.removeObserver(lifecycleObserver)
-        } catch (e: Exception) {}
     }
 
     private fun observeUserData() {
@@ -163,14 +145,6 @@ class ChatViewModel @Inject constructor(
                             currentConversationId = res.conversationId ?: uiState.currentConversationId,
                             currentTitle = res.title ?: uiState.currentTitle
                         )
-                        
-                        if (isAppInBackground) {
-                            NotificationHelper.showResponseNotification(
-                                getApplication(),
-                                "Kiri AI Response",
-                                assistantMsg.content ?: "You have a new message"
-                            )
-                        }
                         
                         loadConversations()
 
