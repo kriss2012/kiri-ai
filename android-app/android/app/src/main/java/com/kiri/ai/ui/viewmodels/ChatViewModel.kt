@@ -41,12 +41,10 @@ class ChatViewModel @Inject constructor(
     init {
         observeUserData()
         loadConversations()
-        viewModelScope.launch {
-            try {
-                ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
-            } catch (e: Exception) {
-                // Fallback if ProcessLifecycleOwner is not available in certain environments
-            }
+        try {
+            ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
+        } catch (e: Exception) {
+            // Fallback if ProcessLifecycleOwner is not available in certain environments
         }
     }
 
