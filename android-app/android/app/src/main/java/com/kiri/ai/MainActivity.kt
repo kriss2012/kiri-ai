@@ -36,6 +36,7 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
         super.onCreate(savedInstanceState)
         
         requestPermissions()
+        checkForCrashes()
 
         setContent {
             KiriTheme {
@@ -69,20 +70,24 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
         }
     }
 
-    private fun requestPermissions() {
-        val permissions = mutableListOf<String>()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            permissions.add(Manifest.permission.POST_NOTIFICATIONS)
-        }
-        
-        val requestPermissionLauncher = registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) { _ -> }
-        
-        if (permissions.isNotEmpty()) {
-            requestPermissionLauncher.launch(permissions.toTypedArray())
+    private fun checkForCrashes() {
+        val lastCrash = com.kiri.ai.utils.KiriCrashHandler.getAndClearLastCrash(this)
+        if (lastCrash != null) {
+            androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Kiri AI: Crash Detected")
+                .setMessage("The app closed unexpectedly. Here is the error detail:\n\n$lastCrash")
+                .setPositiveButton("Copy Error") { _, _ ->
+                    val clipboard = getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+                    val clip = android.content.ClipData.newPlainText("Kiri AI Crash", lastCrash)
+                    clipboard.setPrimaryClip(clip)
+                    Toast.makeText(this, "Error copied to clipboard. Please send it to the developer.", Toast.LENGTH_LONG).show()
+                }
+                .setNegativeButton("Close", null)
+                .show()
         }
     }
+
+    private fun requestPermissions() {
 
     override fun onPaymentSuccess(razorpayPaymentId: String?, paymentData: PaymentData?) {
         paymentData?.let {
