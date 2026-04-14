@@ -407,19 +407,19 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String com_kiri_ai_ui_viewmodels_SubscriptionViewModel = "com.kiri.ai.ui.viewmodels.SubscriptionViewModel";
-
       static String com_kiri_ai_ui_viewmodels_ChatViewModel = "com.kiri.ai.ui.viewmodels.ChatViewModel";
+
+      static String com_kiri_ai_ui_viewmodels_SubscriptionViewModel = "com.kiri.ai.ui.viewmodels.SubscriptionViewModel";
 
       static String com_kiri_ai_ui_viewmodels_MainViewModel = "com.kiri.ai.ui.viewmodels.MainViewModel";
 
       static String com_kiri_ai_ui_viewmodels_AuthViewModel = "com.kiri.ai.ui.viewmodels.AuthViewModel";
 
       @KeepFieldType
-      SubscriptionViewModel com_kiri_ai_ui_viewmodels_SubscriptionViewModel2;
+      ChatViewModel com_kiri_ai_ui_viewmodels_ChatViewModel2;
 
       @KeepFieldType
-      ChatViewModel com_kiri_ai_ui_viewmodels_ChatViewModel2;
+      SubscriptionViewModel com_kiri_ai_ui_viewmodels_SubscriptionViewModel2;
 
       @KeepFieldType
       MainViewModel com_kiri_ai_ui_viewmodels_MainViewModel2;
@@ -477,9 +477,9 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
     private static final class LazyClassKeyProvider {
       static String com_kiri_ai_ui_viewmodels_ChatViewModel = "com.kiri.ai.ui.viewmodels.ChatViewModel";
 
-      static String com_kiri_ai_ui_viewmodels_SubscriptionViewModel = "com.kiri.ai.ui.viewmodels.SubscriptionViewModel";
-
       static String com_kiri_ai_ui_viewmodels_MainViewModel = "com.kiri.ai.ui.viewmodels.MainViewModel";
+
+      static String com_kiri_ai_ui_viewmodels_SubscriptionViewModel = "com.kiri.ai.ui.viewmodels.SubscriptionViewModel";
 
       static String com_kiri_ai_ui_viewmodels_AuthViewModel = "com.kiri.ai.ui.viewmodels.AuthViewModel";
 
@@ -487,10 +487,10 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
       ChatViewModel com_kiri_ai_ui_viewmodels_ChatViewModel2;
 
       @KeepFieldType
-      SubscriptionViewModel com_kiri_ai_ui_viewmodels_SubscriptionViewModel2;
+      MainViewModel com_kiri_ai_ui_viewmodels_MainViewModel2;
 
       @KeepFieldType
-      MainViewModel com_kiri_ai_ui_viewmodels_MainViewModel2;
+      SubscriptionViewModel com_kiri_ai_ui_viewmodels_SubscriptionViewModel2;
 
       @KeepFieldType
       AuthViewModel com_kiri_ai_ui_viewmodels_AuthViewModel2;
