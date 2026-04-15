@@ -12,11 +12,23 @@ import com.kiri.ai.data.repository.AuthRepository
 import com.kiri.ai.data.repository.ChatRepository
 import com.kiri.ai.utils.NotificationHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
-import java.util.UUID
 import javax.inject.Inject
+import android.net.Uri
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import com.kiri.ai.workers.ChatPollingWorker
+import java.io.File
+import java.util.concurrent.TimeUnit
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.launchIn
+import java.util.UUID
 
 @HiltViewModel
 class ChatViewModel @Inject constructor(
@@ -25,34 +37,49 @@ class ChatViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : AndroidViewModel(application) {
 
-    var uiState by mutableStateOf(ChatUiState())
-        private set
-
-    private var isAppInBackground = false
+    private val workManager = WorkManager.getInstance(application)
     
     private val lifecycleObserver = LifecycleEventObserver { _, event ->
         when (event) {
-            Lifecycle.Event.ON_STOP -> isAppInBackground = true
-            Lifecycle.Event.ON_START -> isAppInBackground = false
+            Lifecycle.Event.ON_STOP -> scheduleBackgroundPolling()
+            Lifecycle.Event.ON_START -> cancelBackgroundPolling()
             else -> {}
         }
     }
 
+    var uiState by mutableStateOf(ChatUiState())
+        private set
+
     init {
         observeUserData()
         loadConversations()
-        try {
-            ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
-        } catch (e: Exception) {
-            // Fallback or log if ProcessLifecycleOwner is not available
-        }
+        ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
     }
 
     override fun onCleared() {
         super.onCleared()
-        try {
-            ProcessLifecycleOwner.get().lifecycle.removeObserver(lifecycleObserver)
-        } catch (e: Exception) {}
+        ProcessLifecycleOwner.get().lifecycle.removeObserver(lifecycleObserver)
+        cancelBackgroundPolling()
+    }
+
+    private fun scheduleBackgroundPolling() {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+        
+        val workRequest = PeriodicWorkRequestBuilder<ChatPollingWorker>(15, TimeUnit.MINUTES)
+            .setConstraints(constraints)
+            .build()
+        
+        workManager.enqueueUniquePeriodicWork(
+            "ChatPolling",
+            androidx.work.ExistingPeriodicWorkPolicy.KEEP,
+            workRequest
+        )
+    }
+
+    private fun cancelBackgroundPolling() {
+        workManager.cancelUniqueWork("ChatPolling")
     }
 
     private fun observeUserData() {
@@ -70,7 +97,20 @@ class ChatViewModel @Inject constructor(
     fun loadConversations() {
         viewModelScope.launch {
             chatRepository.getConversations().onSuccess { list ->
-                uiState = uiState.copy(conversations = list)
+                // Sanitize IDs to prevent LazyColumn key collisions
+                val seenIds = mutableSetOf<String>()
+                val sanitized = list.mapIndexed { index, conv ->
+                    val baseId = if (conv.id.isNullOrBlank()) "conv_${index}" else conv.id!!
+                    var finalId = baseId
+                    var counter = 1
+                    while (seenIds.contains(finalId)) {
+                        finalId = "${baseId}_${counter}"
+                        counter++
+                    }
+                    seenIds.add(finalId)
+                    conv.copy(id = finalId)
+                }
+                uiState = uiState.copy(conversations = sanitized)
             }.onFailure { error ->
                 uiState = uiState.copy(error = "Failed to load chats: ${error.message}")
             }
@@ -84,8 +124,8 @@ class ChatViewModel @Inject constructor(
                 chatRepository.getConversationDetail(id).onSuccess { detail ->
                     // Ensure each message has a unique stable ID for LazyColumn to prevent crashes
                     val seenIds = mutableSetOf<String>()
-                    val sanitizedMessages = detail?.messages?.mapIndexed { index, msg ->
-                        val baseId = msg.id ?: "msg_${id}_${index}"
+                    val sanitizedMessages = detail.messages?.mapIndexed { index, msg ->
+                        val baseId = if (msg.id.isNullOrBlank()) "msg_${id}_${index}" else msg.id!!
                         var finalId = baseId
                         var counter = 1
                         while (seenIds.contains(finalId)) {
@@ -93,13 +133,21 @@ class ChatViewModel @Inject constructor(
                             counter++
                         }
                         seenIds.add(finalId)
-                        msg.copy(id = finalId)
+                        
+                        // SANITIZE_CONTENT: Permanent stability truncation at the source
+                        val cleanContent = if ((msg.content?.length ?: 0) > 10000) {
+                            msg.content?.take(10000) + "\n\n... [TRUNCATED_FOR_STABILITY]"
+                        } else {
+                            msg.content ?: ""
+                        }
+                        
+                        msg.copy(id = finalId, content = cleanContent)
                     } ?: emptyList()
 
                     uiState = uiState.copy(
                         messages = sanitizedMessages,
                         isLoadingMessages = false,
-                        currentTitle = detail?.title ?: "Untitled Chat"
+                        currentTitle = detail.title ?: "Untitled Chat"
                     )
                 }.onFailure { error ->
                     uiState = uiState.copy(
@@ -115,14 +163,23 @@ class ChatViewModel @Inject constructor(
 
     fun onMessageChange(msg: String) { uiState = uiState.copy(inputMessage = msg) }
 
+    fun onFileSelected(uri: Uri?, name: String?) {
+        uiState = uiState.copy(selectedFileUri = uri, selectedFileName = name)
+    }
+
+    fun clearSelectedFile() {
+        uiState = uiState.copy(selectedFileUri = null, selectedFileName = null)
+    }
+
     fun sendMessage() {
         val input = uiState.inputMessage.trim()
-        if (input.isBlank() || uiState.isSending) return
+        val fileUri = uiState.selectedFileUri
+        if (input.isBlank() && fileUri == null || uiState.isSending) return
         
-        val userMsgId = "user_${UUID.randomUUID()}"
+        val userMsgId = "user_${java.util.UUID.randomUUID()}"
         val userMsg = ChatMessage(
             role = "user", 
-            content = input,
+            content = input + (if (fileUri != null) "\n[IMAGE_URI: $fileUri]" else ""),
             id = userMsgId
         )
         
@@ -135,28 +192,35 @@ class ChatViewModel @Inject constructor(
 
         viewModelScope.launch {
             try {
-                chatRepository.sendMessage(input, uiState.currentConversationId).onSuccess { res ->
+                val result = if (fileUri != null) {
+                    uploadFileAndSend(input, fileUri)
+                } else {
+                    chatRepository.sendMessage(input, uiState.currentConversationId)
+                }
+
+                result.onSuccess { res ->
                     if (res?.success == true) {
+                        // SANITIZE_AI_RESPONSE: Permanent stability truncation for incoming AI logs
+                        val cleanAiMsg = if ((res.message?.length ?: 0) > 10000) {
+                            res.message?.take(10000) + "\n\n... [TRUNCATED_FOR_STABILITY]"
+                        } else {
+                            res.message ?: ""
+                        }
+
                         val assistantMsg = ChatMessage(
                             role = "assistant", 
-                            content = res.message ?: "",
-                            id = "ai_${UUID.randomUUID()}"
+                            content = cleanAiMsg,
+                            id = "ai_${java.util.UUID.randomUUID()}"
                         )
                         
                         uiState = uiState.copy(
                             messages = uiState.messages + assistantMsg,
                             isSending = false,
+                            selectedFileUri = null,
+                            selectedFileName = null,
                             currentConversationId = res.conversationId ?: uiState.currentConversationId,
                             currentTitle = res.title ?: uiState.currentTitle
                         )
-                        
-                        if (isAppInBackground) {
-                            NotificationHelper.showResponseNotification(
-                                getApplication(),
-                                "Kiri AI Response",
-                                assistantMsg.content ?: "You have a new message"
-                            )
-                        }
                         
                         loadConversations()
 
@@ -181,6 +245,28 @@ class ChatViewModel @Inject constructor(
         }
     }
 
+    private suspend fun uploadFileAndSend(message: String, uri: Uri): Result<ChatResponse> {
+        return try {
+            val contentResolver = getApplication<Application>().contentResolver
+            val inputStream = contentResolver.openInputStream(uri)
+            val file = File(getApplication<Application>().cacheDir, "upload_${System.currentTimeMillis()}")
+            file.outputStream().use { inputStream?.copyTo(it) }
+
+            val requestFile = file.asRequestBody(contentResolver.getType(uri)?.toMediaTypeOrNull())
+            val body = MultipartBody.Part.createFormData("file", uiState.selectedFileName ?: file.name, requestFile)
+            
+            // AI Analysis: If message is empty, provide a default analysis prompt
+            val prompt = if (message.trim().isEmpty()) "Analyze this image and explain what is shown in it." else message
+            
+            val contentBody = prompt.toRequestBody("text/plain".toMediaTypeOrNull())
+            val convIdBody = uiState.currentConversationId?.toRequestBody("text/plain".toMediaTypeOrNull())
+
+            chatRepository.sendMessageWithFile(contentBody, convIdBody, body)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     fun newChat() {
         uiState = uiState.copy(
             currentConversationId = null,
@@ -198,6 +284,8 @@ data class ChatUiState(
     val currentConversationId: String? = null,
     val currentTitle: String = "Kiri AI",
     val inputMessage: String = "",
+    val selectedFileUri: Uri? = null,
+    val selectedFileName: String? = null,
     val isLoadingMessages: Boolean = false,
     val isSending: Boolean = false,
     val error: String? = null

@@ -42,6 +42,14 @@ interface ChatApi {
     @POST("chat/message")
     suspend fun sendMessage(@Body request: ChatRequest): Response<ChatResponse>
 
+    @Multipart
+    @POST("chat/message/upload")
+    suspend fun sendMessageWithFile(
+        @Part("content") content: okhttp3.RequestBody,
+        @Part("conversationId") conversationId: okhttp3.RequestBody?,
+        @Part file: okhttp3.MultipartBody.Part
+    ): Response<ChatResponse>
+
     @DELETE("chat/conversations/{id}")
     suspend fun deleteConversation(@Path("id") id: String): Response<GenericResponse>
 

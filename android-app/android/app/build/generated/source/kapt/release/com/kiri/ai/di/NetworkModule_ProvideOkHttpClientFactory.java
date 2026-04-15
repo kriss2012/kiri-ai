@@ -17,8 +17,7 @@ import okhttp3.OkHttpClient;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava",
-    "cast"
+    "KotlinInternalInJava"
 })
 public final class NetworkModule_ProvideOkHttpClientFactory implements Factory<OkHttpClient> {
   private final Provider<Interceptor> authInterceptorProvider;

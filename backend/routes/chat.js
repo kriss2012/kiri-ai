@@ -1,8 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const OpenAI = require('openai');
+const mongoose = require('mongoose');
 const { protect, checkRequestLimit } = require('../middleware/auth');
 const Conversation = require('../models/Conversation');
+const multer = require('multer');
+const upload = multer({
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+  storage: multer.memoryStorage()
+});
 
 // Safe OpenAI initialization to prevent crash on startup if key is missing
 const getOpenAIClient = () => {
@@ -21,12 +27,15 @@ const getOpenAIClient = () => {
   });
 };
 
+// Helper to sanitize conversationId
+const sanitizeConvId = (id) =>
+  id && id !== 'undefined' && id !== 'null' && mongoose.Types.ObjectId.isValid(id) ? id : null;
+
 // @POST /api/chat/message - Send message to Gemini
 router.post('/message', protect, checkRequestLimit, async (req, res) => {
   try {
     const { message, conversationId, model = 'google/gemini-2.0-flash-001' } = req.body;
-    // Sanitize conversationId - treat 'undefined' string as null
-    const safeConvId = conversationId && conversationId !== 'undefined' && conversationId !== 'null' ? conversationId : null;
+    const safeConvId = sanitizeConvId(conversationId);
 
     if (!message || !message.trim()) {
       return res.status(400).json({ success: false, message: 'Message is required.' });
@@ -40,11 +49,9 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
         _id: safeConvId,
         user: req.user._id
       });
-      if (!conversation) {
-        // If not found, create a new one instead of erroring
-        conversation = new Conversation({ user: req.user._id, model, messages: [] });
-      }
-    } else {
+    }
+
+    if (!conversation) {
       conversation = new Conversation({
         user: req.user._id,
         model,
@@ -88,31 +95,112 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
     // Increment user request count
     await req.user.incrementRequest();
 
-    // Get updated request count
-    const updatedUser = req.user;
+    res.json({
+      success: true,
+      message: assistantMessage,
+      conversationId: conversation._id,
+      title: conversation.title,
+      requestsUsed: req.user.dailyRequests,
+      requestsRemaining: req.user.isPremium()
+        ? 'unlimited'
+        : Math.max(0, parseInt(process.env.FREE_DAILY_REQUESTS || 50) - req.user.dailyRequests)
+    });
+
+  } catch (error) {
+    console.error('Chat error:', error);
+    res.status(500).json({ success: false, message: 'AI Error: ' + (error.message || 'Unknown error') });
+  }
+});
+
+// @POST /api/chat/message/upload - Send message with file to Gemini
+router.post('/message/upload', protect, checkRequestLimit, upload.single('file'), async (req, res) => {
+  try {
+    const { content, conversationId, model = 'google/gemini-2.0-flash-001' } = req.body;
+    const safeConvId = sanitizeConvId(conversationId);
+    const file = req.file;
+
+    if (!file) {
+      return res.status(400).json({ success: false, message: 'File is required.' });
+    }
+
+    let conversation;
+    if (safeConvId) {
+      conversation = await Conversation.findOne({ _id: safeConvId, user: req.user._id });
+    }
+
+    if (!conversation) {
+      conversation = new Conversation({
+        user: req.user._id,
+        model,
+        messages: []
+      });
+    }
+
+    // Prepare message content for OpenAI/OpenRouter (Gemini supports multimodal via base64)
+    const base64Image = file.buffer.toString('base64');
+    const mimeType = file.mimetype;
+
+    const userMessageContent = [
+      { type: 'text', text: content || 'Analyze this image.' },
+      {
+        type: 'image_url',
+        image_url: {
+          url: `data:${mimeType};base64,${base64Image}`
+        }
+      }
+    ];
+
+    // Build chat history
+    const history = conversation.messages.map(msg => ({
+      role: msg.role === 'assistant' ? 'assistant' : 'user',
+      content: msg.content
+    }));
+
+    // Add current multimodal message
+    history.push({ role: 'user', content: userMessageContent });
+
+    const openai = getOpenAIClient();
+
+    const completion = await openai.chat.completions.create({
+      model: model || 'google/gemini-2.0-flash-001',
+      messages: history,
+      temperature: 0.7,
+      max_tokens: 2048
+    });
+
+    const assistantMessage = completion.choices[0].message.content;
+
+    // Save messages to conversation. Store local reference for display.
+    // Note: We store the text part + a placeholder in the DB for simplicity,
+    // as storing massive base64 in MongoDB isn't ideal for large-scale.
+    // The Android app looks for [IMAGE_URI: ...] which we'll simulate.
+    const textContent = content || 'Analyze this image.';
+    const savedUserContent = textContent + `\n[IMAGE_ATTACHMENT: ${file.originalname}]`;
+
+    conversation.messages.push({ role: 'user', content: savedUserContent });
+    conversation.messages.push({ role: 'assistant', content: assistantMessage });
+
+    if (conversation.messages.length === 2) {
+      conversation.generateTitle();
+    }
+
+    await conversation.save();
+    await req.user.incrementRequest();
 
     res.json({
       success: true,
       message: assistantMessage,
       conversationId: conversation._id,
       title: conversation.title,
-      requestsUsed: updatedUser.dailyRequests,
-      requestsRemaining: updatedUser.isPremium()
+      requestsUsed: req.user.dailyRequests,
+      requestsRemaining: req.user.isPremium()
         ? 'unlimited'
-        : Math.max(0, parseInt(process.env.FREE_DAILY_REQUESTS || 50) - updatedUser.dailyRequests)
+        : Math.max(0, parseInt(process.env.FREE_DAILY_REQUESTS || 50) - req.user.dailyRequests)
     });
 
   } catch (error) {
-    const fs = require('fs');
-    fs.appendFileSync('error.log', `\n[${new Date().toISOString()}] Chat error: ${error.stack || error.message}\n`);
-    console.error('Chat error:', error);
-    if (error.message && error.message.includes('API_KEY')) {
-      return res.status(500).json({ success: false, message: 'AI service configuration error.' });
-    }
-    if (error.message && error.message.includes('SAFETY')) {
-      return res.status(400).json({ success: false, message: 'Message blocked by safety filters. Please rephrase.' });
-    }
-    res.status(500).json({ success: false, message: 'AI Error: ' + (error.message || 'Unknown error') });
+    console.error('Upload error:', error);
+    res.status(500).json({ success: false, message: 'AI Upload Error: ' + (error.message || 'Unknown error') });
   }
 });
 
@@ -120,9 +208,18 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
 router.post('/stream', protect, checkRequestLimit, async (req, res) => {
   try {
     const { message, conversationId, model = 'google/gemini-2.0-flash-001' } = req.body;
+    const safeConvId = sanitizeConvId(conversationId);
 
     if (!message || !message.trim()) {
       return res.status(400).json({ success: false, message: 'Message is required.' });
+    }
+
+    // Initialize OpenAI BEFORE setting SSE headers
+    let openai;
+    try {
+      openai = getOpenAIClient();
+    } catch (e) {
+      return res.status(500).json({ success: false, message: 'AI service not configured.' });
     }
 
     // Set SSE headers
@@ -132,14 +229,11 @@ router.post('/stream', protect, checkRequestLimit, async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', process.env.FRONTEND_URL || '*');
 
     let conversation;
+    if (safeConvId) {
+      conversation = await Conversation.findOne({ _id: safeConvId, user: req.user._id });
+    }
 
-    if (conversationId) {
-      conversation = await Conversation.findOne({ _id: conversationId, user: req.user._id });
-      if (!conversation) {
-        res.write(`data: ${JSON.stringify({ error: 'Conversation not found' })}\n\n`);
-        return res.end();
-      }
-    } else {
+    if (!conversation) {
       conversation = new Conversation({ user: req.user._id, model, messages: [] });
     }
 
@@ -150,10 +244,6 @@ router.post('/stream', protect, checkRequestLimit, async (req, res) => {
     history.push({ role: 'user', content: message });
 
     let fullResponse = '';
-
-    // Get OpenAI client safely
-    const openai = getOpenAIClient();
-
     const stream = await openai.chat.completions.create({
       model: model || 'google/gemini-2.0-flash-001',
       messages: history,
@@ -187,8 +277,10 @@ router.post('/stream', protect, checkRequestLimit, async (req, res) => {
 
   } catch (error) {
     console.error('Stream error:', error);
-    res.write(`data: ${JSON.stringify({ error: 'Stream failed. Please try again.' })}\n\n`);
-    res.end();
+    try {
+      res.write(`data: ${JSON.stringify({ error: 'Stream failed. Please try again.', done: true })}\n\n`);
+      res.end();
+    } catch (_) {}
   }
 });
 
@@ -213,7 +305,7 @@ router.get('/conversations', protect, async (req, res) => {
       model: c.model,
       isPinned: c.isPinned,
       messageCount: c.messages.length,
-      lastMessage: c.messages.length > 0 ? c.messages[c.messages.length - 1].content.substring(0, 100) : '',
+      lastMessage: c.messages.length > 0 ? (c.messages[c.messages.length - 1].content || '').substring(0, 100) : '',
       createdAt: c.createdAt,
       updatedAt: c.updatedAt
     }));

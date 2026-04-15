@@ -1,199 +1,133 @@
 package com.kiri.ai.ui.screens
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.kiri.ai.ui.components.FadeUpAnimation
 import com.kiri.ai.ui.components.KiriButton
-import com.kiri.ai.ui.components.KiriOutlineButton
+import com.kiri.ai.ui.components.KiriSecondaryButton
 import com.kiri.ai.ui.theme.*
+
+/**
+ * Bugatti-Inspired Landing Screen
+ * 
+ * Cinematic, monumental, and ultra-monochrome.
+ * Focuses on high-performance scale and silent luxury.
+ */
 
 @Composable
 fun LandingScreen(navController: NavController) {
-    var animate by remember { mutableStateOf(false) }
-    LaunchedEffect(Unit) { animate = true }
+    val scrollState = rememberScrollState()
+    var startAnimation by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        startAnimation = true
+    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Parchment)
-            .verticalScroll(rememberScrollState())
-            .padding(24.dp),
+            .background(VelvetBlack)
+            .verticalScroll(scrollState)
+            .padding(horizontal = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(60.dp))
-        
-        FadeUpAnimation(visible = animate, delayMillis = 100) {
-            Box(
-                modifier = Modifier
-                    .background(
-                        brush = Brush.linearGradient(LogoGradient),
-                        shape = CircleShape
-                    )
-                    .padding(horizontal = 16.dp, vertical = 6.dp)
-            ) {
+        // Top Spacer for Cinematic Air
+        Spacer(modifier = Modifier.height(100.dp))
+
+        // Monumental Branding
+        AnimatedVisibility(
+            visible = startAnimation,
+            enter = fadeIn(animationSpec = tween(1500)) + 
+                    expandVertically(animationSpec = tween(1000, easing = EaseOutExpo))
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
-                    text = "✦ AI-POWERED INTELLIGENCE",
+                    text = "KIRI",
+                    style = KiriTypography.displayLarge.copy(
+                        color = ShowroomWhite,
+                        fontSize = 120.sp, // Monumental scale
+                        lineHeight = 110.sp
+                    ),
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    text = "INTELLIGENCE",
                     style = KiriTypography.labelLarge.copy(
-                        color = Color.White,
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight.Bold,
-                        letterSpacing = 1.sp
-                    )
+                        color = ShowroomWhite,
+                        letterSpacing = 8.sp // Ultra-wide tracking
+                    ),
+                    textAlign = TextAlign.Center
                 )
             }
         }
-        
-        Spacer(modifier = Modifier.height(24.dp))
-        
-        FadeUpAnimation(visible = animate, delayMillis = 200) {
-            Image(
-                painter = painterResource(id = com.kiri.ai.R.drawable.app_logo),
-                contentDescription = "Kiri AI Logo",
-                modifier = Modifier.size(120.dp)
-            )
-        }
-        
-        FadeUpAnimation(visible = animate, delayMillis = 250) {
+
+        Spacer(modifier = Modifier.height(60.dp))
+
+        // Feature Description (Quiet Mono)
+        AnimatedVisibility(
+            visible = startAnimation,
+            enter = fadeIn(animationSpec = tween(1200, delayMillis = 500)) + 
+                    slideInVertically(initialOffsetY = { 20 })
+        ) {
             Text(
-                text = "Kiri AI",
-                style = KiriTypography.displayLarge.copy(
-                    brush = Brush.linearGradient(LogoGradient)
-                ),
-                textAlign = TextAlign.Center
-            )
-        }
-
-
-
-        
-        Spacer(modifier = Modifier.height(24.dp))
-        
-        FadeUpAnimation(visible = animate, delayMillis = 300) {
-            Text(
-                text = "Your intelligent assistant that thinks deeper, reasons sharper, and creates without limits.",
-                style = KiriTypography.bodyLarge.copy(
-                    color = OliveGray,
+                text = "HYPER-PERFORMANCE REASONING ENGINE.\nBUILT FOR COUTRE SOLUTIONS.",
+                style = KiriTypography.labelMedium.copy(
+                    color = SilverMist,
                     textAlign = TextAlign.Center,
-                    lineHeight = 32.sp // More relaxed for editorial feel
+                    lineHeight = 24.sp
                 ),
-                modifier = Modifier.padding(horizontal = 24.dp)
+                modifier = Modifier.padding(horizontal = 32.dp)
             )
         }
-        
-        Spacer(modifier = Modifier.height(32.dp))
-        
-        // Hero Illustration
-        FadeUpAnimation(visible = animate, delayMillis = 400) {
-            /* 
-               Note: In a real project, hero_illustration would be in res/drawable.
-               Using a placeholder that represents the generated organic illustration.
-            */
-            Box(modifier = Modifier.fillMaxWidth().height(240.dp), contentAlignment = Alignment.Center) {
-                // Mocking the Image load since I can't actually compile/run android here
-                // But I've placed the file in drawable/hero_illustration.png
-                Text("Organic Hand-Drawn Illustration Placeholder", color = OliveGray)
-            }
-        }
-        
-        Spacer(modifier = Modifier.height(32.dp))
-        
-        FadeUpAnimation(visible = animate, delayMillis = 500) {
-            Column {
+
+        Spacer(modifier = Modifier.height(120.dp))
+
+        // Primary Call to Action
+        AnimatedVisibility(
+            visible = startAnimation,
+            enter = fadeIn(animationSpec = tween(1000, delayMillis = 800))
+        ) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 KiriButton(
-                    text = "Start for Free",
-                    onClick = { navController.navigate("register") }
+                    text = "ENTER THE ATELIER",
+                    onClick = { navController.navigate("register") },
+                    modifier = Modifier.width(280.dp)
                 )
-                
-                Spacer(modifier = Modifier.height(12.dp))
-                
-                KiriOutlineButton(
-                    text = "Sign In",
-                    onClick = { navController.navigate("login") }
-                )
-            }
-        }
-        
-        Spacer(modifier = Modifier.height(64.dp))
-        
-        // Features Section
-        FadeUpAnimation(visible = animate, delayMillis = 600) {
-            Column {
-                FeatureCard(
-                    icon = "⚡",
-                    title = "Lightning Fast",
-                    desc = "Get answers in seconds with Gemini 2.0 Flash."
-                )
+
                 Spacer(modifier = Modifier.height(16.dp))
-                FeatureCard(
-                    icon = "🧠",
-                    title = "Deep Reasoning",
-                    desc = "Complex analysis and creative writing."
+
+                KiriSecondaryButton(
+                    text = "SIGN IN",
+                    onClick = { navController.navigate("login") },
+                    modifier = Modifier.width(200.dp)
                 )
             }
         }
+
+        // Bottom Decorative Spacer
+        Spacer(modifier = Modifier.height(100.dp))
+        
+        Text(
+            text = "V1.1 // CORE STABILITY ACTIVE",
+            style = KiriTypography.labelMedium.copy(color = SilverMist.copy(alpha = 0.3f)),
+            textAlign = TextAlign.Center
+        )
         
         Spacer(modifier = Modifier.height(48.dp))
-    }
-}
-
-@Composable
-fun FeatureCard(
-    icon: String,
-    title: String,
-    desc: String
-) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(containerColor = Ivory),
-        border = BorderStroke(1.dp, BorderCream)
-    ) {
-        Row(
-            modifier = Modifier.padding(20.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(48.dp)
-                    .background(Parchment, RoundedCornerShape(8.dp)),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(text = icon, fontSize = 24.sp)
-            }
-            Spacer(modifier = Modifier.width(16.dp))
-            Column {
-                Text(
-                    text = title,
-                    style = KiriTypography.titleMedium,
-                    color = AnthropicNearBlack
-                )
-                Text(
-                    text = desc,
-                    style = KiriTypography.bodySmall,
-                    color = OliveGray,
-                    lineHeight = 20.sp
-                )
-            }
-        }
     }
 }

@@ -2,17 +2,22 @@ package com.kiri.ai.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.kiri.ai.ui.theme.*
+
+/**
+ * Bugatti Design System Buttons
+ * 
+ * Primary: White Outlined Pill (9999px radius)
+ * Secondary: Technical Gray Outline (6px radius)
+ */
 
 @Composable
 fun KiriButton(
@@ -20,49 +25,39 @@ fun KiriButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    containerColor: Color = TerracottaBrand,
-    contentColor: Color = Ivory,
+    containerColor: Color = Color.Transparent,
+    contentColor: Color = ShowroomWhite,
     isLoading: Boolean = false,
-    shape: Shape = RoundedCornerShape(12.dp),
-    border: BorderStroke? = null
+    shape: Shape = CircleShape, // 9999px Pill
+    border: BorderStroke? = BorderStroke(1.dp, ShowroomWhite)
 ) {
     Button(
         onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
-            .height(52.dp),
+            .height(48.dp), // Bugatti standard pill height
         enabled = enabled && !isLoading,
         shape = shape,
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+        contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
             contentColor = contentColor,
-            disabledContainerColor = containerColor.copy(alpha = 0.5f),
-            disabledContentColor = contentColor.copy(alpha = 0.7f)
+            disabledContainerColor = Color.Transparent,
+            disabledContentColor = SilverMist
         ),
         border = border,
-        elevation = ButtonDefaults.buttonElevation(
-
-            defaultElevation = 0.dp,
-            pressedElevation = 0.dp,
-            hoveredElevation = 0.dp,
-            focusedElevation = 0.dp
-        )
+        elevation = ButtonDefaults.buttonElevation(defaultElevation = 0.dp)
     ) {
         if (isLoading) {
             CircularProgressIndicator(
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier.size(20.dp),
                 color = contentColor,
                 strokeWidth = 2.dp
             )
         } else {
             Text(
-                text = text,
-                style = KiriTypography.bodyLarge.copy(
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 16.sp,
-                    fontFamily = SansFont
-                )
+                text = text.uppercase(),
+                style = KiriTypography.labelLarge.copy(color = contentColor)
             )
         }
     }
@@ -75,15 +70,15 @@ fun KiriSecondaryButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true
 ) {
-    // Warm Sand button from DESIGN.md
+    // Technical Gray Outline from DESIGN.md (6px radius)
     KiriButton(
         text = text,
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier.height(38.dp),
         enabled = enabled,
-        containerColor = WarmSand,
-        contentColor = CharcoalWarm,
-        shape = RoundedCornerShape(8.dp) // Comfortably rounded
+        shape = RoundedCornerShape(6.dp),
+        border = BorderStroke(1.dp, SilverMist),
+        contentColor = ShowroomWhite
     )
 }
 
@@ -94,25 +89,13 @@ fun KiriOutlineButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true
 ) {
-    OutlinedButton(
+    // In Bugatti system, the Primary IS an outline but let's keep this for compatibility
+    KiriButton(
+        text = text,
         onClick = onClick,
-        modifier = modifier
-            .fillMaxWidth()
-            .height(52.dp),
+        modifier = modifier,
         enabled = enabled,
-        shape = RoundedCornerShape(12.dp),
-        border = ButtonDefaults.outlinedButtonBorder.copy(width = 1.dp),
-        colors = ButtonDefaults.outlinedButtonColors(
-            contentColor = AnthropicNearBlack
-        )
-    ) {
-        Text(
-            text = text,
-            style = KiriTypography.bodyLarge.copy(
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 16.sp,
-                fontFamily = SansFont
-            )
-        )
-    }
+        border = BorderStroke(1.dp, SilverMist),
+        contentColor = SilverMist
+    )
 }

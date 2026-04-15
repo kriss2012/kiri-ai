@@ -7,7 +7,11 @@
     <attr format="integer" name="windowSplashScreenAnimationDuration"/>
     <attr format="color" name="windowSplashScreenBackground"/>
     <attr format="color" name="windowSplashScreenIconBackgroundColor"/>
+    <bool name="enable_system_alarm_service_default">true</bool>
+    <bool name="enable_system_foreground_service_default">true</bool>
+    <bool name="enable_system_job_service_default">false</bool>
     <bool name="isTablet">false</bool>
+    <bool name="workmanager_test_configuration">false</bool>
     <color name="androidx_core_ripple_material_light">#1f000000</color>
     <color name="androidx_core_secondary_text_default_material_light">#8a000000</color>
     <color name="call_notification_answer_color">#1d873b</color>
@@ -274,13 +278,14 @@
     </style>
     <style name="TextAppearance.Compat.Notification.Title" parent="@android:style/TextAppearance.StatusBar.EventContent.Title"/>
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">#F5F4ED</item>
+        <item name="windowSplashScreenBackground">#000000</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/app_logo</item>
         <item name="postSplashScreenTheme">@style/Theme.KiriAI</item>
     </style>
-    <style name="Theme.KiriAI" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">#F5F4ED</item>
-        <item name="android:windowLightStatusBar">true</item>
+    <style name="Theme.KiriAI" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">#000000</item>
+        <item name="android:windowBackground">#000000</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
     <style name="Theme.SplashScreen" parent="Theme.SplashScreen.Common">
         <item name="postSplashScreenTheme">?android:attr/theme</item>

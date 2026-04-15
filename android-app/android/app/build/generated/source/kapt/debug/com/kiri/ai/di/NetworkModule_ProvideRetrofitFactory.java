@@ -17,8 +17,7 @@ import retrofit2.Retrofit;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava",
-    "cast"
+    "KotlinInternalInJava"
 })
 public final class NetworkModule_ProvideRetrofitFactory implements Factory<Retrofit> {
   private final Provider<OkHttpClient> okHttpClientProvider;

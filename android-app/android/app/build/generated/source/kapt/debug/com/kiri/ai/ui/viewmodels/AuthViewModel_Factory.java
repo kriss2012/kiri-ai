@@ -15,8 +15,7 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava",
-    "cast"
+    "KotlinInternalInJava"
 })
 public final class AuthViewModel_Factory implements Factory<AuthViewModel> {
   private final Provider<AuthRepository> authRepositoryProvider;

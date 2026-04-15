@@ -15,8 +15,7 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava",
-    "cast"
+    "KotlinInternalInJava"
 })
 public final class SubscriptionRepository_Factory implements Factory<SubscriptionRepository> {
   private final Provider<SubscriptionApi> subscriptionApiProvider;

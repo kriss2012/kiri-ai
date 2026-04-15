@@ -98,9 +98,19 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.work.runtime)
+    implementation(libs.androidx.hilt.work)
+    kapt(libs.androidx.hilt.compiler)
     
     // Markdown
     implementation(libs.multiplatform.markdown.renderer)
+    implementation(libs.multiplatform.markdown.renderer.m3)
+    
+    // Coil for Image Loading
+    implementation("io.coil-kt:coil-compose:2.6.0")
+    
+    // Icons
+    implementation(libs.androidx.compose.material.icons.extended)
     
     // Razorpay
     implementation(libs.razorpay.android)

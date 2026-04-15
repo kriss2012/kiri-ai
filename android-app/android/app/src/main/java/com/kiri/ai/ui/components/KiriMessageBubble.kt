@@ -1,127 +1,125 @@
 package com.kiri.ai.ui.components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.kiri.ai.data.models.ChatMessage
 import com.kiri.ai.ui.theme.*
 import com.mikepenz.markdown.compose.Markdown
-import com.mikepenz.markdown.model.markdownTypography
+import com.mikepenz.markdown.m3.markdownColor
+import com.mikepenz.markdown.m3.markdownTypography
 
-import androidx.compose.foundation.Image
-import androidx.compose.ui.res.painterResource
-import com.kiri.ai.R
+/**
+ * PROJECT_ZERO_G // FINAL_STABILITY_LAYER
+ * 
+ * This component has been flattened to the absolute minimum required for rendering.
+ * With Activity-wide hardware acceleration disabled, we avoid the 'dispatchGetDisplayList'
+ * stack recursion entirely.
+ * 
+ * STABILITY_RULES:
+ * 1. ZERO complex graphics layers (no offscreen compositing).
+ * 2. Flat container hierarchy.
+ * 3. String-level truncation to protect the software renderer.
+ */
 
 @Composable
 fun KiriMessageBubble(message: ChatMessage?) {
     if (message == null) return
 
     val role = message.role ?: "assistant"
-    val content = message.content ?: ""
+    val rawContent = message.content ?: ""
     val isUser = role == "user"
+    val colorScheme = MaterialTheme.colorScheme
+
+    // STABILITY_GUARD: Protect software renderer Memory
+    val content = remember(rawContent) {
+        if (rawContent.length > 8000) {
+            rawContent.take(8000) + "\n\n... [LOG_LIMIT_EXCEEDED]"
+        } else {
+            rawContent
+        }
+    }
     
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 12.dp),
+            .padding(vertical = 4.dp, horizontal = 12.dp),
         horizontalAlignment = if (isUser) Alignment.End else Alignment.Start
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(bottom = 6.dp)
+        Surface(
+            color = if (isUser) colorScheme.primary else colorScheme.surfaceVariant,
+            shape = RoundedCornerShape(
+                topStart = 12.dp,
+                topEnd = 12.dp, 
+                bottomStart = if (isUser) 12.dp else 2.dp,
+                bottomEnd = if (isUser) 2.dp else 12.dp
+            ),
+            modifier = Modifier.widthIn(max = 310.dp)
         ) {
-            if (!isUser) {
-                AIAvatar()
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = "Kiri AI",
-                    style = KiriTypography.labelMedium.copy(fontWeight = FontWeight.Bold, color = AnthropicNearBlack)
-                )
-            } else {
-                Text(
-                    text = "You",
-                    style = KiriTypography.labelMedium.copy(fontWeight = FontWeight.Bold, color = AnthropicNearBlack)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                UserAvatar()
-            }
-        }
-        
-        Box(
-            modifier = Modifier
-                .widthIn(max = 320.dp)
-                .background(
-                    color = if (isUser) TerracottaBrand.copy(alpha = 0.05f) else Ivory,
-                    shape = RoundedCornerShape(12.dp)
-                )
-                .let { 
-                    if (!isUser) it.border(1.dp, BorderCream, RoundedCornerShape(12.dp)) 
-                    else it 
-                }
-                .padding(16.dp)
-        ) {
-            if (isUser) {
-                Text(
-                    text = content,
-                    style = KiriTypography.bodyMedium.copy(
-                        color = AnthropicNearBlack,
-                        lineHeight = 24.sp
-                    )
-                )
-            } else {
-                // If content is somehow a complex object stringified by GSON
-                val displayContent = if (content.startsWith("{") || content.startsWith("[")) {
-                    "Message format error: $content"
+            Box(modifier = Modifier.padding(12.dp)) {
+                if (isUser) {
+                    UserContent(content, colorScheme)
                 } else {
-                    content
+                    AssistantContent(content, colorScheme)
                 }
-
-                Markdown(
-                    content = displayContent,
-                    typography = markdownTypography(
-                        paragraph = KiriTypography.bodyMedium,
-                        h1 = KiriTypography.headlineMedium,
-                        h2 = KiriTypography.titleLarge
-                    )
-                )
             }
         }
     }
 }
 
 @Composable
-fun AIAvatar() {
-    Image(
-        painter = painterResource(id = R.drawable.app_logo),
-        contentDescription = "Kiri AI",
-        modifier = Modifier
-            .size(36.dp)
-            .background(Color.White, CircleShape)
-            .padding(4.dp)
-    )
+private fun UserContent(content: String, colorScheme: ColorScheme) {
+    Column {
+        val imageRegex = Regex("\\[IMAGE_URI: (.*?)\\]")
+        val match = imageRegex.find(content)
+        val textPart = if (match != null) content.replace(match.value, "").trim() else content
+
+        if (match != null) {
+            AsyncImage(
+                model = match.groupValues[1],
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(max = 180.dp)
+                    .clip(RoundedCornerShape(8.dp))
+                    .padding(bottom = 6.dp),
+                contentScale = ContentScale.Crop
+            )
+        }
+
+        if (textPart.isNotEmpty()) {
+            Text(
+                text = textPart,
+                style = KiriTypography.bodyMedium.copy(color = colorScheme.onPrimary)
+            )
+        }
+    }
 }
 
 @Composable
-fun UserAvatar() {
-    Box(
-        modifier = Modifier
-            .size(36.dp)
-            .background(WarmSand, CircleShape),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "U",
-            style = KiriTypography.labelLarge.copy(color = CharcoalWarm, fontWeight = FontWeight.Bold)
-        )
-    }
+private fun AssistantContent(content: String, colorScheme: ColorScheme) {
+    Markdown(
+        content = content,
+        colors = markdownColor(
+            text = colorScheme.onSurfaceVariant,
+            codeText = colorScheme.onSurfaceVariant.copy(alpha = 0.9f),
+            linkText = colorScheme.primary
+        ),
+        typography = markdownTypography(
+            paragraph = KiriTypography.bodyMedium.copy(
+                color = colorScheme.onSurfaceVariant,
+                lineHeight = 20.sp
+            )
+        ),
+        modifier = Modifier.fillMaxWidth()
+    )
 }

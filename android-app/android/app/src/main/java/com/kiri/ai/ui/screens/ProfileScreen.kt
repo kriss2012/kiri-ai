@@ -82,7 +82,7 @@ fun ProfileScreen(
                         Box(
                             modifier = Modifier
                                 .size(72.dp)
-                                .background(Brush.linearGradient(LogoGradient), CircleShape),
+                                .background(Brush.linearGradient(listOf(VelvetBlack, DarkGray)), CircleShape),
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
@@ -169,7 +169,7 @@ fun ProfileScreen(
                 onClick = { 
                     authViewModel.logout {
                         navController.navigate("landing") {
-                            popUpTo("chat") { inclusive = true }
+                            popUpTo(0) { inclusive = true }
                         }
                     }
                 },

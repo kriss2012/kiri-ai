@@ -10,7 +10,9 @@ import dagger.hilt.android.components.ViewModelComponent;
 import dagger.hilt.android.internal.lifecycle.HiltViewModelMap;
 import dagger.hilt.codegen.OriginatingElement;
 import dagger.multibindings.IntoMap;
-import dagger.multibindings.LazyClassKey;
+import dagger.multibindings.IntoSet;
+import dagger.multibindings.StringKey;
+import java.lang.String;
 
 @OriginatingElement(
     topLevelClass = AuthViewModel.class
@@ -27,7 +29,7 @@ public final class AuthViewModel_HiltModules {
 
     @Binds
     @IntoMap
-    @LazyClassKey(AuthViewModel.class)
+    @StringKey("com.kiri.ai.ui.viewmodels.AuthViewModel")
     @HiltViewModelMap
     public abstract ViewModel binds(AuthViewModel vm);
   }
@@ -39,11 +41,10 @@ public final class AuthViewModel_HiltModules {
     }
 
     @Provides
-    @IntoMap
-    @LazyClassKey(AuthViewModel.class)
+    @IntoSet
     @HiltViewModelMap.KeySet
-    public static boolean provide() {
-      return true;
+    public static String provide() {
+      return "com.kiri.ai.ui.viewmodels.AuthViewModel";
     }
   }
 }

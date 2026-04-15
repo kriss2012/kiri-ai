@@ -6,82 +6,79 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-// Anthropics Serif substitute (Georgia / Serif)
-val SerifFont = FontFamily.Serif
-// Anthropics Sans substitute (System Sans)
-val SansFont = FontFamily.SansSerif
+/**
+ * Bugatti Design System Typography
+ * 
+ * Hierarchy:
+ * - Display: Bugatti Display (Monumental Scale 120sp+)
+ * - UI/Labels: Bugatti Monospace (UPPERCASE, Technical)
+ * - Body: Bugatti Text (Standard readable sans)
+ */
+
+val BugattiDisplayFont = FontFamily.SansSerif // Substitute for Bugatti Display
+val BugattiMonoFont = FontFamily.Monospace   // Substitute for Bugatti Monospace
+val BugattiTextFont = FontFamily.SansSerif    // Substitute for Bugatti Text
 
 val KiriTypography = Typography(
+    // Hero Display (Monumental) - Architectural presence
     displayLarge = TextStyle(
-        fontFamily = SerifFont,
-        fontWeight = FontWeight.Medium,
-        fontSize = 64.sp,
-        lineHeight = 70.sp,
-        letterSpacing = 0.sp,
-        color = AnthropicNearBlack
+        fontFamily = BugattiDisplayFont,
+        fontWeight = FontWeight.Normal,
+        fontSize = 120.sp, // Capped for mobile (Plan: 288px)
+        lineHeight = 120.sp,
+        letterSpacing = 0.sp
     ),
+    // Mid Display (Feature)
     headlineLarge = TextStyle(
-        fontFamily = SerifFont,
-        fontWeight = FontWeight.Medium,
-        fontSize = 52.sp,
-        lineHeight = 62.sp,
-        color = AnthropicNearBlack
+        fontFamily = BugattiDisplayFont,
+        fontWeight = FontWeight.Normal,
+        fontSize = 60.sp,
+        lineHeight = 60.sp,
+        letterSpacing = 1.4.sp
     ),
+    // Section Heading
     headlineMedium = TextStyle(
-        fontFamily = SerifFont,
-        fontWeight = FontWeight.Medium,
-        fontSize = 32.sp,
-        lineHeight = 35.sp,
-        color = AnthropicNearBlack
-    ),
-    titleLarge = TextStyle(
-        fontFamily = SerifFont,
-        fontWeight = FontWeight.Medium,
-        fontSize = 25.sp,
-        lineHeight = 30.sp,
-        color = AnthropicNearBlack
-    ),
-    titleMedium = TextStyle(
-        fontFamily = SerifFont,
-        fontWeight = FontWeight.Medium,
-        fontSize = 20.sp,
-        lineHeight = 24.sp,
-        color = AnthropicNearBlack
-    ),
-    bodyLarge = TextStyle(
-        fontFamily = SansFont,
+        fontFamily = BugattiDisplayFont,
         fontWeight = FontWeight.Normal,
-        fontSize = 17.sp,
-        lineHeight = 27.sp,
-        color = AnthropicNearBlack
+        fontSize = 36.sp,
+        lineHeight = 40.sp
     ),
-    bodyMedium = TextStyle(
-        fontFamily = SansFont,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        color = AnthropicNearBlack
-    ),
-    bodySmall = TextStyle(
-        fontFamily = SansFont,
-        fontWeight = FontWeight.Normal,
-        fontSize = 15.sp,
-        lineHeight = 22.sp,
-        color = OliveGray
-    ),
+    // UI Link / Button Label (CAPS) - The "Telemetry" feel
     labelLarge = TextStyle(
-        fontFamily = SansFont,
-        fontWeight = FontWeight.Medium,
+        fontFamily = BugattiMonoFont,
+        fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
         lineHeight = 20.sp,
-        color = OliveGray
+        letterSpacing = 1.4.sp
     ),
+    // Caption Micro (CAPS)
     labelMedium = TextStyle(
-        fontFamily = SansFont,
-        fontWeight = FontWeight.Medium,
+        fontFamily = BugattiMonoFont,
+        fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
         lineHeight = 16.sp,
-        letterSpacing = 0.12.sp,
-        color = StoneGray
+        letterSpacing = 1.2.sp
+    ),
+    // Lead Body
+    bodyLarge = TextStyle(
+        fontFamily = BugattiTextFont,
+        fontWeight = FontWeight.Normal,
+        fontSize = 20.sp,
+        lineHeight = 28.sp
+    ),
+    // Standard Body
+    bodyMedium = TextStyle(
+        fontFamily = BugattiTextFont,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        lineHeight = 24.sp
+    ),
+    // Compact Body
+    bodySmall = TextStyle(
+        fontFamily = BugattiTextFont,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        color = SilverMist
     )
 )

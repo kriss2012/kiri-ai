@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.kiri.ai.app-mergeReleaseResources-60:/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "com.kiri.ai.app-mergeReleaseResources-69:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\e0779eb083ffca954d6753dbc234b4fd\\transformed\\jetified-play-services-auth-17.0.0\\res\\values-watch-v20\\values.xml",
+                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\524ab93da02e9d4a3b8e0c2d3470b25d\\transformed\\jetified-play-services-auth-17.0.0\\res\\values-watch-v20\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\e7026028690488381e3cfc30fbd78838\\transformed\\jetified-core-splashscreen-1.0.1\\res\\values-watch-v20\\values-watch-v20.xml",
+                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\932fb6ab16760eec185612b5ecb876e6\\transformed\\jetified-core-splashscreen-1.0.1\\res\\values-watch-v20\\values-watch-v20.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

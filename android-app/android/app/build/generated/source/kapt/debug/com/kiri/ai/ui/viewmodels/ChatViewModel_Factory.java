@@ -17,8 +17,7 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava",
-    "cast"
+    "KotlinInternalInJava"
 })
 public final class ChatViewModel_Factory implements Factory<ChatViewModel> {
   private final Provider<Application> applicationProvider;
