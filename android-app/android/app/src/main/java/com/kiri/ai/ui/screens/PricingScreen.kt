@@ -169,9 +169,10 @@ fun PricingScreen(
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
-            if (uiState.error != null) {
+            val errorText = uiState.error
+            if (errorText != null) {
                 Text(
-                    text = uiState.error!!,
+                    text = errorText,
                     color = Color.Red,
                     style = KiriTypography.bodySmall,
                     modifier = Modifier.padding(top = 16.dp)
