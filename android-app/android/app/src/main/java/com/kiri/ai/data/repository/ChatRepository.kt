@@ -137,8 +137,9 @@ class ChatRepository @Inject constructor(
     suspend fun deleteConversation(id: String): Result<GenericResponse> {
         return try {
             val response = chatApi.deleteConversation(id)
-            if (response.isSuccessful && response.body() != null) {
-                Result.success(response.body()!!)
+            val body = response.body()
+            if (response.isSuccessful && body != null) {
+                Result.success(body)
             } else {
                 val errorBody = response.errorBody()?.string()
                 val message = if (errorBody?.trim()?.startsWith("{") == true) {
