@@ -30,6 +30,7 @@ import com.kiri.ai.ui.screens.*
 import com.kiri.ai.ui.theme.*
 import com.kiri.ai.ui.viewmodels.MainViewModel
 import com.kiri.ai.ui.viewmodels.SubscriptionViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.razorpay.PaymentData
 import com.razorpay.PaymentResultWithDataListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -77,7 +78,7 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
 
         setContent {
             val viewModel: MainViewModel = hiltViewModel()
-            val themeMode by viewModel.isDarkMode.collectAsState()
+            val themeMode by viewModel.isDarkMode.collectAsStateWithLifecycle()
             
             CompositionLocalProvider(LocalThemeMode provides themeMode) {
                 KiriTheme(darkTheme = themeMode) {
@@ -85,7 +86,7 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                         CrashDialog(lastCrash)
                     }
 
-                    val startDestination by viewModel.startDestination.collectAsState()
+                    val startDestination by viewModel.startDestination.collectAsStateWithLifecycle()
 
                     val startDest = startDestination
                     Surface(
