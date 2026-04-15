@@ -150,7 +150,7 @@ class ChatViewModel @Inject constructor(
                     val seenIds = mutableSetOf<String>()
                     val sanitizedMessages = (detail.messages ?: emptyList()).mapIndexed { index, msg ->
                         // ID_STABILITY_ENFORCEMENT: Permanent unique ID generation to stop SnapshotStateObserver
-                        val baseId = if (msg.id.isNullOrBlank()) "msg_${id}_${index}" else (msg.id ?: "msg_${index}")
+                        val baseId = if (msg.id.isNullOrBlank()) "msg_${id}_${index}" else msg.id
                         var finalId = baseId
                         var counter = 1
                         while (seenIds.contains(finalId)) {
@@ -239,7 +239,7 @@ class ChatViewModel @Inject constructor(
                 }
 
                 result.onSuccess { res ->
-                    if (res?.success == true) {
+                    if (res.success == true) {
                         // SANITIZE_AI_RESPONSE: Permanent stability truncation for incoming AI logs
                         val cleanAiMsg = if ((res.message?.length ?: 0) > 10000) {
                             res.message?.take(10000) + "\n\n... [TRUNCATED_FOR_STABILITY]"
@@ -275,7 +275,7 @@ class ChatViewModel @Inject constructor(
                         _uiState.update {
                             it.copy(
                                 isSending = false,
-                                error = res?.message ?: "Server returned error"
+                                error = res.message ?: "Server returned error"
                             )
                         }
                     }

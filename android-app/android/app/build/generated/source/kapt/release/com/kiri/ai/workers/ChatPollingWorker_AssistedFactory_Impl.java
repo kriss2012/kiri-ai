@@ -17,7 +17,9 @@ import javax.inject.Provider;
     "rawtypes",
     "KotlinInternal",
     "KotlinInternalInJava",
-    "cast"
+    "cast",
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class ChatPollingWorker_AssistedFactory_Impl implements ChatPollingWorker_AssistedFactory {
   private final ChatPollingWorker_Factory delegateFactory;

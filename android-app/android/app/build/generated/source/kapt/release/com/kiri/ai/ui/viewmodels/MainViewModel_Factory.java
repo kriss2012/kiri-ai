@@ -4,10 +4,11 @@ import com.kiri.ai.data.repository.AuthRepository;
 import com.kiri.ai.data.repository.ThemeRepository;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
+import dagger.internal.Provider;
+import dagger.internal.Providers;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 
 @ScopeMetadata
 @QualifierMetadata
@@ -21,7 +22,9 @@ import javax.inject.Provider;
     "rawtypes",
     "KotlinInternal",
     "KotlinInternalInJava",
-    "cast"
+    "cast",
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class MainViewModel_Factory implements Factory<MainViewModel> {
   private final Provider<AuthRepository> authRepositoryProvider;
@@ -37,6 +40,12 @@ public final class MainViewModel_Factory implements Factory<MainViewModel> {
   @Override
   public MainViewModel get() {
     return newInstance(authRepositoryProvider.get(), themeRepositoryProvider.get());
+  }
+
+  public static MainViewModel_Factory create(
+      javax.inject.Provider<AuthRepository> authRepositoryProvider,
+      javax.inject.Provider<ThemeRepository> themeRepositoryProvider) {
+    return new MainViewModel_Factory(Providers.asDaggerProvider(authRepositoryProvider), Providers.asDaggerProvider(themeRepositoryProvider));
   }
 
   public static MainViewModel_Factory create(Provider<AuthRepository> authRepositoryProvider,

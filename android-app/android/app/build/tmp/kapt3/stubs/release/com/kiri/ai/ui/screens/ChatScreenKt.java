@@ -4,45 +4,10 @@ package com.kiri.ai.ui.screens;
 public final class ChatScreenKt {
     
     /**
-     * ====================================================================================
-     * CRITICAL_STABILITY_NOTICE - CHAT_SCREEN_ERROR_FIXES
-     * ====================================================================================
+     * Kiri AI - Chat Interface
      *
-     * DATE: 2026-04-15
-     * SEVERITY: CRITICAL - App crashes on attachment/chat load
-     *
-     * ERROR_1_FIXED: SnapshotStateObserver.observeReads Crash
-     * --------------------------------------------------------
-     * STACK_TRACE_LOCATION:
-     *  androidx.compose.runtime.snapshots.SnapshotStateObserver.observeReads
-     *  androidx.compose.ui.node.OwnerSnapshotObserver.observeReads$ui_release
-     *  androidx.compose.ui.node.NodeCoordinator$drawBlock$1.invoke
-     *
-     * CAUSE: ViewModel was using mutableStateOf() instead of StateFlow
-     * FIX: ChatViewModel now uses StateFlow with collectAsStateWithLifecycle()
-     *
-     * ERROR_2_FIXED: Activity Result Callback During Draw Phase
-     * ---------------------------------------------------------
-     * CAUSE: rememberLauncherForActivityResult callback fires during draw/layout
-     *       Immediate viewModel.onFileSelected() call triggers state mutation mid-draw
-     *
-     * FIX: Deferred state update using coroutine scope:
-     *     scope.launch { viewModel.onFileSelected(it, name) }
-     *     This schedules update on next frame, avoiding snapshot observation conflict
-     *
-     * RULES_FOR_STABILITY:
-     * 1. LazyColumn items MUST use stable keys to prevent redundant recompositions.
-     * 2. Avoid nesting the LazyColumn inside other scrollable containers.
-     * 3. IME (keyboard) padding must be handled at the root level to prevent remeasure loops.
-     * 4. Keep the hierarchy flat to avoid 'dispatchGetDisplayList' recursion crashes.
-     * 5. NEVER call ViewModel methods directly in ActivityResultCallback - always defer.
-     *
-     * VERIFICATION_CHECKLIST:
-     * [x] Attachments add without crash
-     * [x] Chat sessions start safely
-     * [x] Old chats with attachments load without crash
-     * [x] State updates are lifecycle-aware
-     * ====================================================================================
+     * Cinematic, high-performance messaging interface implementing the Bugatti Design System.
+     * Optimized for architectural stability and technical flair.
      */
     @kotlin.OptIn(markerClass = {androidx.compose.material3.ExperimentalMaterial3Api.class})
     @androidx.compose.runtime.Composable()

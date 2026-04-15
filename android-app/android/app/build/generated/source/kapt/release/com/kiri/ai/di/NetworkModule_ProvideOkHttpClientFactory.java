@@ -3,10 +3,11 @@ package com.kiri.ai.di;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.Preconditions;
+import dagger.internal.Provider;
+import dagger.internal.Providers;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 
@@ -22,7 +23,9 @@ import okhttp3.OkHttpClient;
     "rawtypes",
     "KotlinInternal",
     "KotlinInternalInJava",
-    "cast"
+    "cast",
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class NetworkModule_ProvideOkHttpClientFactory implements Factory<OkHttpClient> {
   private final Provider<Interceptor> authInterceptorProvider;
@@ -34,6 +37,11 @@ public final class NetworkModule_ProvideOkHttpClientFactory implements Factory<O
   @Override
   public OkHttpClient get() {
     return provideOkHttpClient(authInterceptorProvider.get());
+  }
+
+  public static NetworkModule_ProvideOkHttpClientFactory create(
+      javax.inject.Provider<Interceptor> authInterceptorProvider) {
+    return new NetworkModule_ProvideOkHttpClientFactory(Providers.asDaggerProvider(authInterceptorProvider));
   }
 
   public static NetworkModule_ProvideOkHttpClientFactory create(

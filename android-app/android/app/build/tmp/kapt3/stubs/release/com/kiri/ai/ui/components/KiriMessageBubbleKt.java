@@ -4,11 +4,10 @@ package com.kiri.ai.ui.components;
 public final class KiriMessageBubbleKt {
     
     /**
-     * PROJECT_ZERO_G // REINFORCED_STABILITY_LAYER
+     * KiriMessageBubble Component
      *
-     * 1. graphicsLayer(renderEffect) isolation for complex MD blocks.
-     * 2. Segmented interpretation of internal technical metadata.
-     * 3. Atomic copy actions to prevent Snapshot transactions.
+     * Implements the Bugatti Design System's monochromatic aesthetic.
+     * Optimized for software-based rendering stability.
      */
     @androidx.compose.runtime.Composable()
     public static final void KiriMessageBubble(@org.jetbrains.annotations.Nullable()

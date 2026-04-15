@@ -3,10 +3,11 @@ package com.kiri.ai.data.repository;
 import com.kiri.ai.data.remote.SubscriptionApi;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
+import dagger.internal.Provider;
+import dagger.internal.Providers;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 
 @ScopeMetadata("javax.inject.Singleton")
 @QualifierMetadata
@@ -20,7 +21,9 @@ import javax.inject.Provider;
     "rawtypes",
     "KotlinInternal",
     "KotlinInternalInJava",
-    "cast"
+    "cast",
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class SubscriptionRepository_Factory implements Factory<SubscriptionRepository> {
   private final Provider<SubscriptionApi> subscriptionApiProvider;
@@ -32,6 +35,11 @@ public final class SubscriptionRepository_Factory implements Factory<Subscriptio
   @Override
   public SubscriptionRepository get() {
     return newInstance(subscriptionApiProvider.get());
+  }
+
+  public static SubscriptionRepository_Factory create(
+      javax.inject.Provider<SubscriptionApi> subscriptionApiProvider) {
+    return new SubscriptionRepository_Factory(Providers.asDaggerProvider(subscriptionApiProvider));
   }
 
   public static SubscriptionRepository_Factory create(

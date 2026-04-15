@@ -4,10 +4,11 @@ import com.kiri.ai.data.local.AuthDataStore;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.Preconditions;
+import dagger.internal.Provider;
+import dagger.internal.Providers;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 import okhttp3.Interceptor;
 
 @ScopeMetadata("javax.inject.Singleton")
@@ -22,7 +23,9 @@ import okhttp3.Interceptor;
     "rawtypes",
     "KotlinInternal",
     "KotlinInternalInJava",
-    "cast"
+    "cast",
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class NetworkModule_ProvideAuthInterceptorFactory implements Factory<Interceptor> {
   private final Provider<AuthDataStore> authDataStoreProvider;
@@ -35,6 +38,11 @@ public final class NetworkModule_ProvideAuthInterceptorFactory implements Factor
   @Override
   public Interceptor get() {
     return provideAuthInterceptor(authDataStoreProvider.get());
+  }
+
+  public static NetworkModule_ProvideAuthInterceptorFactory create(
+      javax.inject.Provider<AuthDataStore> authDataStoreProvider) {
+    return new NetworkModule_ProvideAuthInterceptorFactory(Providers.asDaggerProvider(authDataStoreProvider));
   }
 
   public static NetworkModule_ProvideAuthInterceptorFactory create(

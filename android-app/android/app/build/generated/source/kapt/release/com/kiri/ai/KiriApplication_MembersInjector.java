@@ -4,9 +4,10 @@ import androidx.hilt.work.HiltWorkerFactory;
 import dagger.MembersInjector;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.InjectedFieldSignature;
+import dagger.internal.Provider;
+import dagger.internal.Providers;
 import dagger.internal.QualifierMetadata;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 
 @QualifierMetadata
 @DaggerGenerated
@@ -19,7 +20,9 @@ import javax.inject.Provider;
     "rawtypes",
     "KotlinInternal",
     "KotlinInternalInJava",
-    "cast"
+    "cast",
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class KiriApplication_MembersInjector implements MembersInjector<KiriApplication> {
   private final Provider<HiltWorkerFactory> workerFactoryProvider;
@@ -31,6 +34,11 @@ public final class KiriApplication_MembersInjector implements MembersInjector<Ki
   public static MembersInjector<KiriApplication> create(
       Provider<HiltWorkerFactory> workerFactoryProvider) {
     return new KiriApplication_MembersInjector(workerFactoryProvider);
+  }
+
+  public static MembersInjector<KiriApplication> create(
+      javax.inject.Provider<HiltWorkerFactory> workerFactoryProvider) {
+    return new KiriApplication_MembersInjector(Providers.asDaggerProvider(workerFactoryProvider));
   }
 
   @Override

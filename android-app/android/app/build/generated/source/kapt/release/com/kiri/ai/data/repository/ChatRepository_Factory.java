@@ -4,10 +4,11 @@ import android.content.Context;
 import com.kiri.ai.data.remote.ChatApi;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
+import dagger.internal.Provider;
+import dagger.internal.Providers;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 
 @ScopeMetadata("javax.inject.Singleton")
 @QualifierMetadata("dagger.hilt.android.qualifiers.ApplicationContext")
@@ -21,7 +22,9 @@ import javax.inject.Provider;
     "rawtypes",
     "KotlinInternal",
     "KotlinInternalInJava",
-    "cast"
+    "cast",
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class ChatRepository_Factory implements Factory<ChatRepository> {
   private final Provider<ChatApi> chatApiProvider;
@@ -37,6 +40,11 @@ public final class ChatRepository_Factory implements Factory<ChatRepository> {
   @Override
   public ChatRepository get() {
     return newInstance(chatApiProvider.get(), contextProvider.get());
+  }
+
+  public static ChatRepository_Factory create(javax.inject.Provider<ChatApi> chatApiProvider,
+      javax.inject.Provider<Context> contextProvider) {
+    return new ChatRepository_Factory(Providers.asDaggerProvider(chatApiProvider), Providers.asDaggerProvider(contextProvider));
   }
 
   public static ChatRepository_Factory create(Provider<ChatApi> chatApiProvider,

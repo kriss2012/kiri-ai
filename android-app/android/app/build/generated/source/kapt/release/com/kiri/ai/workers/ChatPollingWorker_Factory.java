@@ -4,10 +4,11 @@ import android.content.Context;
 import androidx.work.WorkerParameters;
 import com.kiri.ai.data.repository.ChatRepository;
 import dagger.internal.DaggerGenerated;
+import dagger.internal.Provider;
+import dagger.internal.Providers;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 
 @ScopeMetadata
 @QualifierMetadata
@@ -21,7 +22,9 @@ import javax.inject.Provider;
     "rawtypes",
     "KotlinInternal",
     "KotlinInternalInJava",
-    "cast"
+    "cast",
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class ChatPollingWorker_Factory {
   private final Provider<ChatRepository> chatRepositoryProvider;
@@ -32,6 +35,11 @@ public final class ChatPollingWorker_Factory {
 
   public ChatPollingWorker get(Context appContext, WorkerParameters workerParams) {
     return newInstance(appContext, workerParams, chatRepositoryProvider.get());
+  }
+
+  public static ChatPollingWorker_Factory create(
+      javax.inject.Provider<ChatRepository> chatRepositoryProvider) {
+    return new ChatPollingWorker_Factory(Providers.asDaggerProvider(chatRepositoryProvider));
   }
 
   public static ChatPollingWorker_Factory create(Provider<ChatRepository> chatRepositoryProvider) {

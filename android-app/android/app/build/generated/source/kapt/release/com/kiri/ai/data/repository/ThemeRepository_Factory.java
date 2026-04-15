@@ -3,10 +3,11 @@ package com.kiri.ai.data.repository;
 import android.content.Context;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
+import dagger.internal.Provider;
+import dagger.internal.Providers;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 
 @ScopeMetadata("javax.inject.Singleton")
 @QualifierMetadata("dagger.hilt.android.qualifiers.ApplicationContext")
@@ -20,7 +21,9 @@ import javax.inject.Provider;
     "rawtypes",
     "KotlinInternal",
     "KotlinInternalInJava",
-    "cast"
+    "cast",
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class ThemeRepository_Factory implements Factory<ThemeRepository> {
   private final Provider<Context> contextProvider;
@@ -32,6 +35,10 @@ public final class ThemeRepository_Factory implements Factory<ThemeRepository> {
   @Override
   public ThemeRepository get() {
     return newInstance(contextProvider.get());
+  }
+
+  public static ThemeRepository_Factory create(javax.inject.Provider<Context> contextProvider) {
+    return new ThemeRepository_Factory(Providers.asDaggerProvider(contextProvider));
   }
 
   public static ThemeRepository_Factory create(Provider<Context> contextProvider) {

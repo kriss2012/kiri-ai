@@ -4,10 +4,11 @@ import com.kiri.ai.data.remote.SubscriptionApi;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.Preconditions;
+import dagger.internal.Provider;
+import dagger.internal.Providers;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 import retrofit2.Retrofit;
 
 @ScopeMetadata("javax.inject.Singleton")
@@ -22,7 +23,9 @@ import retrofit2.Retrofit;
     "rawtypes",
     "KotlinInternal",
     "KotlinInternalInJava",
-    "cast"
+    "cast",
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class NetworkModule_ProvideSubscriptionApiFactory implements Factory<SubscriptionApi> {
   private final Provider<Retrofit> retrofitProvider;
@@ -34,6 +37,11 @@ public final class NetworkModule_ProvideSubscriptionApiFactory implements Factor
   @Override
   public SubscriptionApi get() {
     return provideSubscriptionApi(retrofitProvider.get());
+  }
+
+  public static NetworkModule_ProvideSubscriptionApiFactory create(
+      javax.inject.Provider<Retrofit> retrofitProvider) {
+    return new NetworkModule_ProvideSubscriptionApiFactory(Providers.asDaggerProvider(retrofitProvider));
   }
 
   public static NetworkModule_ProvideSubscriptionApiFactory create(

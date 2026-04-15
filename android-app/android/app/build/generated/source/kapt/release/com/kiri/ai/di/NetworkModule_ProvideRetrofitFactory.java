@@ -3,10 +3,11 @@ package com.kiri.ai.di;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.Preconditions;
+import dagger.internal.Provider;
+import dagger.internal.Providers;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
@@ -22,7 +23,9 @@ import retrofit2.Retrofit;
     "rawtypes",
     "KotlinInternal",
     "KotlinInternalInJava",
-    "cast"
+    "cast",
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class NetworkModule_ProvideRetrofitFactory implements Factory<Retrofit> {
   private final Provider<OkHttpClient> okHttpClientProvider;
@@ -34,6 +37,11 @@ public final class NetworkModule_ProvideRetrofitFactory implements Factory<Retro
   @Override
   public Retrofit get() {
     return provideRetrofit(okHttpClientProvider.get());
+  }
+
+  public static NetworkModule_ProvideRetrofitFactory create(
+      javax.inject.Provider<OkHttpClient> okHttpClientProvider) {
+    return new NetworkModule_ProvideRetrofitFactory(Providers.asDaggerProvider(okHttpClientProvider));
   }
 
   public static NetworkModule_ProvideRetrofitFactory create(

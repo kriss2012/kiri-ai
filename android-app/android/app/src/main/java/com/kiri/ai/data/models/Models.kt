@@ -70,10 +70,12 @@ data class ChatMessage(
     val content: String? = "",
     @SerializedName("_id", alternate = ["id"])
     val id: String? = null,
-    val timestamp: Long = System.currentTimeMillis() // Added for stability tie-breaking
+    val timestamp: Long = System.currentTimeMillis(),
+    val localId: String = java.util.UUID.randomUUID().toString() // PERMANENT_STABILITY_ANCHOR
 ) {
     // Helper to ensure we always have a non-null ID for LazyColumn keys
-    fun getStableId(): String = id ?: "msg_${role}_${content?.hashCode() ?: 0}_$timestamp"
+    // We prioritize remote ID, then fixed localId. NEVER use content.hashCode() here.
+    fun getStableId(): String = id ?: localId
 }
 
 data class ChatDetail(

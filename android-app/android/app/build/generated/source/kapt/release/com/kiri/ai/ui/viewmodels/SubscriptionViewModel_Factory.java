@@ -4,10 +4,11 @@ import com.kiri.ai.data.local.AuthDataStore;
 import com.kiri.ai.data.repository.SubscriptionRepository;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
+import dagger.internal.Provider;
+import dagger.internal.Providers;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 
 @ScopeMetadata
 @QualifierMetadata
@@ -21,7 +22,9 @@ import javax.inject.Provider;
     "rawtypes",
     "KotlinInternal",
     "KotlinInternalInJava",
-    "cast"
+    "cast",
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class SubscriptionViewModel_Factory implements Factory<SubscriptionViewModel> {
   private final Provider<SubscriptionRepository> repositoryProvider;
@@ -37,6 +40,12 @@ public final class SubscriptionViewModel_Factory implements Factory<Subscription
   @Override
   public SubscriptionViewModel get() {
     return newInstance(repositoryProvider.get(), authDataStoreProvider.get());
+  }
+
+  public static SubscriptionViewModel_Factory create(
+      javax.inject.Provider<SubscriptionRepository> repositoryProvider,
+      javax.inject.Provider<AuthDataStore> authDataStoreProvider) {
+    return new SubscriptionViewModel_Factory(Providers.asDaggerProvider(repositoryProvider), Providers.asDaggerProvider(authDataStoreProvider));
   }
 
   public static SubscriptionViewModel_Factory create(
