@@ -1,5 +1,35 @@
 package com.kiri.ai.ui.viewmodels
 
+/**
+ * ====================================================================================
+ * STABILITY_ARCHITECTURE_NOTICE
+ * ====================================================================================
+ * 
+ * ERROR_FIXED: SnapshotStateObserver Crash - 2026-04-15
+ * 
+ * ARCHITECTURAL_VIOLATION_CORRECTED:
+ * ----------------------------------
+ * Previously this ViewModel used 'mutableStateOf()' which is a COMPOSE-ONLY API.
+ * mutableStateOf is designed for use INSIDE @Composable functions with 'remember'.
+ * Using it in ViewModels causes snapshot transaction violations when:
+ *   - State updates occur outside composition (file pickers, callbacks)
+ *   - Multiple threads access state concurrently
+ *   - Activity lifecycle transitions trigger state reads
+ * 
+ * CORRECT_PATTERN_IMPLEMENTED:
+ * ----------------------------
+ * Now using StateFlow which is the proper Kotlin Flow-based state holder for ViewModels:
+ *   - MutableStateFlow for internal updates (thread-safe, atomic)
+ *   - StateFlow for external observation (lifecycle-aware)
+ *   - _uiState.update { } for immutable state mutations
+ * 
+ * Key difference: StateFlow uses Kotlin Coroutines for concurrency, while mutableStateOf
+ * uses Compose's snapshot system which fails outside composition.
+ * 
+ * DO_NOT_CHANGE: Reverting to mutableStateOf will reintroduce the crash.
+ * ====================================================================================
+ */
+
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Lifecycle
