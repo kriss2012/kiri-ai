@@ -60,25 +60,27 @@ class ChatRepository @Inject constructor(
     }
 
     private fun handleResponse(response: retrofit2.Response<ChatResponse>): Result<ChatResponse> {
-        return if (response.isSuccessful) {
-            val body = response.body()
-            if (body != null) {
-                Result.success(body)
-            } else {
-                Result.failure(Exception("EMPTY_RESPONSE: Server returned no data"))
-            }
-        } else {
-            val errorMsg = try {
-                val errorBody = response.errorBody()?.string()
-                if (errorBody?.contains("message") == true) {
-                    com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message
+        return try {
+            if (response.isSuccessful) {
+                val body = response.body()
+                if (body != null) {
+                    Result.success(body)
                 } else {
-                    "API_ERROR_${response.code()}"
+                    Result.failure(Exception("SERVER_EMPTY_RESPONSE: The server returned success but no data."))
                 }
-            } catch (e: Exception) {
-                "API_ERROR_${response.code()}"
+            } else {
+                val errorBody = response.errorBody()?.string()
+                val parsedError = if (errorBody != null && errorBody.trim().startsWith("{")) {
+                    try {
+                        com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message
+                    } catch (e: Exception) { null }
+                } else null
+
+                val finalMessage = parsedError ?: "HTTP_ERROR_${response.code()}: The server is temporarily unavailable."
+                Result.failure(Exception(finalMessage))
             }
-            Result.failure(Exception(errorMsg ?: "UNKNOWN_ERROR"))
+        } catch (e: Exception) {
+            Result.failure(Exception("PARSING_ERROR: Unexpected response format from server."))
         }
     }
 
@@ -88,10 +90,14 @@ class ChatRepository @Inject constructor(
             if (response.isSuccessful) {
                 Result.success(response.body()?.conversations ?: emptyList())
             } else {
-                Result.failure(Exception("Failed to load conversations (${response.code()})"))
+                val errorBody = response.errorBody()?.string() ?: "Unknown error"
+                val message = if (errorBody.contains("message")) {
+                    try { com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message } catch(e: Exception) { "SERVER_ERROR_${response.code()}" }
+                } else "SERVER_ERROR_${response.code()}"
+                Result.failure(Exception(message ?: "Failed to load chats."))
             }
         } catch (e: java.net.UnknownHostException) {
-            Result.failure(Exception("Offline: Conversations could not be loaded."))
+            Result.failure(Exception("OFFLINE: Please check your internet connection."))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -105,13 +111,13 @@ class ChatRepository @Inject constructor(
                 if (detail != null) {
                     Result.success(detail)
                 } else {
-                    Result.success(ChatDetail(id = id, title = "Untitled", messages = emptyList()))
+                    Result.success(ChatDetail(id = id, title = "Untitled Chat", messages = emptyList()))
                 }
             } else {
-                Result.failure(Exception("Conversation not found or server error (${response.code()})"))
+                Result.failure(Exception("Chat session not found (${response.code()})"))
             }
         } catch (e: java.net.UnknownHostException) {
-            Result.failure(Exception("Offline: Message history unavailable."))
+            Result.failure(Exception("OFFLINE: Message history unavailable."))
         } catch (e: Exception) {
             Result.failure(e)
         }

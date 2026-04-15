@@ -7,7 +7,7 @@
     mergedManifest="build\intermediates\merged_manifest\release\processReleaseMainManifest\AndroidManifest.xml"
     proguardFiles="build\intermediates\default_proguard_files\global\proguard-android-optimize.txt-8.3.2;proguard-rules.pro"
     partialResultsDir="build\intermediates\lint_vital_partial_results\release\lintVitalAnalyzeRelease\out"
-    desugaredMethodsFiles="C:\Users\krishna\.gradle\caches\8.13\transforms\e5c07ec350133491d2c4224c7b458f22\transformed\D8BackportedDesugaredMethods.txt">
+    desugaredMethodsFiles="C:\Users\krishna\.gradle\caches\8.13\transforms\edcfafc039626de8b60c26c4a3ebb16a\transformed\D8BackportedDesugaredMethods.txt">
   <buildFeatures
       namespacing="REQUIRED"/>
   <sourceProviders>
@@ -27,6 +27,6 @@
       applicationId="com.kiri.ai"
       generatedSourceFolders="build\generated\source\kapt\release;build\generated\ap_generated_sources\release\out"
       generatedResourceFolders="build\generated\res\resValues\release"
-      desugaredMethodsFiles="C:\Users\krishna\.gradle\caches\8.13\transforms\e5c07ec350133491d2c4224c7b458f22\transformed\D8BackportedDesugaredMethods.txt">
+      desugaredMethodsFiles="C:\Users\krishna\.gradle\caches\8.13\transforms\edcfafc039626de8b60c26c4a3ebb16a\transformed\D8BackportedDesugaredMethods.txt">
   </artifact>
 </variant>

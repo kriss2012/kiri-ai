@@ -25,7 +25,11 @@ class AuthRepository @Inject constructor(
                 authRes.user?.let { authDataStore.saveUser(it) }
                 Result.success(authRes)
             } else {
-                Result.failure(Exception(response.message()))
+                val errorBody = response.errorBody()?.string()
+                val message = if (errorBody?.trim()?.startsWith("{") == true) {
+                    try { com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message } catch(e: Exception) { null }
+                } else null
+                Result.failure(Exception(message ?: "Login failed (${response.code()})"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -41,7 +45,11 @@ class AuthRepository @Inject constructor(
                 authRes.user?.let { authDataStore.saveUser(it) }
                 Result.success(authRes)
             } else {
-                Result.failure(Exception(response.message()))
+                val errorBody = response.errorBody()?.string()
+                val message = if (errorBody?.trim()?.startsWith("{") == true) {
+                    try { com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message } catch(e: Exception) { null }
+                } else null
+                Result.failure(Exception(message ?: "Registration failed (${response.code()})"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -56,7 +64,11 @@ class AuthRepository @Inject constructor(
                 authRes.user?.let { authDataStore.saveUser(it) }
                 Result.success(authRes)
             } else {
-                Result.failure(Exception(response.message()))
+                val errorBody = response.errorBody()?.string()
+                val message = if (errorBody?.trim()?.startsWith("{") == true) {
+                    try { com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message } catch(e: Exception) { null }
+                } else null
+                Result.failure(Exception(message ?: "Failed to fetch user data (${response.code()})"))
             }
         } catch (e: Exception) {
             Result.failure(e)
