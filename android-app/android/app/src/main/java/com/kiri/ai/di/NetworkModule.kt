@@ -28,9 +28,20 @@ object NetworkModule {
     @Singleton
     fun provideAuthInterceptor(authDataStore: AuthDataStore): Interceptor {
         return Interceptor { chain ->
-            val token = runBlocking { authDataStore.token.first() }
+            // Use firstOrNull with a small timeout or just fallback to null if it takes too long
+            // though runBlocking is generally okay in OkHttp Interceptors as they run on background threads.
+            val token = try {
+                runBlocking { 
+                    kotlinx.coroutines.withTimeoutOrNull(2000) {
+                        authDataStore.token.first() 
+                    }
+                }
+            } catch (e: Exception) {
+                null
+            }
+            
             val request = chain.request().newBuilder()
-            if (token != null) {
+            if (!token.isNullOrBlank()) {
                 request.addHeader("Authorization", "Bearer $token")
             }
             chain.proceed(request.build())

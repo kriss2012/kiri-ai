@@ -687,4 +687,5 @@ int styleable WalletFragmentStyle_maskedWalletDetailsLogoImageType 8
 int styleable WalletFragmentStyle_maskedWalletDetailsLogoTextColor 9
 int styleable WalletFragmentStyle_maskedWalletDetailsTextAppearance 10
 int xml config 0x7f100000
-int xml file_provider_path 0x7f100001
+int xml file_paths 0x7f100001
+int xml file_provider_path 0x7f100002

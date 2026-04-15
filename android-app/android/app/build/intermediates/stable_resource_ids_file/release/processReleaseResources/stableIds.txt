@@ -1,3 +1,4 @@
+com.kiri.ai:xml/file_paths = 0x7f100001
 com.kiri.ai:styleable/WalletFragmentStyle = 0x7f0f001a
 com.kiri.ai:styleable/WalletFragmentOptions = 0x7f0f0019
 com.kiri.ai:styleable/StateListDrawableItem = 0x7f0f0018
@@ -304,7 +305,7 @@ com.kiri.ai:id/notification_background = 0x7f08005f
 com.kiri.ai:drawable/common_google_signin_btn_icon_light_normal = 0x7f07000a
 com.kiri.ai:drawable/common_google_signin_btn_icon_disabled = 0x7f070007
 com.kiri.ai:drawable/common_google_signin_btn_icon_dark = 0x7f070003
-com.kiri.ai:xml/file_provider_path = 0x7f100001
+com.kiri.ai:xml/file_provider_path = 0x7f100002
 com.kiri.ai:id/report_drawn = 0x7f080065
 com.kiri.ai:id/coil_request_manager = 0x7f080038
 com.kiri.ai:drawable/common_google_signin_btn_text_dark_normal_background = 0x7f07000f

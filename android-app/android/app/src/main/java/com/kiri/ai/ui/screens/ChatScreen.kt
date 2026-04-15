@@ -35,7 +35,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.kiri.ai.R
+import androidx.core.content.FileProvider
+import com.kiri.ai.BuildConfig
 import com.kiri.ai.ui.components.*
 import com.kiri.ai.ui.theme.*
 import com.kiri.ai.data.models.*
@@ -108,17 +109,16 @@ fun ChatScreen(
 
     // File Picker Launcher
     val filePickerLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocument(),
+        contract = ActivityResultContracts.GetContent(),
         onResult = { uri ->
             uri?.let {
                 val name = context.contentResolver.query(it, null, null, null, null)?.use { cursor ->
                     val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                    cursor.moveToFirst()
-                    cursor.getString(nameIndex)
-                }
-                // DEFERRED_STATE_UPDATE: Launch on next frame to avoid SnapshotStateObserver crash
-                // Activity result callbacks can fire during draw phase; immediate state updates
-                // trigger concurrent modification during snapshot observation.
+                    if (nameIndex != -1 && cursor.moveToFirst()) {
+                        cursor.getString(nameIndex)
+                    } else null
+                } ?: it.lastPathSegment
+
                 scope.launch {
                     viewModel.onFileSelected(it, name)
                 }

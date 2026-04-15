@@ -9,3 +9,4 @@ string app_name
 style Theme.App.Starting
 style Theme.KiriAI
 xml config
+xml file_paths
