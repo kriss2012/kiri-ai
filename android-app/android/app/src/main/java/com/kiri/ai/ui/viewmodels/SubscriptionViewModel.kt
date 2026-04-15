@@ -1,5 +1,29 @@
 package com.kiri.ai.ui.viewmodels
 
+/**
+ * ====================================================================================
+ * STABILITY_ARCHITECTURE_NOTICE
+ * ====================================================================================
+ * 
+ * ERROR_FIXED: SnapshotStateObserver Crash - 2026-04-15
+ * 
+ * ARCHITECTURAL_VIOLATION_CORRECTED:
+ * ----------------------------------
+ * Previously this ViewModel used 'mutableStateOf()' which is COMPOSE-ONLY API.
+ * This caused crashes during payment flows when state was accessed outside
+ * composition (e.g., during Razorpay callbacks, background threads).
+ * 
+ * CORRECT_PATTERN_IMPLEMENTED:
+ * ----------------------------
+ * Now using StateFlow:
+ *   - MutableStateFlow for internal updates (thread-safe)
+ *   - StateFlow for external observation (lifecycle-aware)
+ *   - _uiState.update { } for atomic state mutations
+ * 
+ * DO_NOT_CHANGE: Reverting to mutableStateOf will reintroduce crashes.
+ * ====================================================================================
+ */
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kiri.ai.data.local.AuthDataStore
