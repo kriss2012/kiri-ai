@@ -105,14 +105,17 @@ class ChatViewModel @Inject constructor(
     private fun observeConnectivity() {
         chatRepository.isConnected
             .onEach { connected ->
-                _uiState.update { it.copy(isConnected = connected) }
-                if (connected) {
-                    // AUTO_RELOAD: On reconnection, refresh current context
-                    val currentId = _uiState.value.currentConversationId
-                    if (currentId != null) {
-                        selectConversation(currentId)
-                    } else {
-                        loadConversations()
+                // DEFERRED_UPDATE: Use viewModelScope to move state update out of the observation collector
+                // to prevent SnapshotStateObserver violations if this collector is triggered during composition.
+                viewModelScope.launch {
+                    _uiState.update { it.copy(isConnected = connected) }
+                    if (connected) {
+                        val currentId = _uiState.value.currentConversationId
+                        if (currentId != null) {
+                            selectConversation(currentId)
+                        } else {
+                            loadConversations()
+                        }
                     }
                 }
             }
@@ -178,14 +181,18 @@ class ChatViewModel @Inject constructor(
     }
 
     fun selectConversation(id: String) {
+        // PREVENT_REDUNDANT_RECOMPOSITION: If already loading or selected, skip
+        if (_uiState.value.isLoadingMessages && _uiState.value.currentConversationId == id) return
+        
         viewModelScope.launch {
             try {
                 _uiState.update { it.copy(isLoadingMessages = true, currentConversationId = id, error = null) }
                 chatRepository.getConversationDetail(id).onSuccess { detail ->
                     // Ensure each message has a unique stable ID for LazyColumn to prevent crashes
                     val seenIds = mutableSetOf<String>()
-                    val sanitizedMessages = detail.messages?.mapIndexed { index, msg ->
-                        val baseId = if (msg.id.isNullOrBlank()) "msg_${id}_${index}" else msg.id ?: "msg_${index}"
+                    val sanitizedMessages = (detail.messages ?: emptyList()).mapIndexed { index, msg ->
+                        // ID_STABILITY_ENFORCEMENT: Permanent unique ID generation to stop SnapshotStateObserver
+                        val baseId = if (msg.id.isNullOrBlank()) "msg_${id}_${index}" else (msg.id ?: "msg_${index}")
                         var finalId = baseId
                         var counter = 1
                         while (seenIds.contains(finalId)) {
@@ -196,13 +203,13 @@ class ChatViewModel @Inject constructor(
                         
                         // SANITIZE_CONTENT: Permanent stability truncation at the source
                         val cleanContent = if ((msg.content?.length ?: 0) > 10000) {
-                            msg.content?.take(10000) + "\n\n... [TRUNCATED_FOR_STABILITY]"
+                            (msg.content?.take(10000) ?: "") + "\n\n... [TRUNCATED_FOR_STABILITY]"
                         } else {
                             msg.content ?: ""
                         }
                         
                         msg.copy(id = finalId, content = cleanContent)
-                    } ?: emptyList()
+                    }
 
                     _uiState.update {
                         it.copy(
