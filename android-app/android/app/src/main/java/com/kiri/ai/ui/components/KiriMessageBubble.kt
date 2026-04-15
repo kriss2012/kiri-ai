@@ -178,8 +178,8 @@ private fun AssistantContent(content: String) {
                 linkText = ShowroomWhite
             ),
             components = markdownComponents(
-                codeBlock = { MarkdownHighlightedCodeBlock(it.content, it.language) },
-                codeFence = { MarkdownHighlightedCodeFence(it.content, it.language) }
+                codeBlock = { block -> MarkdownHighlightedCodeBlock(block.content, block.language) },
+                codeFence = { fence -> MarkdownHighlightedCodeFence(fence.content, fence.language) }
             )
         )
     }

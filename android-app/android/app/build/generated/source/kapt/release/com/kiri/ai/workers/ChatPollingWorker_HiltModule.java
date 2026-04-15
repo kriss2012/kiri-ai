@@ -9,7 +9,9 @@ import dagger.hilt.codegen.OriginatingElement;
 import dagger.hilt.components.SingletonComponent;
 import dagger.multibindings.IntoMap;
 import dagger.multibindings.StringKey;
+import javax.annotation.processing.Generated;
 
+@Generated("androidx.hilt.AndroidXHiltProcessor")
 @Module
 @InstallIn(SingletonComponent.class)
 @OriginatingElement(

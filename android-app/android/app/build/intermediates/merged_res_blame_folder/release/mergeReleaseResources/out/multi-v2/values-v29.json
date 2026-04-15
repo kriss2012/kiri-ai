@@ -4,7 +4,7 @@
             "outputFile": "com.kiri.ai.app-mergeReleaseResources-70:/values-v29/values-v29.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\e73ef06ed7af4677a1cd5321e1572d4f\\transformed\\jetified-core-splashscreen-1.0.1\\res\\values-v29\\values-v29.xml",
+                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\097b0279769a8f0943299a63149c9f66\\transformed\\jetified-core-splashscreen-1.0.1\\res\\values-v29\\values-v29.xml",
                     "from": {
                         "startLines": "2,7",
                         "startColumns": "4,4",

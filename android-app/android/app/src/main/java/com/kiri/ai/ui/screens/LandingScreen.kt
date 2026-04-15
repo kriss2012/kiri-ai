@@ -22,6 +22,7 @@ import androidx.navigation.NavController
 import com.kiri.ai.R
 import com.kiri.ai.ui.components.KiriButton
 import com.kiri.ai.ui.components.KiriSecondaryButton
+import com.kiri.ai.ui.components.BugattiLogo
 import com.kiri.ai.ui.theme.*
 
 /**
