@@ -89,6 +89,8 @@ private fun UserContent(content: String, colorScheme: ColorScheme) {
             AsyncImage(
                 model = imageUrl,
                 contentDescription = "User uploaded image",
+                placeholder = androidx.compose.ui.graphics.painter.ColorPainter(colorScheme.surfaceVariant),
+                error = androidx.compose.ui.graphics.painter.ColorPainter(colorScheme.errorContainer),
                 modifier = Modifier
                     .fillMaxWidth()
                     .heightIn(max = 240.dp) // Slightly increased for better visibility
