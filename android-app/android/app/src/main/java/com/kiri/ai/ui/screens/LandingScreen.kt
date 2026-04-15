@@ -115,47 +115,29 @@ fun LandingScreen(navController: NavController) {
         // Top Spacer for Cinematic Air
         Spacer(modifier = Modifier.height(80.dp))
 
-        // App Logo - Visual Identity
+        // App Logo - Cinematic Enhancement
         AnimatedVisibility(
             visible = startAnimation,
-            enter = fadeIn(animationSpec = tween(1000, delayMillis = 200)) +
-                    slideInVertically(initialOffsetY = { -50 })
+            enter = fadeIn(animationSpec = tween(1200, delayMillis = 200)) +
+                    scaleIn(animationSpec = tween(1000, easing = EaseOutExpo), initialScale = 0.8f)
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.app_logo),
-                contentDescription = "Kiri AI Logo",
-                modifier = Modifier
-                    .size(140.dp)
-                    .clip(RoundedCornerShape(24.dp))
-                    .padding(bottom = 24.dp)
-            )
+            BugattiLogo(modifier = Modifier.padding(bottom = 48.dp))
         }
 
-        // Monumental Branding
+        // Feature Description (Quiet Mono)
         AnimatedVisibility(
             visible = startAnimation,
-            enter = fadeIn(animationSpec = tween(1500)) + 
-                    expandVertically(animationSpec = tween(1000, easing = EaseOutExpo))
+            enter = fadeIn(animationSpec = tween(1200, delayMillis = 600))
         ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    text = "KIRI",
-                    style = KiriTypography.displayLarge.copy(
-                        color = ShowroomWhite,
-                        fontSize = 100.sp, // Monumental scale
-                        lineHeight = 90.sp
-                    ),
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    text = "INTELLIGENCE",
-                    style = KiriTypography.labelLarge.copy(
-                        color = ShowroomWhite,
-                        letterSpacing = 8.sp // Ultra-wide tracking
-                    ),
-                    textAlign = TextAlign.Center
-                )
-            }
+            Text(
+                text = "HYPER-PERFORMANCE REASONING // ATELIER_V1",
+                style = KiriTypography.labelLarge.copy(
+                    color = SilverMist,
+                    textAlign = TextAlign.Center,
+                    letterSpacing = 4.sp
+                ),
+                modifier = Modifier.padding(horizontal = 32.dp)
+            )
         }
 
         Spacer(modifier = Modifier.height(60.dp))

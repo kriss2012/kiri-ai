@@ -8,6 +8,10 @@
         "source": "C:\\Users\\krishna\\.gradle\\daemon\\8.13\\com.kiri.ai.app-main-73:\\drawable\\ic_launcher_foreground.xml"
     },
     {
+        "merged": "C:\\Users\\krishna\\.gradle\\daemon\\8.13\\com.kiri.ai.app-release-72:\\xml_file_paths.xml.flat",
+        "source": "C:\\Users\\krishna\\.gradle\\daemon\\8.13\\com.kiri.ai.app-main-73:\\xml\\file_paths.xml"
+    },
+    {
         "merged": "C:\\Users\\krishna\\.gradle\\daemon\\8.13\\com.kiri.ai.app-release-72:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "C:\\Users\\krishna\\.gradle\\daemon\\8.13\\com.kiri.ai.app-main-73:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },

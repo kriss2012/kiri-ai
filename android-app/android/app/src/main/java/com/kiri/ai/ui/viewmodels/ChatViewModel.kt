@@ -32,9 +32,6 @@ package com.kiri.ai.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.viewModelScope
 import com.kiri.ai.data.models.*
 import com.kiri.ai.data.repository.AuthRepository
@@ -42,13 +39,7 @@ import com.kiri.ai.data.repository.ChatRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import android.net.Uri
-import androidx.work.Constraints
-import androidx.work.NetworkType
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
-import com.kiri.ai.workers.ChatPollingWorker
 import java.io.File
-import java.util.concurrent.TimeUnit
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -56,7 +47,6 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.UUID
-
 import androidx.lifecycle.SavedStateHandle
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
@@ -71,21 +61,11 @@ class ChatViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : AndroidViewModel(application) {
 
-    private val workManager = WorkManager.getInstance(application)
-    
     // SAVED_STATE_KEYS: Keys for process death restoration
     private companion object {
         const val KEY_INPUT = "chat_input_text"
         const val KEY_FILE_URI = "chat_file_uri"
         const val KEY_FILE_NAME = "chat_file_name"
-    }
-
-    private val lifecycleObserver = LifecycleEventObserver { _, event ->
-        when (event) {
-            Lifecycle.Event.ON_STOP -> scheduleBackgroundPolling()
-            Lifecycle.Event.ON_START -> cancelBackgroundPolling()
-            else -> {}
-        }
     }
 
     private val _uiState = MutableStateFlow(ChatUiState(
@@ -99,7 +79,6 @@ class ChatViewModel @Inject constructor(
         observeUserData()
         observeConnectivity()
         loadConversations()
-        ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
     }
 
     private fun observeConnectivity() {
@@ -124,29 +103,8 @@ class ChatViewModel @Inject constructor(
 
     override fun onCleared() {
         super.onCleared()
-        ProcessLifecycleOwner.get().lifecycle.removeObserver(lifecycleObserver)
-        cancelBackgroundPolling()
     }
 
-    private fun scheduleBackgroundPolling() {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-        
-        val workRequest = PeriodicWorkRequestBuilder<ChatPollingWorker>(15, TimeUnit.MINUTES)
-            .setConstraints(constraints)
-            .build()
-        
-        workManager.enqueueUniquePeriodicWork(
-            "ChatPolling",
-            androidx.work.ExistingPeriodicWorkPolicy.KEEP,
-            workRequest
-        )
-    }
-
-    private fun cancelBackgroundPolling() {
-        workManager.cancelUniqueWork("ChatPolling")
-    }
 
     private fun observeUserData() {
         authRepository.user

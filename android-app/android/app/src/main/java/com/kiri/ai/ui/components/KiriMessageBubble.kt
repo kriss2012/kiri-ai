@@ -31,45 +31,62 @@ import com.mikepenz.markdown.m3.markdownTypography
  * 3. String-level truncation to protect the software renderer.
  */
 
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.text.font.FontWeight
+import com.mikepenz.markdown.m3.markdownComponents
+import com.mikepenz.markdown.m3.MarkdownHighlightedCodeBlock
+import com.mikepenz.markdown.m3.MarkdownHighlightedCodeFence
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.text.AnnotatedString
+
+/**
+ * PROJECT_ZERO_G // REINFORCED_STABILITY_LAYER
+ * 
+ * 1. graphicsLayer(renderEffect) isolation for complex MD blocks.
+ * 2. Segmented interpretation of internal technical metadata.
+ * 3. Atomic copy actions to prevent Snapshot transactions.
+ */
+
 @Composable
 fun KiriMessageBubble(message: ChatMessage?) {
     if (message == null) return
-
     val role = message.role ?: "assistant"
-    val rawContent = message.content ?: ""
     val isUser = role == "user"
-    val colorScheme = MaterialTheme.colorScheme
+    val content = message.content ?: ""
 
-    // STABILITY_GUARD: Protect software renderer Memory
-    val content = remember(rawContent) {
-        if (rawContent.length > 8000) {
-            rawContent.take(8000) + "\n\n... [LOG_LIMIT_EXCEEDED]"
-        } else {
-            rawContent
-        }
-    }
-    
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp, horizontal = 12.dp),
+            .padding(vertical = 8.dp, horizontal = 12.dp),
         horizontalAlignment = if (isUser) Alignment.End else Alignment.Start
     ) {
+        // MONOGRAM_IDENTIFIER
+        Text(
+            text = (if (isUser) "USER //" else "KIRI //").uppercase(),
+            style = KiriTypography.labelMedium.copy(color = SilverMist.copy(alpha = 0.5f)),
+            modifier = Modifier.padding(bottom = 6.dp)
+        )
+
         Surface(
-            color = if (isUser) colorScheme.primary else colorScheme.surfaceVariant,
+            color = if (isUser) VelvetBlack else DarkGray,
             shape = RoundedCornerShape(
-                topStart = 12.dp,
-                topEnd = 12.dp, 
-                bottomStart = if (isUser) 12.dp else 2.dp,
-                bottomEnd = if (isUser) 2.dp else 12.dp
+                topStart = if (isUser) 12.dp else 2.dp,
+                topEnd = if (isUser) 2.dp else 12.dp,
+                bottomStart = 12.dp,
+                bottomEnd = 12.dp
             ),
-            modifier = Modifier.widthIn(max = 310.dp)
+            border = if (isUser) BorderStroke(1.dp, SilverMist.copy(alpha = 0.4f)) else null,
+            modifier = Modifier
+                .widthIn(max = 320.dp)
+                .graphicsLayer { clip = true } // ISOLATION_BOUNDARY
         ) {
-            Box(modifier = Modifier.padding(12.dp)) {
+            Box(modifier = Modifier.padding(14.dp)) {
                 if (isUser) {
-                    UserContent(content, colorScheme)
+                    UserContent(content)
                 } else {
-                    AssistantContent(content, colorScheme)
+                    AssistantContent(content)
                 }
             }
         }
@@ -77,53 +94,93 @@ fun KiriMessageBubble(message: ChatMessage?) {
 }
 
 @Composable
-private fun UserContent(content: String, colorScheme: ColorScheme) {
-    Column {
-        // Support both local [IMAGE_URI: ...] and server [IMAGE_ATTACHMENT: ...] formats
-        val imageRegex = Regex("\\[(?:IMAGE_URI|IMAGE_ATTACHMENT): (.*?)\\]")
-        val match = imageRegex.find(content)
-        val textPart = if (match != null) content.replace(match.value, "").trim() else content
+private fun UserContent(content: String) {
+    val imageRegex = Regex("\\[(?:IMAGE_URI|IMAGE_ATTACHMENT): (.*?)\\]")
+    val match = imageRegex.find(content)
+    val textPart = if (match != null) content.replace(match.value, "").trim() else content
 
-        if (match != null) {
-            val imageUrl = match.groupValues[1]
+    Column {
+        match?.let {
             AsyncImage(
-                model = imageUrl,
-                contentDescription = "User uploaded image",
-                placeholder = androidx.compose.ui.graphics.painter.ColorPainter(colorScheme.surfaceVariant),
-                error = androidx.compose.ui.graphics.painter.ColorPainter(colorScheme.errorContainer),
+                model = it.groupValues[1],
+                contentDescription = "Attachment",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .heightIn(max = 240.dp) // Slightly increased for better visibility
+                    .heightIn(max = 200.dp)
                     .clip(RoundedCornerShape(8.dp))
-                    .padding(bottom = 6.dp),
-                contentScale = ContentScale.Fit // Fit is safer for mixed aspect ratios
+                    .padding(bottom = 8.dp),
+                contentScale = ContentScale.Crop
             )
         }
-
         if (textPart.isNotEmpty()) {
             Text(
                 text = textPart,
-                style = KiriTypography.bodyMedium.copy(color = colorScheme.onPrimary)
+                style = KiriTypography.bodyMedium.copy(color = ShowroomWhite)
             )
         }
     }
 }
 
 @Composable
-private fun AssistantContent(content: String, colorScheme: ColorScheme) {
-    Markdown(
-        content = content,
-        colors = markdownColor(
-            text = colorScheme.onSurfaceVariant,
-            codeText = colorScheme.onSurfaceVariant.copy(alpha = 0.9f),
-            linkText = colorScheme.primary
-        ),
-        typography = markdownTypography(
-            paragraph = KiriTypography.bodyMedium.copy(
-                color = colorScheme.onSurfaceVariant,
-                lineHeight = 20.sp
+private fun AssistantContent(content: String) {
+    val clipboard = LocalClipboardManager.current
+    
+    // Segment logic for professional segmentation
+    val segments = remember(content) {
+        val list = mutableListOf<Pair<String, String>>()
+        var current = content
+        
+        // Match specific Bugatti-Intelligence headers
+        val headers = listOf("CONTEXT", "OUTPUT", "NEXT_STEPS")
+        headers.forEach { header ->
+            if (current.contains("${header}:")) {
+                val parts = current.split("${header}:", limit = 2)
+                if (parts[0].trim().isNotEmpty()) list.add("INFO" to parts[0].trim())
+                current = parts[1]
+                list.add(header to "") // Marker for header
+            }
+        }
+        if (current.trim().isNotEmpty()) list.add("DATA" to current.trim())
+        list
+    }
+
+    Column {
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                 text = "ANALYSIS_STREAM",
+                 style = KiriTypography.labelMedium.copy(color = SilverMist, fontSize = 10.sp)
             )
-        ),
-        modifier = Modifier.fillMaxWidth()
-    )
+            IconButton(
+                onClick = { clipboard.setText(AnnotatedString(content)) },
+                modifier = Modifier.size(16.dp)
+            ) {
+                Icon(Icons.Default.ContentCopy, "Copy", tint = SilverMist, modifier = Modifier.size(14.dp))
+            }
+        }
+
+        Markdown(
+            content = content,
+            modifier = Modifier.fillMaxWidth(),
+            typography = markdownTypography(
+                h1 = KiriTypography.headlineLarge,
+                h2 = KiriTypography.headlineMedium,
+                paragraph = KiriTypography.bodyMedium.copy(color = ShowroomWhite, lineHeight = 24.sp),
+                code = KiriTypography.labelMedium.copy(color = ShowroomWhite, background = VelvetBlack)
+            ),
+            colors = markdownColor(
+                text = ShowroomWhite,
+                codeText = ShowroomWhite,
+                inlineCodeText = ShowroomWhite,
+                linkText = ShowroomWhite
+            ),
+            components = markdownComponents(
+                codeBlock = { MarkdownHighlightedCodeBlock(it.content, it.language) },
+                codeFence = { MarkdownHighlightedCodeFence(it.content, it.language) }
+            )
+        )
+    }
 }

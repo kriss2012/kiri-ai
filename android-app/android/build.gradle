@@ -3,16 +3,17 @@ plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.compose.compiler) apply false
 }
 
 allprojects {
     configurations.all {
         resolutionStrategy {
-            force "org.jetbrains.kotlin:kotlin-stdlib:1.9.23"
-            force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.23"
-            force "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.23"
-            force "org.jetbrains.kotlin:kotlin-stdlib-common:1.9.23"
-            force "org.jetbrains.kotlin:kotlin-reflect:1.9.23"
+            force "org.jetbrains.kotlin:kotlin-stdlib:2.1.0"
+            force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.1.0"
+            force "org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.0"
+            force "org.jetbrains.kotlin:kotlin-stdlib-common:2.1.0"
+            force "org.jetbrains.kotlin:kotlin-reflect:2.1.0"
         }
     }
 }

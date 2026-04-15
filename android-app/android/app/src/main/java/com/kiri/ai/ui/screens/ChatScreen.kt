@@ -241,7 +241,7 @@ fun ChatScreen(
                     actions = {
                         // High-Visibility Theme Toggle
                         val mainViewModel: MainViewModel = hiltViewModel()
-                        val isDarkMode by mainViewModel.isDarkMode.collectAsState()
+                        val isDarkMode by mainViewModel.isDarkMode.collectAsStateWithLifecycle()
                         IconButton(onClick = { mainViewModel.toggleTheme() }) {
                             Icon(
                                 if (isDarkMode) Icons.Default.LightMode else Icons.Default.DarkMode, 
