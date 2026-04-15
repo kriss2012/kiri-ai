@@ -4,18 +4,16 @@ package com.kiri.ai.ui.components;
 public final class KiriMessageBubbleKt {
     
     /**
-     * ! CRITICAL STABILITY COMPONENT - PERMANENT FIX FOR NATIVE RENDERING CRASH !
+     * PROJECT_ZERO_G // FINAL_STABILITY_LAYER
      *
-     * ERROR: java.lang.StackOverflowError / Native crash in dispatchGetDisplayList.
-     * CAUSE: Hardware renderer recursion limit exceeded by deep Compose trees or huge text.
+     * This component has been flattened to the absolute minimum required for rendering.
+     * With Activity-wide hardware acceleration disabled, we avoid the 'dispatchGetDisplayList'
+     * stack recursion entirely.
      *
-     * PERMANENT SOLUTIONS (DO NOT REMOVE):
-     * 1. COMPOSITING_STRATEGY: Using CompositingStrategy.Offscreen on the root Column.
-     *   This forces the Android OS to flatten the entire message bubble into a single
-     *   hardware layer, breaking any drawing recursion chain immediately.
-     * 2. AGGRESSIVE_TRUNCATION: Hard limit of 5,000 characters. Single nodes larger than
-     *   this can exceed the 64KB DisplayList operation limit on many Android versions.
-     * 3. HIERARCHY_FLATTENING: Minimized nesting to keep the native View tree shallow.
+     * STABILITY_RULES:
+     * 1. ZERO complex graphics layers (no offscreen compositing).
+     * 2. Flat container hierarchy.
+     * 3. String-level truncation to protect the software renderer.
      */
     @androidx.compose.runtime.Composable()
     public static final void KiriMessageBubble(@org.jetbrains.annotations.Nullable()
