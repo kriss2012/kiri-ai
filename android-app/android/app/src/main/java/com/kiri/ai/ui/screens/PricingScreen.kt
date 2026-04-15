@@ -33,6 +33,7 @@ import com.kiri.ai.ui.components.KiriButton
 import com.kiri.ai.ui.theme.*
 import com.kiri.ai.ui.viewmodels.SubscriptionViewModel
 import com.kiri.ai.utils.findActivity
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.razorpay.Checkout
 import org.json.JSONObject
 import android.app.Activity
@@ -45,7 +46,7 @@ fun PricingScreen(
     viewModel: SubscriptionViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
-    val uiState = viewModel.uiState
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var selectedPlan by remember { mutableStateOf("premium_monthly") }
 
     LaunchedEffect(uiState.orderData) {
