@@ -1,13 +1,14 @@
 package com.kiri.ai.ui.viewmodels
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kiri.ai.data.local.AuthDataStore
 import com.kiri.ai.data.repository.SubscriptionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,34 +28,34 @@ class SubscriptionViewModel @Inject constructor(
     private val authDataStore: AuthDataStore
 ) : ViewModel() {
 
-    var uiState by mutableStateOf(SubscriptionUiState())
-        private set
+    private val _uiState = MutableStateFlow(SubscriptionUiState())
+    val uiState: StateFlow<SubscriptionUiState> = _uiState.asStateFlow()
 
     fun createOrder(plan: String) {
         viewModelScope.launch {
-            uiState = uiState.copy(isLoading = true, error = null, pendingPlan = plan)
-            repository.createOrder(plan).onSuccess {
-                uiState = uiState.copy(isLoading = false, orderData = it)
-            }.onFailure {
-                uiState = uiState.copy(isLoading = false, error = it.message ?: "Failed to create order")
+            _uiState.update { it.copy(isLoading = true, error = null, pendingPlan = plan) }
+            repository.createOrder(plan).onSuccess { data ->
+                _uiState.update { it.copy(isLoading = false, orderData = data) }
+            }.onFailure { error ->
+                _uiState.update { it.copy(isLoading = false, error = error.message ?: "Failed to create order") }
             }
         }
     }
 
     fun onPaymentSuccess(orderId: String, paymentId: String, signature: String) {
-        val plan = uiState.pendingPlan ?: "premium"
+        val plan = _uiState.value.pendingPlan ?: "premium"
         viewModelScope.launch {
-            uiState = uiState.copy(isLoading = true)
-            repository.verifyPayment(orderId, paymentId, signature, plan).onSuccess {
-                authDataStore.saveUser(it.user)
-                uiState = uiState.copy(isLoading = false, success = true)
-            }.onFailure {
-                uiState = uiState.copy(isLoading = false, error = "Payment verification failed: ${it.message}")
+            _uiState.update { it.copy(isLoading = true) }
+            repository.verifyPayment(orderId, paymentId, signature, plan).onSuccess { data ->
+                authDataStore.saveUser(data.user)
+                _uiState.update { it.copy(isLoading = false, success = true) }
+            }.onFailure { error ->
+                _uiState.update { it.copy(isLoading = false, error = "Payment verification failed: ${error.message}") }
             }
         }
     }
 
     fun clearError() {
-        uiState = uiState.copy(error = null)
+        _uiState.update { it.copy(error = null) }
     }
 }
