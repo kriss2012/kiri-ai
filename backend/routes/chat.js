@@ -174,7 +174,8 @@ router.post('/message/upload', protect, checkRequestLimit, upload.single('file')
     // Note: We store the text part + a placeholder in the DB for simplicity,
     // as storing massive base64 in MongoDB isn't ideal for large-scale.
     // The Android app looks for [IMAGE_URI: ...] which we'll simulate.
-    const savedUserContent = content + `\n[IMAGE_ATTACHMENT: ${file.originalname}]`;
+    const textContent = content || 'Analyze this image.';
+    const savedUserContent = textContent + `\n[IMAGE_ATTACHMENT: ${file.originalname}]`;
 
     conversation.messages.push({ role: 'user', content: savedUserContent });
     conversation.messages.push({ role: 'assistant', content: assistantMessage });
@@ -304,7 +305,7 @@ router.get('/conversations', protect, async (req, res) => {
       model: c.model,
       isPinned: c.isPinned,
       messageCount: c.messages.length,
-      lastMessage: c.messages.length > 0 ? c.messages[c.messages.length - 1].content.substring(0, 100) : '',
+      lastMessage: c.messages.length > 0 ? (c.messages[c.messages.length - 1].content || '').substring(0, 100) : '',
       createdAt: c.createdAt,
       updatedAt: c.updatedAt
     }));
