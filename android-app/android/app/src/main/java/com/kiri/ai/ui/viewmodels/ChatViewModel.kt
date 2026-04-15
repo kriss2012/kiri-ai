@@ -173,7 +173,7 @@ class ChatViewModel @Inject constructor(
                     // Ensure each message has a unique stable ID for LazyColumn to prevent crashes
                     val seenIds = mutableSetOf<String>()
                     val sanitizedMessages = detail.messages?.mapIndexed { index, msg ->
-                        val baseId = if (msg.id.isNullOrBlank()) "msg_${id}_${index}" else msg.id!!
+                        val baseId = if (msg.id.isNullOrBlank()) "msg_${id}_${index}" else msg.id ?: "msg_${index}"
                         var finalId = baseId
                         var counter = 1
                         while (seenIds.contains(finalId)) {
