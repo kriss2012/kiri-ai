@@ -1,5 +1,6 @@
 package com.kiri.ai.ui.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -8,9 +9,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
 import coil.compose.AsyncImage
 import com.kiri.ai.data.models.ChatMessage
 import com.kiri.ai.ui.theme.*
@@ -19,36 +26,15 @@ import com.mikepenz.markdown.m3.markdownColor
 import com.mikepenz.markdown.m3.markdownTypography
 
 /**
- * PROJECT_ZERO_G // FINAL_STABILITY_LAYER
+ * KiriMessageBubble Component // PROJECT_ZERO_G REINFORCED
  * 
- * This component has been flattened to the absolute minimum required for rendering.
- * With Activity-wide hardware acceleration disabled, we avoid the 'dispatchGetDisplayList'
- * stack recursion entirely.
+ * Implements the Bugatti Design System's monochromatic aesthetic.
  * 
- * STABILITY_RULES:
- * 1. ZERO complex graphics layers (no offscreen compositing).
- * 2. Flat container hierarchy.
- * 3. String-level truncation to protect the software renderer.
+ * STABILITY_CONTROLS:
+ * 1. graphicsLayer isolation to prevent dispatchGetDisplayList recursion.
+ * 2. Immutable monochromatic palette to reduce Draw-phase color resolution steps.
+ * 3. Segmented intelligence interpretation.
  */
-
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.text.font.FontWeight
-import com.mikepenz.markdown.m3.markdownComponents
-import com.mikepenz.markdown.m3.MarkdownHighlightedCodeBlock
-import com.mikepenz.markdown.m3.MarkdownHighlightedCodeFence
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ContentCopy
-import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.text.AnnotatedString
-
-/**
- * PROJECT_ZERO_G // REINFORCED_STABILITY_LAYER
- * 
- * 1. graphicsLayer(renderEffect) isolation for complex MD blocks.
- * 2. Segmented interpretation of internal technical metadata.
- * 3. Atomic copy actions to prevent Snapshot transactions.
- */
-
 @Composable
 fun KiriMessageBubble(message: ChatMessage?) {
     if (message == null) return
@@ -59,14 +45,17 @@ fun KiriMessageBubble(message: ChatMessage?) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp, horizontal = 12.dp),
+            .padding(vertical = 12.dp, horizontal = 16.dp),
         horizontalAlignment = if (isUser) Alignment.End else Alignment.Start
     ) {
-        // MONOGRAM_IDENTIFIER
+        // MONOGRAM_IDENTIFIER (Technical Header)
         Text(
-            text = (if (isUser) "USER //" else "KIRI //").uppercase(),
-            style = KiriTypography.labelMedium.copy(color = SilverMist.copy(alpha = 0.5f)),
-            modifier = Modifier.padding(bottom = 6.dp)
+            text = (if (isUser) "USER // ATELIER" else "KIRI // INTELLIGENCE").uppercase(),
+            style = KiriTypography.labelMedium.copy(
+                color = if (isUser) ShowroomWhite.copy(alpha = 0.4f) else SilverMist.copy(alpha = 0.6f),
+                letterSpacing = 2.sp
+            ),
+            modifier = Modifier.padding(bottom = 8.dp)
         )
 
         Surface(
@@ -77,12 +66,16 @@ fun KiriMessageBubble(message: ChatMessage?) {
                 bottomStart = 12.dp,
                 bottomEnd = 12.dp
             ),
-            border = if (isUser) BorderStroke(1.dp, SilverMist.copy(alpha = 0.4f)) else null,
+            border = if (isUser) BorderStroke(1.dp, SilverMist.copy(alpha = 0.2f)) else null,
             modifier = Modifier
                 .widthIn(max = 320.dp)
-                .graphicsLayer { clip = true } // ISOLATION_BOUNDARY
+                .graphicsLayer { 
+                    clip = true 
+                    // PROJECT_ZERO_G: Layer isolation prevents the Draw-pass from recursing 
+                    // into complex Markdown blocks on low-performance devices.
+                }
         ) {
-            Box(modifier = Modifier.padding(14.dp)) {
+            Box(modifier = Modifier.padding(16.dp)) {
                 if (isUser) {
                     UserContent(content)
                 } else {
@@ -106,9 +99,9 @@ private fun UserContent(content: String) {
                 contentDescription = "Attachment",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .heightIn(max = 200.dp)
+                    .heightIn(max = 240.dp)
                     .clip(RoundedCornerShape(8.dp))
-                    .padding(bottom = 8.dp),
+                    .padding(bottom = 12.dp),
                 contentScale = ContentScale.Crop
             )
         }
@@ -125,19 +118,23 @@ private fun UserContent(content: String) {
 private fun AssistantContent(content: String) {
     val clipboard = LocalClipboardManager.current
     
-    // Segment logic for professional segmentation
+    // Segment logic for professional segmentation (Bugatti Intelligence Protocol)
     val segments = remember(content) {
         val list = mutableListOf<Pair<String, String>>()
         var current = content
         
-        // Match specific Bugatti-Intelligence headers
-        val headers = listOf("CONTEXT", "OUTPUT", "NEXT_STEPS")
-        headers.forEach { header ->
-            if (current.contains("${header}:")) {
-                val parts = current.split("${header}:", limit = 2)
-                if (parts[0].trim().isNotEmpty()) list.add("INFO" to parts[0].trim())
+        val types = listOf(
+            "CONTEXT" to "TECHNICAL_CONTEXT",
+            "OUTPUT" to "REASONING_OUTPUT",
+            "NEXT_STEPS" to "ACTIONABLE_PROJECTION"
+        )
+        
+        types.forEach { (marker, label) ->
+            if (current.contains("${marker}:")) {
+                val parts = current.split("${marker}:", limit = 2)
+                if (parts[0].trim().isNotEmpty()) list.add("STREAM" to parts[0].trim())
                 current = parts[1]
-                list.add(header to "") // Marker for header
+                list.add(label to "") // Marker
             }
         }
         if (current.trim().isNotEmpty()) list.add("DATA" to current.trim())
@@ -146,19 +143,27 @@ private fun AssistantContent(content: String) {
 
     Column {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
+            modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                  text = "ANALYSIS_STREAM",
-                 style = KiriTypography.labelMedium.copy(color = SilverMist, fontSize = 10.sp)
+                 style = KiriTypography.labelMedium.copy(
+                     color = SilverMist,
+                     fontSize = 10.sp
+                 )
             )
             IconButton(
                 onClick = { clipboard.setText(AnnotatedString(content)) },
-                modifier = Modifier.size(16.dp)
+                modifier = Modifier.size(20.dp)
             ) {
-                Icon(Icons.Default.ContentCopy, "Copy", tint = SilverMist, modifier = Modifier.size(14.dp))
+                Icon(
+                    Icons.Default.ContentCopy, 
+                    contentDescription = "Copy", 
+                    tint = SilverMist, 
+                    modifier = Modifier.size(16.dp)
+                )
             }
         }
 
@@ -168,19 +173,22 @@ private fun AssistantContent(content: String) {
             typography = markdownTypography(
                 h1 = KiriTypography.headlineLarge,
                 h2 = KiriTypography.headlineMedium,
-                paragraph = KiriTypography.bodyMedium.copy(color = ShowroomWhite, lineHeight = 24.sp),
-                code = KiriTypography.labelMedium.copy(color = ShowroomWhite, background = VelvetBlack)
+                paragraph = KiriTypography.bodyMedium.copy(
+                    color = ShowroomWhite,
+                    lineHeight = 26.sp
+                ),
+                code = KiriTypography.labelMedium.copy(
+                    color = ShowroomWhite,
+                    background = VelvetBlack
+                )
             ),
             colors = markdownColor(
                 text = ShowroomWhite,
                 codeText = ShowroomWhite,
                 inlineCodeText = ShowroomWhite,
-                linkText = ShowroomWhite
-            ),
-            components = markdownComponents(
-                codeBlock = { block -> MarkdownHighlightedCodeBlock(block.content, block.language) },
-                codeFence = { fence -> MarkdownHighlightedCodeFence(fence.content, fence.language) }
+                linkText = SilverMist
             )
         )
     }
 }
+
