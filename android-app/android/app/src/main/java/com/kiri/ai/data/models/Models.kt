@@ -57,7 +57,7 @@ data class Conversation(
     val updatedAt: String? = ""
 ) {
     // Helper to ensure we always have a non-null ID for LazyColumn keys
-    fun getStableId(): String = id ?: "conv_${System.identityHashCode(this)}"
+    fun getStableId(): String = id ?: "conv_${title?.hashCode() ?: 0}_${updatedAt?.hashCode() ?: 0}"
 }
 
 data class ConversationDetailResponse(
@@ -69,10 +69,11 @@ data class ChatMessage(
     val role: String? = "user", // "user" or "assistant"
     val content: String? = "",
     @SerializedName("_id", alternate = ["id"])
-    val id: String? = null
+    val id: String? = null,
+    val timestamp: Long = System.currentTimeMillis() // Added for stability tie-breaking
 ) {
     // Helper to ensure we always have a non-null ID for LazyColumn keys
-    fun getStableId(): String = id ?: "msg_${System.identityHashCode(this)}_${role}"
+    fun getStableId(): String = id ?: "msg_${role}_${content?.hashCode() ?: 0}_$timestamp"
 }
 
 data class ChatDetail(

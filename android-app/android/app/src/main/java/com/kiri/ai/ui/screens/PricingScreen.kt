@@ -190,27 +190,34 @@ fun PricingPlanCardEnhanced(
     isLoading: Boolean,
     onUpgrade: () -> Unit
 ) {
-    val infiniteTransition = rememberInfiniteTransition(label = "")
+    val infiniteTransition = rememberInfiniteTransition(label = "pricing_card_glow")
     val borderAlpha by infiniteTransition.animateFloat(
         initialValue = 0.5f,
         targetValue = 1f,
         animationSpec = infiniteRepeatable(
             animation = tween(2000, easing = LinearEasing),
             repeatMode = RepeatMode.Reverse
-        ), label = ""
+        ), label = "border_alpha"
     )
+
+    // STABILITY_OPTIMIZATION: Using a derived brush to minimize recomposition trigger scope
+    val primaryColor = MaterialTheme.colorScheme.primary
+    val secondaryColor = MaterialTheme.colorScheme.secondary
+    val animatedBrush = remember(borderAlpha) {
+        Brush.linearGradient(
+            colors = listOf(
+                primaryColor.copy(alpha = borderAlpha),
+                secondaryColor.copy(alpha = borderAlpha)
+            )
+        )
+    }
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .border(
                 2.dp,
-                Brush.linearGradient(
-                    colors = listOf(
-                        MaterialTheme.colorScheme.primary.copy(alpha = borderAlpha),
-                        MaterialTheme.colorScheme.secondary.copy(alpha = borderAlpha)
-                    )
-                ),
+                animatedBrush,
                 RoundedCornerShape(24.dp)
             ),
         shape = RoundedCornerShape(24.dp),

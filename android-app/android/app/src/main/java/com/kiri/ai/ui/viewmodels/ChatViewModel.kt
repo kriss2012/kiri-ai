@@ -57,7 +57,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 import java.util.UUID
@@ -84,8 +84,27 @@ class ChatViewModel @Inject constructor(
 
     init {
         observeUserData()
+        observeConnectivity()
         loadConversations()
         ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
+    }
+
+    private fun observeConnectivity() {
+        chatRepository.isConnected
+            .distinctUntilChanged()
+            .onEach { connected ->
+                _uiState.update { it.copy(isConnected = connected) }
+                if (connected) {
+                    // AUTO_RELOAD: On reconnection, refresh current context
+                    val currentId = _uiState.value.currentConversationId
+                    if (currentId != null) {
+                        selectConversation(currentId)
+                    } else {
+                        loadConversations()
+                    }
+                }
+            }
+            .launchIn(viewModelScope)
     }
 
     override fun onCleared() {
@@ -129,15 +148,12 @@ class ChatViewModel @Inject constructor(
     fun loadConversations() {
         viewModelScope.launch {
             chatRepository.getConversations().onSuccess { list ->
-                // Sanitize IDs to prevent LazyColumn key collisions
+                // STABILITY_FIX: Guarantee absolute uniqueness for LazyColumn keys
                 val seenIds = mutableSetOf<String>()
                 val sanitized = list.mapIndexed { index, conv ->
-                    val baseId = if (conv.id.isNullOrBlank()) "conv_${index}" else conv.id!!
-                    var finalId = baseId
-                    var counter = 1
-                    while (seenIds.contains(finalId)) {
-                        finalId = "${baseId}_${counter}"
-                        counter++
+                    var finalId = conv.id ?: "temp_${index}"
+                    if (seenIds.contains(finalId)) {
+                        finalId = "${finalId}_${java.util.UUID.randomUUID().toString().take(4)}"
                     }
                     seenIds.add(finalId)
                     conv.copy(id = finalId)
@@ -338,5 +354,6 @@ data class ChatUiState(
     val selectedFileName: String? = null,
     val isLoadingMessages: Boolean = false,
     val isSending: Boolean = false,
+    val isConnected: Boolean = true,
     val error: String? = null
 )

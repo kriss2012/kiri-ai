@@ -103,7 +103,10 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                                     composable("landing") { LandingScreen(navController) }
                                     composable("login") { LoginScreen(navController) }
                                     composable("register") { RegisterScreen(navController) }
-                                    composable("chat") { ChatScreen(navController) }
+                                    composable("chat?id={id}") { backStackEntry -> 
+                                        val id = backStackEntry.arguments?.getString("id")
+                                        ChatScreen(navController, id = id) 
+                                    }
                                     composable("profile") { ProfileScreen(navController) }
                                     composable("pricing") { PricingScreen(navController, subscriptionViewModel) }
                                 }

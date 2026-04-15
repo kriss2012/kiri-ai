@@ -90,6 +90,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun ChatScreen(
     navController: NavController,
+    id: String? = null,
     viewModel: ChatViewModel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -97,6 +98,13 @@ fun ChatScreen(
     val scope = rememberCoroutineScope()
     val scrollState = rememberLazyListState()
     val context = LocalContext.current
+
+    // LOAD_INITIAL_CONVERSATION: React to navigation parameters
+    LaunchedEffect(id) {
+        if (!id.isNullOrBlank() && id != state.currentConversationId) {
+            viewModel.selectConversation(id)
+        }
+    }
 
     // File Picker Launcher
     val filePickerLauncher = rememberLauncherForActivityResult(
@@ -265,34 +273,52 @@ fun ChatScreen(
                     .navigationBarsPadding() // Handles bottom home handle
                     .imePadding() // Handles keyboard
             ) {
+                if (!state.isConnected) {
+                    Surface(
+                        color = MaterialTheme.colorScheme.errorContainer,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "OFFLINE_MODE // CONNECTIVITY_LOST",
+                            style = KiriTypography.labelSmall,
+                            color = MaterialTheme.colorScheme.onErrorContainer,
+                            modifier = Modifier.padding(vertical = 4.dp),
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+
                 Box(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxWidth()
                 ) {
-                LazyColumn(
-                    state = scrollState,
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(16.dp)
-                ) {
-                    items(
-                        items = state.messages,
-                        key = { it.getStableId() }
-                    ) { msg ->
-                        // STRICT_ISOLATION: Force Compose to treat each message as an independent entity
-                        key(msg.getStableId()) {
-                            KiriMessageBubble(msg)
+                    LazyColumn(
+                        state = scrollState,
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(16.dp)
+                    ) {
+                        items(
+                            items = state.messages,
+                            key = { it.getStableId() }
+                        ) { msg ->
+                            // STRICT_ISOLATION: Force Compose to treat each message as an independent entity
+                            // Using graphicsLayer to isolate message renders from main layout pass
+                            key(msg.getStableId()) {
+                                Box(modifier = Modifier.graphicsLayer { clip = true }) {
+                                    KiriMessageBubble(msg)
+                                }
+                            }
                         }
-                    }
-                    
-                    if (state.isSending) {
-                        item(key = "typing_indicator") { 
-                            Box(modifier = Modifier.graphicsLayer { clip = true }) {
-                                TypingIndicator() 
+                        
+                        if (state.isSending) {
+                            item(key = "typing_indicator") { 
+                                Box(modifier = Modifier.graphicsLayer { clip = true }) {
+                                    TypingIndicator() 
+                                }
                             }
                         }
                     }
-                }
 
                     if (state.isLoadingMessages) {
                         CircularProgressIndicator(modifier = Modifier.align(Alignment.Center), color = MaterialTheme.colorScheme.primary)
@@ -328,12 +354,14 @@ fun TypingIndicator() {
     )
 
     Row(
-        modifier = Modifier.padding(vertical = 12.dp),
+        modifier = Modifier
+            .padding(vertical = 12.dp)
+            .graphicsLayer { this.alpha = alpha }, // STABILITY_FIX: Use graphicsLayer for alpha to avoid measurement pass
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             "KIRI_IS_THINKING",
-            style = KiriTypography.labelMedium.copy(color = ShowroomWhite.copy(alpha = alpha))
+            style = KiriTypography.labelMedium.copy(color = ShowroomWhite)
         )
     }
 }

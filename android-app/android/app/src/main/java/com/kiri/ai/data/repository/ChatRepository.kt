@@ -18,8 +18,15 @@ class ChatRepository @Inject constructor(
     private val chatApi: ChatApi,
     @ApplicationContext private val context: Context
 ) {
-    private val _isConnected = MutableStateFlow(true)
+    private val _isConnected = MutableStateFlow(checkInitialConnectivity())
     val isConnected: StateFlow<Boolean> = _isConnected
+
+    private fun checkInitialConnectivity(): Boolean {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = cm.activeNetwork ?: return false
+        val capabilities = cm.getNetworkCapabilities(activeNetwork) ?: return false
+        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    }
 
     init {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -90,11 +97,11 @@ class ChatRepository @Inject constructor(
             if (response.isSuccessful) {
                 Result.success(response.body()?.conversations ?: emptyList())
             } else {
-                val errorBody = response.errorBody()?.string() ?: "Unknown error"
-                val message = if (errorBody.contains("message")) {
-                    try { com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message } catch(e: Exception) { "SERVER_ERROR_${response.code()}" }
-                } else "SERVER_ERROR_${response.code()}"
-                Result.failure(Exception(message ?: "Failed to load chats."))
+                val errorBody = response.errorBody()?.string()
+                val message = if (errorBody?.trim()?.startsWith("{") == true) {
+                    try { com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message } catch(e: Exception) { null }
+                } else null
+                Result.failure(Exception(message ?: "Failed to load chats (${response.code()})"))
             }
         } catch (e: java.net.UnknownHostException) {
             Result.failure(Exception("OFFLINE: Please check your internet connection."))
@@ -114,7 +121,11 @@ class ChatRepository @Inject constructor(
                     Result.success(ChatDetail(id = id, title = "Untitled Chat", messages = emptyList()))
                 }
             } else {
-                Result.failure(Exception("Chat session not found (${response.code()})"))
+                val errorBody = response.errorBody()?.string()
+                val message = if (errorBody?.trim()?.startsWith("{") == true) {
+                    try { com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message } catch(e: Exception) { null }
+                } else null
+                Result.failure(Exception(message ?: "Chat session not found (${response.code()})"))
             }
         } catch (e: java.net.UnknownHostException) {
             Result.failure(Exception("OFFLINE: Message history unavailable."))
@@ -129,7 +140,11 @@ class ChatRepository @Inject constructor(
             if (response.isSuccessful && response.body() != null) {
                 Result.success(response.body()!!)
             } else {
-                Result.failure(Exception(response.message()))
+                val errorBody = response.errorBody()?.string()
+                val message = if (errorBody?.trim()?.startsWith("{") == true) {
+                    try { com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message } catch(e: Exception) { null }
+                } else null
+                Result.failure(Exception(message ?: "Delete failed (${response.code()})"))
             }
         } catch (e: Exception) {
             Result.failure(e)
