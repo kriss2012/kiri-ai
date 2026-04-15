@@ -18,6 +18,7 @@ import com.kiri.ai.ui.components.KiriButton
 import com.kiri.ai.ui.components.KiriTextField
 import com.kiri.ai.ui.theme.*
 import com.kiri.ai.ui.viewmodels.AuthViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 /**
  * Bugatti Showroom Registration
@@ -28,7 +29,7 @@ fun RegisterScreen(
     navController: NavController,
     viewModel: AuthViewModel = hiltViewModel()
 ) {
-    val state = viewModel.uiState
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier
