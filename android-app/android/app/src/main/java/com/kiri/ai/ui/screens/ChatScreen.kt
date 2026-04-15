@@ -36,7 +36,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.core.content.FileProvider
-import com.kiri.ai.BuildConfig
 import com.kiri.ai.ui.components.*
 import com.kiri.ai.ui.theme.*
 import com.kiri.ai.data.models.*
@@ -330,7 +329,7 @@ fun ChatScreen(
                     message = state.inputMessage,
                     onMessageChange = { viewModel.onMessageChange(it) },
                     onSend = { viewModel.sendMessage() },
-                    onAttachClick = { filePickerLauncher.launch(arrayOf("*/*")) },
+                    onAttachClick = { filePickerLauncher.launch("*/*") },
                     selectedFileUri = state.selectedFileUri,
                     selectedFileName = state.selectedFileName,
                     onClearFile = { viewModel.clearSelectedFile() },
