@@ -2,6 +2,7 @@
 package com.kiri.ai.ui.viewmodels;
 
 import android.app.Application;
+import androidx.lifecycle.SavedStateHandle;
 import com.kiri.ai.data.repository.AuthRepository;
 import com.kiri.ai.data.repository.ChatRepository;
 import dagger.internal.DaggerGenerated;
@@ -22,31 +23,37 @@ import javax.inject.Provider;
 public final class ChatViewModel_Factory implements Factory<ChatViewModel> {
   private final Provider<Application> applicationProvider;
 
+  private final Provider<SavedStateHandle> savedStateHandleProvider;
+
   private final Provider<ChatRepository> chatRepositoryProvider;
 
   private final Provider<AuthRepository> authRepositoryProvider;
 
   public ChatViewModel_Factory(Provider<Application> applicationProvider,
+      Provider<SavedStateHandle> savedStateHandleProvider,
       Provider<ChatRepository> chatRepositoryProvider,
       Provider<AuthRepository> authRepositoryProvider) {
     this.applicationProvider = applicationProvider;
+    this.savedStateHandleProvider = savedStateHandleProvider;
     this.chatRepositoryProvider = chatRepositoryProvider;
     this.authRepositoryProvider = authRepositoryProvider;
   }
 
   @Override
   public ChatViewModel get() {
-    return newInstance(applicationProvider.get(), chatRepositoryProvider.get(), authRepositoryProvider.get());
+    return newInstance(applicationProvider.get(), savedStateHandleProvider.get(), chatRepositoryProvider.get(), authRepositoryProvider.get());
   }
 
   public static ChatViewModel_Factory create(Provider<Application> applicationProvider,
+      Provider<SavedStateHandle> savedStateHandleProvider,
       Provider<ChatRepository> chatRepositoryProvider,
       Provider<AuthRepository> authRepositoryProvider) {
-    return new ChatViewModel_Factory(applicationProvider, chatRepositoryProvider, authRepositoryProvider);
+    return new ChatViewModel_Factory(applicationProvider, savedStateHandleProvider, chatRepositoryProvider, authRepositoryProvider);
   }
 
-  public static ChatViewModel newInstance(Application application, ChatRepository chatRepository,
+  public static ChatViewModel newInstance(Application application,
+      SavedStateHandle savedStateHandle, ChatRepository chatRepository,
       AuthRepository authRepository) {
-    return new ChatViewModel(application, chatRepository, authRepository);
+    return new ChatViewModel(application, savedStateHandle, chatRepository, authRepository);
   }
 }

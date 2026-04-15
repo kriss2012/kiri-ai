@@ -53,24 +53,33 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.UUID
+
+import androidx.lifecycle.SavedStateHandle
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.map
 
 @HiltViewModel
 class ChatViewModel @Inject constructor(
     application: Application,
+    private val savedStateHandle: SavedStateHandle,
     private val chatRepository: ChatRepository,
     private val authRepository: AuthRepository
 ) : AndroidViewModel(application) {
 
     private val workManager = WorkManager.getInstance(application)
     
+    // SAVED_STATE_KEYS: Keys for process death restoration
+    private companion object {
+        const val KEY_INPUT = "chat_input_text"
+        const val KEY_FILE_URI = "chat_file_uri"
+        const val KEY_FILE_NAME = "chat_file_name"
+    }
+
     private val lifecycleObserver = LifecycleEventObserver { _, event ->
         when (event) {
             Lifecycle.Event.ON_STOP -> scheduleBackgroundPolling()
@@ -79,7 +88,11 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    private val _uiState = MutableStateFlow(ChatUiState())
+    private val _uiState = MutableStateFlow(ChatUiState(
+        inputMessage = savedStateHandle.get<String>(KEY_INPUT) ?: "",
+        selectedFileUri = savedStateHandle.get<Uri>(KEY_FILE_URI),
+        selectedFileName = savedStateHandle.get<String>(KEY_FILE_NAME)
+    ))
     val uiState: StateFlow<ChatUiState> = _uiState.asStateFlow()
 
     init {
@@ -91,7 +104,6 @@ class ChatViewModel @Inject constructor(
 
     private fun observeConnectivity() {
         chatRepository.isConnected
-            .distinctUntilChanged()
             .onEach { connected ->
                 _uiState.update { it.copy(isConnected = connected) }
                 if (connected) {
@@ -213,14 +225,21 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    fun onMessageChange(msg: String) { _uiState.update { it.copy(inputMessage = msg) } }
+    fun onMessageChange(msg: String) { 
+        _uiState.update { it.copy(inputMessage = msg) } 
+        savedStateHandle[KEY_INPUT] = msg
+    }
 
     fun onFileSelected(uri: Uri?, name: String?) {
         _uiState.update { it.copy(selectedFileUri = uri, selectedFileName = name) }
+        savedStateHandle[KEY_FILE_URI] = uri
+        savedStateHandle[KEY_FILE_NAME] = name
     }
 
     fun clearSelectedFile() {
         _uiState.update { it.copy(selectedFileUri = null, selectedFileName = null) }
+        savedStateHandle.remove<Uri>(KEY_FILE_URI)
+        savedStateHandle.remove<String>(KEY_FILE_NAME)
     }
 
     fun sendMessage() {
@@ -279,6 +298,11 @@ class ChatViewModel @Inject constructor(
                                 currentTitle = res.title ?: it.currentTitle
                             )
                         }
+                        
+                        // Clear saved state after successful send
+                        savedStateHandle.remove<String>(KEY_INPUT)
+                        savedStateHandle.remove<Uri>(KEY_FILE_URI)
+                        savedStateHandle.remove<String>(KEY_FILE_NAME)
                         
                         loadConversations()
 

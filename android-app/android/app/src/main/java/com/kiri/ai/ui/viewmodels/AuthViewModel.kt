@@ -35,16 +35,33 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+import androidx.lifecycle.SavedStateHandle
+
 @HiltViewModel
 class AuthViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
     private val authRepository: AuthRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(AuthUiState())
+    private companion object {
+        const val KEY_NAME = "auth_name"
+        const val KEY_EMAIL = "auth_email"
+    }
+
+    private val _uiState = MutableStateFlow(AuthUiState(
+        name = savedStateHandle.get<String>(KEY_NAME) ?: "",
+        email = savedStateHandle.get<String>(KEY_EMAIL) ?: ""
+    ))
     val uiState: StateFlow<AuthUiState> = _uiState.asStateFlow()
 
-    fun onNameChange(name: String) { _uiState.update { it.copy(name = name) } }
-    fun onEmailChange(email: String) { _uiState.update { it.copy(email = email) } }
+    fun onNameChange(name: String) { 
+        _uiState.update { it.copy(name = name) } 
+        savedStateHandle[KEY_NAME] = name
+    }
+    fun onEmailChange(email: String) { 
+        _uiState.update { it.copy(email = email) } 
+        savedStateHandle[KEY_EMAIL] = email
+    }
     fun onPasswordChange(password: String) { _uiState.update { it.copy(password = password) } }
 
     fun login(onSuccess: () -> Unit) {

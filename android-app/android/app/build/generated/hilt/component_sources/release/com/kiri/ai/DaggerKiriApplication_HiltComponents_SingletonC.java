@@ -435,6 +435,8 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
   }
 
   private static final class ViewModelCImpl extends KiriApplication_HiltComponents.ViewModelC {
+    private final SavedStateHandle savedStateHandle;
+
     private final SingletonCImpl singletonCImpl;
 
     private final ActivityRetainedCImpl activityRetainedCImpl;
@@ -454,7 +456,7 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
         ViewModelLifecycle viewModelLifecycleParam) {
       this.singletonCImpl = singletonCImpl;
       this.activityRetainedCImpl = activityRetainedCImpl;
-
+      this.savedStateHandle = savedStateHandleParam;
       initialize(savedStateHandleParam, viewModelLifecycleParam);
 
     }
@@ -495,10 +497,10 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
       public T get() {
         switch (id) {
           case 0: // com.kiri.ai.ui.viewmodels.AuthViewModel 
-          return (T) new AuthViewModel(singletonCImpl.authRepositoryProvider.get());
+          return (T) new AuthViewModel(viewModelCImpl.savedStateHandle, singletonCImpl.authRepositoryProvider.get());
 
           case 1: // com.kiri.ai.ui.viewmodels.ChatViewModel 
-          return (T) new ChatViewModel(ApplicationContextModule_ProvideApplicationFactory.provideApplication(singletonCImpl.applicationContextModule), singletonCImpl.chatRepositoryProvider.get(), singletonCImpl.authRepositoryProvider.get());
+          return (T) new ChatViewModel(ApplicationContextModule_ProvideApplicationFactory.provideApplication(singletonCImpl.applicationContextModule), viewModelCImpl.savedStateHandle, singletonCImpl.chatRepositoryProvider.get(), singletonCImpl.authRepositoryProvider.get());
 
           case 2: // com.kiri.ai.ui.viewmodels.MainViewModel 
           return (T) new MainViewModel(singletonCImpl.authRepositoryProvider.get(), singletonCImpl.themeRepositoryProvider.get());
