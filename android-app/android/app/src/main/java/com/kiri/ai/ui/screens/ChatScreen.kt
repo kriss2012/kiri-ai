@@ -42,6 +42,7 @@ import com.kiri.ai.data.models.*
 import com.kiri.ai.ui.viewmodels.MainViewModel
 import com.kiri.ai.ui.viewmodels.ChatViewModel
 import kotlinx.coroutines.launch
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 /**
  * CRITICAL_STABILITY_NOTICE
@@ -60,7 +61,7 @@ fun ChatScreen(
     navController: NavController,
     viewModel: ChatViewModel = hiltViewModel()
 ) {
-    val state = viewModel.uiState
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val scrollState = rememberLazyListState()
@@ -76,7 +77,12 @@ fun ChatScreen(
                     cursor.moveToFirst()
                     cursor.getString(nameIndex)
                 }
-                viewModel.onFileSelected(it, name)
+                // DEFERRED_STATE_UPDATE: Launch on next frame to avoid SnapshotStateObserver crash
+                // Activity result callbacks can fire during draw phase; immediate state updates
+                // trigger concurrent modification during snapshot observation.
+                scope.launch {
+                    viewModel.onFileSelected(it, name)
+                }
             }
         }
     )

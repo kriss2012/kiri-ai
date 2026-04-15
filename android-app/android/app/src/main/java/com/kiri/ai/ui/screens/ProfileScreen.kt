@@ -28,6 +28,7 @@ import com.kiri.ai.ui.components.KiriTextField
 import com.kiri.ai.ui.theme.*
 import com.kiri.ai.ui.viewmodels.AuthViewModel
 import com.kiri.ai.ui.viewmodels.ChatViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,8 +38,8 @@ fun ProfileScreen(
     authViewModel: AuthViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
-    val state = chatViewModel.uiState
-    val authUiState = authViewModel.uiState
+    val state by chatViewModel.uiState.collectAsStateWithLifecycle()
+    val authUiState by authViewModel.uiState.collectAsStateWithLifecycle()
     var name by remember { mutableStateOf(state.user?.name ?: "") }
 
     Scaffold(

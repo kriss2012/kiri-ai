@@ -79,20 +79,22 @@ fun KiriMessageBubble(message: ChatMessage?) {
 @Composable
 private fun UserContent(content: String, colorScheme: ColorScheme) {
     Column {
-        val imageRegex = Regex("\\[IMAGE_URI: (.*?)\\]")
+        // Support both local [IMAGE_URI: ...] and server [IMAGE_ATTACHMENT: ...] formats
+        val imageRegex = Regex("\\[(?:IMAGE_URI|IMAGE_ATTACHMENT): (.*?)\\]")
         val match = imageRegex.find(content)
         val textPart = if (match != null) content.replace(match.value, "").trim() else content
 
         if (match != null) {
+            val imageUrl = match.groupValues[1]
             AsyncImage(
-                model = match.groupValues[1],
-                contentDescription = null,
+                model = imageUrl,
+                contentDescription = "User uploaded image",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .heightIn(max = 180.dp)
+                    .heightIn(max = 240.dp) // Slightly increased for better visibility
                     .clip(RoundedCornerShape(8.dp))
                     .padding(bottom = 6.dp),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Fit // Fit is safer for mixed aspect ratios
             )
         }
 

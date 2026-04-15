@@ -1,7 +1,6 @@
 package com.kiri.ai.ui.viewmodels
 
 import android.app.Application
-import androidx.compose.runtime.*
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -10,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import com.kiri.ai.data.models.*
 import com.kiri.ai.data.repository.AuthRepository
 import com.kiri.ai.data.repository.ChatRepository
-import com.kiri.ai.utils.NotificationHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import android.net.Uri
@@ -25,9 +23,13 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.launch
 import java.util.UUID
 
 @HiltViewModel
@@ -47,8 +49,8 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    var uiState by mutableStateOf(ChatUiState())
-        private set
+    private val _uiState = MutableStateFlow(ChatUiState())
+    val uiState: StateFlow<ChatUiState> = _uiState.asStateFlow()
 
     init {
         observeUserData()
@@ -85,7 +87,7 @@ class ChatViewModel @Inject constructor(
     private fun observeUserData() {
         authRepository.user
             .onEach { user ->
-                uiState = uiState.copy(user = user)
+                _uiState.update { it.copy(user = user) }
             }
             .launchIn(viewModelScope)
 
@@ -110,9 +112,9 @@ class ChatViewModel @Inject constructor(
                     seenIds.add(finalId)
                     conv.copy(id = finalId)
                 }
-                uiState = uiState.copy(conversations = sanitized)
+                _uiState.update { it.copy(conversations = sanitized) }
             }.onFailure { error ->
-                uiState = uiState.copy(error = "Failed to load chats: ${error.message}")
+                _uiState.update { it.copy(error = "Failed to load chats: ${error.message}") }
             }
         }
     }
@@ -120,7 +122,7 @@ class ChatViewModel @Inject constructor(
     fun selectConversation(id: String) {
         viewModelScope.launch {
             try {
-                uiState = uiState.copy(isLoadingMessages = true, currentConversationId = id, error = null)
+                _uiState.update { it.copy(isLoadingMessages = true, currentConversationId = id, error = null) }
                 chatRepository.getConversationDetail(id).onSuccess { detail ->
                     // Ensure each message has a unique stable ID for LazyColumn to prevent crashes
                     val seenIds = mutableSetOf<String>()
@@ -144,37 +146,42 @@ class ChatViewModel @Inject constructor(
                         msg.copy(id = finalId, content = cleanContent)
                     } ?: emptyList()
 
-                    uiState = uiState.copy(
-                        messages = sanitizedMessages,
-                        isLoadingMessages = false,
-                        currentTitle = detail.title ?: "Untitled Chat"
-                    )
+                    _uiState.update {
+                        it.copy(
+                            messages = sanitizedMessages,
+                            isLoadingMessages = false,
+                            currentTitle = detail.title ?: "Untitled Chat"
+                        )
+                    }
                 }.onFailure { error ->
-                    uiState = uiState.copy(
-                        isLoadingMessages = false,
-                        error = "Could not load conversation: ${error.message}"
-                    )
+                    _uiState.update {
+                        it.copy(
+                            isLoadingMessages = false,
+                            error = "Could not load conversation: ${error.message}"
+                        )
+                    }
                 }
             } catch (e: Exception) {
-                uiState = uiState.copy(isLoadingMessages = false, error = "Error: ${e.message}")
+                _uiState.update { it.copy(isLoadingMessages = false, error = "Error: ${e.message}") }
             }
         }
     }
 
-    fun onMessageChange(msg: String) { uiState = uiState.copy(inputMessage = msg) }
+    fun onMessageChange(msg: String) { _uiState.update { it.copy(inputMessage = msg) } }
 
     fun onFileSelected(uri: Uri?, name: String?) {
-        uiState = uiState.copy(selectedFileUri = uri, selectedFileName = name)
+        _uiState.update { it.copy(selectedFileUri = uri, selectedFileName = name) }
     }
 
     fun clearSelectedFile() {
-        uiState = uiState.copy(selectedFileUri = null, selectedFileName = null)
+        _uiState.update { it.copy(selectedFileUri = null, selectedFileName = null) }
     }
 
     fun sendMessage() {
-        val input = uiState.inputMessage.trim()
-        val fileUri = uiState.selectedFileUri
-        if (input.isBlank() && fileUri == null || uiState.isSending) return
+        val currentState = _uiState.value
+        val input = currentState.inputMessage.trim()
+        val fileUri = currentState.selectedFileUri
+        if (input.isBlank() && fileUri == null || currentState.isSending) return
         
         val userMsgId = "user_${java.util.UUID.randomUUID()}"
         val userMsg = ChatMessage(
@@ -183,19 +190,22 @@ class ChatViewModel @Inject constructor(
             id = userMsgId
         )
         
-        uiState = uiState.copy(
-            messages = uiState.messages + userMsg,
-            inputMessage = "",
-            isSending = true,
-            error = null
-        )
+        _uiState.update {
+            it.copy(
+                messages = it.messages + userMsg,
+                inputMessage = "",
+                isSending = true,
+                error = null
+            )
+        }
 
         viewModelScope.launch {
             try {
+                val currentConvId = _uiState.value.currentConversationId
                 val result = if (fileUri != null) {
                     uploadFileAndSend(input, fileUri)
                 } else {
-                    chatRepository.sendMessage(input, uiState.currentConversationId)
+                    chatRepository.sendMessage(input, currentConvId)
                 }
 
                 result.onSuccess { res ->
@@ -213,34 +223,42 @@ class ChatViewModel @Inject constructor(
                             id = "ai_${java.util.UUID.randomUUID()}"
                         )
                         
-                        uiState = uiState.copy(
-                            messages = uiState.messages + assistantMsg,
-                            isSending = false,
-                            selectedFileUri = null,
-                            selectedFileName = null,
-                            currentConversationId = res.conversationId ?: uiState.currentConversationId,
-                            currentTitle = res.title ?: uiState.currentTitle
-                        )
+                        _uiState.update {
+                            it.copy(
+                                messages = it.messages + assistantMsg,
+                                isSending = false,
+                                selectedFileUri = null,
+                                selectedFileName = null,
+                                currentConversationId = res.conversationId ?: it.currentConversationId,
+                                currentTitle = res.title ?: it.currentTitle
+                            )
+                        }
                         
                         loadConversations()
 
                     } else {
-                        uiState = uiState.copy(
-                            isSending = false,
-                            error = res?.message ?: "Server returned error"
-                        )
+                        _uiState.update {
+                            it.copy(
+                                isSending = false,
+                                error = res?.message ?: "Server returned error"
+                            )
+                        }
                     }
                 }.onFailure { error ->
-                    uiState = uiState.copy(
-                        isSending = false,
-                        error = error.message ?: "Failed to send message"
-                    )
+                    _uiState.update {
+                        it.copy(
+                            isSending = false,
+                            error = error.message ?: "Failed to send message"
+                        )
+                    }
                 }
             } catch (e: Exception) {
-                uiState = uiState.copy(
-                    isSending = false, 
-                    error = "Unexpected error: ${e.message}"
-                )
+                _uiState.update {
+                    it.copy(
+                        isSending = false,
+                        error = "Unexpected error: ${e.message}"
+                    )
+                }
             }
         }
     }
@@ -253,13 +271,13 @@ class ChatViewModel @Inject constructor(
             file.outputStream().use { inputStream?.copyTo(it) }
 
             val requestFile = file.asRequestBody(contentResolver.getType(uri)?.toMediaTypeOrNull())
-            val body = MultipartBody.Part.createFormData("file", uiState.selectedFileName ?: file.name, requestFile)
+            val body = MultipartBody.Part.createFormData("file", _uiState.value.selectedFileName ?: file.name, requestFile)
             
             // AI Analysis: If message is empty, provide a default analysis prompt
             val prompt = if (message.trim().isEmpty()) "Analyze this image and explain what is shown in it." else message
             
             val contentBody = prompt.toRequestBody("text/plain".toMediaTypeOrNull())
-            val convIdBody = uiState.currentConversationId?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val convIdBody = _uiState.value.currentConversationId?.toRequestBody("text/plain".toMediaTypeOrNull())
 
             chatRepository.sendMessageWithFile(contentBody, convIdBody, body)
         } catch (e: Exception) {
@@ -268,12 +286,14 @@ class ChatViewModel @Inject constructor(
     }
 
     fun newChat() {
-        uiState = uiState.copy(
-            currentConversationId = null,
-            messages = emptyList(),
-            currentTitle = "New Chat",
-            inputMessage = ""
-        )
+        _uiState.update {
+            it.copy(
+                currentConversationId = null,
+                messages = emptyList(),
+                currentTitle = "New Chat",
+                inputMessage = ""
+            )
+        }
     }
 }
 
