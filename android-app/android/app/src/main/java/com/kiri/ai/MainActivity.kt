@@ -87,18 +87,19 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
 
                     val startDestination by viewModel.startDestination.collectAsState()
 
+                    val startDest = startDestination
                     Surface(
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        if (startDestination != null) {
+                        if (startDest != null) {
                             val navController = rememberNavController()
                             CompositionLocalProvider(
                                 androidx.compose.ui.platform.LocalContext provides this
                             ) {
                                 NavHost(
                                     navController = navController,
-                                    startDestination = startDestination!!
+                                    startDestination = startDest
                                 ) {
                                     composable("landing") { LandingScreen(navController) }
                                     composable("login") { LoginScreen(navController) }

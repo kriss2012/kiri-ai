@@ -59,9 +59,10 @@ fun LoginScreen(
         
         Spacer(modifier = Modifier.height(48.dp))
         
-        if (state.error != null) {
+        val errorText = state.error
+        if (errorText != null) {
             Text(
-                text = "ERROR // ${state.error!!.uppercase()}",
+                text = "ERROR // ${errorText.uppercase()}",
                 color = ShowroomWhite,
                 modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
                 style = KiriTypography.labelMedium

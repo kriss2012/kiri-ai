@@ -19,8 +19,8 @@ class AuthRepository @Inject constructor(
     suspend fun login(email: String, password: String): Result<AuthResponse> {
         return try {
             val response = authApi.login(mapOf("email" to email, "password" to password))
-            if (response.isSuccessful && response.body() != null) {
-                val authRes = response.body()!!
+            val authRes = response.body()
+            if (response.isSuccessful && authRes != null) {
                 authRes.token?.let { authDataStore.saveToken(it) }
                 authRes.user?.let { authDataStore.saveUser(it) }
                 Result.success(authRes)
@@ -39,8 +39,8 @@ class AuthRepository @Inject constructor(
     suspend fun register(name: String, email: String, password: String): Result<AuthResponse> {
         return try {
             val response = authApi.register(mapOf("name" to name, "email" to email, "password" to password))
-            if (response.isSuccessful && response.body() != null) {
-                val authRes = response.body()!!
+            val authRes = response.body()
+            if (response.isSuccessful && authRes != null) {
                 authRes.token?.let { authDataStore.saveToken(it) }
                 authRes.user?.let { authDataStore.saveUser(it) }
                 Result.success(authRes)
@@ -59,8 +59,8 @@ class AuthRepository @Inject constructor(
     suspend fun getMe(): Result<AuthResponse> {
         return try {
             val response = authApi.getMe()
-            if (response.isSuccessful && response.body() != null) {
-                val authRes = response.body()!!
+            val authRes = response.body()
+            if (response.isSuccessful && authRes != null) {
                 authRes.user?.let { authDataStore.saveUser(it) }
                 Result.success(authRes)
             } else {
@@ -78,8 +78,8 @@ class AuthRepository @Inject constructor(
     suspend fun updateProfile(name: String): Result<AuthResponse> {
         return try {
             val response = authApi.updateProfile(mapOf("name" to name))
-            if (response.isSuccessful && response.body() != null) {
-                val authRes = response.body()!!
+            val authRes = response.body()
+            if (response.isSuccessful && authRes != null) {
                 authRes.user?.let { authDataStore.saveUser(it) }
                 Result.success(authRes)
             } else {

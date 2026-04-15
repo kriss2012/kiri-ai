@@ -58,9 +58,10 @@ fun RegisterScreen(
         
         Spacer(modifier = Modifier.height(32.dp))
         
-        if (state.error != null) {
+        val errorText = state.error
+        if (errorText != null) {
             Text(
-                text = "ERROR // ${state.error!!.uppercase()}",
+                text = "ERROR // ${errorText.uppercase()}",
                 color = ShowroomWhite,
                 modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
                 style = KiriTypography.labelMedium
