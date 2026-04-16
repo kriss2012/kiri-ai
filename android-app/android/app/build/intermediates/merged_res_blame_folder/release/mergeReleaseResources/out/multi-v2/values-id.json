@@ -4,7 +4,7 @@
             "outputFile": "com.kiri.ai.app-mergeReleaseResources-70:/values-id/values-id.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\87aedb74191cdebdcf0b88366adb09cc\\transformed\\jetified-play-services-wallet-18.1.3\\res\\values-id\\values.xml",
+                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\03fa12bf817edce6c4cc0bae2838ee60\\transformed\\jetified-play-services-wallet-18.1.3\\res\\values-id\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
