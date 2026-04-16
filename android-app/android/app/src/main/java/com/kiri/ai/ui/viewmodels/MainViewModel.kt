@@ -36,12 +36,19 @@ class MainViewModel @Inject constructor(
     }
 
     private fun checkAuthStatus() {
+        android.util.Log.d("Kiri_DEBUG", "MainViewModel: Checking auth status...")
         viewModelScope.launch {
-            val token = authRepository.token.first()
-            if (token != null) {
-                _startDestination.value = "chat"
-            } else {
-                _startDestination.value = "landing"
+            try {
+                val token = authRepository.token.first()
+                android.util.Log.d("Kiri_DEBUG", "MainViewModel: Token found=${token != null}")
+                if (token != null) {
+                    _startDestination.value = "chat"
+                } else {
+                    _startDestination.value = "landing"
+                }
+            } catch (e: Exception) {
+                android.util.Log.e("Kiri_DEBUG", "MainViewModel: Auth check failed", e)
+                _startDestination.value = "landing" // Fallback
             }
         }
     }
