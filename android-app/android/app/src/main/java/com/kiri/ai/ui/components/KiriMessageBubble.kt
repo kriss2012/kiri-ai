@@ -69,18 +69,13 @@ fun KiriMessageBubble(message: ChatMessage?) {
             border = if (isUser) BorderStroke(1.dp, SilverMist.copy(alpha = 0.2f)) else null,
             modifier = Modifier
                 .widthIn(max = 320.dp)
-                .graphicsLayer { 
-                    clip = true 
-                    // PROJECT_ZERO_G: Layer isolation prevents the Draw-pass from recursing 
-                    // into complex Markdown blocks on low-performance devices.
-                }
+                .padding(if (isUser) 0.dp else 0.dp) // PLACEHOLDER for potential flattening
         ) {
-            Box(modifier = Modifier.padding(16.dp)) {
-                if (isUser) {
-                    UserContent(content)
-                } else {
-                    AssistantContent(content)
-                }
+            // DIRECT_CONTENT: Removed intermediate Box for flatter hierarchy
+            if (isUser) {
+                UserContent(content)
+            } else {
+                AssistantContent(content)
             }
         }
     }
@@ -92,7 +87,7 @@ private fun UserContent(content: String) {
     val match = imageRegex.find(content)
     val textPart = if (match != null) content.replace(match.value, "").trim() else content
 
-    Column {
+    Column(modifier = Modifier.padding(16.dp)) {
         match?.let {
             AsyncImage(
                 model = it.groupValues[1],
@@ -141,7 +136,7 @@ private fun AssistantContent(content: String) {
         list
     }
 
-    Column {
+    Column(modifier = Modifier.padding(16.dp)) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -167,10 +162,9 @@ private fun AssistantContent(content: String) {
             }
         }
 
-        Markdown(
-            content = content,
-            modifier = Modifier.fillMaxWidth(),
-            typography = markdownTypography(
+        // STABILITY_OPTIMIZATION: Remember typography and colors to prevent measurement-pass thrashing
+        val markdownTypography = remember {
+            markdownTypography(
                 h1 = KiriTypography.headlineLarge,
                 h2 = KiriTypography.headlineMedium,
                 paragraph = KiriTypography.bodyMedium.copy(
@@ -181,13 +175,22 @@ private fun AssistantContent(content: String) {
                     color = ShowroomWhite,
                     background = VelvetBlack
                 )
-            ),
-            colors = markdownColor(
+            )
+        }
+        val markdownColors = remember {
+            markdownColor(
                 text = ShowroomWhite,
                 codeText = ShowroomWhite,
                 inlineCodeText = ShowroomWhite,
                 linkText = SilverMist
             )
+        }
+
+        Markdown(
+            content = content,
+            modifier = Modifier.fillMaxWidth(),
+            typography = markdownTypography,
+            colors = markdownColors
         )
     }
 }
