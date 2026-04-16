@@ -143,8 +143,10 @@ class ChatViewModel @Inject constructor(
     }
 
     fun loadConversations() {
+        android.util.Log.d("Kiri_DEBUG", "ChatViewModel: Loading conversations...")
         viewModelScope.launch {
             chatRepository.getConversations().onSuccess { list ->
+                android.util.Log.d("Kiri_DEBUG", "ChatViewModel: Successfully loaded ${list.size} conversations")
                 // STABILITY_FIX: Guarantee absolute uniqueness for LazyColumn keys
                 val seenIds = mutableSetOf<String>()
                 val sanitized = list.mapIndexed { index, conv ->
@@ -157,19 +159,25 @@ class ChatViewModel @Inject constructor(
                 }
                 _uiState.update { it.copy(conversations = sanitized) }
             }.onFailure { error ->
+                android.util.Log.e("Kiri_DEBUG", "ChatViewModel: loadConversations failed", error)
                 _uiState.update { it.copy(error = "Failed to load chats: ${error.message}") }
             }
         }
     }
 
     fun selectConversation(id: String) {
+        android.util.Log.d("Kiri_DEBUG", "ChatViewModel: Selecting conversation id=$id")
         // PREVENT_REDUNDANT_RECOMPOSITION: If already loading or selected, skip
-        if (_uiState.value.isLoadingMessages && _uiState.value.currentConversationId == id) return
+        if (_uiState.value.isLoadingMessages && _uiState.value.currentConversationId == id) {
+            android.util.Log.d("Kiri_DEBUG", "ChatViewModel: Selection skipped - already loading same ID")
+            return
+        }
         
         viewModelScope.launch {
             try {
                 _uiState.update { it.copy(isLoadingMessages = true, currentConversationId = id, error = null) }
                 chatRepository.getConversationDetail(id).onSuccess { detail ->
+                    android.util.Log.d("Kiri_DEBUG", "ChatViewModel: Detail fetched for id=$id, messages=${detail.messages?.size ?: 0}")
                     // Ensure each message has a unique stable ID for LazyColumn to prevent crashes
                     val seenIds = mutableSetOf<String>()
                     val sanitizedMessages = (detail.messages ?: emptyList()).mapIndexed { index, msg ->
@@ -220,7 +228,9 @@ class ChatViewModel @Inject constructor(
     }
 
     fun onFileSelected(uri: Uri?, name: String?) {
+        android.util.Log.d("Kiri_DEBUG", "ChatViewModel: onFileSelected uri=$uri, name=$name")
         val secureUri = uri ?: run {
+            android.util.Log.d("Kiri_DEBUG", "ChatViewModel: uri is null, clearing file")
             clearSelectedFile()
             return
         }
@@ -230,6 +240,7 @@ class ChatViewModel @Inject constructor(
             val cachedFile = copyUriToInternalStorage(secureUri, name)
             
             if (cachedFile != null) {
+                android.util.Log.d("Kiri_DEBUG", "ChatViewModel: File secured at ${cachedFile.absolutePath}")
                 val cachedUri = Uri.fromFile(cachedFile)
                 _uiState.update { 
                     it.copy(
@@ -241,6 +252,7 @@ class ChatViewModel @Inject constructor(
                 savedStateHandle.set(KEY_FILE_PATH, cachedFile.absolutePath)
                 savedStateHandle.set(KEY_FILE_NAME, name)
             } else {
+                android.util.Log.e("Kiri_DEBUG", "ChatViewModel: Failed to secure file")
                 _uiState.update { 
                     it.copy(
                         isLoadingMessages = false,
@@ -283,7 +295,12 @@ class ChatViewModel @Inject constructor(
         val currentState = _uiState.value
         val input = currentState.inputMessage.trim()
         val fileUri = currentState.selectedFileUri
-        if (input.isBlank() && fileUri == null || currentState.isSending) return
+        android.util.Log.d("Kiri_DEBUG", "ChatViewModel: sendMessage input_length=${input.length}, has_file=${fileUri != null}")
+        
+        if (input.isBlank() && fileUri == null || currentState.isSending) {
+            android.util.Log.w("Kiri_DEBUG", "ChatViewModel: sendMessage blocked - empty input or already sending")
+            return
+        }
         
         val userMsgId = "user_${java.util.UUID.randomUUID()}"
         val userMsg = ChatMessage(
@@ -304,6 +321,8 @@ class ChatViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val currentConvId = _uiState.value.currentConversationId
+                android.util.Log.d("Kiri_DEBUG", "ChatViewModel: Launching send with convId=$currentConvId")
+                
                 val result = if (fileUri != null) {
                     uploadFileAndSend(input, fileUri)
                 } else {
