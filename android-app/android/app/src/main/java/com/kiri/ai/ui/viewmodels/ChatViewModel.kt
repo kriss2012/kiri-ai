@@ -64,26 +64,37 @@ class ChatViewModel @Inject constructor(
     // SAVED_STATE_KEYS: Keys for process death restoration
     private companion object {
         const val KEY_INPUT = "chat_input_text"
-        const val KEY_FILE_URI = "chat_file_uri"
+        const val KEY_FILE_PATH = "chat_file_path"
         const val KEY_FILE_NAME = "chat_file_name"
     }
 
     private val _uiState = MutableStateFlow(ChatUiState(
         inputMessage = savedStateHandle.get<String>(KEY_INPUT) ?: "",
-        selectedFileUri = savedStateHandle.get<Uri>(KEY_FILE_URI),
         selectedFileName = savedStateHandle.get<String>(KEY_FILE_NAME)
     ))
     val uiState: StateFlow<ChatUiState> = _uiState.asStateFlow()
 
     init {
+        restoreAttachmentState()
         observeUserData()
         observeConnectivity()
         loadConversations()
     }
 
+    private fun restoreAttachmentState() {
+        val path = savedStateHandle.get<String>(KEY_FILE_PATH)
+        if (path != null) {
+            val file = File(path)
+            if (file.exists()) {
+                _uiState.update { it.copy(selectedFileUri = Uri.fromFile(file)) }
+            } else {
+                savedStateHandle.remove<String>(KEY_FILE_PATH)
+            }
+        }
+    }
+
     private fun observeConnectivity() {
         chatRepository.isConnected
-            .distinctUntilChanged()
             .onEach { connected ->
                 // DEFERRED_UPDATE: Use viewModelScope to move state update out of the observation collector
                 // to prevent SnapshotStateObserver violations if this collector is triggered during composition.
@@ -205,18 +216,18 @@ class ChatViewModel @Inject constructor(
 
     fun onMessageChange(msg: String) { 
         _uiState.update { it.copy(inputMessage = msg) } 
-        savedStateHandle[KEY_INPUT] = msg
+        savedStateHandle.set(KEY_INPUT, msg)
     }
 
     fun onFileSelected(uri: Uri?, name: String?) {
-        if (uri == null) {
+        val secureUri = uri ?: run {
             clearSelectedFile()
             return
         }
 
         viewModelScope.launch {
             _uiState.update { it.copy(isLoadingMessages = true) } // Show small indicator during copy
-            val cachedFile = copyUriToInternalStorage(uri, name)
+            val cachedFile = copyUriToInternalStorage(secureUri, name)
             
             if (cachedFile != null) {
                 val cachedUri = Uri.fromFile(cachedFile)
@@ -227,8 +238,8 @@ class ChatViewModel @Inject constructor(
                         isLoadingMessages = false
                     ) 
                 }
-                savedStateHandle[KEY_FILE_URI] = cachedUri
-                savedStateHandle[KEY_FILE_NAME] = name
+                savedStateHandle.set(KEY_FILE_PATH, cachedFile.absolutePath)
+                savedStateHandle.set(KEY_FILE_NAME, name)
             } else {
                 _uiState.update { 
                     it.copy(
@@ -264,7 +275,7 @@ class ChatViewModel @Inject constructor(
 
     fun clearSelectedFile() {
         _uiState.update { it.copy(selectedFileUri = null, selectedFileName = null) }
-        savedStateHandle.remove<Uri>(KEY_FILE_URI)
+        savedStateHandle.remove<String>(KEY_FILE_PATH)
         savedStateHandle.remove<String>(KEY_FILE_NAME)
     }
 
@@ -327,7 +338,7 @@ class ChatViewModel @Inject constructor(
                         
                         // Clear saved state after successful send
                         savedStateHandle.remove<String>(KEY_INPUT)
-                        savedStateHandle.remove<Uri>(KEY_FILE_URI)
+                        savedStateHandle.remove<String>(KEY_FILE_PATH)
                         savedStateHandle.remove<String>(KEY_FILE_NAME)
                         
                         loadConversations()

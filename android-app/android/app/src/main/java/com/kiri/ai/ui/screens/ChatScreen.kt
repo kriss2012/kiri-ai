@@ -264,17 +264,21 @@ fun ChatScreen(
                     ) {
                         items(
                             items = state.messages,
-                            key = { it.getStableId() }
+                            key = { it.id ?: it.getStableId() },
+                            contentType = { it.role }
                         ) { msg ->
-                            // REINFORCED_STABILITY: Item isolation via key ensures minimal recomposition
-                            key(msg.getStableId()) {
+                            // REINFORCED_ISOLATION: Isolate every bubble in its own graphics layer 
+                            // to prevent dispatchGetDisplayList recursion on heavy markdown content.
+                            Box(modifier = Modifier.graphicsLayer { clip = true }) {
                                 KiriMessageBubble(msg)
                             }
                         }
                         
                         if (state.isSending) {
-                            item(key = "typing_indicator") { 
-                                TypingIndicator() 
+                            item(key = "typing_indicator", contentType = "system") { 
+                                Box(modifier = Modifier.graphicsLayer { clip = true }) {
+                                    TypingIndicator()
+                                }
                             }
                         }
                     }

@@ -643,8 +643,8 @@ public final class DaggerKiriApplication_HiltComponents_SingletonC {
     }
 
     @Override
-    public void injectKiriApplication(KiriApplication arg0) {
-      injectKiriApplication2(arg0);
+    public void injectKiriApplication(KiriApplication kiriApplication) {
+      injectKiriApplication2(kiriApplication);
     }
 
     @Override

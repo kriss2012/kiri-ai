@@ -191,8 +191,8 @@
 104-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:47:13-41
 105            android:exported="true"
 105-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:48:13-36
-106            android:hardwareAccelerated="false"
-106-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:52:13-48
+106            android:hardwareAccelerated="true"
+106-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:52:13-47
 107            android:label="@string/app_name"
 107-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:49:13-45
 108            android:theme="@style/Theme.App.Starting"

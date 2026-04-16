@@ -29,9 +29,9 @@ class KiriApplication : Application(), Configuration.Provider {
 
     override fun onCreate() {
         super.onCreate()
-        KiriCrashHandler.initialize(this)
-        NotificationHelper.createNotificationChannel(this)
-        enqueueChatPolling()
+        runCatching { KiriCrashHandler.initialize(this) }
+        runCatching { NotificationHelper.createNotificationChannel(this) }
+        runCatching { enqueueChatPolling() }
     }
 
     private fun enqueueChatPolling() {
