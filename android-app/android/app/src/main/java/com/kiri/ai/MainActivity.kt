@@ -115,7 +115,15 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                                 composable("landing") { LandingScreen(navController) }
                                 composable("login") { LoginScreen(navController) }
                                 composable("register") { RegisterScreen(navController) }
-                                composable("chat?id={id}") { backStackEntry -> 
+                                composable(
+                                    route = "chat?id={id}",
+                                    arguments = listOf(
+                                        androidx.navigation.navArgument("id") { 
+                                            nullable = true
+                                            defaultValue = null 
+                                        }
+                                    )
+                                ) { backStackEntry -> 
                                     val id = backStackEntry.arguments?.getString("id")
                                     ChatScreen(navController, id = id) 
                                 }
