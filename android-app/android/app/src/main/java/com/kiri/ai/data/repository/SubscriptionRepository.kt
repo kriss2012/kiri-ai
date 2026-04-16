@@ -13,10 +13,15 @@ class SubscriptionRepository @Inject constructor(
     suspend fun createOrder(plan: String): Result<OrderResponse> {
         return try {
             val response = subscriptionApi.createOrder(mapOf("plan" to plan))
-            if (response.isSuccessful && response.body() != null) {
-                Result.success(response.body()!!)
+            val body = response.body()
+            if (response.isSuccessful && body != null) {
+                Result.success(body)
             } else {
-                Result.failure(Exception(response.message()))
+                val errorBody = response.errorBody()?.string()
+                val message = if (errorBody?.trim()?.startsWith("{") == true) {
+                    try { com.google.gson.Gson().fromJson(errorBody, com.kiri.ai.data.models.GenericResponse::class.java).message } catch(e: Exception) { null }
+                } else null
+                Result.failure(Exception(message ?: "Failed to create order (${response.code()})"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -37,10 +42,15 @@ class SubscriptionRepository @Inject constructor(
                 "plan" to plan
             )
             val response = subscriptionApi.verifyPayment(request)
-            if (response.isSuccessful && response.body() != null) {
-                Result.success(response.body()!!)
+            val body = response.body()
+            if (response.isSuccessful && body != null) {
+                Result.success(body)
             } else {
-                Result.failure(Exception(response.message()))
+                val errorBody = response.errorBody()?.string()
+                val message = if (errorBody?.trim()?.startsWith("{") == true) {
+                    try { com.google.gson.Gson().fromJson(errorBody, com.kiri.ai.data.models.GenericResponse::class.java).message } catch(e: Exception) { null }
+                } else null
+                Result.failure(Exception(message ?: "Payment verification failed (${response.code()})"))
             }
         } catch (e: Exception) {
             Result.failure(e)

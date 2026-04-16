@@ -2,28 +2,34 @@ package com.kiri.ai.ui.screens
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.kiri.ai.R
 import com.kiri.ai.ui.components.KiriButton
 import com.kiri.ai.ui.components.KiriSecondaryButton
+import com.kiri.ai.ui.components.BugattiLogo
 import com.kiri.ai.ui.theme.*
 
 /**
- * Bugatti-Inspired Landing Screen
+ * Kiri AI - Landing Screen
  * 
- * Cinematic, monumental, and ultra-monochrome.
- * Focuses on high-performance scale and silent luxury.
+ * Cinematic, monumental landing experience implementing the Bugatti Design System.
+ * Focused on silent luxury and high-performance branding.
  */
 
 @Composable
@@ -44,33 +50,31 @@ fun LandingScreen(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Top Spacer for Cinematic Air
-        Spacer(modifier = Modifier.height(100.dp))
+        Spacer(modifier = Modifier.height(80.dp))
 
-        // Monumental Branding
+        // App Logo - Cinematic Enhancement
         AnimatedVisibility(
             visible = startAnimation,
-            enter = fadeIn(animationSpec = tween(1500)) + 
-                    expandVertically(animationSpec = tween(1000, easing = EaseOutExpo))
+            enter = fadeIn(animationSpec = tween(1200, delayMillis = 200)) +
+                    scaleIn(animationSpec = tween(1000, easing = EaseOutExpo), initialScale = 0.8f)
         ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    text = "KIRI",
-                    style = KiriTypography.displayLarge.copy(
-                        color = ShowroomWhite,
-                        fontSize = 120.sp, // Monumental scale
-                        lineHeight = 110.sp
-                    ),
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    text = "INTELLIGENCE",
-                    style = KiriTypography.labelLarge.copy(
-                        color = ShowroomWhite,
-                        letterSpacing = 8.sp // Ultra-wide tracking
-                    ),
-                    textAlign = TextAlign.Center
-                )
-            }
+            BugattiLogo(modifier = Modifier.padding(bottom = 48.dp))
+        }
+
+        // Feature Description (Quiet Mono)
+        AnimatedVisibility(
+            visible = startAnimation,
+            enter = fadeIn(animationSpec = tween(1200, delayMillis = 600))
+        ) {
+            Text(
+                text = "HYPER-PERFORMANCE REASONING // ATELIER_V1",
+                style = KiriTypography.labelLarge.copy(
+                    color = SilverMist,
+                    textAlign = TextAlign.Center,
+                    letterSpacing = 4.sp
+                ),
+                modifier = Modifier.padding(horizontal = 32.dp)
+            )
         }
 
         Spacer(modifier = Modifier.height(60.dp))

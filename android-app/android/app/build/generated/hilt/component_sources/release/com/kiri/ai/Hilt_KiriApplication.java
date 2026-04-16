@@ -9,10 +9,12 @@ import dagger.hilt.internal.GeneratedComponentManagerHolder;
 import dagger.hilt.internal.UnsafeCasts;
 import java.lang.Object;
 import java.lang.Override;
+import javax.annotation.processing.Generated;
 
 /**
  * A generated base class to be extended by the @dagger.hilt.android.HiltAndroidApp annotated class. If using the Gradle plugin, this is swapped as the base class via bytecode transformation.
  */
+@Generated("dagger.hilt.android.processor.internal.androidentrypoint.ApplicationGenerator")
 public abstract class Hilt_KiriApplication extends Application implements GeneratedComponentManagerHolder {
   private boolean injected = false;
 

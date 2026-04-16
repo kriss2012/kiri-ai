@@ -19,13 +19,17 @@ class AuthRepository @Inject constructor(
     suspend fun login(email: String, password: String): Result<AuthResponse> {
         return try {
             val response = authApi.login(mapOf("email" to email, "password" to password))
-            if (response.isSuccessful && response.body() != null) {
-                val authRes = response.body()!!
+            val authRes = response.body()
+            if (response.isSuccessful && authRes != null) {
                 authRes.token?.let { authDataStore.saveToken(it) }
                 authRes.user?.let { authDataStore.saveUser(it) }
                 Result.success(authRes)
             } else {
-                Result.failure(Exception(response.message()))
+                val errorBody = response.errorBody()?.string()
+                val message = if (errorBody?.trim()?.startsWith("{") == true) {
+                    try { com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message } catch(e: Exception) { null }
+                } else null
+                Result.failure(Exception(message ?: "Login failed (${response.code()})"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -35,13 +39,17 @@ class AuthRepository @Inject constructor(
     suspend fun register(name: String, email: String, password: String): Result<AuthResponse> {
         return try {
             val response = authApi.register(mapOf("name" to name, "email" to email, "password" to password))
-            if (response.isSuccessful && response.body() != null) {
-                val authRes = response.body()!!
+            val authRes = response.body()
+            if (response.isSuccessful && authRes != null) {
                 authRes.token?.let { authDataStore.saveToken(it) }
                 authRes.user?.let { authDataStore.saveUser(it) }
                 Result.success(authRes)
             } else {
-                Result.failure(Exception(response.message()))
+                val errorBody = response.errorBody()?.string()
+                val message = if (errorBody?.trim()?.startsWith("{") == true) {
+                    try { com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message } catch(e: Exception) { null }
+                } else null
+                Result.failure(Exception(message ?: "Registration failed (${response.code()})"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -51,12 +59,16 @@ class AuthRepository @Inject constructor(
     suspend fun getMe(): Result<AuthResponse> {
         return try {
             val response = authApi.getMe()
-            if (response.isSuccessful && response.body() != null) {
-                val authRes = response.body()!!
+            val authRes = response.body()
+            if (response.isSuccessful && authRes != null) {
                 authRes.user?.let { authDataStore.saveUser(it) }
                 Result.success(authRes)
             } else {
-                Result.failure(Exception(response.message()))
+                val errorBody = response.errorBody()?.string()
+                val message = if (errorBody?.trim()?.startsWith("{") == true) {
+                    try { com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message } catch(e: Exception) { null }
+                } else null
+                Result.failure(Exception(message ?: "Failed to fetch user data (${response.code()})"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -66,8 +78,8 @@ class AuthRepository @Inject constructor(
     suspend fun updateProfile(name: String): Result<AuthResponse> {
         return try {
             val response = authApi.updateProfile(mapOf("name" to name))
-            if (response.isSuccessful && response.body() != null) {
-                val authRes = response.body()!!
+            val authRes = response.body()
+            if (response.isSuccessful && authRes != null) {
                 authRes.user?.let { authDataStore.saveUser(it) }
                 Result.success(authRes)
             } else {

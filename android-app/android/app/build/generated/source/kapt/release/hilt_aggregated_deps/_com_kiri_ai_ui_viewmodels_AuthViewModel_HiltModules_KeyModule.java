@@ -1,6 +1,7 @@
 package hilt_aggregated_deps;
 
 import dagger.hilt.processor.internal.aggregateddeps.AggregatedDeps;
+import javax.annotation.processing.Generated;
 
 /**
  * This class should only be referenced by generated code! This class aggregates information across multiple compilations.
@@ -9,5 +10,6 @@ import dagger.hilt.processor.internal.aggregateddeps.AggregatedDeps;
     components = "dagger.hilt.android.components.ActivityRetainedComponent",
     modules = "com.kiri.ai.ui.viewmodels.AuthViewModel_HiltModules.KeyModule"
 )
+@Generated("dagger.hilt.processor.internal.aggregateddeps.AggregatedDepsGenerator")
 public class _com_kiri_ai_ui_viewmodels_AuthViewModel_HiltModules_KeyModule {
 }

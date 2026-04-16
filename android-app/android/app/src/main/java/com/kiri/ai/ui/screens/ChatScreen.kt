@@ -35,48 +35,57 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.kiri.ai.R
+import androidx.core.content.FileProvider
 import com.kiri.ai.ui.components.*
 import com.kiri.ai.ui.theme.*
 import com.kiri.ai.data.models.*
 import com.kiri.ai.ui.viewmodels.MainViewModel
 import com.kiri.ai.ui.viewmodels.ChatViewModel
 import kotlinx.coroutines.launch
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 /**
- * CRITICAL_STABILITY_NOTICE
- * This screen handles high-frequency UI updates (typing, scrolling, IME transitions).
+ * Kiri AI - Chat Interface
  * 
- * RULES_FOR_STABILITY:
- * 1. LazyColumn items MUST use stable keys to prevent redundant recompositions.
- * 2. Avoid nesting the LazyColumn inside other scrollable containers.
- * 3. IME (keyboard) padding must be handled at the root level to prevent remeasure loops.
- * 4. Keep the hierarchy flat to avoid 'dispatchGetDisplayList' recursion crashes.
+ * Cinematic, high-performance messaging interface implementing the Bugatti Design System.
+ * Optimized for architectural stability and technical flair.
  */
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScreen(
     navController: NavController,
+    id: String? = null,
     viewModel: ChatViewModel = hiltViewModel()
 ) {
-    val state = viewModel.uiState
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val scrollState = rememberLazyListState()
     val context = LocalContext.current
 
+    // LOAD_INITIAL_CONVERSATION: React to navigation parameters
+    LaunchedEffect(id) {
+        if (!id.isNullOrBlank() && id != state.currentConversationId) {
+            viewModel.selectConversation(id)
+        }
+    }
+
     // File Picker Launcher
     val filePickerLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocument(),
+        contract = ActivityResultContracts.GetContent(),
         onResult = { uri ->
             uri?.let {
                 val name = context.contentResolver.query(it, null, null, null, null)?.use { cursor ->
                     val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                    cursor.moveToFirst()
-                    cursor.getString(nameIndex)
+                    if (nameIndex != -1 && cursor.moveToFirst()) {
+                        cursor.getString(nameIndex)
+                    } else null
+                } ?: it.lastPathSegment
+
+                scope.launch {
+                    viewModel.onFileSelected(it, name)
                 }
-                viewModel.onFileSelected(it, name)
             }
         }
     )
@@ -197,7 +206,7 @@ fun ChatScreen(
                     actions = {
                         // High-Visibility Theme Toggle
                         val mainViewModel: MainViewModel = hiltViewModel()
-                        val isDarkMode by mainViewModel.isDarkMode.collectAsState()
+                        val isDarkMode by mainViewModel.isDarkMode.collectAsStateWithLifecycle()
                         IconButton(onClick = { mainViewModel.toggleTheme() }) {
                             Icon(
                                 if (isDarkMode) Icons.Default.LightMode else Icons.Default.DarkMode, 
@@ -228,34 +237,47 @@ fun ChatScreen(
                     .navigationBarsPadding() // Handles bottom home handle
                     .imePadding() // Handles keyboard
             ) {
+                if (!state.isConnected) {
+                    Surface(
+                        color = MaterialTheme.colorScheme.errorContainer,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "OFFLINE_MODE // CONNECTIVITY_LOST",
+                            style = KiriTypography.labelSmall,
+                            color = MaterialTheme.colorScheme.onErrorContainer,
+                            modifier = Modifier.padding(vertical = 4.dp),
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+
                 Box(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxWidth()
                 ) {
-                LazyColumn(
-                    state = scrollState,
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(16.dp)
-                ) {
-                    items(
-                        items = state.messages,
-                        key = { it.getStableId() }
-                    ) { msg ->
-                        // STRICT_ISOLATION: Force Compose to treat each message as an independent entity
-                        key(msg.getStableId()) {
-                            KiriMessageBubble(msg)
+                    LazyColumn(
+                        state = scrollState,
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(16.dp)
+                    ) {
+                        items(
+                            items = state.messages,
+                            key = { it.getStableId() }
+                        ) { msg ->
+                            // REINFORCED_STABILITY: Item isolation via key ensures minimal recomposition
+                            key(msg.getStableId()) {
+                                KiriMessageBubble(msg)
+                            }
                         }
-                    }
-                    
-                    if (state.isSending) {
-                        item(key = "typing_indicator") { 
-                            Box(modifier = Modifier.graphicsLayer { clip = true }) {
+                        
+                        if (state.isSending) {
+                            item(key = "typing_indicator") { 
                                 TypingIndicator() 
                             }
                         }
                     }
-                }
 
                     if (state.isLoadingMessages) {
                         CircularProgressIndicator(modifier = Modifier.align(Alignment.Center), color = MaterialTheme.colorScheme.primary)
@@ -267,7 +289,7 @@ fun ChatScreen(
                     message = state.inputMessage,
                     onMessageChange = { viewModel.onMessageChange(it) },
                     onSend = { viewModel.sendMessage() },
-                    onAttachClick = { filePickerLauncher.launch(arrayOf("*/*")) },
+                    onAttachClick = { filePickerLauncher.launch("*/*") },
                     selectedFileUri = state.selectedFileUri,
                     selectedFileName = state.selectedFileName,
                     onClearFile = { viewModel.clearSelectedFile() },
@@ -291,12 +313,14 @@ fun TypingIndicator() {
     )
 
     Row(
-        modifier = Modifier.padding(vertical = 12.dp),
+        modifier = Modifier
+            .padding(vertical = 12.dp)
+            .graphicsLayer { this.alpha = alpha }, // STABILITY_FIX: Use graphicsLayer for alpha to avoid measurement pass
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             "KIRI_IS_THINKING",
-            style = KiriTypography.labelMedium.copy(color = ShowroomWhite.copy(alpha = alpha))
+            style = KiriTypography.labelMedium.copy(color = ShowroomWhite)
         )
     }
 }

@@ -33,6 +33,7 @@ import com.kiri.ai.ui.components.KiriButton
 import com.kiri.ai.ui.theme.*
 import com.kiri.ai.ui.viewmodels.SubscriptionViewModel
 import com.kiri.ai.utils.findActivity
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.razorpay.Checkout
 import org.json.JSONObject
 import android.app.Activity
@@ -45,7 +46,7 @@ fun PricingScreen(
     viewModel: SubscriptionViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
-    val uiState = viewModel.uiState
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var selectedPlan by remember { mutableStateOf("premium_monthly") }
 
     LaunchedEffect(uiState.orderData) {
@@ -121,7 +122,7 @@ fun PricingScreen(
             Row(
                 modifier = Modifier
                     .clip(RoundedCornerShape(50))
-                    .background(BorderCream)
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
                     .padding(4.dp)
             ) {
                 val plans = listOf("premium_monthly" to "Monthly", "premium_yearly" to "Yearly")
@@ -130,7 +131,7 @@ fun PricingScreen(
                     Box(
                         modifier = Modifier
                             .clip(RoundedCornerShape(50))
-                            .background(if (selected) TerracottaBrand else Color.Transparent)
+                            .background(if (selected) MaterialTheme.colorScheme.primary else Color.Transparent)
                             .clickable { selectedPlan = id }
                             .padding(horizontal = 24.dp, vertical = 8.dp)
                     ) {
@@ -159,23 +160,6 @@ fun PricingScreen(
                 isLoading = uiState.isLoading,
                 onUpgrade = { viewModel.createOrder(selectedPlan) }
             )
-
-            Spacer(modifier = Modifier.height(24.dp))
-            
-            Text(
-                text = "Secure payment powered by Razorpay",
-                style = KiriTypography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-
-            if (uiState.error != null) {
-                Text(
-                    text = uiState.error!!,
-                    color = Color.Red,
-                    style = KiriTypography.bodySmall,
-                    modifier = Modifier.padding(top = 16.dp)
-                )
-            }
         }
     }
 }
@@ -189,94 +173,100 @@ fun PricingPlanCardEnhanced(
     isLoading: Boolean,
     onUpgrade: () -> Unit
 ) {
-    val infiniteTransition = rememberInfiniteTransition(label = "")
+    val infiniteTransition = rememberInfiniteTransition(label = "pricing_card_glow")
     val borderAlpha by infiniteTransition.animateFloat(
         initialValue = 0.5f,
         targetValue = 1f,
         animationSpec = infiniteRepeatable(
             animation = tween(2000, easing = LinearEasing),
             repeatMode = RepeatMode.Reverse
-        ), label = ""
+        ), label = "border_alpha"
     )
+
+    val primaryColor = MaterialTheme.colorScheme.primary
+    val outlineColor = MaterialTheme.colorScheme.outline
+    val animatedBrush = remember(borderAlpha) {
+        Brush.linearGradient(
+            colors = listOf(
+                primaryColor.copy(alpha = borderAlpha),
+                outlineColor.copy(alpha = borderAlpha)
+            )
+        )
+    }
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .border(
-                2.dp,
-                Brush.linearGradient(
-                    colors = listOf(
-                        MaterialTheme.colorScheme.primary.copy(alpha = borderAlpha),
-                        MaterialTheme.colorScheme.secondary.copy(alpha = borderAlpha)
-                    )
-                ),
+                1.dp,
+                animatedBrush,
                 RoundedCornerShape(24.dp)
             ),
         shape = RoundedCornerShape(24.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
+            containerColor = MaterialTheme.colorScheme.surface
         )
     ) {
         Column(modifier = Modifier.padding(32.dp)) {
             Box(
                 modifier = Modifier
-                    .background(TerracottaBrand.copy(alpha = 0.1f), RoundedCornerShape(50))
+                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), RoundedCornerShape(50))
                     .padding(horizontal = 12.dp, vertical = 4.dp)
             ) {
                 Text(
-                    "PREMIUM",
+                    "PREMIUM // ACCESS",
                     style = KiriTypography.labelMedium.copy(
-                        color = TerracottaBrand,
+                        color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold,
-                        letterSpacing = 1.sp
+                        letterSpacing = 2.sp
                     )
                 )
             }
             
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
             
             Row(verticalAlignment = Alignment.Bottom) {
                 Text(
                     text = "₹$price", 
                     style = KiriTypography.displayLarge.copy(fontSize = 56.sp),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
                     text = period, 
                     style = KiriTypography.titleLarge, 
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f), 
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f), 
                     modifier = Modifier.padding(bottom = 12.dp, start = 4.dp)
                 )
             }
             
             Text(
-                text = "Perfect for power users who want more.",
+                text = "TECHNICAL_SPEC: UNLIMITED_REASONING_CAPACITY",
                 style = KiriTypography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
             )
             
             Spacer(modifier = Modifier.height(32.dp))
             
             features.forEach { feature ->
-                Row(modifier = Modifier.padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+                Row(modifier = Modifier.padding(vertical = 10.dp), verticalAlignment = Alignment.CenterVertically) {
                     Box(
                         modifier = Modifier
-                            .size(20.dp)
-                            .background(TerracottaBrand.copy(alpha = 0.1f), CircleShape),
+                            .size(18.dp)
+                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), CircleShape),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
                             Icons.Default.Check, 
                             contentDescription = null, 
                             tint = MaterialTheme.colorScheme.primary, 
-                            modifier = Modifier.size(14.dp)
+                            modifier = Modifier.size(12.dp)
                         )
                     }
                     Spacer(modifier = Modifier.width(16.dp))
                     Text(
-                        text = feature, 
-                        style = KiriTypography.bodyMedium, 
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        text = feature.uppercase(), 
+                        style = KiriTypography.labelMedium, 
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
@@ -284,12 +274,13 @@ fun PricingPlanCardEnhanced(
             Spacer(modifier = Modifier.height(40.dp))
             
             KiriButton(
-                text = "Upgrade to $name",
+                text = "UPGRADE_SYSTEM",
                 onClick = onUpgrade,
                 modifier = Modifier.fillMaxWidth(),
                 isLoading = isLoading,
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(2.dp) // Professional sharp button
             )
         }
     }
 }
+

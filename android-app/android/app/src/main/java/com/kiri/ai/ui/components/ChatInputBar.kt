@@ -69,6 +69,8 @@ fun ChatInputBar(
                         coil.compose.AsyncImage(
                             model = selectedFileUri,
                             contentDescription = null,
+                            placeholder = androidx.compose.ui.graphics.painter.ColorPainter(colorScheme.surfaceVariant),
+                            error = androidx.compose.ui.graphics.painter.ColorPainter(colorScheme.errorContainer),
                             modifier = Modifier
                                 .size(40.dp)
                                 .clip(RoundedCornerShape(6.dp))

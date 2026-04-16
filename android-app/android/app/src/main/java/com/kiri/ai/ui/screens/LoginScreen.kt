@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,6 +20,7 @@ import com.kiri.ai.ui.components.KiriButton
 import com.kiri.ai.ui.components.KiriTextField
 import com.kiri.ai.ui.theme.*
 import com.kiri.ai.ui.viewmodels.AuthViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 /**
  * Bugatti Showroom Login
@@ -29,7 +31,7 @@ fun LoginScreen(
     navController: NavController,
     viewModel: AuthViewModel = hiltViewModel()
 ) {
-    val state = viewModel.uiState
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier
@@ -57,9 +59,10 @@ fun LoginScreen(
         
         Spacer(modifier = Modifier.height(48.dp))
         
-        if (state.error != null) {
+        val errorText = state.error
+        if (errorText != null) {
             Text(
-                text = "ERROR // ${state.error!!.uppercase()}",
+                text = "ERROR // ${errorText.uppercase()}",
                 color = ShowroomWhite,
                 modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
                 style = KiriTypography.labelMedium

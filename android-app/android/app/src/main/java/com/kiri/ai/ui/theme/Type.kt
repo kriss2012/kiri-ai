@@ -24,16 +24,16 @@ val KiriTypography = Typography(
     displayLarge = TextStyle(
         fontFamily = BugattiDisplayFont,
         fontWeight = FontWeight.Normal,
-        fontSize = 120.sp, // Capped for mobile (Plan: 288px)
-        lineHeight = 120.sp,
+        fontSize = 120.sp, 
+        lineHeight = 110.sp,
         letterSpacing = 0.sp
     ),
     // Mid Display (Feature)
     headlineLarge = TextStyle(
         fontFamily = BugattiDisplayFont,
         fontWeight = FontWeight.Normal,
-        fontSize = 60.sp,
-        lineHeight = 60.sp,
+        fontSize = 64.sp,
+        lineHeight = 64.sp,
         letterSpacing = 1.4.sp
     ),
     // Section Heading

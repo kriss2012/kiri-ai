@@ -9,7 +9,7 @@ public final class MainActivity extends androidx.activity.ComponentActivity impl
     private final androidx.activity.result.ActivityResultLauncher<java.lang.String[]> requestPermissionLauncher = null;
     
     public MainActivity() {
-        super();
+        super(0);
     }
     
     private final com.kiri.ai.ui.viewmodels.SubscriptionViewModel getSubscriptionViewModel() {

@@ -4,10 +4,10 @@ package com.kiri.ai.ui.screens;
 public final class LandingScreenKt {
     
     /**
-     * Bugatti-Inspired Landing Screen
+     * Kiri AI - Landing Screen
      *
-     * Cinematic, monumental, and ultra-monochrome.
-     * Focuses on high-performance scale and silent luxury.
+     * Cinematic, monumental landing experience implementing the Bugatti Design System.
+     * Focused on silent luxury and high-performance branding.
      */
     @androidx.compose.runtime.Composable()
     public static final void LandingScreen(@org.jetbrains.annotations.NotNull()

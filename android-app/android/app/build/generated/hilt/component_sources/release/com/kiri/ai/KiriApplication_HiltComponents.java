@@ -37,6 +37,7 @@ import dagger.hilt.android.internal.managers.FragmentComponentManager;
 import dagger.hilt.android.internal.managers.HiltWrapper_ActivityRetainedComponentManager_ActivityRetainedComponentBuilderEntryPoint;
 import dagger.hilt.android.internal.managers.HiltWrapper_ActivityRetainedComponentManager_ActivityRetainedLifecycleEntryPoint;
 import dagger.hilt.android.internal.managers.HiltWrapper_ActivityRetainedComponentManager_LifecycleModule;
+import dagger.hilt.android.internal.managers.HiltWrapper_SavedStateHandleModule;
 import dagger.hilt.android.internal.managers.ServiceComponentManager;
 import dagger.hilt.android.internal.managers.ViewComponentManager;
 import dagger.hilt.android.internal.modules.ApplicationContextModule;
@@ -50,8 +51,10 @@ import dagger.hilt.android.scopes.ViewScoped;
 import dagger.hilt.components.SingletonComponent;
 import dagger.hilt.internal.GeneratedComponent;
 import dagger.hilt.migration.DisableInstallInCheck;
+import javax.annotation.processing.Generated;
 import javax.inject.Singleton;
 
+@Generated("dagger.hilt.processor.internal.root.RootProcessor")
 public final class KiriApplication_HiltComponents {
   private KiriApplication_HiltComponents() {
   }
@@ -60,6 +63,7 @@ public final class KiriApplication_HiltComponents {
       subcomponents = ServiceC.class
   )
   @DisableInstallInCheck
+  @Generated("dagger.hilt.processor.internal.root.RootProcessor")
   abstract interface ServiceCBuilderModule {
     @Binds
     ServiceComponentBuilder bind(ServiceC.Builder builder);
@@ -69,6 +73,7 @@ public final class KiriApplication_HiltComponents {
       subcomponents = ActivityRetainedC.class
   )
   @DisableInstallInCheck
+  @Generated("dagger.hilt.processor.internal.root.RootProcessor")
   abstract interface ActivityRetainedCBuilderModule {
     @Binds
     ActivityRetainedComponentBuilder bind(ActivityRetainedC.Builder builder);
@@ -78,6 +83,7 @@ public final class KiriApplication_HiltComponents {
       subcomponents = ActivityC.class
   )
   @DisableInstallInCheck
+  @Generated("dagger.hilt.processor.internal.root.RootProcessor")
   abstract interface ActivityCBuilderModule {
     @Binds
     ActivityComponentBuilder bind(ActivityC.Builder builder);
@@ -87,6 +93,7 @@ public final class KiriApplication_HiltComponents {
       subcomponents = ViewModelC.class
   )
   @DisableInstallInCheck
+  @Generated("dagger.hilt.processor.internal.root.RootProcessor")
   abstract interface ViewModelCBuilderModule {
     @Binds
     ViewModelComponentBuilder bind(ViewModelC.Builder builder);
@@ -96,6 +103,7 @@ public final class KiriApplication_HiltComponents {
       subcomponents = ViewC.class
   )
   @DisableInstallInCheck
+  @Generated("dagger.hilt.processor.internal.root.RootProcessor")
   abstract interface ViewCBuilderModule {
     @Binds
     ViewComponentBuilder bind(ViewC.Builder builder);
@@ -105,6 +113,7 @@ public final class KiriApplication_HiltComponents {
       subcomponents = FragmentC.class
   )
   @DisableInstallInCheck
+  @Generated("dagger.hilt.processor.internal.root.RootProcessor")
   abstract interface FragmentCBuilderModule {
     @Binds
     FragmentComponentBuilder bind(FragmentC.Builder builder);
@@ -114,6 +123,7 @@ public final class KiriApplication_HiltComponents {
       subcomponents = ViewWithFragmentC.class
   )
   @DisableInstallInCheck
+  @Generated("dagger.hilt.processor.internal.root.RootProcessor")
   abstract interface ViewWithFragmentCBuilderModule {
     @Binds
     ViewWithFragmentComponentBuilder bind(ViewWithFragmentC.Builder builder);
@@ -153,6 +163,7 @@ public final class KiriApplication_HiltComponents {
           AuthViewModel_HiltModules.KeyModule.class,
           ChatViewModel_HiltModules.KeyModule.class,
           HiltWrapper_ActivityRetainedComponentManager_LifecycleModule.class,
+          HiltWrapper_SavedStateHandleModule.class,
           ActivityCBuilderModule.class,
           ViewModelCBuilderModule.class,
           MainViewModel_HiltModules.KeyModule.class,

@@ -1,5 +1,6 @@
 package com.kiri.ai.ui.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -8,9 +9,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
 import coil.compose.AsyncImage
 import com.kiri.ai.data.models.ChatMessage
 import com.kiri.ai.ui.theme.*
@@ -19,107 +26,172 @@ import com.mikepenz.markdown.m3.markdownColor
 import com.mikepenz.markdown.m3.markdownTypography
 
 /**
- * PROJECT_ZERO_G // FINAL_STABILITY_LAYER
+ * KiriMessageBubble Component // PROJECT_ZERO_G REINFORCED
  * 
- * This component has been flattened to the absolute minimum required for rendering.
- * With Activity-wide hardware acceleration disabled, we avoid the 'dispatchGetDisplayList'
- * stack recursion entirely.
+ * Implements the Bugatti Design System's monochromatic aesthetic.
  * 
- * STABILITY_RULES:
- * 1. ZERO complex graphics layers (no offscreen compositing).
- * 2. Flat container hierarchy.
- * 3. String-level truncation to protect the software renderer.
+ * STABILITY_CONTROLS:
+ * 1. graphicsLayer isolation to prevent dispatchGetDisplayList recursion.
+ * 2. Immutable monochromatic palette to reduce Draw-phase color resolution steps.
+ * 3. Segmented intelligence interpretation.
  */
-
 @Composable
 fun KiriMessageBubble(message: ChatMessage?) {
     if (message == null) return
-
     val role = message.role ?: "assistant"
-    val rawContent = message.content ?: ""
     val isUser = role == "user"
-    val colorScheme = MaterialTheme.colorScheme
+    val content = message.content ?: ""
 
-    // STABILITY_GUARD: Protect software renderer Memory
-    val content = remember(rawContent) {
-        if (rawContent.length > 8000) {
-            rawContent.take(8000) + "\n\n... [LOG_LIMIT_EXCEEDED]"
-        } else {
-            rawContent
-        }
-    }
-    
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp, horizontal = 12.dp),
+            .padding(vertical = 12.dp, horizontal = 16.dp),
         horizontalAlignment = if (isUser) Alignment.End else Alignment.Start
     ) {
-        Surface(
-            color = if (isUser) colorScheme.primary else colorScheme.surfaceVariant,
-            shape = RoundedCornerShape(
-                topStart = 12.dp,
-                topEnd = 12.dp, 
-                bottomStart = if (isUser) 12.dp else 2.dp,
-                bottomEnd = if (isUser) 2.dp else 12.dp
+        // MONOGRAM_IDENTIFIER (Technical Header)
+        Text(
+            text = (if (isUser) "USER // ATELIER" else "KIRI // INTELLIGENCE").uppercase(),
+            style = KiriTypography.labelMedium.copy(
+                color = if (isUser) ShowroomWhite.copy(alpha = 0.4f) else SilverMist.copy(alpha = 0.6f),
+                letterSpacing = 2.sp
             ),
-            modifier = Modifier.widthIn(max = 310.dp)
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+
+        Surface(
+            color = if (isUser) VelvetBlack else DarkGray,
+            shape = RoundedCornerShape(
+                topStart = if (isUser) 12.dp else 2.dp,
+                topEnd = if (isUser) 2.dp else 12.dp,
+                bottomStart = 12.dp,
+                bottomEnd = 12.dp
+            ),
+            border = if (isUser) BorderStroke(1.dp, SilverMist.copy(alpha = 0.2f)) else null,
+            modifier = Modifier
+                .widthIn(max = 320.dp)
+                .padding(if (isUser) 0.dp else 0.dp) // PLACEHOLDER for potential flattening
         ) {
-            Box(modifier = Modifier.padding(12.dp)) {
-                if (isUser) {
-                    UserContent(content, colorScheme)
-                } else {
-                    AssistantContent(content, colorScheme)
-                }
+            // DIRECT_CONTENT: Removed intermediate Box for flatter hierarchy
+            if (isUser) {
+                UserContent(content)
+            } else {
+                AssistantContent(content)
             }
         }
     }
 }
 
 @Composable
-private fun UserContent(content: String, colorScheme: ColorScheme) {
-    Column {
-        val imageRegex = Regex("\\[IMAGE_URI: (.*?)\\]")
-        val match = imageRegex.find(content)
-        val textPart = if (match != null) content.replace(match.value, "").trim() else content
+private fun UserContent(content: String) {
+    val imageRegex = Regex("\\[(?:IMAGE_URI|IMAGE_ATTACHMENT): (.*?)\\]")
+    val match = imageRegex.find(content)
+    val textPart = if (match != null) content.replace(match.value, "").trim() else content
 
-        if (match != null) {
+    Column(modifier = Modifier.padding(16.dp)) {
+        match?.let {
             AsyncImage(
-                model = match.groupValues[1],
-                contentDescription = null,
+                model = it.groupValues[1],
+                contentDescription = "Attachment",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .heightIn(max = 180.dp)
+                    .heightIn(max = 240.dp)
                     .clip(RoundedCornerShape(8.dp))
-                    .padding(bottom = 6.dp),
+                    .padding(bottom = 12.dp),
                 contentScale = ContentScale.Crop
             )
         }
-
         if (textPart.isNotEmpty()) {
             Text(
                 text = textPart,
-                style = KiriTypography.bodyMedium.copy(color = colorScheme.onPrimary)
+                style = KiriTypography.bodyMedium.copy(color = ShowroomWhite)
             )
         }
     }
 }
 
 @Composable
-private fun AssistantContent(content: String, colorScheme: ColorScheme) {
-    Markdown(
-        content = content,
-        colors = markdownColor(
-            text = colorScheme.onSurfaceVariant,
-            codeText = colorScheme.onSurfaceVariant.copy(alpha = 0.9f),
-            linkText = colorScheme.primary
-        ),
-        typography = markdownTypography(
-            paragraph = KiriTypography.bodyMedium.copy(
-                color = colorScheme.onSurfaceVariant,
-                lineHeight = 20.sp
+private fun AssistantContent(content: String) {
+    val clipboard = LocalClipboardManager.current
+    
+    // Segment logic for professional segmentation (Bugatti Intelligence Protocol)
+    val segments = remember(content) {
+        val list = mutableListOf<Pair<String, String>>()
+        var current = content
+        
+        val types = listOf(
+            "CONTEXT" to "TECHNICAL_CONTEXT",
+            "OUTPUT" to "REASONING_OUTPUT",
+            "NEXT_STEPS" to "ACTIONABLE_PROJECTION"
+        )
+        
+        types.forEach { (marker, label) ->
+            if (current.contains("${marker}:")) {
+                val parts = current.split("${marker}:", limit = 2)
+                if (parts[0].trim().isNotEmpty()) list.add("STREAM" to parts[0].trim())
+                current = parts[1]
+                list.add(label to "") // Marker
+            }
+        }
+        if (current.trim().isNotEmpty()) list.add("DATA" to current.trim())
+        list
+    }
+
+    Column(modifier = Modifier.padding(16.dp)) {
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                 text = "ANALYSIS_STREAM",
+                 style = KiriTypography.labelMedium.copy(
+                     color = SilverMist,
+                     fontSize = 10.sp
+                 )
             )
-        ),
-        modifier = Modifier.fillMaxWidth()
-    )
+            IconButton(
+                onClick = { clipboard.setText(AnnotatedString(content)) },
+                modifier = Modifier.size(20.dp)
+            ) {
+                Icon(
+                    Icons.Default.ContentCopy, 
+                    contentDescription = "Copy", 
+                    tint = SilverMist, 
+                    modifier = Modifier.size(16.dp)
+                )
+            }
+        }
+
+        // STABILITY_OPTIMIZATION: Remember typography and colors to prevent measurement-pass thrashing
+        val markdownTypography = remember {
+            markdownTypography(
+                h1 = KiriTypography.headlineLarge,
+                h2 = KiriTypography.headlineMedium,
+                paragraph = KiriTypography.bodyMedium.copy(
+                    color = ShowroomWhite,
+                    lineHeight = 26.sp
+                ),
+                code = KiriTypography.labelMedium.copy(
+                    color = ShowroomWhite,
+                    background = VelvetBlack
+                )
+            )
+        }
+        val markdownColors = remember {
+            markdownColor(
+                text = ShowroomWhite,
+                codeText = ShowroomWhite,
+                inlineCodeText = ShowroomWhite,
+                linkText = SilverMist
+            )
+        }
+
+        Markdown(
+            content = content,
+            modifier = Modifier.fillMaxWidth(),
+            typography = markdownTypography,
+            colors = markdownColors
+        )
+    }
 }
+

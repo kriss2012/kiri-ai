@@ -57,7 +57,7 @@ data class Conversation(
     val updatedAt: String? = ""
 ) {
     // Helper to ensure we always have a non-null ID for LazyColumn keys
-    fun getStableId(): String = id ?: "conv_${System.identityHashCode(this)}"
+    fun getStableId(): String = id ?: "conv_${title?.hashCode() ?: 0}_${updatedAt?.hashCode() ?: 0}"
 }
 
 data class ConversationDetailResponse(
@@ -69,10 +69,13 @@ data class ChatMessage(
     val role: String? = "user", // "user" or "assistant"
     val content: String? = "",
     @SerializedName("_id", alternate = ["id"])
-    val id: String? = null
+    val id: String? = null,
+    val timestamp: Long = System.currentTimeMillis(),
+    val localId: String = java.util.UUID.randomUUID().toString() // PERMANENT_STABILITY_ANCHOR
 ) {
     // Helper to ensure we always have a non-null ID for LazyColumn keys
-    fun getStableId(): String = id ?: "msg_${System.identityHashCode(this)}_${role}"
+    // We prioritize remote ID, then fixed localId. NEVER use content.hashCode() here.
+    fun getStableId(): String = id ?: localId
 }
 
 data class ChatDetail(

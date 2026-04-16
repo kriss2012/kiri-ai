@@ -30,6 +30,7 @@ import com.kiri.ai.ui.screens.*
 import com.kiri.ai.ui.theme.*
 import com.kiri.ai.ui.viewmodels.MainViewModel
 import com.kiri.ai.ui.viewmodels.SubscriptionViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.razorpay.PaymentData
 import com.razorpay.PaymentResultWithDataListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,12 +58,23 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
      */
 
     private fun startKiriService() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU || 
-            checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
-            try {
-                startService(android.content.Intent(this, com.kiri.ai.services.KiriBackgroundService::class.java))
-            } catch (e: Exception) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val hasNotify = checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) == android.content.pm.PackageManager.PERMISSION_GRANTED
+            if (!hasNotify) return
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            val hasDataSync = checkSelfPermission(android.Manifest.permission.FOREGROUND_SERVICE_DATA_SYNC) == android.content.pm.PackageManager.PERMISSION_GRANTED
+            if (!hasDataSync) {
+                // We request it in requestPermissions() but here we guard the service start
+                return
             }
+        }
+
+        try {
+            startService(android.content.Intent(this, com.kiri.ai.services.KiriBackgroundService::class.java))
+        } catch (e: Exception) {
+            android.util.Log.e("KiriService", "Start failed: ${e.message}")
         }
     }
 
@@ -71,13 +83,12 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
         super.onCreate(savedInstanceState)
         
         requestPermissions()
-        startKiriService()
         WindowCompat.setDecorFitsSystemWindows(window, false)
         val lastCrash = com.kiri.ai.utils.KiriCrashHandler.getAndClearLastCrash(this)
 
         setContent {
             val viewModel: MainViewModel = hiltViewModel()
-            val themeMode by viewModel.isDarkMode.collectAsState()
+            val themeMode by viewModel.isDarkMode.collectAsStateWithLifecycle()
             
             CompositionLocalProvider(LocalThemeMode provides themeMode) {
                 KiriTheme(darkTheme = themeMode) {
@@ -85,28 +96,28 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                         CrashDialog(lastCrash)
                     }
 
-                    val startDestination by viewModel.startDestination.collectAsState()
+                    val startDestination by viewModel.startDestination.collectAsStateWithLifecycle()
 
+                    val startDest = startDestination
                     Surface(
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        if (startDestination != null) {
+                        if (startDest != null) {
                             val navController = rememberNavController()
-                            CompositionLocalProvider(
-                                androidx.compose.ui.platform.LocalContext provides this
+                            NavHost(
+                                navController = navController,
+                                startDestination = startDest
                             ) {
-                                NavHost(
-                                    navController = navController,
-                                    startDestination = startDestination!!
-                                ) {
-                                    composable("landing") { LandingScreen(navController) }
-                                    composable("login") { LoginScreen(navController) }
-                                    composable("register") { RegisterScreen(navController) }
-                                    composable("chat") { ChatScreen(navController) }
-                                    composable("profile") { ProfileScreen(navController) }
-                                    composable("pricing") { PricingScreen(navController, subscriptionViewModel) }
+                                composable("landing") { LandingScreen(navController) }
+                                composable("login") { LoginScreen(navController) }
+                                composable("register") { RegisterScreen(navController) }
+                                composable("chat?id={id}") { backStackEntry -> 
+                                    val id = backStackEntry.arguments?.getString("id")
+                                    ChatScreen(navController, id = id) 
                                 }
+                                composable("profile") { ProfileScreen(navController) }
+                                composable("pricing") { PricingScreen(navController, subscriptionViewModel) }
                             }
                         }
                     }
@@ -163,6 +174,10 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
             permissions.add(android.Manifest.permission.READ_MEDIA_VIDEO)
         } else {
             permissions.add(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+        
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            permissions.add(android.Manifest.permission.FOREGROUND_SERVICE_DATA_SYNC)
         }
         
         if (permissions.isNotEmpty()) {
