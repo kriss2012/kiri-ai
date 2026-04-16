@@ -58,6 +58,7 @@ fun ChatScreen(
     id: String? = null,
     viewModel: ChatViewModel = hiltViewModel()
 ) {
+    android.util.Log.d("Kiri_DEBUG", "ChatScreen: Navigation triggered with id=$id")
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -75,14 +76,21 @@ fun ChatScreen(
     val filePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),
         onResult = { uri ->
+            android.util.Log.d("Kiri_DEBUG", "FilePicker: Result received uri=$uri")
             uri?.let {
-                val name = context.contentResolver.query(it, null, null, null, null)?.use { cursor ->
-                    val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                    if (nameIndex != -1 && cursor.moveToFirst()) {
-                        cursor.getString(nameIndex)
-                    } else null
+                val name = try {
+                    context.contentResolver.query(it, null, null, null, null)?.use { cursor ->
+                        val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                        if (nameIndex != -1 && cursor.moveToFirst()) {
+                            cursor.getString(nameIndex)
+                        } else null
+                    }
+                } catch (e: Exception) {
+                    android.util.Log.e("Kiri_DEBUG", "FilePicker: Query failed", e)
+                    null
                 } ?: it.lastPathSegment
 
+                android.util.Log.d("Kiri_DEBUG", "FilePicker: Handing over to ViewModel name=$name")
                 scope.launch {
                     viewModel.onFileSelected(it, name)
                 }
