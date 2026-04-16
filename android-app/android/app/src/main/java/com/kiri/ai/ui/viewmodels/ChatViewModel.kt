@@ -166,7 +166,12 @@ class ChatViewModel @Inject constructor(
     }
 
     fun selectConversation(id: String) {
+        if (id.isBlank()) {
+            android.util.Log.e("Kiri_DEBUG", "ChatViewModel: Aborting selection - target id is blank")
+            return
+        }
         android.util.Log.d("Kiri_DEBUG", "ChatViewModel: Selecting conversation id=$id")
+        
         // PREVENT_REDUNDANT_RECOMPOSITION: If already loading or selected, skip
         if (_uiState.value.isLoadingMessages && _uiState.value.currentConversationId == id) {
             android.util.Log.d("Kiri_DEBUG", "ChatViewModel: Selection skipped - already loading same ID")
@@ -420,12 +425,14 @@ class ChatViewModel @Inject constructor(
     }
 
     fun newChat() {
+        android.util.Log.d("Kiri_DEBUG", "ChatViewModel: Initializing NEW_CHAT session")
         _uiState.update {
             it.copy(
                 currentConversationId = null,
                 messages = emptyList(),
-                currentTitle = "New Chat",
-                inputMessage = ""
+                currentTitle = "Kiri AI",
+                inputMessage = "",
+                error = null
             )
         }
     }
