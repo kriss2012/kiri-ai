@@ -1,26 +1,26 @@
 [
     {
-        "merged": "com.kiri.ai.app-debug-76:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.kiri.ai.app-main-78:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "com.kiri.ai.app-debug-77:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.kiri.ai.app-main-79:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "com.kiri.ai.app-debug-76:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.kiri.ai.app-main-78:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "com.kiri.ai.app-debug-77:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.kiri.ai.app-main-79:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "com.kiri.ai.app-debug-76:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.kiri.ai.app-main-78:/drawable/ic_launcher_foreground.xml"
+        "merged": "com.kiri.ai.app-debug-77:/xml_file_paths.xml.flat",
+        "source": "com.kiri.ai.app-main-79:/xml/file_paths.xml"
     },
     {
-        "merged": "com.kiri.ai.app-debug-76:/drawable_app_logo.png.flat",
-        "source": "com.kiri.ai.app-main-78:/drawable/app_logo.png"
+        "merged": "com.kiri.ai.app-debug-77:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.kiri.ai.app-main-79:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "com.kiri.ai.app-debug-76:/xml_file_paths.xml.flat",
-        "source": "com.kiri.ai.app-main-78:/xml/file_paths.xml"
+        "merged": "com.kiri.ai.app-debug-77:/xml_config.xml.flat",
+        "source": "com.kiri.ai.app-main-79:/xml/config.xml"
     },
     {
-        "merged": "com.kiri.ai.app-debug-76:/xml_config.xml.flat",
-        "source": "com.kiri.ai.app-main-78:/xml/config.xml"
+        "merged": "com.kiri.ai.app-debug-77:/drawable_app_logo.png.flat",
+        "source": "com.kiri.ai.app-main-79:/drawable/app_logo.png"
     }
 ]

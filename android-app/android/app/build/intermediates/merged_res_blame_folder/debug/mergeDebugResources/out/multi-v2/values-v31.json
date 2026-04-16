@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.kiri.ai.app-mergeDebugResources-74:/values-v31/values-v31.xml",
+            "outputFile": "com.kiri.ai.app-mergeDebugResources-75:/values-v31/values-v31.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\4bffbb60784fb641b1896598bb2eacba\\transformed\\jetified-core-splashscreen-1.0.1\\res\\values-v31\\values-v31.xml",
+                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\3e4d1bf6f9619af20fffb55ac3ad89e4\\transformed\\jetified-core-splashscreen-1.0.1\\res\\values-v31\\values-v31.xml",
                     "from": {
                         "startLines": "2,9",
                         "startColumns": "4,4",

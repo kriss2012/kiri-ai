@@ -90,7 +90,7 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
 
         setContent {
             val viewModel: MainViewModel = hiltViewModel()
-            val themeMode by viewModel.isDarkMode.collectAsStateWithLifecycle()
+            val themeMode by viewModel.isDarkMode.collectAsState()
             
             CompositionLocalProvider(LocalThemeMode provides themeMode) {
                 KiriTheme(darkTheme = themeMode) {
@@ -98,7 +98,7 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                         CrashDialog(lastCrash)
                     }
 
-                    val startDestination by viewModel.startDestination.collectAsStateWithLifecycle()
+                    val startDestination by viewModel.startDestination.collectAsState()
                     val startDest = startDestination
                     android.util.Log.d("Kiri_DEBUG", "MainActivity: Start destination resolved to: $startDest")
                     

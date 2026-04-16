@@ -1,7 +1,7 @@
-#Thu Apr 16 23:40:56 IST 2026
-base.0=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
-base.1=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes2.dex
-base.2=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes3.dex
+#Fri Apr 17 00:46:58 IST 2026
+base.0=D\:\\MyApplication\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
+base.1=D\:\\MyApplication\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes2.dex
+base.2=D\:\\MyApplication\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes3.dex
 path.0=classes.dex
 path.1=classes2.dex
 path.2=classes3.dex

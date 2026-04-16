@@ -1,18 +1,18 @@
-#Thu Apr 16 22:40:32 IST 2026
-base.0=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.10=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
-base.11=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\9\\classes.dex
-base.12=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
-base.13=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
-base.2=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
-base.3=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\12\\classes.dex
-base.4=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
-base.5=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
-base.6=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
-base.7=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\4\\classes.dex
-base.8=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
-base.9=D\:\\A-Telegram\\kiri_ai\\kiri-ai-complete\\kiri-ai\\android-app\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
+#Fri Apr 17 00:26:51 IST 2026
+base.0=D\:\\MyApplication\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=D\:\\MyApplication\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.10=D\:\\MyApplication\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
+base.11=D\:\\MyApplication\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\9\\classes.dex
+base.12=D\:\\MyApplication\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+base.13=D\:\\MyApplication\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
+base.2=D\:\\MyApplication\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
+base.3=D\:\\MyApplication\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\12\\classes.dex
+base.4=D\:\\MyApplication\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
+base.5=D\:\\MyApplication\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
+base.6=D\:\\MyApplication\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
+base.7=D\:\\MyApplication\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\4\\classes.dex
+base.8=D\:\\MyApplication\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
+base.9=D\:\\MyApplication\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.10=8/classes.dex
