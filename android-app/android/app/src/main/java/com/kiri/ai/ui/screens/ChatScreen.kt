@@ -113,8 +113,8 @@ fun ChatScreen(
             ModalDrawerSheet(
                 drawerContainerColor = VelvetBlack,
                 drawerContentColor = ShowroomWhite,
-                drawerShape = RoundedCornerShape(0.dp), // Sharper aesthetic
-                modifier = Modifier.width(300.dp)
+                drawerShape = RoundedCornerShape(0.dp),
+                modifier = Modifier.fillMaxHeight().width(300.dp)
             ) {
                 Spacer(modifier = Modifier.height(64.dp))
                 Text(
@@ -242,7 +242,6 @@ fun ChatScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(padding)
-                    .navigationBarsPadding() // Handles bottom home handle
                     .imePadding() // Handles keyboard
             ) {
                 if (!state.isConnected) {
