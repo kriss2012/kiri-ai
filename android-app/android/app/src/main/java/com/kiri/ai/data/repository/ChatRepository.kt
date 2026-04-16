@@ -127,12 +127,23 @@ class ChatRepository @Inject constructor(
             if (response.isSuccessful) {
                 val detail = response.body()?.conversation
                 if (detail != null) {
-                    Result.success(detail)
+                    android.util.Log.d("Kiri_DEBUG", "ChatRepository: Valid detail fetched for id=$id")
+                    // Pre-sanitize to prevent crashes in ViewModel/UI
+                    val safeMessages = (detail.messages ?: emptyList()).mapIndexed { index, msg ->
+                        msg.copy(
+                            id = msg.id ?: "remote_${index}",
+                            content = msg.content ?: "",
+                            role = msg.role ?: "user"
+                        )
+                    }
+                    Result.success(detail.copy(messages = safeMessages))
                 } else {
+                    android.util.Log.e("Kiri_DEBUG", "ChatRepository: Detail body is null")
                     Result.success(ChatDetail(id = id, title = "Untitled Chat", messages = emptyList()))
                 }
             } else {
                 val errorBody = response.errorBody()?.string()
+                android.util.Log.e("Kiri_DEBUG", "ChatRepository: Detail fetch failed $errorBody")
                 val message = if (errorBody?.trim()?.startsWith("{") == true) {
                     try { com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message } catch(e: Exception) { null }
                 } else null
@@ -141,6 +152,7 @@ class ChatRepository @Inject constructor(
         } catch (e: java.net.UnknownHostException) {
             Result.failure(Exception("OFFLINE: Message history unavailable."))
         } catch (e: Exception) {
+            android.util.Log.e("Kiri_DEBUG", "ChatRepository: Detail fetch exception", e)
             Result.failure(e)
         }
     }
