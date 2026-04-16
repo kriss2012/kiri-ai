@@ -266,20 +266,15 @@ fun ChatScreen(
                             items = state.messages,
                             key = { it.getStableId() }
                         ) { msg ->
-                            // STRICT_ISOLATION: Force Compose to treat each message as an independent entity
-                            // Using graphicsLayer to isolate message renders from main layout pass
+                            // REINFORCED_STABILITY: Item isolation via key ensures minimal recomposition
                             key(msg.getStableId()) {
-                                Box(modifier = Modifier.graphicsLayer { clip = true }) {
-                                    KiriMessageBubble(msg)
-                                }
+                                KiriMessageBubble(msg)
                             }
                         }
                         
                         if (state.isSending) {
                             item(key = "typing_indicator") { 
-                                Box(modifier = Modifier.graphicsLayer { clip = true }) {
-                                    TypingIndicator() 
-                                }
+                                TypingIndicator() 
                             }
                         }
                     }
