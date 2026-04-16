@@ -14,6 +14,44 @@ public final class ChatDetail {
     @org.jetbrains.annotations.Nullable()
     private final java.lang.String updatedAt = null;
     
+    public ChatDetail(@org.jetbrains.annotations.Nullable()
+    java.lang.String id, @org.jetbrains.annotations.Nullable()
+    java.lang.String title, @org.jetbrains.annotations.Nullable()
+    java.util.List<com.kiri.ai.data.models.ChatMessage> messages, @org.jetbrains.annotations.Nullable()
+    java.lang.String model, @org.jetbrains.annotations.Nullable()
+    java.lang.String updatedAt) {
+        super();
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getId() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getTitle() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.util.List<com.kiri.ai.data.models.ChatMessage> getMessages() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getModel() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getUpdatedAt() {
+        return null;
+    }
+    
+    public ChatDetail() {
+        super();
+    }
+    
     @org.jetbrains.annotations.Nullable()
     public final java.lang.String component1() {
         return null;
@@ -64,43 +102,5 @@ public final class ChatDetail {
     @org.jetbrains.annotations.NotNull()
     public java.lang.String toString() {
         return null;
-    }
-    
-    public ChatDetail(@org.jetbrains.annotations.Nullable()
-    java.lang.String id, @org.jetbrains.annotations.Nullable()
-    java.lang.String title, @org.jetbrains.annotations.Nullable()
-    java.util.List<com.kiri.ai.data.models.ChatMessage> messages, @org.jetbrains.annotations.Nullable()
-    java.lang.String model, @org.jetbrains.annotations.Nullable()
-    java.lang.String updatedAt) {
-        super();
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getId() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getTitle() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.util.List<com.kiri.ai.data.models.ChatMessage> getMessages() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getModel() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getUpdatedAt() {
-        return null;
-    }
-    
-    public ChatDetail() {
-        super();
     }
 }

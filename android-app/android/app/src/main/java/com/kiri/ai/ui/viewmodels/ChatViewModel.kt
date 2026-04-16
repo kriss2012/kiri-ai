@@ -83,12 +83,15 @@ class ChatViewModel @Inject constructor(
 
     private fun observeConnectivity() {
         chatRepository.isConnected
+            .distinctUntilChanged()
             .onEach { connected ->
                 // DEFERRED_UPDATE: Use viewModelScope to move state update out of the observation collector
                 // to prevent SnapshotStateObserver violations if this collector is triggered during composition.
                 viewModelScope.launch {
+                    val wasConnected = _uiState.value.isConnected
                     _uiState.update { it.copy(isConnected = connected) }
-                    if (connected) {
+                    
+                    if (connected && !wasConnected) {
                         val currentId = _uiState.value.currentConversationId
                         if (currentId != null) {
                             selectConversation(currentId)
@@ -103,6 +106,16 @@ class ChatViewModel @Inject constructor(
 
     override fun onCleared() {
         super.onCleared()
+        // STABILITY_CLEANUP: Wipe temporary uploads to prevent disk bloat
+        viewModelScope.launch {
+            try {
+                getApplication<Application>().cacheDir.listFiles()?.forEach { file ->
+                    if (file.name.startsWith("upload_")) {
+                        file.delete()
+                    }
+                }
+            } catch (e: Exception) { /* Silently fail during cleanup */ }
+        }
     }
 
 
@@ -196,9 +209,57 @@ class ChatViewModel @Inject constructor(
     }
 
     fun onFileSelected(uri: Uri?, name: String?) {
-        _uiState.update { it.copy(selectedFileUri = uri, selectedFileName = name) }
-        savedStateHandle[KEY_FILE_URI] = uri
-        savedStateHandle[KEY_FILE_NAME] = name
+        if (uri == null) {
+            clearSelectedFile()
+            return
+        }
+
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoadingMessages = true) } // Show small indicator during copy
+            val cachedFile = copyUriToInternalStorage(uri, name)
+            
+            if (cachedFile != null) {
+                val cachedUri = Uri.fromFile(cachedFile)
+                _uiState.update { 
+                    it.copy(
+                        selectedFileUri = cachedUri, 
+                        selectedFileName = name,
+                        isLoadingMessages = false
+                    ) 
+                }
+                savedStateHandle[KEY_FILE_URI] = cachedUri
+                savedStateHandle[KEY_FILE_NAME] = name
+            } else {
+                _uiState.update { 
+                    it.copy(
+                        isLoadingMessages = false,
+                        error = "FILE_ACCESS_ERROR: Could not secure attachment."
+                    ) 
+                }
+            }
+        }
+    }
+
+    private suspend fun copyUriToInternalStorage(uri: Uri, name: String?): File? {
+        return try {
+            kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                val contentResolver = getApplication<Application>().contentResolver
+                val inputStream = contentResolver.openInputStream(uri) ?: return@withContext null
+                
+                // Create a permanent unique file in cache to survive permission revocation
+                val extension = name?.substringAfterLast('.', "") ?: "tmp"
+                val fileName = "upload_${System.currentTimeMillis()}.${extension}"
+                val file = File(getApplication<Application>().cacheDir, fileName)
+                
+                file.outputStream().use { outputStream ->
+                    inputStream.copyTo(outputStream)
+                }
+                file
+            }
+        } catch (e: Exception) {
+            android.util.Log.e("ChatViewModel", "Copy failed: ${e.message}")
+            null
+        }
     }
 
     fun clearSelectedFile() {
@@ -300,12 +361,20 @@ class ChatViewModel @Inject constructor(
 
     private suspend fun uploadFileAndSend(message: String, uri: Uri): Result<ChatResponse> {
         return try {
-            val contentResolver = getApplication<Application>().contentResolver
-            val inputStream = contentResolver.openInputStream(uri)
-            val file = File(getApplication<Application>().cacheDir, "upload_${System.currentTimeMillis()}")
-            file.outputStream().use { inputStream?.copyTo(it) }
+            val file = if (uri.scheme == "file") {
+                File(uri.path ?: "")
+            } else {
+                // Fallback (should not happen with new copy logic)
+                val contentResolver = getApplication<Application>().contentResolver
+                val inputStream = contentResolver.openInputStream(uri)
+                val tempFile = File(getApplication<Application>().cacheDir, "upload_fallback_${System.currentTimeMillis()}")
+                tempFile.outputStream().use { inputStream?.copyTo(it) }
+                tempFile
+            }
 
-            val requestFile = file.asRequestBody(contentResolver.getType(uri)?.toMediaTypeOrNull())
+            if (!file.exists()) return Result.failure(Exception("FILE_NOT_FOUND"))
+
+            val requestFile = file.asRequestBody(getApplication<Application>().contentResolver.getType(uri)?.toMediaTypeOrNull() ?: "application/octet-stream".toMediaTypeOrNull())
             val body = MultipartBody.Part.createFormData("file", _uiState.value.selectedFileName ?: file.name, requestFile)
             
             // AI Analysis: If message is empty, provide a default analysis prompt

@@ -25,6 +25,74 @@ public final class User {
     @org.jetbrains.annotations.Nullable()
     private final java.lang.Object _dailyLimit = null;
     
+    public User(@org.jetbrains.annotations.Nullable()
+    java.lang.String id, @org.jetbrains.annotations.Nullable()
+    java.lang.String name, @org.jetbrains.annotations.Nullable()
+    java.lang.String email, @org.jetbrains.annotations.Nullable()
+    java.lang.String plan, @org.jetbrains.annotations.Nullable()
+    java.lang.Integer dailyRequests, @org.jetbrains.annotations.Nullable()
+    java.lang.Integer totalRequests, @org.jetbrains.annotations.Nullable()
+    java.lang.Boolean isVerified, @org.jetbrains.annotations.Nullable()
+    java.lang.String avatar, @org.jetbrains.annotations.Nullable()
+    java.lang.Boolean isPremium, @org.jetbrains.annotations.Nullable()
+    java.lang.Object _dailyLimit) {
+        super();
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getId() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getName() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getEmail() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getPlan() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Integer getDailyRequests() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Integer getTotalRequests() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Boolean isVerified() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getAvatar() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Boolean isPremium() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String getDailyLimit() {
+        return null;
+    }
+    
+    public User() {
+        super();
+    }
+    
     @org.jetbrains.annotations.Nullable()
     public final java.lang.String component1() {
         return null;
@@ -104,73 +172,5 @@ public final class User {
     @org.jetbrains.annotations.NotNull()
     public java.lang.String toString() {
         return null;
-    }
-    
-    public User(@org.jetbrains.annotations.Nullable()
-    java.lang.String id, @org.jetbrains.annotations.Nullable()
-    java.lang.String name, @org.jetbrains.annotations.Nullable()
-    java.lang.String email, @org.jetbrains.annotations.Nullable()
-    java.lang.String plan, @org.jetbrains.annotations.Nullable()
-    java.lang.Integer dailyRequests, @org.jetbrains.annotations.Nullable()
-    java.lang.Integer totalRequests, @org.jetbrains.annotations.Nullable()
-    java.lang.Boolean isVerified, @org.jetbrains.annotations.Nullable()
-    java.lang.String avatar, @org.jetbrains.annotations.Nullable()
-    java.lang.Boolean isPremium, @org.jetbrains.annotations.Nullable()
-    java.lang.Object _dailyLimit) {
-        super();
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getId() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getName() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getEmail() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getPlan() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.Integer getDailyRequests() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.Integer getTotalRequests() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.Boolean isVerified() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getAvatar() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.Boolean isPremium() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.NotNull()
-    public final java.lang.String getDailyLimit() {
-        return null;
-    }
-    
-    public User() {
-        super();
     }
 }

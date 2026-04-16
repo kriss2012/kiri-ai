@@ -4,10 +4,14 @@ package com.kiri.ai.ui.components;
 public final class KiriMessageBubbleKt {
     
     /**
-     * KiriMessageBubble Component
+     * KiriMessageBubble Component // PROJECT_ZERO_G REINFORCED
      *
      * Implements the Bugatti Design System's monochromatic aesthetic.
-     * Optimized for software-based rendering stability.
+     *
+     * STABILITY_CONTROLS:
+     * 1. graphicsLayer isolation to prevent dispatchGetDisplayList recursion.
+     * 2. Immutable monochromatic palette to reduce Draw-phase color resolution steps.
+     * 3. Segmented intelligence interpretation.
      */
     @androidx.compose.runtime.Composable()
     public static final void KiriMessageBubble(@org.jetbrains.annotations.Nullable()

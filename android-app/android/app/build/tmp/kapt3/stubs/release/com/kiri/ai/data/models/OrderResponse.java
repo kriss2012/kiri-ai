@@ -15,6 +15,50 @@ public final class OrderResponse {
     @org.jetbrains.annotations.Nullable()
     private final java.lang.String message = null;
     
+    public OrderResponse(@org.jetbrains.annotations.Nullable()
+    java.lang.Boolean success, @org.jetbrains.annotations.Nullable()
+    java.lang.String orderId, @org.jetbrains.annotations.Nullable()
+    java.lang.Integer amount, @org.jetbrains.annotations.Nullable()
+    java.lang.String currency, @org.jetbrains.annotations.Nullable()
+    java.lang.String keyId, @org.jetbrains.annotations.Nullable()
+    java.lang.String message) {
+        super();
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Boolean getSuccess() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getOrderId() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Integer getAmount() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getCurrency() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getKeyId() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getMessage() {
+        return null;
+    }
+    
+    public OrderResponse() {
+        super();
+    }
+    
     @org.jetbrains.annotations.Nullable()
     public final java.lang.Boolean component1() {
         return null;
@@ -71,49 +115,5 @@ public final class OrderResponse {
     @org.jetbrains.annotations.NotNull()
     public java.lang.String toString() {
         return null;
-    }
-    
-    public OrderResponse(@org.jetbrains.annotations.Nullable()
-    java.lang.Boolean success, @org.jetbrains.annotations.Nullable()
-    java.lang.String orderId, @org.jetbrains.annotations.Nullable()
-    java.lang.Integer amount, @org.jetbrains.annotations.Nullable()
-    java.lang.String currency, @org.jetbrains.annotations.Nullable()
-    java.lang.String keyId, @org.jetbrains.annotations.Nullable()
-    java.lang.String message) {
-        super();
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.Boolean getSuccess() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getOrderId() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.Integer getAmount() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getCurrency() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getKeyId() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getMessage() {
-        return null;
-    }
-    
-    public OrderResponse() {
-        super();
     }
 }

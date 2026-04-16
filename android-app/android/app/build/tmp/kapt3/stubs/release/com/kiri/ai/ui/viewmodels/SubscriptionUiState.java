@@ -11,6 +11,40 @@ public final class SubscriptionUiState {
     @org.jetbrains.annotations.Nullable()
     private final java.lang.String pendingPlan = null;
     
+    public SubscriptionUiState(boolean isLoading, @org.jetbrains.annotations.Nullable()
+    java.lang.String error, @org.jetbrains.annotations.Nullable()
+    com.kiri.ai.data.models.OrderResponse orderData, boolean success, @org.jetbrains.annotations.Nullable()
+    java.lang.String pendingPlan) {
+        super();
+    }
+    
+    public final boolean isLoading() {
+        return false;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getError() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final com.kiri.ai.data.models.OrderResponse getOrderData() {
+        return null;
+    }
+    
+    public final boolean getSuccess() {
+        return false;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getPendingPlan() {
+        return null;
+    }
+    
+    public SubscriptionUiState() {
+        super();
+    }
+    
     public final boolean component1() {
         return false;
     }
@@ -57,39 +91,5 @@ public final class SubscriptionUiState {
     @org.jetbrains.annotations.NotNull()
     public java.lang.String toString() {
         return null;
-    }
-    
-    public SubscriptionUiState(boolean isLoading, @org.jetbrains.annotations.Nullable()
-    java.lang.String error, @org.jetbrains.annotations.Nullable()
-    com.kiri.ai.data.models.OrderResponse orderData, boolean success, @org.jetbrains.annotations.Nullable()
-    java.lang.String pendingPlan) {
-        super();
-    }
-    
-    public final boolean isLoading() {
-        return false;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getError() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final com.kiri.ai.data.models.OrderResponse getOrderData() {
-        return null;
-    }
-    
-    public final boolean getSuccess() {
-        return false;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getPendingPlan() {
-        return null;
-    }
-    
-    public SubscriptionUiState() {
-        super();
     }
 }

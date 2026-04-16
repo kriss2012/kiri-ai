@@ -7,6 +7,26 @@ public final class GenericResponse {
     @org.jetbrains.annotations.Nullable()
     private final java.lang.String message = null;
     
+    public GenericResponse(@org.jetbrains.annotations.Nullable()
+    java.lang.Boolean success, @org.jetbrains.annotations.Nullable()
+    java.lang.String message) {
+        super();
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Boolean getSuccess() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getMessage() {
+        return null;
+    }
+    
+    public GenericResponse() {
+        super();
+    }
+    
     @org.jetbrains.annotations.Nullable()
     public final java.lang.Boolean component1() {
         return null;
@@ -39,25 +59,5 @@ public final class GenericResponse {
     @org.jetbrains.annotations.NotNull()
     public java.lang.String toString() {
         return null;
-    }
-    
-    public GenericResponse(@org.jetbrains.annotations.Nullable()
-    java.lang.Boolean success, @org.jetbrains.annotations.Nullable()
-    java.lang.String message) {
-        super();
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.Boolean getSuccess() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getMessage() {
-        return null;
-    }
-    
-    public GenericResponse() {
-        super();
     }
 }

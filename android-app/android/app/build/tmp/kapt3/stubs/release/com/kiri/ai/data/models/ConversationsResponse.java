@@ -7,6 +7,26 @@ public final class ConversationsResponse {
     @org.jetbrains.annotations.Nullable()
     private final java.util.List<com.kiri.ai.data.models.Conversation> conversations = null;
     
+    public ConversationsResponse(@org.jetbrains.annotations.Nullable()
+    java.lang.Boolean success, @org.jetbrains.annotations.Nullable()
+    java.util.List<com.kiri.ai.data.models.Conversation> conversations) {
+        super();
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Boolean getSuccess() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.util.List<com.kiri.ai.data.models.Conversation> getConversations() {
+        return null;
+    }
+    
+    public ConversationsResponse() {
+        super();
+    }
+    
     @org.jetbrains.annotations.Nullable()
     public final java.lang.Boolean component1() {
         return null;
@@ -39,25 +59,5 @@ public final class ConversationsResponse {
     @org.jetbrains.annotations.NotNull()
     public java.lang.String toString() {
         return null;
-    }
-    
-    public ConversationsResponse(@org.jetbrains.annotations.Nullable()
-    java.lang.Boolean success, @org.jetbrains.annotations.Nullable()
-    java.util.List<com.kiri.ai.data.models.Conversation> conversations) {
-        super();
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.Boolean getSuccess() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.util.List<com.kiri.ai.data.models.Conversation> getConversations() {
-        return null;
-    }
-    
-    public ConversationsResponse() {
-        super();
     }
 }

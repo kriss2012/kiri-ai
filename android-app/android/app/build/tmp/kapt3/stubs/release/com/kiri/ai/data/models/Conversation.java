@@ -18,6 +18,61 @@ public final class Conversation {
     @org.jetbrains.annotations.Nullable()
     private final java.lang.String updatedAt = null;
     
+    public Conversation(@org.jetbrains.annotations.Nullable()
+    java.lang.String id, @org.jetbrains.annotations.Nullable()
+    java.lang.String title, @org.jetbrains.annotations.Nullable()
+    java.lang.String model, @org.jetbrains.annotations.Nullable()
+    java.lang.Boolean isPinned, @org.jetbrains.annotations.Nullable()
+    java.lang.Integer messageCount, @org.jetbrains.annotations.Nullable()
+    java.lang.String lastMessage, @org.jetbrains.annotations.Nullable()
+    java.lang.String updatedAt) {
+        super();
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getId() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getTitle() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getModel() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Boolean isPinned() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Integer getMessageCount() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getLastMessage() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getUpdatedAt() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String getStableId() {
+        return null;
+    }
+    
+    public Conversation() {
+        super();
+    }
+    
     @org.jetbrains.annotations.Nullable()
     public final java.lang.String component1() {
         return null;
@@ -80,60 +135,5 @@ public final class Conversation {
     @org.jetbrains.annotations.NotNull()
     public java.lang.String toString() {
         return null;
-    }
-    
-    public Conversation(@org.jetbrains.annotations.Nullable()
-    java.lang.String id, @org.jetbrains.annotations.Nullable()
-    java.lang.String title, @org.jetbrains.annotations.Nullable()
-    java.lang.String model, @org.jetbrains.annotations.Nullable()
-    java.lang.Boolean isPinned, @org.jetbrains.annotations.Nullable()
-    java.lang.Integer messageCount, @org.jetbrains.annotations.Nullable()
-    java.lang.String lastMessage, @org.jetbrains.annotations.Nullable()
-    java.lang.String updatedAt) {
-        super();
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getId() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getTitle() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getModel() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.Boolean isPinned() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.Integer getMessageCount() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getLastMessage() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getUpdatedAt() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.NotNull()
-    public final java.lang.String getStableId() {
-        return null;
-    }
-    
-    public Conversation() {
-        super();
     }
 }

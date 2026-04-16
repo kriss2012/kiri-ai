@@ -11,6 +11,38 @@ public final class AuthResponse {
     @org.jetbrains.annotations.Nullable()
     private final com.kiri.ai.data.models.User user = null;
     
+    public AuthResponse(@org.jetbrains.annotations.Nullable()
+    java.lang.Boolean success, @org.jetbrains.annotations.Nullable()
+    java.lang.String message, @org.jetbrains.annotations.Nullable()
+    java.lang.String token, @org.jetbrains.annotations.Nullable()
+    com.kiri.ai.data.models.User user) {
+        super();
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Boolean getSuccess() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getMessage() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getToken() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final com.kiri.ai.data.models.User getUser() {
+        return null;
+    }
+    
+    public AuthResponse() {
+        super();
+    }
+    
     @org.jetbrains.annotations.Nullable()
     public final java.lang.Boolean component1() {
         return null;
@@ -55,37 +87,5 @@ public final class AuthResponse {
     @org.jetbrains.annotations.NotNull()
     public java.lang.String toString() {
         return null;
-    }
-    
-    public AuthResponse(@org.jetbrains.annotations.Nullable()
-    java.lang.Boolean success, @org.jetbrains.annotations.Nullable()
-    java.lang.String message, @org.jetbrains.annotations.Nullable()
-    java.lang.String token, @org.jetbrains.annotations.Nullable()
-    com.kiri.ai.data.models.User user) {
-        super();
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.Boolean getSuccess() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getMessage() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getToken() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final com.kiri.ai.data.models.User getUser() {
-        return null;
-    }
-    
-    public AuthResponse() {
-        super();
     }
 }

@@ -16,6 +16,50 @@ public final class ChatResponse {
     @org.jetbrains.annotations.Nullable()
     private final java.lang.Object _requestsRemaining = null;
     
+    public ChatResponse(@org.jetbrains.annotations.Nullable()
+    java.lang.Boolean success, @org.jetbrains.annotations.Nullable()
+    java.lang.String message, @org.jetbrains.annotations.Nullable()
+    java.lang.String conversationId, @org.jetbrains.annotations.Nullable()
+    java.lang.String title, @org.jetbrains.annotations.Nullable()
+    java.lang.Integer requestsUsed, @org.jetbrains.annotations.Nullable()
+    java.lang.Object _requestsRemaining) {
+        super();
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Boolean getSuccess() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getMessage() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getConversationId() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getTitle() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Integer getRequestsUsed() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String getRequestsRemaining() {
+        return null;
+    }
+    
+    public ChatResponse() {
+        super();
+    }
+    
     @org.jetbrains.annotations.Nullable()
     public final java.lang.Boolean component1() {
         return null;
@@ -71,49 +115,5 @@ public final class ChatResponse {
     @org.jetbrains.annotations.NotNull()
     public java.lang.String toString() {
         return null;
-    }
-    
-    public ChatResponse(@org.jetbrains.annotations.Nullable()
-    java.lang.Boolean success, @org.jetbrains.annotations.Nullable()
-    java.lang.String message, @org.jetbrains.annotations.Nullable()
-    java.lang.String conversationId, @org.jetbrains.annotations.Nullable()
-    java.lang.String title, @org.jetbrains.annotations.Nullable()
-    java.lang.Integer requestsUsed, @org.jetbrains.annotations.Nullable()
-    java.lang.Object _requestsRemaining) {
-        super();
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.Boolean getSuccess() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getMessage() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getConversationId() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getTitle() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.Integer getRequestsUsed() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.NotNull()
-    public final java.lang.String getRequestsRemaining() {
-        return null;
-    }
-    
-    public ChatResponse() {
-        super();
     }
 }

@@ -7,6 +7,26 @@ public final class ConversationDetailResponse {
     @org.jetbrains.annotations.Nullable()
     private final com.kiri.ai.data.models.ChatDetail conversation = null;
     
+    public ConversationDetailResponse(@org.jetbrains.annotations.Nullable()
+    java.lang.Boolean success, @org.jetbrains.annotations.Nullable()
+    com.kiri.ai.data.models.ChatDetail conversation) {
+        super();
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.Boolean getSuccess() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final com.kiri.ai.data.models.ChatDetail getConversation() {
+        return null;
+    }
+    
+    public ConversationDetailResponse() {
+        super();
+    }
+    
     @org.jetbrains.annotations.Nullable()
     public final java.lang.Boolean component1() {
         return null;
@@ -39,25 +59,5 @@ public final class ConversationDetailResponse {
     @org.jetbrains.annotations.NotNull()
     public java.lang.String toString() {
         return null;
-    }
-    
-    public ConversationDetailResponse(@org.jetbrains.annotations.Nullable()
-    java.lang.Boolean success, @org.jetbrains.annotations.Nullable()
-    com.kiri.ai.data.models.ChatDetail conversation) {
-        super();
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.Boolean getSuccess() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final com.kiri.ai.data.models.ChatDetail getConversation() {
-        return null;
-    }
-    
-    public ConversationDetailResponse() {
-        super();
     }
 }

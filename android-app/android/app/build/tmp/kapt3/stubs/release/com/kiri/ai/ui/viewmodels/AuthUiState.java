@@ -12,6 +12,42 @@ public final class AuthUiState {
     @org.jetbrains.annotations.Nullable()
     private final java.lang.String error = null;
     
+    public AuthUiState(@org.jetbrains.annotations.NotNull()
+    java.lang.String name, @org.jetbrains.annotations.NotNull()
+    java.lang.String email, @org.jetbrains.annotations.NotNull()
+    java.lang.String password, boolean isLoading, @org.jetbrains.annotations.Nullable()
+    java.lang.String error) {
+        super();
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String getName() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String getEmail() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String getPassword() {
+        return null;
+    }
+    
+    public final boolean isLoading() {
+        return false;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getError() {
+        return null;
+    }
+    
+    public AuthUiState() {
+        super();
+    }
+    
     @org.jetbrains.annotations.NotNull()
     public final java.lang.String component1() {
         return null;
@@ -60,41 +96,5 @@ public final class AuthUiState {
     @org.jetbrains.annotations.NotNull()
     public java.lang.String toString() {
         return null;
-    }
-    
-    public AuthUiState(@org.jetbrains.annotations.NotNull()
-    java.lang.String name, @org.jetbrains.annotations.NotNull()
-    java.lang.String email, @org.jetbrains.annotations.NotNull()
-    java.lang.String password, boolean isLoading, @org.jetbrains.annotations.Nullable()
-    java.lang.String error) {
-        super();
-    }
-    
-    @org.jetbrains.annotations.NotNull()
-    public final java.lang.String getName() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.NotNull()
-    public final java.lang.String getEmail() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.NotNull()
-    public final java.lang.String getPassword() {
-        return null;
-    }
-    
-    public final boolean isLoading() {
-        return false;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getError() {
-        return null;
-    }
-    
-    public AuthUiState() {
-        super();
     }
 }

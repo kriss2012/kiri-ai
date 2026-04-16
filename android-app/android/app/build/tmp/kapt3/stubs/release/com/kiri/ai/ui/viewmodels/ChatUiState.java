@@ -24,6 +24,80 @@ public final class ChatUiState {
     @org.jetbrains.annotations.Nullable()
     private final java.lang.String error = null;
     
+    public ChatUiState(@org.jetbrains.annotations.Nullable()
+    com.kiri.ai.data.models.User user, @org.jetbrains.annotations.NotNull()
+    java.util.List<com.kiri.ai.data.models.Conversation> conversations, @org.jetbrains.annotations.NotNull()
+    java.util.List<com.kiri.ai.data.models.ChatMessage> messages, @org.jetbrains.annotations.Nullable()
+    java.lang.String currentConversationId, @org.jetbrains.annotations.NotNull()
+    java.lang.String currentTitle, @org.jetbrains.annotations.NotNull()
+    java.lang.String inputMessage, @org.jetbrains.annotations.Nullable()
+    android.net.Uri selectedFileUri, @org.jetbrains.annotations.Nullable()
+    java.lang.String selectedFileName, boolean isLoadingMessages, boolean isSending, boolean isConnected, @org.jetbrains.annotations.Nullable()
+    java.lang.String error) {
+        super();
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final com.kiri.ai.data.models.User getUser() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.util.List<com.kiri.ai.data.models.Conversation> getConversations() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.util.List<com.kiri.ai.data.models.ChatMessage> getMessages() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getCurrentConversationId() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String getCurrentTitle() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String getInputMessage() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final android.net.Uri getSelectedFileUri() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getSelectedFileName() {
+        return null;
+    }
+    
+    public final boolean isLoadingMessages() {
+        return false;
+    }
+    
+    public final boolean isSending() {
+        return false;
+    }
+    
+    public final boolean isConnected() {
+        return false;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getError() {
+        return null;
+    }
+    
+    public ChatUiState() {
+        super();
+    }
+    
     @org.jetbrains.annotations.Nullable()
     public final com.kiri.ai.data.models.User component1() {
         return null;
@@ -110,79 +184,5 @@ public final class ChatUiState {
     @org.jetbrains.annotations.NotNull()
     public java.lang.String toString() {
         return null;
-    }
-    
-    public ChatUiState(@org.jetbrains.annotations.Nullable()
-    com.kiri.ai.data.models.User user, @org.jetbrains.annotations.NotNull()
-    java.util.List<com.kiri.ai.data.models.Conversation> conversations, @org.jetbrains.annotations.NotNull()
-    java.util.List<com.kiri.ai.data.models.ChatMessage> messages, @org.jetbrains.annotations.Nullable()
-    java.lang.String currentConversationId, @org.jetbrains.annotations.NotNull()
-    java.lang.String currentTitle, @org.jetbrains.annotations.NotNull()
-    java.lang.String inputMessage, @org.jetbrains.annotations.Nullable()
-    android.net.Uri selectedFileUri, @org.jetbrains.annotations.Nullable()
-    java.lang.String selectedFileName, boolean isLoadingMessages, boolean isSending, boolean isConnected, @org.jetbrains.annotations.Nullable()
-    java.lang.String error) {
-        super();
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final com.kiri.ai.data.models.User getUser() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.NotNull()
-    public final java.util.List<com.kiri.ai.data.models.Conversation> getConversations() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.NotNull()
-    public final java.util.List<com.kiri.ai.data.models.ChatMessage> getMessages() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getCurrentConversationId() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.NotNull()
-    public final java.lang.String getCurrentTitle() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.NotNull()
-    public final java.lang.String getInputMessage() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final android.net.Uri getSelectedFileUri() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getSelectedFileName() {
-        return null;
-    }
-    
-    public final boolean isLoadingMessages() {
-        return false;
-    }
-    
-    public final boolean isSending() {
-        return false;
-    }
-    
-    public final boolean isConnected() {
-        return false;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getError() {
-        return null;
-    }
-    
-    public ChatUiState() {
-        super();
     }
 }

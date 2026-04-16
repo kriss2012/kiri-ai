@@ -9,6 +9,28 @@ public final class ChatRequest {
     @org.jetbrains.annotations.NotNull()
     private final java.lang.String model = null;
     
+    public ChatRequest(@org.jetbrains.annotations.NotNull()
+    java.lang.String message, @org.jetbrains.annotations.Nullable()
+    java.lang.String conversationId, @org.jetbrains.annotations.NotNull()
+    java.lang.String model) {
+        super();
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String getMessage() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.Nullable()
+    public final java.lang.String getConversationId() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String getModel() {
+        return null;
+    }
+    
     @org.jetbrains.annotations.NotNull()
     public final java.lang.String component1() {
         return null;
@@ -46,28 +68,6 @@ public final class ChatRequest {
     @java.lang.Override()
     @org.jetbrains.annotations.NotNull()
     public java.lang.String toString() {
-        return null;
-    }
-    
-    public ChatRequest(@org.jetbrains.annotations.NotNull()
-    java.lang.String message, @org.jetbrains.annotations.Nullable()
-    java.lang.String conversationId, @org.jetbrains.annotations.NotNull()
-    java.lang.String model) {
-        super();
-    }
-    
-    @org.jetbrains.annotations.NotNull()
-    public final java.lang.String getMessage() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.Nullable()
-    public final java.lang.String getConversationId() {
-        return null;
-    }
-    
-    @org.jetbrains.annotations.NotNull()
-    public final java.lang.String getModel() {
         return null;
     }
 }

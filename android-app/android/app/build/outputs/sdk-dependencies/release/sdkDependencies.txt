@@ -5,10 +5,10 @@ library {
   maven_library {
     groupId: "org.jetbrains.kotlin"
     artifactId: "kotlin-stdlib"
-    version: "2.1.0"
+    version: "2.0.21"
   }
   digests {
-    sha256: "\326\371\033{\0170l\312)\237\354t\373|4\344\207Mo^\305\271%\240\264\336!\220\036\021\234?"
+    sha256: "\363\034\305?\020Z~H\300\223h;\275T7V\035\0223\222\005\023wKG\b\005d\033\355\274\t"
   }
   repo_index {
     value: 1
@@ -31,10 +31,10 @@ library {
   maven_library {
     groupId: "org.jetbrains.kotlin"
     artifactId: "kotlin-stdlib-jdk8"
-    version: "2.1.0"
+    version: "2.0.21"
   }
   digests {
-    sha256: "#\215<~I/\021\233P\332\034\"Tm\327bF.U\362$\ta\037^S\335wb\\\325D"
+    sha256: "\025\310\300\254\263\021H<\006\215\026\227P\031eGKp\337\330\n\307\225\200\354\243\240<\365\036J\035"
   }
   repo_index {
     value: 1
@@ -44,10 +44,10 @@ library {
   maven_library {
     groupId: "org.jetbrains.kotlin"
     artifactId: "kotlin-stdlib-jdk7"
-    version: "2.1.0"
+    version: "2.0.21"
   }
   digests {
-    sha256: "\375\352lB\003rOB\350\346K\357/\v\367\221)\314\321\337\036\337\034\317\375\302-\347\337I\214v"
+    sha256: "q/H\a`\355\356\344\212\2046\236k\350\237j\265#u@\213\262\312;\341N\366c\367+\3561"
   }
   repo_index {
     value: 1
@@ -57,7 +57,7 @@ library {
   maven_library {
     groupId: "org.jetbrains.kotlin"
     artifactId: "kotlin-stdlib-common"
-    version: "2.1.0"
+    version: "2.0.21"
   }
   repo_index {
     value: 1
@@ -1359,10 +1359,10 @@ library {
   maven_library {
     groupId: "androidx.hilt"
     artifactId: "hilt-navigation-compose"
-    version: "1.1.0"
+    version: "1.2.0"
   }
   digests {
-    sha256: "\"1\324\\\331|\r\354\344L\270Z\270.r\336\275\277\366\277\244)I>\214td\235\022\031/E"
+    sha256: "\346\232\273\263\361w\211;W\245\226\375\314^\341\364\327\3628RA\2547e\303\327\271\305\f\235\270N"
   }
   repo_index {
   }
@@ -1371,10 +1371,10 @@ library {
   maven_library {
     groupId: "androidx.hilt"
     artifactId: "hilt-navigation"
-    version: "1.1.0"
+    version: "1.2.0"
   }
   digests {
-    sha256: "F\241\321$\030\367zuO\311\034\\(\254\277\004\034x\366N\240\203\361\372\2234\235\216C\366\352\211"
+    sha256: "\213\251\351\226\344\f\\8\274\376\254\333\'R\206\323\253\020\375\367Z\255\332\024\330\204+x\201\016\360\333"
   }
   repo_index {
   }
@@ -1467,10 +1467,10 @@ library {
   maven_library {
     groupId: "androidx.hilt"
     artifactId: "hilt-work"
-    version: "1.1.0"
+    version: "1.2.0"
   }
   digests {
-    sha256: "G\326\267\227==D\241COP\tQ\364q\363q\2612\316\242\244G\232\177RO\3261\343ry"
+    sha256: "\217\002\271b\250KhnJGI\333@\354\210M\227\247C\237\371\031\032\232&\344ni\207\236K\370"
   }
   repo_index {
   }
@@ -1479,7 +1479,7 @@ library {
   maven_library {
     groupId: "androidx.hilt"
     artifactId: "hilt-common"
-    version: "1.1.0"
+    version: "1.2.0"
   }
   digests {
     sha256: "k\t\b\037\325\241\r\345i\264\276dc\261F\366\004[\261\211\031\2770\232\377\006I\200\2661\003q"

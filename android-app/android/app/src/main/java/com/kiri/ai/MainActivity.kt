@@ -83,7 +83,6 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
         super.onCreate(savedInstanceState)
         
         requestPermissions()
-        startKiriService()
         WindowCompat.setDecorFitsSystemWindows(window, false)
         val lastCrash = com.kiri.ai.utils.KiriCrashHandler.getAndClearLastCrash(this)
 
@@ -106,23 +105,19 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                     ) {
                         if (startDest != null) {
                             val navController = rememberNavController()
-                            CompositionLocalProvider(
-                                androidx.compose.ui.platform.LocalContext provides this
+                            NavHost(
+                                navController = navController,
+                                startDestination = startDest
                             ) {
-                                NavHost(
-                                    navController = navController,
-                                    startDestination = startDest
-                                ) {
-                                    composable("landing") { LandingScreen(navController) }
-                                    composable("login") { LoginScreen(navController) }
-                                    composable("register") { RegisterScreen(navController) }
-                                    composable("chat?id={id}") { backStackEntry -> 
-                                        val id = backStackEntry.arguments?.getString("id")
-                                        ChatScreen(navController, id = id) 
-                                    }
-                                    composable("profile") { ProfileScreen(navController) }
-                                    composable("pricing") { PricingScreen(navController, subscriptionViewModel) }
+                                composable("landing") { LandingScreen(navController) }
+                                composable("login") { LoginScreen(navController) }
+                                composable("register") { RegisterScreen(navController) }
+                                composable("chat?id={id}") { backStackEntry -> 
+                                    val id = backStackEntry.arguments?.getString("id")
+                                    ChatScreen(navController, id = id) 
                                 }
+                                composable("profile") { ProfileScreen(navController) }
+                                composable("pricing") { PricingScreen(navController, subscriptionViewModel) }
                             }
                         }
                     }
