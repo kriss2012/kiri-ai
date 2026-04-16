@@ -23,9 +23,14 @@ class KiriApplication : Application(), Configuration.Provider {
     lateinit var workerFactory: HiltWorkerFactory
 
     override val workManagerConfiguration: Configuration
-        get() = Configuration.Builder()
-            .setWorkerFactory(workerFactory)
-            .build()
+        get() = if (::workerFactory.isInitialized) {
+            Configuration.Builder()
+                .setWorkerFactory(workerFactory)
+                .build()
+        } else {
+            // Fallback for extremely early wakeups (e.g. OS rescheduling workers before Hilt finishes)
+            Configuration.Builder().build()
+        }
 
     override fun onCreate() {
         super.onCreate()
