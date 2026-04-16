@@ -42,7 +42,8 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
 
     private val requestPermissionLauncher = registerForActivityResult(
         androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions()
-    ) { _ ->
+    ) { perms ->
+        android.util.Log.d("Kiri_DEBUG", "Permissions result: $perms")
         startKiriService()
     }
 
@@ -85,6 +86,7 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
         requestPermissions()
         WindowCompat.setDecorFitsSystemWindows(window, false)
         val lastCrash = com.kiri.ai.utils.KiriCrashHandler.getAndClearLastCrash(this)
+        android.util.Log.d("Kiri_DEBUG", "MainActivity: onCreate - lastCrash detected=${lastCrash != null}")
 
         setContent {
             val viewModel: MainViewModel = hiltViewModel()
@@ -97,8 +99,9 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                     }
 
                     val startDestination by viewModel.startDestination.collectAsStateWithLifecycle()
-
                     val startDest = startDestination
+                    android.util.Log.d("Kiri_DEBUG", "MainActivity: Start destination resolved to: $startDest")
+                    
                     Surface(
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
