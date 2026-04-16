@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.kiri.ai.app-mergeDebugResources-74:/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\4e24bca7a5ba52e67adbd1ad34d554fc\\transformed\\jetified-checkout-1.6.38\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,93",
+                        "endLines": "2,13",
+                        "endColumns": "37,12",
+                        "endOffsets": "88,745"
+                    }
+                }
+            ]
+        }
+    ]
+}
