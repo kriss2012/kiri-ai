@@ -1,0 +1,146 @@
+.profile-page {
+  flex: 1;
+  background-color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  overflow-y: auto;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.profile-content {
+  display: flex;
+  gap: 64px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.profile-sidebar {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.profile-avatar-large {
+  width: 120px;
+  height: 120px;
+  background-color: var(--accent);
+  color: var(--bg-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.profile-sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.user-badge {
+  font-size: 11px;
+  background: var(--color-surface-variant);
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-bottom: 32px;
+}
+
+.profile-nav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 48px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 13px;
+  text-align: left;
+}
+
+.nav-item:hover {
+  background-color: var(--color-surface-variant);
+  color: var(--text-primary);
+}
+
+.nav-item.active {
+  background-color: var(--color-surface-variant);
+  color: var(--text-primary);
+  border-left: 3px solid var(--accent);
+}
+
+.profile-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.profile-section h3 {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--color-surface-variant);
+  padding-bottom: 8px;
+}
+
+.status-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--color-surface-variant);
+  padding: 24px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.status-item .label {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.status-item .value {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-item .value.active {
+  color: #008000;
+}
+
+.logout-btn {
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .profile-content {
+    flex-direction: column;
+    gap: 48px;
+  }
+  .profile-sidebar {
+    width: 100%;
+  }
+}

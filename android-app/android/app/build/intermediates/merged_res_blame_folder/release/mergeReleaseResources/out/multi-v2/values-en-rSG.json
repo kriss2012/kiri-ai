@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.kiri.ai.app-mergeReleaseResources-71:/values-en-rSG/values-en-rSG.xml",
+            "outputFile": "com.kiriai.kiriorganization.app-mergeReleaseResources-71:/values-en-rSG/values-en-rSG.xml",
             "map": [
                 {
                     "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\c079c2da66974d4c7d8626b9b52ff032\\transformed\\jetified-play-services-wallet-18.1.3\\res\\values-en-rSG\\values.xml",

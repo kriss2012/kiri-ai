@@ -1,0 +1,68 @@
+.kiri-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background-color: var(--accent);
+  color: var(--bg-primary);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border: 1px solid transparent;
+  width: 100%;
+}
+
+.kiri-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.kiri-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.kiri-button.outline {
+  background-color: transparent;
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+.kiri-input-group {
+  margin-bottom: 24px;
+}
+
+.kiri-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.kiri-input {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: var(--color-surface-variant);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-size: 16px;
+}
+
+.kiri-input:focus {
+  border-color: var(--text-secondary);
+}
+
+.avatar {
+  background-color: var(--accent);
+  color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 600;
+}

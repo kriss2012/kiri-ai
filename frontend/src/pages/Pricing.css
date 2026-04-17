@@ -1,0 +1,123 @@
+.pricing-page {
+  flex: 1;
+  background-color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  overflow-y: auto;
+}
+
+.pricing-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.back-btn {
+  padding: 8px;
+  color: var(--text-primary);
+}
+
+.pricing-title-area {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.pricing-title-area h1 {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.pricing-title-area p {
+  color: var(--text-secondary);
+  font-size: 18px;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.plan-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--color-surface-variant);
+  border-radius: 4px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-card.highlight {
+  border: 1px solid var(--accent);
+}
+
+.plan-name-badge {
+  font-size: 12px;
+  background: var(--color-surface-variant);
+  padding: 4px 12px;
+  width: fit-content;
+  margin-bottom: 24px;
+}
+
+.plan-price {
+  margin-bottom: 8px;
+}
+
+.plan-price .amount {
+  font-size: 42px;
+  font-weight: 500;
+}
+
+.plan-price .period {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-left: 8px;
+}
+
+.plan-specs {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  opacity: 0.7;
+}
+
+.features-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.feature-item .mono {
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.check-icon {
+  color: var(--text-primary);
+}
+
+.subscribe-btn {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .pricing-page {
+    padding: 24px;
+  }
+  .pricing-title-area h1 {
+    font-size: 32px;
+  }
+}

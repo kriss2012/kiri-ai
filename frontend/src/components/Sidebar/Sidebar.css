@@ -1,0 +1,148 @@
+.sidebar {
+  width: 300px;
+  height: 100vh;
+  background-color: var(--bg-surface);
+  border-right: 1px solid var(--color-surface-variant);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar-header {
+  padding: 32px 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar-logo {
+  height: 48px;
+  width: auto;
+  align-self: flex-start;
+}
+
+.sidebar-actions {
+  padding: 0 24px 24px;
+}
+
+.new-chat-btn {
+  gap: 8px;
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  padding: 12px;
+}
+
+.conversation-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.conversation-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.conversation-item:hover {
+  background-color: var(--color-surface-variant);
+  color: var(--text-primary);
+}
+
+.conversation-item.active {
+  background-color: var(--color-surface-variant);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.conv-title {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--font-mono);
+}
+
+.sidebar-footer {
+  padding: 24px;
+  border-top: 1px solid var(--color-surface-variant);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+
+.avatar.micro {
+  width: 36px;
+  height: 36px;
+  font-size: 14px;
+}
+
+.user-name {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.user-plan {
+  font-size: 10px;
+  color: var(--text-secondary);
+  background: var(--color-surface-variant);
+  padding: 2px 6px;
+  border-radius: 2px;
+  margin-top: 2px;
+  display: inline-block;
+}
+
+.footer-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.footer-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 4px;
+  color: var(--text-secondary);
+  border: 1px solid var(--color-surface-variant);
+}
+
+.footer-btn:hover {
+  background-color: var(--color-surface-variant);
+  color: var(--text-primary);
+}
+
+.footer-btn.logout:hover {
+  color: var(--color-error);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    transform: translateX(-100%);
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}

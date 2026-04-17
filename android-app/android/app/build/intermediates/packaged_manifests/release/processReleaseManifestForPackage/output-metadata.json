@@ -4,7 +4,7 @@
     "type": "PACKAGED_MANIFESTS",
     "kind": "Directory"
   },
-  "applicationId": "com.kiri.ai",
+  "applicationId": "com.kiriai.kiriorganization",
   "variantName": "release",
   "elements": [
     {
