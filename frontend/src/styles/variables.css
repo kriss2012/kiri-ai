@@ -1,0 +1,44 @@
+:root {
+  /* Core Palette */
+  --color-ivory: #F9F7F2;
+  --color-velvet-black: #050505;
+  --color-showroom-white: #FFFFFF;
+  --color-silver-mist: #C0C0C0;
+  --color-dark-gray: #1A1A1A;
+  --color-surface-variant: #ECEAE4;
+  --color-error: #B00020;
+
+  /* Semantic Colors */
+  --bg-primary: var(--color-ivory);
+  --bg-surface: var(--color-showroom-white);
+  --text-primary: var(--color-velvet-black);
+  --text-secondary: #4A4A4A;
+  --accent: var(--color-velvet-black);
+  
+  /* Dark Mode Defaults (Internal state handles toggle) */
+  --transition-speed: 0.5s;
+  
+  /* Typography */
+  --font-display: 'Outfit', sans-serif;
+  --font-text: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+[data-theme='dark'] {
+  --bg-primary: var(--color-velvet-black);
+  --bg-surface: #0A0A0A;
+  --text-primary: #F5F5F5;
+  --text-secondary: var(--color-silver-mist);
+  --accent: #F5F5F5;
+  --color-surface-variant: #1A1A1A;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-text);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+  -webkit-font-smoothing: antialiased;
+}

@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.kiri.ai"
+3    package="com.kiriai.kiriorganization"
 4    android:versionCode="1"
 5    android:versionName="1.0" >
 6
@@ -112,18 +112,18 @@
 61
 62    <permission
 62-->[androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
-63        android:name="com.kiri.ai.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+63        android:name="com.kiriai.kiriorganization.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
 63-->[androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
 64        android:protectionLevel="signature" />
 64-->[androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
 65
-66    <uses-permission android:name="com.kiri.ai.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+66    <uses-permission android:name="com.kiriai.kiriorganization.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 66-->[androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
 66-->[androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
 67
 68    <application
 68-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:15:5-65:19
-69        android:name="com.kiri.ai.KiriApplication"
+69        android:name="com.kiriai.kiriorganization.KiriApplication"
 69-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:16:9-40
 70        android:allowBackup="true"
 70-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:17:9-35
@@ -145,7 +145,7 @@
 79        <provider
 80            android:name="androidx.core.content.FileProvider"
 80-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:27:13-62
-81            android:authorities="com.kiri.ai.fileprovider"
+81            android:authorities="com.kiriai.kiriorganization.fileprovider"
 81-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:28:13-64
 82            android:exported="false"
 82-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:29:13-37
@@ -161,7 +161,7 @@
 88        <provider
 89            android:name="androidx.startup.InitializationProvider"
 89-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:37:13-67
-90            android:authorities="com.kiri.ai.androidx-startup"
+90            android:authorities="com.kiriai.kiriorganization.androidx-startup"
 90-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:38:13-68
 91            android:exported="false" >
 91-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:39:13-37
@@ -187,7 +187,7 @@
 102
 103        <activity
 103-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:46:9-57:20
-104            android:name="com.kiri.ai.MainActivity"
+104            android:name="com.kiriai.kiriorganization.MainActivity"
 104-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:47:13-41
 105            android:exported="true"
 105-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:48:13-36
@@ -213,7 +213,7 @@
 116
 117        <service
 117-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:59:9-64:34
-118            android:name="com.kiri.ai.services.KiriBackgroundService"
+118            android:name="com.kiriai.kiriorganization.services.KiriBackgroundService"
 118-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:60:13-59
 119            android:enabled="true"
 119-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:61:13-35

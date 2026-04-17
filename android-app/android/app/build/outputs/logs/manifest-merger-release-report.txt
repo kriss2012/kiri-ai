@@ -239,7 +239,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\kr
 		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:23:9-44
 	android:name
 		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:16:9-40
-activity#com.kiri.ai.MainActivity
+activity#com.kiriai.kiriorganization.MainActivity
 ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:46:9-57:20
 	android:label
 		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:49:13-45
@@ -263,7 +263,7 @@ category#android.intent.category.LAUNCHER
 ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:55:17-77
 	android:name
 		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:55:27-74
-service#com.kiri.ai.services.KiriBackgroundService
+service#com.kiriai.kiriorganization.services.KiriBackgroundService
 ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:59:9-64:34
 	tools:node
 		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:64:13-31
@@ -810,7 +810,7 @@ ADDED from [androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\tran
 		ADDED from [androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
 	android:name
 		ADDED from [androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
-permission#com.kiri.ai.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+permission#com.kiriai.kiriorganization.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
 	android:protectionLevel
 		ADDED from [androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
@@ -820,7 +820,7 @@ uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
-uses-permission#com.kiri.ai.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+uses-permission#com.kiriai.kiriorganization.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:26:22-94

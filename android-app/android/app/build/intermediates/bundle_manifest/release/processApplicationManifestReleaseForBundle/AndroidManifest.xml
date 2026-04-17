@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kiri.ai"
+    package="com.kiriai.kiriorganization"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -60,13 +60,13 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <permission
-        android:name="com.kiri.ai.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:name="com.kiriai.kiriorganization.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.kiri.ai.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+    <uses-permission android:name="com.kiriai.kiriorganization.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
-        android:name="com.kiri.ai.KiriApplication"
+        android:name="com.kiriai.kiriorganization.KiriApplication"
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:extractNativeLibs="false"
@@ -78,7 +78,7 @@
         android:usesCleartextTraffic="true" >
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.kiri.ai.fileprovider"
+            android:authorities="com.kiriai.kiriorganization.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -87,7 +87,7 @@
         </provider>
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.kiri.ai.androidx-startup"
+            android:authorities="com.kiriai.kiriorganization.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="androidx.emoji2.text.EmojiCompatInitializer"
@@ -101,7 +101,7 @@
         </provider>
 
         <activity
-            android:name="com.kiri.ai.MainActivity"
+            android:name="com.kiriai.kiriorganization.MainActivity"
             android:exported="true"
             android:hardwareAccelerated="true"
             android:label="@string/app_name"
@@ -115,7 +115,7 @@
         </activity>
 
         <service
-            android:name="com.kiri.ai.services.KiriBackgroundService"
+            android:name="com.kiriai.kiriorganization.services.KiriBackgroundService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="dataSync" />
