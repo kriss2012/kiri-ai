@@ -41,132 +41,176 @@ fun ProfileScreen(
     val state by chatViewModel.uiState.collectAsStateWithLifecycle()
     val authUiState by authViewModel.uiState.collectAsStateWithLifecycle()
     var name by remember { mutableStateOf(state.user?.name ?: "") }
+    val colorScheme = MaterialTheme.colorScheme
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Account Settings", style = KiriTypography.titleLarge) },
+            CenterAlignedTopAppBar(
+                title = { 
+                    Text(
+                        "USER_ATELIER // PROFILE", 
+                        style = KiriTypography.labelLarge,
+                        letterSpacing = 2.sp
+                    ) 
+                },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Parchment)
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = colorScheme.background,
+                    titleContentColor = colorScheme.onBackground,
+                    navigationIconContentColor = colorScheme.onBackground
+                )
             )
         },
-        containerColor = Parchment
+        containerColor = colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(24.dp)
+                .padding(horizontal = 24.dp, vertical = 32.dp)
         ) {
+            // HIGH_PERFORMANCE_AVATAR
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 40.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(100.dp)
+                        .border(1.dp, colorScheme.primary.copy(alpha = 0.3f), CircleShape)
+                        .padding(4.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(colorScheme.primary, CircleShape),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = state.user?.name?.take(1)?.uppercase() ?: "U",
+                            style = KiriTypography.headlineLarge.copy(
+                                color = colorScheme.onPrimary,
+                                fontSize = 48.sp
+                            )
+                        )
+                    }
+                }
+            }
+
+            // TECHNICAL_DATA_SECTION
             Text(
-                text = "Manage your profile and subscription",
-                style = KiriTypography.bodyLarge,
-                color = OliveGray
+                "IDENTITY_MODULE",
+                style = KiriTypography.labelSmall,
+                color = colorScheme.primary.copy(alpha = 0.5f),
+                modifier = Modifier.padding(bottom = 16.dp)
             )
             
-            Spacer(modifier = Modifier.height(32.dp))
-            
-            // Profile Card
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = Ivory),
-                border = BorderStroke(1.dp, BorderCream)
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(colorScheme.surfaceVariant.copy(alpha = 0.3f), RoundedCornerShape(4.dp))
+                    .padding(20.dp)
             ) {
-                Column(modifier = Modifier.padding(24.dp)) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Box(
-                            modifier = Modifier
-                                .size(72.dp)
-                                .background(Brush.linearGradient(listOf(VelvetBlack, DarkGray)), CircleShape),
-                            contentAlignment = Alignment.Center
+                Text(
+                    text = state.user?.email ?: "NULL_AUTH_EMAIL",
+                    style = KiriTypography.bodyLarge,
+                    color = colorScheme.onSurface
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+                
+                KiriTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = "RENAME_USER",
+                    placeholder = "ENTER_NEW_ALIAS"
+                )
+                
+                Spacer(modifier = Modifier.height(24.dp))
+                
+                KiriButton(
+                    text = "COMMIT_CHANGES",
+                    onClick = { 
+                        authViewModel.updateProfile(name) {
+                            Toast.makeText(context, "DATA_SYNC_COMPLETE", Toast.LENGTH_SHORT).show()
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth().height(48.dp),
+                    isLoading = authUiState.isLoading,
+                    shape = RoundedCornerShape(2.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(40.dp))
+
+            // SUBSCRIPTION_DATA_SECTION
+            Text(
+                "SUBSCRIPTION_STATUS",
+                style = KiriTypography.labelSmall,
+                color = colorScheme.primary.copy(alpha = 0.5f),
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .border(1.dp, colorScheme.outline.copy(alpha = 0.1f), RoundedCornerShape(4.dp))
+                    .padding(20.dp)
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = (state.user?.plan ?: "FREE_TIER").uppercase(),
+                        style = KiriTypography.labelLarge,
+                        color = colorScheme.primary
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+                    if (state.user?.isPremium == true) {
+                        Surface(
+                            color = colorScheme.primary.copy(alpha = 0.1f),
+                            shape = RoundedCornerShape(4.dp)
                         ) {
                             Text(
-                                text = state.user?.name?.take(1) ?: "U",
-                                style = KiriTypography.headlineLarge.copy(color = Ivory)
+                                "ACTIVE",
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                                style = KiriTypography.labelSmall,
+                                color = colorScheme.primary
                             )
-                        }
-
-                        Spacer(modifier = Modifier.width(20.dp))
-                        Column {
-                            Text(
-                                text = state.user?.name ?: "User",
-                                style = KiriTypography.titleLarge.copy(fontFamily = SerifFont)
-                            )
-                            Text(
-                                text = state.user?.email ?: "email@example.com",
-                                style = KiriTypography.bodyMedium,
-                                color = OliveGray
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Badge(
-                                containerColor = if (state.user?.isPremium == true) Color(0xFFFFD700).copy(alpha = 0.2f) else WarmSand,
-                                contentColor = if (state.user?.isPremium == true) Color(0xFFB8860B) else CharcoalWarm
-                            ) {
-                                Text(state.user?.plan ?: "Free Plan")
-                            }
                         }
                     }
-                    
-                    Spacer(modifier = Modifier.height(32.dp))
-                    
-                    KiriTextField(
-                        value = name,
-                        onValueChange = { name = it },
-                        label = "Display Name",
-                        placeholder = "Your name"
-                    )
-                    
-                    Spacer(modifier = Modifier.height(24.dp))
-                    
-                    KiriButton(
-                        text = "Save Changes",
-                        onClick = { 
-                            authViewModel.updateProfile(name) {
-                                Toast.makeText(context, "Profile updated", Toast.LENGTH_SHORT).show()
-                            }
-                        },
-                        modifier = Modifier.width(160.dp),
-                        enabled = !authUiState.isLoading
-                    )
                 }
+                
+                Spacer(modifier = Modifier.height(16.dp))
+                
+                Text(
+                    text = "ACCESS_LEVEL: Full multimodal support, unlimited queries, and priority reasoning cycles.",
+                    style = KiriTypography.bodySmall,
+                    color = colorScheme.onSurface.copy(alpha = 0.7f)
+                )
+                
+                Spacer(modifier = Modifier.height(32.dp))
+                
+                KiriButton(
+                    text = "MANAGE_SUBSCRIPTION",
+                    onClick = { navController.navigate("pricing") },
+                    modifier = Modifier.fillMaxWidth().height(44.dp),
+                    containerColor = Color.Transparent,
+                    contentColor = colorScheme.primary,
+                    border = BorderStroke(1.dp, colorScheme.primary.copy(alpha = 0.2f)),
+                    shape = RoundedCornerShape(2.dp)
+                )
             }
-            
-            Spacer(modifier = Modifier.height(24.dp))
-            
-            // Subscription Card
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = Ivory),
-                border = BorderStroke(1.dp, BorderCream)
-            ) {
-                Column(modifier = Modifier.padding(24.dp)) {
-                    Text(text = "Subscription", style = KiriTypography.titleLarge.copy(fontFamily = SerifFont))
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        text = "Your current plan is ${state.user?.plan ?: "Free"}. Upgrade to Premium for unlimted requests and faster responses.",
-                        style = KiriTypography.bodyMedium,
-                        color = OliveGray
-                    )
-                    Spacer(modifier = Modifier.height(24.dp))
-                    KiriButton(
-                        text = "⚡ Manage Subscription",
-                        onClick = { navController.navigate("pricing") }
-                    )
-                }
-            }
-            
-            Spacer(modifier = Modifier.height(24.dp))
-            
-            // Logout
+
+            Spacer(modifier = Modifier.height(48.dp))
+
+            // DESTRUCTIVE_ACTIONS
             KiriButton(
-                text = "Log Out",
+                text = "TERMINATE_SESSION // LOGOUT",
                 onClick = { 
                     authViewModel.logout {
                         navController.navigate("landing") {
@@ -175,9 +219,11 @@ fun ProfileScreen(
                     }
                 },
                 containerColor = Color.Transparent,
-                contentColor = ErrorCrimson,
+                contentColor = colorScheme.error,
                 modifier = Modifier.fillMaxWidth()
             )
+            
+            Spacer(modifier = Modifier.height(64.dp))
         }
     }
 }
