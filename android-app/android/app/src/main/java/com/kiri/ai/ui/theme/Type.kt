@@ -78,7 +78,6 @@ val KiriTypography = Typography(
         fontFamily = BugattiTextFont,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
-        lineHeight = 20.sp,
-        color = SilverMist
+        lineHeight = 20.sp
     )
 )
