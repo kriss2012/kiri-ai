@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -162,36 +163,36 @@ private fun AssistantContent(content: String) {
             }
         }
 
-        // STABILITY_OPTIMIZATION: Remember typography and colors to prevent measurement-pass thrashing
-        val markdownTypography = remember {
-            markdownTypography(
-                h1 = KiriTypography.headlineLarge,
-                h2 = KiriTypography.headlineMedium,
-                paragraph = KiriTypography.bodyMedium.copy(
-                    color = ShowroomWhite,
-                    lineHeight = 26.sp
-                ),
-                code = KiriTypography.labelMedium.copy(
-                    color = ShowroomWhite,
-                    background = VelvetBlack
-                )
+        // STABILITY_OPTIMIZATION: markdownTypography and markdownColor are @Composable 
+        // functions that already handle internal remembering. Call them directly.
+        val markdownTypography = markdownTypography(
+            h1 = KiriTypography.headlineLarge,
+            h2 = KiriTypography.headlineMedium,
+            paragraph = KiriTypography.bodyMedium.copy(
+                color = ShowroomWhite,
+                lineHeight = 26.sp
+            ),
+            code = KiriTypography.labelMedium.copy(
+                color = ShowroomWhite,
+                background = VelvetBlack
             )
-        }
-        val markdownColors = remember {
-            markdownColor(
-                text = ShowroomWhite,
-                codeText = ShowroomWhite,
-                inlineCodeText = ShowroomWhite,
-                linkText = SilverMist
-            )
-        }
-
-        Markdown(
-            content = content,
-            modifier = Modifier.fillMaxWidth(),
-            typography = markdownTypography,
-            colors = markdownColors
         )
+        val markdownColors = markdownColor(
+            text = ShowroomWhite,
+            codeText = ShowroomWhite,
+            inlineCodeText = ShowroomWhite,
+            linkText = SilverMist
+        )
+
+        val contentKey = remember(content) { content.hashCode() }
+        key(contentKey) {
+            Markdown(
+                content = content,
+                modifier = Modifier.fillMaxWidth(),
+                typography = markdownTypography,
+                colors = markdownColors
+            )
+        }
     }
 }
 

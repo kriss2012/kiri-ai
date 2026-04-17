@@ -23,15 +23,20 @@ class KiriApplication : Application(), Configuration.Provider {
     lateinit var workerFactory: HiltWorkerFactory
 
     override val workManagerConfiguration: Configuration
-        get() = Configuration.Builder()
-            .setWorkerFactory(workerFactory)
-            .build()
+        get() = if (::workerFactory.isInitialized) {
+            Configuration.Builder()
+                .setWorkerFactory(workerFactory)
+                .build()
+        } else {
+            // Fallback for extremely early wakeups (e.g. OS rescheduling workers before Hilt finishes)
+            Configuration.Builder().build()
+        }
 
     override fun onCreate() {
         super.onCreate()
-        KiriCrashHandler.initialize(this)
-        NotificationHelper.createNotificationChannel(this)
-        enqueueChatPolling()
+        runCatching { KiriCrashHandler.initialize(this) }
+        runCatching { NotificationHelper.createNotificationChannel(this) }
+        runCatching { enqueueChatPolling() }
     }
 
     private fun enqueueChatPolling() {

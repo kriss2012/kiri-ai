@@ -58,6 +58,7 @@ fun ChatScreen(
     id: String? = null,
     viewModel: ChatViewModel = hiltViewModel()
 ) {
+    android.util.Log.d("Kiri_DEBUG", "ChatScreen: Navigation triggered with id=$id")
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -75,14 +76,21 @@ fun ChatScreen(
     val filePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),
         onResult = { uri ->
+            android.util.Log.d("Kiri_DEBUG", "FilePicker: Result received uri=$uri")
             uri?.let {
-                val name = context.contentResolver.query(it, null, null, null, null)?.use { cursor ->
-                    val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                    if (nameIndex != -1 && cursor.moveToFirst()) {
-                        cursor.getString(nameIndex)
-                    } else null
+                val name = try {
+                    context.contentResolver.query(it, null, null, null, null)?.use { cursor ->
+                        val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                        if (nameIndex != -1 && cursor.moveToFirst()) {
+                            cursor.getString(nameIndex)
+                        } else null
+                    }
+                } catch (e: Exception) {
+                    android.util.Log.e("Kiri_DEBUG", "FilePicker: Query failed", e)
+                    null
                 } ?: it.lastPathSegment
 
+                android.util.Log.d("Kiri_DEBUG", "FilePicker: Handing over to ViewModel name=$name")
                 scope.launch {
                     viewModel.onFileSelected(it, name)
                 }
@@ -105,8 +113,8 @@ fun ChatScreen(
             ModalDrawerSheet(
                 drawerContainerColor = VelvetBlack,
                 drawerContentColor = ShowroomWhite,
-                drawerShape = RoundedCornerShape(0.dp), // Sharper aesthetic
-                modifier = Modifier.width(300.dp)
+                drawerShape = RoundedCornerShape(0.dp),
+                modifier = Modifier.fillMaxHeight().width(300.dp)
             ) {
                 Spacer(modifier = Modifier.height(64.dp))
                 Text(
@@ -234,7 +242,6 @@ fun ChatScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(padding)
-                    .navigationBarsPadding() // Handles bottom home handle
                     .imePadding() // Handles keyboard
             ) {
                 if (!state.isConnected) {
@@ -264,17 +271,21 @@ fun ChatScreen(
                     ) {
                         items(
                             items = state.messages,
-                            key = { it.getStableId() }
+                            key = { it.id ?: it.getStableId() },
+                            contentType = { it.role }
                         ) { msg ->
-                            // REINFORCED_STABILITY: Item isolation via key ensures minimal recomposition
-                            key(msg.getStableId()) {
+                            // REINFORCED_ISOLATION: Isolate every bubble in its own graphics layer 
+                            // to prevent dispatchGetDisplayList recursion on heavy markdown content.
+                            Box(modifier = Modifier.graphicsLayer { clip = true }) {
                                 KiriMessageBubble(msg)
                             }
                         }
                         
                         if (state.isSending) {
-                            item(key = "typing_indicator") { 
-                                TypingIndicator() 
+                            item(key = "typing_indicator", contentType = "system") { 
+                                Box(modifier = Modifier.graphicsLayer { clip = true }) {
+                                    TypingIndicator()
+                                }
                             }
                         }
                     }
