@@ -149,7 +149,8 @@ fun ChatInputBar(
                         .padding(horizontal = 8.dp, vertical = 12.dp),
                     textStyle = TextStyle(
                         color = colorScheme.onSurface,
-                        fontSize = 16.sp
+                        fontSize = 17.sp, // Slightly boosted for premium feel
+                        fontFamily = BugattiTextFont
                     ),
                     cursorBrush = SolidColor(colorScheme.primary),
                     decorationBox = { innerTextField ->
