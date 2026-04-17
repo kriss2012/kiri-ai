@@ -1,17 +1,17 @@
 -- Merging decision tree log ---
 provider#androidx.core.content.FileProvider
-INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml:26:9-34:20
+INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:26:9-34:20
 	android:grantUriPermissions
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:30:13-47
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:30:13-47
 	android:authorities
-		INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:28:13-64
+		INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:28:13-64
 	android:exported
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:29:13-37
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:29:13-37
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:27:13-62
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:27:13-62
 provider#androidx.startup.InitializationProvider
-INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml:36:9-45:20
+INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:36:9-45:20
 MERGED from [androidx.work:work-runtime:2.9.0] C:\Users\krishna\.gradle\caches\8.13\transforms\a73b995c657aeee808c6dc820e244840\transformed\work-runtime-2.9.0\AndroidManifest.xml:29:9-37:20
 MERGED from [androidx.work:work-runtime:2.9.0] C:\Users\krishna\.gradle\caches\8.13\transforms\a73b995c657aeee808c6dc820e244840\transformed\work-runtime-2.9.0\AndroidManifest.xml:29:9-37:20
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\krishna\.gradle\caches\8.13\transforms\a74a70e0841304cff29c9aa8452ca0a3\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
@@ -23,19 +23,19 @@ MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\krishna\
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\krishna\.gradle\caches\8.13\transforms\bce80d679f3d2008e897e049f963f78d\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:26:9-30:34
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\krishna\.gradle\caches\8.13\transforms\bce80d679f3d2008e897e049f963f78d\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:26:9-30:34
 	tools:node
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:40:13-31
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:40:13-31
 	android:authorities
-		INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:38:13-68
+		INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:38:13-68
 	android:exported
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:39:13-37
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:39:13-37
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:37:13-67
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:37:13-67
 manifest
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:2:1-67:12
-INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml:2:1-67:12
-INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml:2:1-67:12
-INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml:2:1-67:12
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:2:1-67:12
+INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:2:1-67:12
+INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:2:1-67:12
+INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:2:1-67:12
 MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] C:\Users\krishna\.gradle\caches\8.13\transforms\9cdfc96c33d504be50bfd70671ac0649\transformed\jetified-hilt-navigation-compose-1.2.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.hilt:hilt-navigation:1.2.0] C:\Users\krishna\.gradle\caches\8.13\transforms\5701786312600d423988454b0100a029\transformed\jetified-hilt-navigation-1.2.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-common:2.7.7] C:\Users\krishna\.gradle\caches\8.13\transforms\993b456551d2d37c36ce1c9de3b5e7b8\transformed\navigation-common-2.7.7\AndroidManifest.xml:17:1-22:12
@@ -129,64 +129,64 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\krishna\.gradle\
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\krishna\.gradle\caches\8.13\transforms\4ede8ec8d7d1825e993d0b3c81c4d45a\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
 MERGED from [com.google.dagger:dagger-lint-aar:2.55] C:\Users\krishna\.gradle\caches\8.13\transforms\ddd86474bb33b44e7223be63526a08fd\transformed\jetified-dagger-lint-aar-2.55\AndroidManifest.xml:16:1-19:12
 	package
-		INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml
+		INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml
+		INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml
 	xmlns:tools
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:3:5-51
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
-		INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml
+		INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:2:11-69
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:5:5-67
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:5:5-67
 MERGED from [com.razorpay:checkout:1.6.38] C:\Users\krishna\.gradle\caches\8.13\transforms\cf4706a605b5e8259b542693ef5520d6\transformed\jetified-checkout-1.6.38\AndroidManifest.xml:8:5-67
 MERGED from [com.razorpay:checkout:1.6.38] C:\Users\krishna\.gradle\caches\8.13\transforms\cf4706a605b5e8259b542693ef5520d6\transformed\jetified-checkout-1.6.38\AndroidManifest.xml:8:5-67
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\krishna\.gradle\caches\8.13\transforms\9d2dbaaa09e89061028570ee00a6a611\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:24:5-67
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\krishna\.gradle\caches\8.13\transforms\9d2dbaaa09e89061028570ee00a6a611\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:24:5-67
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:5:22-64
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:5:22-64
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:6:5-79
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:6:5-79
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\krishna\.gradle\caches\8.13\transforms\9d2dbaaa09e89061028570ee00a6a611\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:23:5-79
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\krishna\.gradle\caches\8.13\transforms\9d2dbaaa09e89061028570ee00a6a611\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:23:5-79
 MERGED from [androidx.work:work-runtime:2.9.0] C:\Users\krishna\.gradle\caches\8.13\transforms\a73b995c657aeee808c6dc820e244840\transformed\work-runtime-2.9.0\AndroidManifest.xml:24:5-79
 MERGED from [androidx.work:work-runtime:2.9.0] C:\Users\krishna\.gradle\caches\8.13\transforms\a73b995c657aeee808c6dc820e244840\transformed\work-runtime-2.9.0\AndroidManifest.xml:24:5-79
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:6:22-76
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:6:22-76
 uses-permission#android.permission.POST_NOTIFICATIONS
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:7:5-77
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:7:5-77
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:7:22-74
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:7:22-74
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:8:5-107
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:8:5-107
 	android:maxSdkVersion
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:8:78-104
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:8:78-104
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:8:22-77
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:8:22-77
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:9:5-108
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:9:5-108
 	android:maxSdkVersion
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:9:79-105
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:9:79-105
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:9:22-78
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:9:22-78
 uses-permission#android.permission.READ_MEDIA_IMAGES
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:10:5-76
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:10:5-76
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:10:22-73
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:10:22-73
 uses-permission#android.permission.FOREGROUND_SERVICE
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:11:5-77
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:11:5-77
 MERGED from [androidx.work:work-runtime:2.9.0] C:\Users\krishna\.gradle\caches\8.13\transforms\a73b995c657aeee808c6dc820e244840\transformed\work-runtime-2.9.0\AndroidManifest.xml:26:5-77
 MERGED from [androidx.work:work-runtime:2.9.0] C:\Users\krishna\.gradle\caches\8.13\transforms\a73b995c657aeee808c6dc820e244840\transformed\work-runtime-2.9.0\AndroidManifest.xml:26:5-77
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:11:22-74
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:11:22-74
 uses-permission#android.permission.FOREGROUND_SERVICE_DATA_SYNC
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:12:5-87
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:12:5-87
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:12:22-84
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:12:22-84
 application
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:15:5-65:19
-INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml:15:5-65:19
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:15:5-65:19
+INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:15:5-65:19
 MERGED from [com.razorpay:checkout:1.6.38] C:\Users\krishna\.gradle\caches\8.13\transforms\cf4706a605b5e8259b542693ef5520d6\transformed\jetified-checkout-1.6.38\AndroidManifest.xml:41:5-64:19
 MERGED from [com.razorpay:checkout:1.6.38] C:\Users\krishna\.gradle\caches\8.13\transforms\cf4706a605b5e8259b542693ef5520d6\transformed\jetified-checkout-1.6.38\AndroidManifest.xml:41:5-64:19
 MERGED from [com.google.android.gms:play-services-auth:17.0.0] C:\Users\krishna\.gradle\caches\8.13\transforms\2573a2948e015165859634719d6bc189\transformed\jetified-play-services-auth-17.0.0\AndroidManifest.xml:22:5-37:19
@@ -218,82 +218,82 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\krishna\.gradle\ca
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\krishna\.gradle\caches\8.13\transforms\4ede8ec8d7d1825e993d0b3c81c4d45a\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\krishna\.gradle\caches\8.13\transforms\4ede8ec8d7d1825e993d0b3c81c4d45a\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
 	android:extractNativeLibs
-		INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml
+		INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:21:9-35
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:21:9-35
 	android:label
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:19:9-41
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:19:9-41
 	android:roundIcon
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:20:9-47
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:20:9-47
 	tools:targetApi
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:24:9-29
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:24:9-29
 	android:icon
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:18:9-42
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:18:9-42
 	android:allowBackup
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:17:9-35
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:17:9-35
 	android:theme
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:22:9-44
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:22:9-44
 	android:usesCleartextTraffic
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:23:9-44
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:23:9-44
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:16:9-40
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:16:9-40
 activity#com.kiri.ai.MainActivity
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:46:9-57:20
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:46:9-57:20
 	android:label
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:49:13-45
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:49:13-45
 	android:hardwareAccelerated
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:52:13-47
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:52:13-47
 	android:windowSoftInputMode
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:51:13-55
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:51:13-55
 	android:exported
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:48:13-36
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:48:13-36
 	android:theme
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:50:13-54
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:50:13-54
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:47:13-41
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:47:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:53:13-56:29
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:53:13-56:29
 action#android.intent.action.MAIN
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:54:17-69
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:54:17-69
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:54:25-66
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:54:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:55:17-77
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:55:17-77
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:55:27-74
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:55:27-74
 service#com.kiri.ai.services.KiriBackgroundService
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:59:9-64:34
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:59:9-64:34
 	tools:node
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:64:13-31
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:64:13-31
 	android:enabled
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:61:13-35
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:61:13-35
 	android:exported
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:62:13-37
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:62:13-37
 	android:foregroundServiceType
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:63:13-53
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:63:13-53
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:60:13-59
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:60:13-59
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:31:13-33:54
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:31:13-33:54
 	android:resource
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:33:17-51
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:33:17-51
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:32:17-67
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:32:17-67
 meta-data#androidx.work.WorkManagerInitializer
-ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:41:13-44:39
+ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:41:13-44:39
 REJECTED from [androidx.work:work-runtime:2.9.0] C:\Users\krishna\.gradle\caches\8.13\transforms\a73b995c657aeee808c6dc820e244840\transformed\work-runtime-2.9.0\AndroidManifest.xml:34:13-36:52
 	tools:node
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:44:17-36
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:44:17-36
 	android:value
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:43:17-49
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:43:17-49
 	android:name
-		ADDED from D:\MyApplication\app\src\main\AndroidManifest.xml:42:17-68
+		ADDED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:42:17-68
 uses-sdk
-INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml
-INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml
+INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml
+INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml
 MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] C:\Users\krishna\.gradle\caches\8.13\transforms\9cdfc96c33d504be50bfd70671ac0649\transformed\jetified-hilt-navigation-compose-1.2.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] C:\Users\krishna\.gradle\caches\8.13\transforms\9cdfc96c33d504be50bfd70671ac0649\transformed\jetified-hilt-navigation-compose-1.2.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.hilt:hilt-navigation:1.2.0] C:\Users\krishna\.gradle\caches\8.13\transforms\5701786312600d423988454b0100a029\transformed\jetified-hilt-navigation-1.2.0\AndroidManifest.xml:5:5-44
@@ -479,9 +479,9 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\kr
 MERGED from [com.google.dagger:dagger-lint-aar:2.55] C:\Users\krishna\.gradle\caches\8.13\transforms\ddd86474bb33b44e7223be63526a08fd\transformed\jetified-dagger-lint-aar-2.55\AndroidManifest.xml:18:3-42
 MERGED from [com.google.dagger:dagger-lint-aar:2.55] C:\Users\krishna\.gradle\caches\8.13\transforms\ddd86474bb33b44e7223be63526a08fd\transformed\jetified-dagger-lint-aar-2.55\AndroidManifest.xml:18:3-42
 	android:targetSdkVersion
-		INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml
+		INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from D:\MyApplication\app\src\main\AndroidManifest.xml
+		INJECTED from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml
 queries
 ADDED from [com.razorpay:checkout:1.6.38] C:\Users\krishna\.gradle\caches\8.13\transforms\cf4706a605b5e8259b542693ef5520d6\transformed\jetified-checkout-1.6.38\AndroidManifest.xml:10:5-39:15
 intent#action:name:android.intent.action.VIEW+data:mimeType:*/*+data:scheme:*

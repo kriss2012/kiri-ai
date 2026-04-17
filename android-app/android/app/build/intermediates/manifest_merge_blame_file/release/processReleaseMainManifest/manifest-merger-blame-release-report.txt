@@ -9,35 +9,35 @@
 9        android:targetSdkVersion="34" />
 10
 11    <uses-permission android:name="android.permission.INTERNET" />
-11-->D:\MyApplication\app\src\main\AndroidManifest.xml:5:5-67
-11-->D:\MyApplication\app\src\main\AndroidManifest.xml:5:22-64
+11-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:5:5-67
+11-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:5:22-64
 12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-12-->D:\MyApplication\app\src\main\AndroidManifest.xml:6:5-79
-12-->D:\MyApplication\app\src\main\AndroidManifest.xml:6:22-76
+12-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:6:5-79
+12-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:6:22-76
 13    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-13-->D:\MyApplication\app\src\main\AndroidManifest.xml:7:5-77
-13-->D:\MyApplication\app\src\main\AndroidManifest.xml:7:22-74
+13-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:7:5-77
+13-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:7:22-74
 14    <uses-permission
-14-->D:\MyApplication\app\src\main\AndroidManifest.xml:8:5-107
+14-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:8:5-107
 15        android:name="android.permission.READ_EXTERNAL_STORAGE"
-15-->D:\MyApplication\app\src\main\AndroidManifest.xml:8:22-77
+15-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:8:22-77
 16        android:maxSdkVersion="32" />
-16-->D:\MyApplication\app\src\main\AndroidManifest.xml:8:78-104
+16-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:8:78-104
 17    <uses-permission
-17-->D:\MyApplication\app\src\main\AndroidManifest.xml:9:5-108
+17-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:9:5-108
 18        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-18-->D:\MyApplication\app\src\main\AndroidManifest.xml:9:22-78
+18-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:9:22-78
 19        android:maxSdkVersion="28" />
-19-->D:\MyApplication\app\src\main\AndroidManifest.xml:9:79-105
+19-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:9:79-105
 20    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-20-->D:\MyApplication\app\src\main\AndroidManifest.xml:10:5-76
-20-->D:\MyApplication\app\src\main\AndroidManifest.xml:10:22-73
+20-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:10:5-76
+20-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:10:22-73
 21    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-21-->D:\MyApplication\app\src\main\AndroidManifest.xml:11:5-77
-21-->D:\MyApplication\app\src\main\AndroidManifest.xml:11:22-74
+21-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:11:5-77
+21-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:11:22-74
 22    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
-22-->D:\MyApplication\app\src\main\AndroidManifest.xml:12:5-87
-22-->D:\MyApplication\app\src\main\AndroidManifest.xml:12:22-84
+22-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:12:5-87
+22-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:12:22-84
 23
 24    <queries>
 24-->[com.razorpay:checkout:1.6.38] C:\Users\krishna\.gradle\caches\8.13\transforms\cf4706a605b5e8259b542693ef5520d6\transformed\jetified-checkout-1.6.38\AndroidManifest.xml:10:5-39:15
@@ -75,8 +75,8 @@
 42        <intent>
 42-->[com.razorpay:checkout:1.6.38] C:\Users\krishna\.gradle\caches\8.13\transforms\cf4706a605b5e8259b542693ef5520d6\transformed\jetified-checkout-1.6.38\AndroidManifest.xml:28:9-30:18
 43            <action android:name="android.intent.action.MAIN" />
-43-->D:\MyApplication\app\src\main\AndroidManifest.xml:54:17-69
-43-->D:\MyApplication\app\src\main\AndroidManifest.xml:54:25-66
+43-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:54:17-69
+43-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:54:25-66
 44        </intent>
 45        <intent>
 45-->[com.razorpay:checkout:1.6.38] C:\Users\krishna\.gradle\caches\8.13\transforms\cf4706a605b5e8259b542693ef5520d6\transformed\jetified-checkout-1.6.38\AndroidManifest.xml:31:9-35:18
@@ -122,49 +122,49 @@
 66-->[androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
 67
 68    <application
-68-->D:\MyApplication\app\src\main\AndroidManifest.xml:15:5-65:19
+68-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:15:5-65:19
 69        android:name="com.kiri.ai.KiriApplication"
-69-->D:\MyApplication\app\src\main\AndroidManifest.xml:16:9-40
+69-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:16:9-40
 70        android:allowBackup="true"
-70-->D:\MyApplication\app\src\main\AndroidManifest.xml:17:9-35
+70-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:17:9-35
 71        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 71-->[androidx.core:core:1.13.1] C:\Users\krishna\.gradle\caches\8.13\transforms\17f823d90a707a78bf58bd8b3a8ee0ff\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
 72        android:extractNativeLibs="false"
 73        android:icon="@drawable/app_logo"
-73-->D:\MyApplication\app\src\main\AndroidManifest.xml:18:9-42
+73-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:18:9-42
 74        android:label="@string/app_name"
-74-->D:\MyApplication\app\src\main\AndroidManifest.xml:19:9-41
+74-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:19:9-41
 75        android:roundIcon="@drawable/app_logo"
-75-->D:\MyApplication\app\src\main\AndroidManifest.xml:20:9-47
+75-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:20:9-47
 76        android:supportsRtl="true"
-76-->D:\MyApplication\app\src\main\AndroidManifest.xml:21:9-35
+76-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:21:9-35
 77        android:theme="@style/Theme.KiriAI"
-77-->D:\MyApplication\app\src\main\AndroidManifest.xml:22:9-44
+77-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:22:9-44
 78        android:usesCleartextTraffic="true" >
-78-->D:\MyApplication\app\src\main\AndroidManifest.xml:23:9-44
+78-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:23:9-44
 79        <provider
 80            android:name="androidx.core.content.FileProvider"
-80-->D:\MyApplication\app\src\main\AndroidManifest.xml:27:13-62
+80-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:27:13-62
 81            android:authorities="com.kiri.ai.fileprovider"
-81-->D:\MyApplication\app\src\main\AndroidManifest.xml:28:13-64
+81-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:28:13-64
 82            android:exported="false"
-82-->D:\MyApplication\app\src\main\AndroidManifest.xml:29:13-37
+82-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:29:13-37
 83            android:grantUriPermissions="true" >
-83-->D:\MyApplication\app\src\main\AndroidManifest.xml:30:13-47
+83-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:30:13-47
 84            <meta-data
-84-->D:\MyApplication\app\src\main\AndroidManifest.xml:31:13-33:54
+84-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:31:13-33:54
 85                android:name="android.support.FILE_PROVIDER_PATHS"
-85-->D:\MyApplication\app\src\main\AndroidManifest.xml:32:17-67
+85-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:32:17-67
 86                android:resource="@xml/file_paths" />
-86-->D:\MyApplication\app\src\main\AndroidManifest.xml:33:17-51
+86-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:33:17-51
 87        </provider>
 88        <provider
 89            android:name="androidx.startup.InitializationProvider"
-89-->D:\MyApplication\app\src\main\AndroidManifest.xml:37:13-67
+89-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:37:13-67
 90            android:authorities="com.kiri.ai.androidx-startup"
-90-->D:\MyApplication\app\src\main\AndroidManifest.xml:38:13-68
+90-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:38:13-68
 91            android:exported="false" >
-91-->D:\MyApplication\app\src\main\AndroidManifest.xml:39:13-37
+91-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:39:13-37
 92            <meta-data
 92-->[androidx.emoji2:emoji2:1.3.0] C:\Users\krishna\.gradle\caches\8.13\transforms\a74a70e0841304cff29c9aa8452ca0a3\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
 93                android:name="androidx.emoji2.text.EmojiCompatInitializer"
@@ -186,41 +186,41 @@
 101        </provider>
 102
 103        <activity
-103-->D:\MyApplication\app\src\main\AndroidManifest.xml:46:9-57:20
+103-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:46:9-57:20
 104            android:name="com.kiri.ai.MainActivity"
-104-->D:\MyApplication\app\src\main\AndroidManifest.xml:47:13-41
+104-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:47:13-41
 105            android:exported="true"
-105-->D:\MyApplication\app\src\main\AndroidManifest.xml:48:13-36
+105-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:48:13-36
 106            android:hardwareAccelerated="true"
-106-->D:\MyApplication\app\src\main\AndroidManifest.xml:52:13-47
+106-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:52:13-47
 107            android:label="@string/app_name"
-107-->D:\MyApplication\app\src\main\AndroidManifest.xml:49:13-45
+107-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:49:13-45
 108            android:theme="@style/Theme.App.Starting"
-108-->D:\MyApplication\app\src\main\AndroidManifest.xml:50:13-54
+108-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:50:13-54
 109            android:windowSoftInputMode="adjustResize" >
-109-->D:\MyApplication\app\src\main\AndroidManifest.xml:51:13-55
+109-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:51:13-55
 110            <intent-filter>
-110-->D:\MyApplication\app\src\main\AndroidManifest.xml:53:13-56:29
+110-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:53:13-56:29
 111                <action android:name="android.intent.action.MAIN" />
-111-->D:\MyApplication\app\src\main\AndroidManifest.xml:54:17-69
-111-->D:\MyApplication\app\src\main\AndroidManifest.xml:54:25-66
+111-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:54:17-69
+111-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:54:25-66
 112
 113                <category android:name="android.intent.category.LAUNCHER" />
-113-->D:\MyApplication\app\src\main\AndroidManifest.xml:55:17-77
-113-->D:\MyApplication\app\src\main\AndroidManifest.xml:55:27-74
+113-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:55:17-77
+113-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:55:27-74
 114            </intent-filter>
 115        </activity>
 116
 117        <service
-117-->D:\MyApplication\app\src\main\AndroidManifest.xml:59:9-64:34
+117-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:59:9-64:34
 118            android:name="com.kiri.ai.services.KiriBackgroundService"
-118-->D:\MyApplication\app\src\main\AndroidManifest.xml:60:13-59
+118-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:60:13-59
 119            android:enabled="true"
-119-->D:\MyApplication\app\src\main\AndroidManifest.xml:61:13-35
+119-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:61:13-35
 120            android:exported="false"
-120-->D:\MyApplication\app\src\main\AndroidManifest.xml:62:13-37
+120-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:62:13-37
 121            android:foregroundServiceType="dataSync" />
-121-->D:\MyApplication\app\src\main\AndroidManifest.xml:63:13-53
+121-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:63:13-53
 122
 123        <receiver
 123-->[com.razorpay:checkout:1.6.38] C:\Users\krishna\.gradle\caches\8.13\transforms\cf4706a605b5e8259b542693ef5520d6\transformed\jetified-checkout-1.6.38\AndroidManifest.xml:42:9-49:20
@@ -249,8 +249,8 @@
 136            <intent-filter>
 136-->[com.razorpay:checkout:1.6.38] C:\Users\krishna\.gradle\caches\8.13\transforms\cf4706a605b5e8259b542693ef5520d6\transformed\jetified-checkout-1.6.38\AndroidManifest.xml:56:13-58:29
 137                <action android:name="android.intent.action.MAIN" />
-137-->D:\MyApplication\app\src\main\AndroidManifest.xml:54:17-69
-137-->D:\MyApplication\app\src\main\AndroidManifest.xml:54:25-66
+137-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:54:17-69
+137-->D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\AndroidManifest.xml:54:25-66
 138            </intent-filter>
 139        </activity>
 140
