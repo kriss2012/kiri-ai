@@ -67,10 +67,10 @@ com.kiri.ai.app-jetified-room-ktx-2.5.0-65 C:\Users\krishna\.gradle\caches\8.13\
 com.kiri.ai.app-jetified-runtime-release-66 C:\Users\krishna\.gradle\caches\8.13\transforms\f8cb470311ce2284bdfbe3378263ec7e\transformed\jetified-runtime-release\res
 com.kiri.ai.app-jetified-animation-release-67 C:\Users\krishna\.gradle\caches\8.13\transforms\fc890b0a1efdd9015988ea71523378b8\transformed\jetified-animation-release\res
 com.kiri.ai.app-jetified-lifecycle-runtime-compose-release-68 C:\Users\krishna\.gradle\caches\8.13\transforms\fe750190a7cb55f517095514f369fc2b\transformed\jetified-lifecycle-runtime-compose-release\res
-com.kiri.ai.app-resValues-69 D:\MyApplication\app\build\generated\res\resValues\release
-com.kiri.ai.app-updated_navigation_xml-70 D:\MyApplication\app\build\generated\updated_navigation_xml\release
-com.kiri.ai.app-packageReleaseResources-71 D:\MyApplication\app\build\intermediates\incremental\release\packageReleaseResources\merged.dir
-com.kiri.ai.app-packageReleaseResources-72 D:\MyApplication\app\build\intermediates\incremental\release\packageReleaseResources\stripped.dir
-com.kiri.ai.app-release-73 D:\MyApplication\app\build\intermediates\merged_res\release\mergeReleaseResources
-com.kiri.ai.app-main-74 D:\MyApplication\app\src\main\res
-com.kiri.ai.app-release-75 D:\MyApplication\app\src\release\res
+com.kiri.ai.app-resValues-69 D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\generated\res\resValues\release
+com.kiri.ai.app-updated_navigation_xml-70 D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\generated\updated_navigation_xml\release
+com.kiri.ai.app-packageReleaseResources-71 D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\incremental\release\packageReleaseResources\merged.dir
+com.kiri.ai.app-packageReleaseResources-72 D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\incremental\release\packageReleaseResources\stripped.dir
+com.kiri.ai.app-release-73 D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\merged_res\release\mergeReleaseResources
+com.kiri.ai.app-main-74 D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\res
+com.kiri.ai.app-release-75 D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\release\res

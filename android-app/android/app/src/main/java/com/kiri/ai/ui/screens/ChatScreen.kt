@@ -229,7 +229,7 @@ fun ChatScreen(
                         containerColor = MaterialTheme.colorScheme.background,
                         titleContentColor = MaterialTheme.colorScheme.onBackground,
                         navigationIconContentColor = MaterialTheme.colorScheme.onBackground,
-                        actionIconContentColor = MaterialTheme.colorScheme.onBackground
+                        actionIconContentColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.8f) // High-Visibility
                     )
                 )
             },

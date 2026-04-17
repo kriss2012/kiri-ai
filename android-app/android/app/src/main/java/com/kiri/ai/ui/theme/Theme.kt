@@ -10,10 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import androidx.compose.animation.core.tween
 
 private val KiriDarkColorScheme = darkColorScheme(
     primary = ShowroomWhite,
@@ -54,15 +56,33 @@ fun KiriTheme(
     darkTheme: Boolean = LocalThemeMode.current,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = if (darkTheme) KiriDarkColorScheme else KiriLightColorScheme
+    val targetColorScheme = if (darkTheme) KiriDarkColorScheme else KiriLightColorScheme
+    
+    // CINEMATIC_TRANSITION: Animate all core colors to prevent jarring theme jumps
+    val background by androidx.compose.animation.animateColorAsState(targetColorScheme.background, tween(500), label = "bg")
+    val surface by androidx.compose.animation.animateColorAsState(targetColorScheme.surface, tween(500), label = "surface")
+    val primary by androidx.compose.animation.animateColorAsState(targetColorScheme.primary, tween(500), label = "primary")
+    val onBackground by androidx.compose.animation.animateColorAsState(targetColorScheme.onBackground, tween(500), label = "onBg")
+    val onSurface by androidx.compose.animation.animateColorAsState(targetColorScheme.onSurface, tween(500), label = "onSurface")
+    val surfaceVariant by androidx.compose.animation.animateColorAsState(targetColorScheme.surfaceVariant, tween(500), label = "surfaceVariant")
+
+    val animatedColorScheme = targetColorScheme.copy(
+        background = background,
+        surface = surface,
+        primary = primary,
+        onBackground = onBackground,
+        onSurface = onSurface,
+        surfaceVariant = surfaceVariant
+    )
+
     val view = LocalView.current
     
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context.findActivity() as? Activity)?.window
             window?.let {
-                it.statusBarColor = colorScheme.background.toArgb()
-                it.navigationBarColor = colorScheme.background.toArgb()
+                it.statusBarColor = animatedColorScheme.background.toArgb()
+                it.navigationBarColor = animatedColorScheme.background.toArgb()
                 
                 val controller = WindowCompat.getInsetsController(it, view)
                 controller.isAppearanceLightStatusBars = !darkTheme
@@ -72,7 +92,7 @@ fun KiriTheme(
     }
 
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = animatedColorScheme,
         typography = KiriTypography,
         content = content
     )

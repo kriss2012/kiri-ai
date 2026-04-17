@@ -137,8 +137,23 @@ router.post('/message/upload', protect, checkRequestLimit, upload.single('file')
     }
 
     // Prepare message content for OpenAI/OpenRouter (Gemini supports multimodal via base64)
+    // Prepare message content for OpenAI/OpenRouter (Gemini supports multimodal via base64)
     const base64Image = file.buffer.toString('base64');
-    const mimeType = file.mimetype;
+    
+    // DETECT_MIME_TYPE: Ensure we don't send application/octet-stream to Gemini
+    let mimeType = file.mimetype;
+    if (mimeType === 'application/octet-stream' || !mimeType) {
+      const extension = file.originalname.split('.').pop().toLowerCase();
+      const mimeMap = {
+        'jpg': 'image/jpeg',
+        'jpeg': 'image/jpeg',
+        'png': 'image/png',
+        'webp': 'image/webp',
+        'pdf': 'application/pdf',
+        'txt': 'text/plain'
+      };
+      mimeType = mimeMap[extension] || 'image/jpeg'; // Default to image if unknown, better chance than octet-stream
+    }
 
     const userMessageContent = [
       { type: 'text', text: content || 'Analyze this image.' },

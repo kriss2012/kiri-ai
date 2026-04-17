@@ -78,7 +78,16 @@ class ChatViewModel @Inject constructor(
         restoreAttachmentState()
         observeUserData()
         observeConnectivity()
-        loadConversations()
+        
+        // DEFERRED_LOG_LOADING: Observe the token first to avoid 401 errors on startup
+        authRepository.token
+            .filterNotNull()
+            .distinctUntilChanged()
+            .onEach { 
+                android.util.Log.d("Kiri_DEBUG", "ChatViewModel: Token detected, loading conversations...")
+                loadConversations() 
+            }
+            .launchIn(viewModelScope)
     }
 
     private fun restoreAttachmentState() {
@@ -409,7 +418,8 @@ class ChatViewModel @Inject constructor(
 
             if (!file.exists()) return Result.failure(Exception("FILE_NOT_FOUND"))
 
-            val requestFile = file.asRequestBody(getApplication<Application>().contentResolver.getType(uri)?.toMediaTypeOrNull() ?: "application/octet-stream".toMediaTypeOrNull())
+            val contentType = getMimeType(uri) ?: "application/octet-stream"
+            val requestFile = file.asRequestBody(contentType.toMediaTypeOrNull())
             val body = MultipartBody.Part.createFormData("file", _uiState.value.selectedFileName ?: file.name, requestFile)
             
             // AI Analysis: If message is empty, provide a default analysis prompt
@@ -434,6 +444,19 @@ class ChatViewModel @Inject constructor(
                 inputMessage = "",
                 error = null
             )
+        }
+    }
+    private fun getMimeType(uri: Uri): String? {
+        return if (uri.scheme == "content") {
+            getApplication<Application>().contentResolver.getType(uri)
+        } else {
+            val extension = android.webkit.MimeTypeMap.getFileExtensionFromUrl(uri.toString())
+            android.webkit.MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.lowercase())
+        } ?: run {
+            // FALLBACK_MIME: Guess from filename extension if above fails
+            val path = uri.path ?: return null
+            val ext = path.substringAfterLast('.', "").lowercase()
+            android.webkit.MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext)
         }
     }
 }
