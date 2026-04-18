@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { KiriButton, KiriTextField } from '../components/Shared/KiriUI';
-import { ArrowLeft, User, Shield, CreditCard, AlertTriangle, Github } from 'lucide-react';
+import { ArrowLeft, User, Shield, CreditCard, AlertTriangle } from 'lucide-react';
 import api from '../utils/api';
 import './Profile.css';
 
