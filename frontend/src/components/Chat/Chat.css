@@ -110,6 +110,18 @@
   margin: 0 auto;
 }
 
+.sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  animation: fadeIn 0.3s ease-out;
+}
+
 @media (max-width: 1024px) {
   .menu-toggle {
     display: block;
@@ -122,5 +134,16 @@
   }
   .empty-state h1 {
     font-size: 32px;
+  }
+  .header-title {
+    font-size: 12px;
+    letter-spacing: 1px;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .page-header {
+    padding: 12px 16px;
   }
 }
