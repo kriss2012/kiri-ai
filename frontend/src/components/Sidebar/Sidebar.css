@@ -137,12 +137,30 @@
   color: var(--color-error);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .sidebar {
     position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 280px;
     transform: translateX(-100%);
+    box-shadow: none;
   }
   .sidebar.open {
     transform: translateX(0);
+    box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 85%;
+  }
+  .sidebar-logo {
+    height: 36px;
+  }
+  .sidebar-header {
+    padding: 24px 20px 12px;
   }
 }
