@@ -99,4 +99,12 @@
   .chat-input-wrapper {
     padding: 12px;
   }
+  .chat-input-form {
+    padding: 6px 12px;
+    gap: 8px;
+  }
+  .message-input {
+    font-size: 14px;
+    padding: 8px 4px;
+  }
 }
