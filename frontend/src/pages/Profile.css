@@ -92,7 +92,26 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 24px;
+}
+
+.status-msg {
+  padding: 16px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-bottom: 24px;
+}
+
+.status-msg.success {
+  background: rgba(0, 128, 0, 0.1);
+  color: #008000;
+  border-left: 3px solid #008000;
+}
+
+.status-msg.error {
+  background: rgba(176, 0, 32, 0.1);
+  color: var(--color-error);
+  border-left: 3px solid var(--color-error);
 }
 
 .profile-section h3 {
@@ -131,8 +150,43 @@
   color: #008000;
 }
 
-.logout-btn {
-  margin-top: auto;
+.danger-zone {
+  margin-top: 48px;
+  padding: 24px;
+  border: 1px solid rgba(176, 0, 32, 0.2);
+  background: rgba(176, 0, 32, 0.05);
+  border-radius: 4px;
+}
+
+.danger-zone h4 {
+  color: var(--color-error);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.mono-desc {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.delete-acc-btn {
+  background: transparent;
+  border: 1px solid var(--color-error);
+  color: var(--color-error);
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.delete-acc-btn:hover {
+  background: var(--color-error);
+  color: white;
 }
 
 @media (max-width: 900px) {
