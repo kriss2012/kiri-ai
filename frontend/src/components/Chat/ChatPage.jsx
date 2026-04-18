@@ -143,9 +143,13 @@ const ChatPage = () => {
         onNewChat={handleNewChat}
       />
 
+      {isSidebarOpen && window.innerWidth <= 1024 && (
+        <div className="sidebar-backdrop" onClick={() => setIsSidebarOpen(false)} />
+      )}
+
       <div className="main-viewport">
         <header className="page-header">
-          <button className="menu-toggle" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+          <button className="menu-toggle" onClick={() => setIsSidebarOpen(true)}>
             <Menu size={20} />
           </button>
           
