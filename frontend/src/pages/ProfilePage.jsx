@@ -28,7 +28,6 @@ const ProfilePage = () => {
         <button className="back-btn" onClick={() => window.history.back()}>
           <ArrowLeft size={20} />
         </button>
-        <img src="/logo.svg" alt="Kiri Logo" className="header-logo" />
         <div className="mono-label mono">USER_MANIFEST</div>
       </header>
 
