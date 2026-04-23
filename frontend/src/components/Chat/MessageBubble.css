@@ -90,10 +90,21 @@
 }
 
 .message-label {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text-secondary);
-  opacity: 0.6;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.model-badge {
+  background-color: var(--color-surface-variant);
+  color: var(--color-primary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 9px;
+  border: 1px solid var(--color-surface-variant);
 }
 
 .message-image {
