@@ -4,7 +4,7 @@
     "type": "BUNDLE",
     "kind": "RegularFile"
   },
-  "applicationId": "com.kiri.ai",
+  "applicationId": "com.kiriai.kiriorganization",
   "variantName": "release",
   "elements": [
     {

@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const { protect, checkRequestLimit } = require('../middleware/auth');
 const Conversation = require('../models/Conversation');
 const multer = require('multer');
+const { routeModel } = require('../utils/modelRouter');
 const upload = multer({
   limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
   storage: multer.memoryStorage()
@@ -34,11 +35,24 @@ const sanitizeConvId = (id) =>
 // @POST /api/chat/message - Send message to Gemini
 router.post('/message', protect, checkRequestLimit, async (req, res) => {
   try {
-    const { message, conversationId, model = 'google/gemini-2.0-flash-001' } = req.body;
+    let { message, conversationId, model } = req.body;
     const safeConvId = sanitizeConvId(conversationId);
 
     if (!message || !message.trim()) {
       return res.status(400).json({ success: false, message: 'Message is required.' });
+    }
+
+    // Smart Routing: If model is default or auto, determine the best one
+    if (!model || model === 'auto' || model === 'google/gemini-2.0-flash-001') {
+      const suggestedModel = routeModel(message, req.user.tier);
+      if (suggestedModel === 'IMAGE_GENERATION_PENDING') {
+        return res.json({ 
+          success: true, 
+          action: 'SWITCH_TO_IMAGE', 
+          message: 'I noticed you want to generate an image. Switching to Image Lab...' 
+        });
+      }
+      model = suggestedModel;
     }
 
     let conversation;
@@ -83,7 +97,7 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
 
     // Save messages to conversation
     conversation.messages.push({ role: 'user', content: message });
-    conversation.messages.push({ role: 'assistant', content: assistantMessage });
+    conversation.messages.push({ role: 'assistant', content: assistantMessage, model: model });
 
     // Auto-generate title for new conversations
     if (conversation.messages.length === 2) {
@@ -100,6 +114,7 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
       message: assistantMessage,
       conversationId: conversation._id,
       title: conversation.title,
+      model: model,
       requestsUsed: req.user.dailyRequests,
       requestsRemaining: req.user.isPremium()
         ? 'unlimited'
@@ -193,7 +208,7 @@ router.post('/message/upload', protect, checkRequestLimit, upload.single('file')
     const savedUserContent = textContent + `\n[IMAGE_ATTACHMENT: ${file.originalname}]`;
 
     conversation.messages.push({ role: 'user', content: savedUserContent });
-    conversation.messages.push({ role: 'assistant', content: assistantMessage });
+    conversation.messages.push({ role: 'assistant', content: assistantMessage, model: model });
 
     if (conversation.messages.length === 2) {
       conversation.generateTitle();
@@ -207,6 +222,7 @@ router.post('/message/upload', protect, checkRequestLimit, upload.single('file')
       message: assistantMessage,
       conversationId: conversation._id,
       title: conversation.title,
+      model: model,
       requestsUsed: req.user.dailyRequests,
       requestsRemaining: req.user.isPremium()
         ? 'unlimited'
@@ -276,7 +292,7 @@ router.post('/stream', protect, checkRequestLimit, async (req, res) => {
 
     // Save to DB
     conversation.messages.push({ role: 'user', content: message });
-    conversation.messages.push({ role: 'assistant', content: fullResponse });
+    conversation.messages.push({ role: 'assistant', content: fullResponse, model: model });
     if (conversation.messages.length === 2) conversation.generateTitle();
     await conversation.save();
     await req.user.incrementRequest();

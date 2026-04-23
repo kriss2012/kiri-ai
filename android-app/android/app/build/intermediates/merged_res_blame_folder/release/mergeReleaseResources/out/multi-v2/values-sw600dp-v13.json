@@ -4,7 +4,7 @@
             "outputFile": "com.kiriai.kiriorganization.app-mergeReleaseResources-71:/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\cf4706a605b5e8259b542693ef5520d6\\transformed\\jetified-checkout-1.6.38\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\krishna\\.gradle\\caches\\9.3.1\\transforms\\eb39c665adb4a650c7f77c59a059f8bd\\workspace\\transformed\\jetified-checkout-1.6.38\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

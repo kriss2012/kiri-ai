@@ -42,7 +42,10 @@ const MessageBubble = ({ message }) => {
 
         <div className="message-content-wrapper">
           <div className="message-label mono">
-            {isUser ? (user?.name?.toUpperCase() || 'USER_LOG') : 'KIRI_INTELLIGENCE // ACCESS_POINT'}
+            {isUser ? (user?.name?.toUpperCase() || 'USER_LOG') : 'KIRI_INTELLIGENCE'}
+            {!isUser && message.model && (
+              <span className="model-badge">{message.model.split('/')[1]?.toUpperCase() || message.model}</span>
+            )}
           </div>
 
           <div className="message-bubble">
