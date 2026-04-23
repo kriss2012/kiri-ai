@@ -6,6 +6,7 @@ import ChatPage from './components/Chat/ChatPage';
 import { LoginPage, RegisterPage } from './components/Auth/AuthPages';
 import PricingPage from './pages/PricingPage';
 import ProfilePage from './pages/ProfilePage';
+import ImageLab from './components/ImageLab/ImageLab';
 import './index.css';
 
 const ProtectedRoute = ({ children }) => {
@@ -46,6 +47,12 @@ const App = () => {
             <Route path="/profile" element={
               <ProtectedRoute>
                 <ProfilePage />
+              </ProtectedRoute>
+            } />
+
+            <Route path="/image-lab" element={
+              <ProtectedRoute>
+                <ImageLab />
               </ProtectedRoute>
             } />
 
