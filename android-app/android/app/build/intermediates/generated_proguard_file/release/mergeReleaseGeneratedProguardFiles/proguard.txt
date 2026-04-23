@@ -1,0 +1,8 @@
+-keep,allowobfuscation,allowshrinking class com.kiriai.kiriorganization.ui.viewmodels.AuthViewModel
+-keep,allowobfuscation,allowshrinking class com.kiriai.kiriorganization.ui.viewmodels.AuthViewModel
+-keep,allowobfuscation,allowshrinking class com.kiriai.kiriorganization.ui.viewmodels.ChatViewModel
+-keep,allowobfuscation,allowshrinking class com.kiriai.kiriorganization.ui.viewmodels.ChatViewModel
+-keep,allowobfuscation,allowshrinking class com.kiriai.kiriorganization.ui.viewmodels.MainViewModel
+-keep,allowobfuscation,allowshrinking class com.kiriai.kiriorganization.ui.viewmodels.MainViewModel
+-keep,allowobfuscation,allowshrinking class com.kiriai.kiriorganization.ui.viewmodels.SubscriptionViewModel
+-keep,allowobfuscation,allowshrinking class com.kiriai.kiriorganization.ui.viewmodels.SubscriptionViewModel

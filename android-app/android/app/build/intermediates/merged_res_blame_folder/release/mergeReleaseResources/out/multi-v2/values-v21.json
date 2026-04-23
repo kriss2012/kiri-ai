@@ -4,7 +4,7 @@
             "outputFile": "com.kiriai.kiriorganization.app-mergeReleaseResources-71:/values-v21/values-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\krishna\\.gradle\\caches\\8.13\\transforms\\17f823d90a707a78bf58bd8b3a8ee0ff\\transformed\\core-1.13.1\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\krishna\\.gradle\\caches\\9.3.1\\transforms\\c4ca3269f95c31f641955c0f7bc6cca6\\workspace\\transformed\\core-1.13.1\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

@@ -7,15 +7,15 @@ plugins {
 }
 
 android {
-    namespace = "com.kiri.ai"
-    compileSdk = 34
+    namespace = "com.kiriai.kiriorganization"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.kiri.ai"
+        applicationId = "com.kiriai.kiriorganization"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = 35
+        versionCode = 4
+        versionName = "1.2.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -35,7 +35,8 @@ android {
     buildTypes {
         release {
             signingConfig = signingConfigs.getByName("release")
-            minifyEnabled = false
+            minifyEnabled = true
+            shrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
