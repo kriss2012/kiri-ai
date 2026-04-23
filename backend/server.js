@@ -53,6 +53,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/kiri-ai',
 
 app.use('/api/auth', authLimiter, require('./routes/auth'));
 app.use('/api/chat', require('./routes/chat'));
+app.use('/api/image', require('./routes/image'));
 app.use('/api/subscription', require('./routes/subscription'));
 
 app.get('/api/health', async (req, res) => {
