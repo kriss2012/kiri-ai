@@ -22,6 +22,19 @@ const Sidebar = ({ isOpen, onClose, conversations, currentId, onSelect, onNewCha
         </KiriButton>
       </div>
 
+      <div className="sidebar-modes">
+        <div className="section-label mono">Operation_Modes</div>
+        <div className="mode-item active">
+          <MessageSquare size={16} /> <span>CORE_CHAT</span>
+        </div>
+        <div className="mode-item" onClick={() => window.location.href = '/image-lab'}>
+          <img src="https://img.icons8.com/ios-glyphs/30/null/paint-palette.png" style={{filter: 'invert(1)', width: 16, height: 16}} alt="" /> <span>IMAGE_LAB</span>
+        </div>
+        <div className="mode-item" onClick={() => window.location.href = '/code-space'}>
+          <img src="https://img.icons8.com/ios-glyphs/30/null/code.png" style={{filter: 'invert(1)', width: 16, height: 16}} alt="" /> <span>CODE_SPACE</span>
+        </div>
+      </div>
+
       <div className="sidebar-content">
         <div className="section-label mono">Recent_Logs</div>
         <div className="conversation-list">
