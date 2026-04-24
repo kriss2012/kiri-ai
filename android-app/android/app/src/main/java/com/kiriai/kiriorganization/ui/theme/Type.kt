@@ -2,9 +2,11 @@ package com.kiriai.kiriorganization.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.kiriai.kiriorganization.R
 
 /**
  * Bugatti Design System Typography
@@ -15,9 +17,16 @@ import androidx.compose.ui.unit.sp
  * - Body: Bugatti Text (Standard readable sans)
  */
 
-val BugattiDisplayFont = FontFamily.SansSerif // Substitute for Bugatti Display
-val BugattiMonoFont = FontFamily.Monospace   // Substitute for Bugatti Monospace
-val BugattiTextFont = FontFamily.SansSerif    // Substitute for Bugatti Text
+// USER_REQUESTED_FONT: JetBrains Mono
+// To use your own font file: 
+// 1. Create directory: app/src/main/res/font
+// 2. Add jetbrains_mono_regular.ttf to it
+// 3. Use FontFamily(Font(R.font.jetbrains_mono_regular))
+val JetBrainsMono = FontFamily.Monospace
+
+val BugattiDisplayFont = JetBrainsMono
+val BugattiMonoFont = JetBrainsMono
+val BugattiTextFont = FontFamily.SansSerif
 
 val KiriTypography = Typography(
     // Hero Display (Monumental) - Architectural presence
