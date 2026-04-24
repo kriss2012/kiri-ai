@@ -67,10 +67,10 @@ com.kiriai.kiriorganization.app-jetified-checkout-1.6.38-65 C:\Users\krishna\.gr
 com.kiriai.kiriorganization.app-jetified-play-services-auth-17.0.0-66 C:\Users\krishna\.gradle\caches\9.3.1\transforms\ec48edb7254aba47402870f659b4565e\workspace\transformed\jetified-play-services-auth-17.0.0\res
 com.kiriai.kiriorganization.app-jetified-animation-release-67 C:\Users\krishna\.gradle\caches\9.3.1\transforms\fcd7199266a208b894453f30fd42e881\workspace\transformed\jetified-animation-release\res
 com.kiriai.kiriorganization.app-jetified-runtime-release-68 C:\Users\krishna\.gradle\caches\9.3.1\transforms\fda366f6ad0eac301692332929b7afb6\workspace\transformed\jetified-runtime-release\res
-com.kiriai.kiriorganization.app-resValues-69 D:\MyApplication\app\build\generated\res\resValues\release
-com.kiriai.kiriorganization.app-packageReleaseResources-70 D:\MyApplication\app\build\intermediates\incremental\release\packageReleaseResources\merged.dir
-com.kiriai.kiriorganization.app-packageReleaseResources-71 D:\MyApplication\app\build\intermediates\incremental\release\packageReleaseResources\stripped.dir
-com.kiriai.kiriorganization.app-merged-not-compiled-resources-72 D:\MyApplication\app\build\intermediates\merged-not-compiled-resources\release
-com.kiriai.kiriorganization.app-release-73 D:\MyApplication\app\build\intermediates\merged_res\release\mergeReleaseResources
-com.kiriai.kiriorganization.app-main-74 D:\MyApplication\app\src\main\res
-com.kiriai.kiriorganization.app-release-75 D:\MyApplication\app\src\release\res
+com.kiriai.kiriorganization.app-resValues-69 D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\generated\res\resValues\release
+com.kiriai.kiriorganization.app-packageReleaseResources-70 D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\incremental\release\packageReleaseResources\merged.dir
+com.kiriai.kiriorganization.app-packageReleaseResources-71 D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\incremental\release\packageReleaseResources\stripped.dir
+com.kiriai.kiriorganization.app-merged-not-compiled-resources-72 D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\merged-not-compiled-resources\release
+com.kiriai.kiriorganization.app-release-73 D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\merged_res\release\mergeReleaseResources
+com.kiriai.kiriorganization.app-main-74 D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\main\res
+com.kiriai.kiriorganization.app-release-75 D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\src\release\res

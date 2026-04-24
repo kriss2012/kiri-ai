@@ -1,6 +1,6 @@
 package com.kiriai.kiriorganization.ui.components;
 
-@kotlin.Metadata(mv = {1, 9, 0}, k = 2, xi = 48, d1 = {"\u0000\u0018\n\u0000\n\u0002\u0010\u0002\n\u0000\n\u0002\u0010\u000e\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\u001a\u0010\u0010\u0000\u001a\u00020\u00012\u0006\u0010\u0002\u001a\u00020\u0003H\u0003\u001a\u0012\u0010\u0004\u001a\u00020\u00012\b\u0010\u0005\u001a\u0004\u0018\u00010\u0006H\u0007\u001a\u0010\u0010\u0007\u001a\u00020\u00012\u0006\u0010\u0002\u001a\u00020\u0003H\u0003\u00a8\u0006\b"}, d2 = {"AssistantContent", "", "content", "", "KiriMessageBubble", "message", "Lcom/kiriai/kiriorganization/data/models/ChatMessage;", "UserContent", "app_release"})
+@kotlin.Metadata(mv = {1, 9, 0}, k = 2, xi = 48, d1 = {"\u0000\u0016\n\u0000\n\u0002\u0010\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0003\n\u0002\u0010\u000e\n\u0000\u001a\u0010\u0010\u0000\u001a\u00020\u00012\u0006\u0010\u0002\u001a\u00020\u0003H\u0003\u001a\u0012\u0010\u0004\u001a\u00020\u00012\b\u0010\u0002\u001a\u0004\u0018\u00010\u0003H\u0007\u001a\u0010\u0010\u0005\u001a\u00020\u00012\u0006\u0010\u0006\u001a\u00020\u0007H\u0003\u00a8\u0006\b"}, d2 = {"AssistantContent", "", "message", "Lcom/kiriai/kiriorganization/data/models/ChatMessage;", "KiriMessageBubble", "UserContent", "content", "", "app_release"})
 public final class KiriMessageBubbleKt {
     
     /**
@@ -23,6 +23,6 @@ public final class KiriMessageBubbleKt {
     }
     
     @androidx.compose.runtime.Composable()
-    private static final void AssistantContent(java.lang.String content) {
+    private static final void AssistantContent(com.kiriai.kiriorganization.data.models.ChatMessage message) {
     }
 }

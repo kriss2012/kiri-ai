@@ -66,7 +66,7 @@ fun ImageLabScreen(navController: NavController) {
                 contentAlignment = Alignment.Center
             ) {
                 if (isGenerating) {
-                    CircularProgressIndicator(color = NeonCyan)
+                    CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
                 } else if (imageUrl != null) {
                     AsyncImage(
                         model = imageUrl,
@@ -92,10 +92,12 @@ fun ImageLabScreen(navController: NavController) {
                 modifier = Modifier.fillMaxWidth(),
                 placeholder = { Text("Describe the image...", style = KiriTypography.bodyMedium, color = SilverMist) },
                 textStyle = KiriTypography.bodyMedium.copy(color = ShowroomWhite),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = NeonCyan,
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = ShowroomWhite,
                     unfocusedBorderColor = SilverMist.copy(alpha = 0.3f),
-                    cursorColor = NeonCyan
+                    cursorColor = ShowroomWhite,
+                    focusedTextColor = ShowroomWhite,
+                    unfocusedTextColor = ShowroomWhite
                 ),
                 shape = RoundedCornerShape(8.dp),
                 maxLines = 3

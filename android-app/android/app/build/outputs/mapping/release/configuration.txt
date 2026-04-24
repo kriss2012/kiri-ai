@@ -1,4 +1,4 @@
-# The proguard configuration file for the following section is D:\MyApplication\app\build\intermediates\aapt_proguard_file\release\processReleaseResources\aapt_rules.txt
+# The proguard configuration file for the following section is D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\aapt_proguard_file\release\processReleaseResources\aapt_rules.txt
 -keep class androidx.core.app.CoreComponentFactory { <init>(); }
 -keep class androidx.core.content.FileProvider { <init>(); }
 -keep class androidx.profileinstaller.ProfileInstallReceiver { <init>(); }
@@ -26,8 +26,8 @@
 -keep class com.razorpay.CircularProgressView { <init>(android.content.Context, android.util.AttributeSet); }
 
 
-# End of content from D:\MyApplication\app\build\intermediates\aapt_proguard_file\release\processReleaseResources\aapt_rules.txt
-# The proguard configuration file for the following section is D:\MyApplication\app\build\intermediates\default_proguard_files\global\proguard-android-optimize.txt-8.7.3
+# End of content from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\aapt_proguard_file\release\processReleaseResources\aapt_rules.txt
+# The proguard configuration file for the following section is D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\default_proguard_files\global\proguard-android-optimize.txt-8.7.3
 # This is a configuration file for ProGuard.
 # http://proguard.sourceforge.net/index.html#manual/usage.html
 #
@@ -118,8 +118,8 @@
 # These classes are duplicated between android.jar and core-lambda-stubs.jar.
 -dontnote java.lang.invoke.**
 
-# End of content from D:\MyApplication\app\build\intermediates\default_proguard_files\global\proguard-android-optimize.txt-8.7.3
-# The proguard configuration file for the following section is D:\MyApplication\app\proguard-rules.pro
+# End of content from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\default_proguard_files\global\proguard-android-optimize.txt-8.7.3
+# The proguard configuration file for the following section is D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\proguard-rules.pro
 # Proguard Rules for Kiri AI - High Stability Configuration
 
 # General Preservation
@@ -181,7 +181,7 @@
     private final android.os.Handler handler;
 }
 
-# End of content from D:\MyApplication\app\proguard-rules.pro
+# End of content from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\proguard-rules.pro
 # The proguard configuration file for the following section is C:\Users\krishna\.gradle\caches\9.3.1\transforms\c99e3fac036193ad519d934f7840d83c\workspace\transformed\navigation-common-2.7.7\proguard.txt
 # Copyright (C) 2019 The Android Open Source Project
 #
@@ -693,7 +693,7 @@
 }
 
 # End of content from C:\Users\krishna\.gradle\caches\9.3.1\transforms\8a501b203c6423283e7338b153156e18\workspace\transformed\rules\lib\META-INF\com.android.tools\r8\r8.pro
-# The proguard configuration file for the following section is D:\MyApplication\app\build\intermediates\generated_proguard_file\release\mergeReleaseGeneratedProguardFiles\proguard.txt
+# The proguard configuration file for the following section is D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\generated_proguard_file\release\mergeReleaseGeneratedProguardFiles\proguard.txt
 -keep,allowobfuscation,allowshrinking class com.kiriai.kiriorganization.ui.viewmodels.AuthViewModel
 -keep,allowobfuscation,allowshrinking class com.kiriai.kiriorganization.ui.viewmodels.AuthViewModel
 -keep,allowobfuscation,allowshrinking class com.kiriai.kiriorganization.ui.viewmodels.ChatViewModel
@@ -702,7 +702,7 @@
 -keep,allowobfuscation,allowshrinking class com.kiriai.kiriorganization.ui.viewmodels.MainViewModel
 -keep,allowobfuscation,allowshrinking class com.kiriai.kiriorganization.ui.viewmodels.SubscriptionViewModel
 -keep,allowobfuscation,allowshrinking class com.kiriai.kiriorganization.ui.viewmodels.SubscriptionViewModel
-# End of content from D:\MyApplication\app\build\intermediates\generated_proguard_file\release\mergeReleaseGeneratedProguardFiles\proguard.txt
+# End of content from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\generated_proguard_file\release\mergeReleaseGeneratedProguardFiles\proguard.txt
 # The proguard configuration file for the following section is <unknown>
 
 # End of content from <unknown>

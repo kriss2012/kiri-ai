@@ -66,3 +66,30 @@
   border-radius: 50%;
   font-weight: 600;
 }
+
+.kiri-status-banner {
+  padding: 12px 20px;
+  margin-bottom: 24px;
+  border-radius: 4px;
+  font-size: 13px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.kiri-status-banner.success {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+  border: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.kiri-status-banner.error {
+  background-color: rgba(176, 0, 32, 0.1);
+  color: var(--color-error);
+  border: 1px solid rgba(176, 0, 32, 0.2);
+}
+
+.kiri-status-banner.info {
+  background-color: var(--color-surface-variant);
+  color: var(--text-secondary);
+  border: 1px solid var(--text-secondary);
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Check, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { KiriButton } from '../components/Shared/KiriUI';
+import { KiriButton, KiriStatus } from '../components/Shared/KiriUI';
 import api from '../utils/api';
 import './Pricing.css';
 
@@ -39,6 +39,7 @@ const PRICING_PLANS = [
 const PricingPage = () => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState({ message: '', type: 'info' });
 
   useEffect(() => {
     // Load Razorpay Script
@@ -67,11 +68,11 @@ const PricingPage = () => {
                 plan: planId
               });
               if (verifyRes.data.success) {
-                alert('DATA_SYNC_COMPLETE: Subscription Activated.');
-                window.location.href = '/';
+                setStatus({ message: 'DATA_SYNC_COMPLETE: Subscription Activated.', type: 'success' });
+                setTimeout(() => window.location.href = '/', 2000);
               }
             } catch (err) {
-              alert('VERIFICATION_ERROR: Payment sync failed.');
+              setStatus({ message: 'VERIFICATION_ERROR: Payment sync failed.', type: 'error' });
             }
           },
           prefill: {
@@ -88,7 +89,7 @@ const PricingPage = () => {
       }
     } catch (err) {
       console.error('Subscription error', err);
-      alert('SYSTEM_ERROR: Could not initialize payment.');
+      setStatus({ message: 'SYSTEM_ERROR: Could not initialize payment.', type: 'error' });
     } finally {
       setLoading(false);
     }
@@ -107,6 +108,8 @@ const PricingPage = () => {
         <h1 className="mono">Unlock Full Power</h1>
         <p>Advance to elite multimodal intelligence. Bypass all daily limits.</p>
       </div>
+
+      <KiriStatus message={status.message} type={status.type} />
 
       <div className="plans-grid">
         {PRICING_PLANS.map(plan => (

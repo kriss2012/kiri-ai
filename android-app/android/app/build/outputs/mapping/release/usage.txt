@@ -5281,6 +5281,7 @@ androidx.compose.foundation.lazy.LazyListScope:
     public static synthetic void access$items$jd(androidx.compose.foundation.lazy.LazyListScope,int,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function4)
     public static synthetic void access$items$jd(androidx.compose.foundation.lazy.LazyListScope,int,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function4)
     public synthetic void item(java.lang.Object,kotlin.jvm.functions.Function3)
+    public static synthetic void item$default(androidx.compose.foundation.lazy.LazyListScope,java.lang.Object,java.lang.Object,kotlin.jvm.functions.Function3,int,java.lang.Object)
     public static synthetic void item$default(androidx.compose.foundation.lazy.LazyListScope,java.lang.Object,kotlin.jvm.functions.Function3,int,java.lang.Object)
     public synthetic void items(int,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function4)
     public static synthetic void items$default(androidx.compose.foundation.lazy.LazyListScope,int,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function4,int,java.lang.Object)
@@ -9894,8 +9895,6 @@ androidx.compose.material.icons.filled.ChatBubbleOutlineKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _chatBubbleOutline
     public static final androidx.compose.ui.graphics.vector.ImageVector getChatBubbleOutline(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.ChatKt:
-    private static androidx.compose.ui.graphics.vector.ImageVector _chat
-    public static final androidx.compose.ui.graphics.vector.ImageVector getChat(androidx.compose.material.icons.Icons$Filled)
     public static synthetic void getChat$annotations(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.CheckBoxKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _checkBox
@@ -10000,9 +9999,6 @@ androidx.compose.material.icons.filled.Co2Kt:
 androidx.compose.material.icons.filled.CoPresentKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _coPresent
     public static final androidx.compose.ui.graphics.vector.ImageVector getCoPresent(androidx.compose.material.icons.Icons$Filled)
-androidx.compose.material.icons.filled.CodeKt:
-    private static androidx.compose.ui.graphics.vector.ImageVector _code
-    public static final androidx.compose.ui.graphics.vector.ImageVector getCode(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.CodeOffKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _codeOff
     public static final androidx.compose.ui.graphics.vector.ImageVector getCodeOff(androidx.compose.material.icons.Icons$Filled)
@@ -11660,9 +11656,6 @@ androidx.compose.material.icons.filled.IcecreamKt:
 androidx.compose.material.icons.filled.ImageAspectRatioKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _imageAspectRatio
     public static final androidx.compose.ui.graphics.vector.ImageVector getImageAspectRatio(androidx.compose.material.icons.Icons$Filled)
-androidx.compose.material.icons.filled.ImageKt:
-    private static androidx.compose.ui.graphics.vector.ImageVector _image
-    public static final androidx.compose.ui.graphics.vector.ImageVector getImage(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.ImageNotSupportedKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _imageNotSupported
     public static final androidx.compose.ui.graphics.vector.ImageVector getImageNotSupported(androidx.compose.material.icons.Icons$Filled)
@@ -72415,6 +72408,8 @@ com.kiriai.kiriorganization.ui.components.AnimationsKt:
 com.kiriai.kiriorganization.ui.components.KiriButtonKt:
     public static final void KiriOutlineButton(java.lang.String,kotlin.jvm.functions.Function0,androidx.compose.ui.Modifier,boolean,androidx.compose.runtime.Composer,int,int)
     private static final kotlin.Unit KiriOutlineButton$lambda$2(java.lang.String,kotlin.jvm.functions.Function0,androidx.compose.ui.Modifier,boolean,int,int,androidx.compose.runtime.Composer,int)
+com.kiriai.kiriorganization.ui.screens.ImageLabScreenKt:
+    private static final void ImageLabScreen$lambda$8(androidx.compose.runtime.MutableState,java.lang.String)
 com.kiriai.kiriorganization.ui.theme.ColorKt:
     public static final long getActiveOverlay()
     public static final long getAnthropicNearBlack()
@@ -89615,10 +89610,13 @@ androidx.compose.foundation.lazy.LazyListInterval:
     static void <clinit>()
     public final kotlin.jvm.functions.Function4 getItem()
 androidx.compose.foundation.lazy.LazyListIntervalContent$item$1:
+    public final synthetic java.lang.String $key
     public final java.lang.Object invoke$25()
 androidx.compose.foundation.lazy.LazyListIntervalContent$item$2:
+    public final synthetic java.lang.String $contentType
     public final java.lang.Object invoke$25()
 androidx.compose.foundation.lazy.LazyListIntervalContent$item$3:
+    public final synthetic androidx.compose.runtime.internal.ComposableLambdaImpl $content
     public final void invoke$33()
 androidx.compose.foundation.lazy.LazyListIntervalContent:
     public static final int $stable
@@ -121010,7 +121008,6 @@ androidx.compose.material3.NavigationDrawerKt$NavigationDrawerItem$1:
 androidx.compose.material3.NavigationDrawerKt$NavigationDrawerItem$2:
     public final void invoke$2()
 androidx.compose.material3.NavigationDrawerKt$NavigationDrawerItem$3:
-    public final synthetic int $$default
     public final void invoke$2()
 androidx.compose.material3.NavigationDrawerKt$PermanentDrawerSheet$1$1:
     public final synthetic java.lang.String $navigationMenu
@@ -121337,7 +121334,6 @@ androidx.compose.material3.OutlinedTextFieldKt$OutlinedTextField$1$3:
 androidx.compose.material3.OutlinedTextFieldKt$OutlinedTextField$1:
     public final void invoke$2()
 androidx.compose.material3.OutlinedTextFieldKt$OutlinedTextField$2:
-    public final synthetic int $$default
     public final void invoke$2()
 androidx.compose.material3.OutlinedTextFieldKt$OutlinedTextField$3$1:
     public final void invoke$19()
@@ -131881,7 +131877,6 @@ androidx.compose.ui.graphics.vector.ImageVector:
     public static float getViewportWidth()
 androidx.compose.ui.graphics.vector.PathBuilder:
     public static java.util.List getNodes()
-    public final void horizontalLineTo(float)
     public final void verticalLineTo(float)
 androidx.compose.ui.graphics.vector.PathComponent$pathMeasure$2:
     public static androidx.compose.ui.graphics.PathMeasure invoke()
@@ -148612,13 +148607,13 @@ com.google.firebase.FirebaseExceptionMapper:
 com.kiriai.kiriorganization.ComposableSingletons$MainActivityKt$lambda-1$1:
     public final void invoke$59()
 com.kiriai.kiriorganization.ComposableSingletons$MainActivityKt$lambda-2$1:
-    public final void invoke$59()
+    public final void invoke$2()
 com.kiriai.kiriorganization.ComposableSingletons$MainActivityKt$lambda-3$1:
     public final void invoke$2()
 com.kiriai.kiriorganization.ComposableSingletons$MainActivityKt:
     public static final com.kiriai.kiriorganization.ComposableSingletons$MainActivityKt INSTANCE
     public static kotlin.jvm.functions.Function3 getLambda-1$app_release()
-    public static kotlin.jvm.functions.Function3 getLambda-2$app_release()
+    public static kotlin.jvm.functions.Function2 getLambda-2$app_release()
     public static kotlin.jvm.functions.Function2 getLambda-3$app_release()
 com.kiriai.kiriorganization.DaggerKiriApplication_HiltComponents_SingletonC$ActivityCBuilder:
     public static com.kiriai.kiriorganization.DaggerKiriApplication_HiltComponents_SingletonC$ActivityCBuilder activity()
@@ -148713,12 +148708,6 @@ com.kiriai.kiriorganization.KiriApplication:
     public static androidx.hilt.work.HiltWorkerFactory getWorkerFactory()
 com.kiriai.kiriorganization.MainActivity$CrashDialog$2:
     public final void invoke$2()
-com.kiriai.kiriorganization.MainActivity$CrashDialog$3:
-    public final void invoke$2()
-com.kiriai.kiriorganization.MainActivity$CrashDialog$4$1$1$1:
-    public final void invoke$169()
-com.kiriai.kiriorganization.MainActivity$CrashDialog$4:
-    public final void invoke$2()
 com.kiriai.kiriorganization.MainActivity$onCreate$1$1$1$1$$InternalSyntheticLambda$2$7c4e3ccc5f9df9c532a27a8f38f8b3dda6879394f2a98237402c3e9475f30813$0
 com.kiriai.kiriorganization.MainActivity$onCreate$1$1$1$1$1$1:
     public int label
@@ -148734,6 +148723,8 @@ com.kiriai.kiriorganization.MainActivity$onCreate$1$1$1$1$2$1$5:
 com.kiriai.kiriorganization.MainActivity$onCreate$1$1$1$1$2$1$6:
     public final void invoke$158()
 com.kiriai.kiriorganization.MainActivity$onCreate$1$1$1$1$2$1$7:
+    public final void invoke$158()
+com.kiriai.kiriorganization.MainActivity$onCreate$1$1$1$1$2$1$8:
     public final void invoke$158()
 com.kiriai.kiriorganization.MainActivity$onCreate$1$1$1$1:
     public final void invoke$2()
@@ -148920,6 +148911,8 @@ com.kiriai.kiriorganization.ui.components.KiriButtonKt$$InternalSyntheticLambda$
     public final synthetic int f$5
 com.kiriai.kiriorganization.ui.components.KiriButtonKt$KiriButton$1:
     public final void invoke$59()
+com.kiriai.kiriorganization.ui.components.KiriMessageBubbleKt$AssistantContent$1$1$1$1:
+    public final void invoke$2()
 com.kiriai.kiriorganization.ui.components.KiriMessageBubbleKt$KiriMessageBubble$2$1:
     public final void invoke$2()
 com.kiriai.kiriorganization.ui.components.KiriTextFieldKt$KiriTextField$1$1:
@@ -148936,21 +148929,27 @@ com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$3$1:
     public final java.lang.Object invoke$3()
 com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$1$1$1:
     public final java.lang.Object invoke$3()
-com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$2$1$2$1:
-    public final void invoke$2()
-com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$2$1$2$2$1$2:
+com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$2$1$1:
     public final java.lang.Object invoke$3()
-com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$2$1$2$2$1:
+com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$3$1$1:
+    public final java.lang.Object invoke$3()
+com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$4$1$1:
+    public final java.lang.Object invoke$3()
+com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$5$1$2$1:
+    public final void invoke$2()
+com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$5$1$2$2$1$2:
+    public final java.lang.Object invoke$3()
+com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$5$1$2$2$1:
     public final void invoke()
-com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$invoke$lambda$6$lambda$5$$inlined$items$default$1:
-    public static final com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$invoke$lambda$6$lambda$5$$inlined$items$default$1 INSTANCE
+com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$invoke$lambda$12$lambda$11$$inlined$items$default$1:
+    public static final com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$invoke$lambda$12$lambda$11$$inlined$items$default$1 INSTANCE
     public final java.lang.Void invoke$2()
-com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$invoke$lambda$6$lambda$5$$inlined$items$default$2:
+com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$invoke$lambda$12$lambda$11$$inlined$items$default$2:
     public final java.lang.Object invoke$25()
-com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$invoke$lambda$6$lambda$5$$inlined$items$default$3:
-    public final synthetic com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$invoke$lambda$6$lambda$5$$inlined$items$default$1 $contentType
+com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$invoke$lambda$12$lambda$11$$inlined$items$default$3:
+    public final synthetic com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$invoke$lambda$12$lambda$11$$inlined$items$default$1 $contentType
     public final java.lang.Object invoke$25()
-com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$invoke$lambda$6$lambda$5$$inlined$items$default$4:
+com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1$invoke$lambda$12$lambda$11$$inlined$items$default$4:
     public final void invoke$33()
 com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$4$1:
     public final void invoke$23()
@@ -148977,7 +148976,7 @@ com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$5$2$invoke$lambda
 com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$5$2$invoke$lambda$17$lambda$8$lambda$7$lambda$6$$inlined$items$3:
     public final void invoke$33()
 com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$5$2:
-    public final void invoke$170()
+    public final void invoke$169()
 com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$5:
     public final void invoke$2()
 com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$filePickerLauncher$1$1$1$1:
@@ -148985,6 +148984,8 @@ com.kiriai.kiriorganization.ui.screens.ChatScreenKt$ChatScreen$filePickerLaunche
     public final java.lang.Object invoke$3()
 com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ChatScreenKt$lambda-1$1:
     public final void invoke$2()
+com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ChatScreenKt$lambda-10$1:
+    public static void invoke$170()
 com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ChatScreenKt$lambda-2$1:
     public final void invoke$2()
 com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ChatScreenKt$lambda-3$1:
@@ -148992,14 +148993,38 @@ com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ChatScreenKt$lambda-
 com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ChatScreenKt$lambda-4$1:
     public final void invoke$2()
 com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ChatScreenKt$lambda-5$1:
-    public final void invoke$169()
+    public final void invoke$2()
+com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ChatScreenKt$lambda-6$1:
+    public final void invoke$2()
+com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ChatScreenKt$lambda-7$1:
+    public final void invoke$2()
+com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ChatScreenKt$lambda-8$1:
+    public final void invoke$2()
+com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ChatScreenKt$lambda-9$1:
+    public final void invoke$2()
 com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ChatScreenKt:
     public static final com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ChatScreenKt INSTANCE
     public static kotlin.jvm.functions.Function2 getLambda-1$app_release()
+    public static kotlin.jvm.functions.Function3 getLambda-10$app_release()
     public static kotlin.jvm.functions.Function2 getLambda-2$app_release()
     public static kotlin.jvm.functions.Function2 getLambda-3$app_release()
     public static kotlin.jvm.functions.Function2 getLambda-4$app_release()
-    public static kotlin.jvm.functions.Function3 getLambda-5$app_release()
+    public static kotlin.jvm.functions.Function2 getLambda-5$app_release()
+    public static kotlin.jvm.functions.Function2 getLambda-6$app_release()
+    public static kotlin.jvm.functions.Function2 getLambda-7$app_release()
+    public static kotlin.jvm.functions.Function2 getLambda-8$app_release()
+    public static kotlin.jvm.functions.Function2 getLambda-9$app_release()
+com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ImageLabScreenKt$lambda-1$1:
+    public final void invoke$2()
+com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ImageLabScreenKt$lambda-2$1:
+    public final void invoke$2()
+com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ImageLabScreenKt$lambda-3$1:
+    public final void invoke$2()
+com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ImageLabScreenKt:
+    public static final com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ImageLabScreenKt INSTANCE
+    public static kotlin.jvm.functions.Function2 getLambda-1$app_release()
+    public static kotlin.jvm.functions.Function2 getLambda-2$app_release()
+    public static kotlin.jvm.functions.Function2 getLambda-3$app_release()
 com.kiriai.kiriorganization.ui.screens.ComposableSingletons$LandingScreenKt$lambda-1$1:
     public final void invoke$5()
 com.kiriai.kiriorganization.ui.screens.ComposableSingletons$LandingScreenKt$lambda-2$1:
@@ -149027,6 +149052,14 @@ com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ProfileScreenKt:
     public static final com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ProfileScreenKt INSTANCE
     public static kotlin.jvm.functions.Function2 getLambda-1$app_release()
     public static kotlin.jvm.functions.Function2 getLambda-2$app_release()
+com.kiriai.kiriorganization.ui.screens.ImageLabScreenKt$ImageLabScreen$1$1:
+    public final void invoke$2()
+com.kiriai.kiriorganization.ui.screens.ImageLabScreenKt$ImageLabScreen$1:
+    public final void invoke$2()
+com.kiriai.kiriorganization.ui.screens.ImageLabScreenKt$ImageLabScreen$2:
+    public final void invoke$169()
+com.kiriai.kiriorganization.ui.screens.ImageLabScreenKt:
+    public static final void access$ImageLabScreen$lambda$5(androidx.compose.runtime.MutableState,boolean)
 com.kiriai.kiriorganization.ui.screens.LandingScreenKt$LandingScreen$1$1:
     public int label
     public final java.lang.Object invoke$3()
@@ -149052,7 +149085,7 @@ com.kiriai.kiriorganization.ui.screens.PricingScreenKt$PricingScreen$3$1:
 com.kiriai.kiriorganization.ui.screens.PricingScreenKt$PricingScreen$3:
     public final void invoke$2()
 com.kiriai.kiriorganization.ui.screens.PricingScreenKt$PricingScreen$4:
-    public final void invoke$170()
+    public final void invoke$169()
 com.kiriai.kiriorganization.ui.screens.ProfileScreenKt$$InternalSyntheticLambda$1$e7e0b0da63cdc1421cda6450bfceb129f218f771913d30d0497d24b264ed12c3$0:
     public final synthetic int f$4
 com.kiriai.kiriorganization.ui.screens.ProfileScreenKt$ProfileScreen$1$1:
@@ -149069,7 +149102,7 @@ com.kiriai.kiriorganization.ui.screens.ProfileScreenKt$ProfileScreen$3$1$1:
 com.kiriai.kiriorganization.ui.screens.ProfileScreenKt$ProfileScreen$3$1$2:
     public final void invoke$23()
 com.kiriai.kiriorganization.ui.screens.ProfileScreenKt$ProfileScreen$3:
-    public final void invoke$170()
+    public final void invoke$169()
 com.kiriai.kiriorganization.ui.screens.RegisterScreenKt$$InternalSyntheticLambda$1$00cfe38c7d784a9168c31937f08beee685678e6bb3f6bd9e737d3548ccc222a3$6:
     public final synthetic int f$3
 com.kiriai.kiriorganization.ui.theme.ColorKt:
