@@ -8,10 +8,11 @@ const { v4: uuidv4 } = require('uuid');
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    console.log(`[AUTH] Register attempt: ${email} (Payload: ${JSON.stringify(req.body)})`);
 
-    if (!name || !email || !password) {
-      return res.status(400).json({ success: false, message: 'All fields are required.' });
-    }
+    if (!name) return res.status(400).json({ success: false, message: 'Name is required.' });
+    if (!email) return res.status(400).json({ success: false, message: 'Email is required.' });
+    if (!password) return res.status(400).json({ success: false, message: 'Password is required.' });
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {

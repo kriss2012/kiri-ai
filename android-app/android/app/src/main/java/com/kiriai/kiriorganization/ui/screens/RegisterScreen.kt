@@ -101,6 +101,14 @@ fun RegisterScreen(
         KiriButton(
             text = "INIT_ACCOUNT",
             onClick = {
+                if (state.name.isBlank() || state.email.isBlank() || state.password.isBlank()) {
+                    viewModel.setError("All fields are required.")
+                    return@KiriButton
+                }
+                if (state.password.length < 6) {
+                    viewModel.setError("Password must be at least 6 characters.")
+                    return@KiriButton
+                }
                 viewModel.register {
                     navController.navigate("chat") {
                         popUpTo(0) { inclusive = true }
