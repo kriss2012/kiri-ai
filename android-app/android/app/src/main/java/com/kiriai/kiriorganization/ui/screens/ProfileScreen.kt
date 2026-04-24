@@ -212,7 +212,7 @@ fun ProfileScreen(
                     ) {
                         Column {
                             Text("BUILD_VERSION", style = KiriTypography.labelLarge)
-                            Text("V1.2.2 // STABLE_PRODUCTION", style = KiriTypography.bodySmall)
+                            Text("V1.2.3 // STABLE_PRODUCTION", style = KiriTypography.bodySmall)
                         }
                         Icon(Icons.Default.Info, contentDescription = null, tint = SilverMist, modifier = Modifier.size(20.dp))
                     }
