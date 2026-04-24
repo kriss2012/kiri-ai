@@ -195,9 +195,10 @@ fun ProfileScreen(
 
                     SettingsRow(
                         title = "HELP_AND_SUPPORT",
-                        description = "Access technical documentation and support channels.",
+                        description = "Access documentation or contact development team.",
                         onClick = {
-                            Toast.makeText(context, "OPENING_TECHNICAL_DOCS", Toast.LENGTH_SHORT).show()
+                            val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse("https://github.com/kriss2012/kiri-ai/issues/18"))
+                            context.startActivity(intent)
                         },
                         icon = Icons.Default.Help
                     )
