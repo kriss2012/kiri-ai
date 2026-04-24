@@ -149161,6 +149161,7 @@ com.kiriai.kiriorganization.ui.viewmodels.AuthViewModel:
     static void <clinit>()
     public final kotlinx.coroutines.flow.StateFlow getUiState()
     public static void onNameChange()
+    public final void setError(java.lang.String)
 com.kiriai.kiriorganization.ui.viewmodels.AuthViewModel_Factory:
     public final dagger.internal.Provider authRepositoryProvider
     public final dagger.internal.Provider savedStateHandleProvider
