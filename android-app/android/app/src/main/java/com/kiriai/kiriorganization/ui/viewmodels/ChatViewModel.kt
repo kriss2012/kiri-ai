@@ -455,6 +455,25 @@ class ChatViewModel @Inject constructor(
             )
         }
     }
+
+    fun clearAllHistory(onComplete: () -> Unit = {}) {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoadingMessages = true) }
+            chatRepository.deleteAllConversations().onSuccess {
+                _uiState.update { 
+                    it.copy(
+                        conversations = emptyList(), 
+                        messages = emptyList(),
+                        currentConversationId = null,
+                        isLoadingMessages = false
+                    ) 
+                }
+                onComplete()
+            }.onFailure { error ->
+                _uiState.update { it.copy(isLoadingMessages = false, error = "Failed to clear history: ${error.message}") }
+            }
+        }
+    }
 }
 
 data class ChatUiState(

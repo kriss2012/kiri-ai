@@ -59,5 +59,12 @@ fun BugattiLogo(modifier: Modifier = Modifier) {
                 letterSpacing = 12.sp
             )
         )
+        Text(
+            text = "V1.2.3",
+            style = KiriTypography.labelSmall.copy(
+                color = SilverMist,
+                letterSpacing = 4.sp
+            )
+        )
     }
 }

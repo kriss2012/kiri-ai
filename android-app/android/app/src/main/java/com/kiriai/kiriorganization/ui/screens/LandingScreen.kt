@@ -127,7 +127,7 @@ fun LandingScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(100.dp))
         
         Text(
-            text = "KIRI AI // MULTIMODAL_INTEL",
+            text = "KIRI AI // MULTIMODAL_INTEL // V1.2.3",
             style = KiriTypography.labelMedium.copy(color = SilverMist.copy(alpha = 0.3f)),
             textAlign = TextAlign.Center
         )

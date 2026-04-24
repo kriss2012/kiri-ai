@@ -10287,9 +10287,6 @@ androidx.compose.material.icons.filled.DehazeKt:
 androidx.compose.material.icons.filled.DeleteForeverKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _deleteForever
     public static final androidx.compose.ui.graphics.vector.ImageVector getDeleteForever(androidx.compose.material.icons.Icons$Filled)
-androidx.compose.material.icons.filled.DeleteKt:
-    private static androidx.compose.ui.graphics.vector.ImageVector _delete
-    public static final androidx.compose.ui.graphics.vector.ImageVector getDelete(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.DeleteOutlineKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _deleteOutline
     public static final androidx.compose.ui.graphics.vector.ImageVector getDeleteOutline(androidx.compose.material.icons.Icons$Filled)
@@ -11514,8 +11511,6 @@ androidx.compose.material.icons.filled.HelpCenterKt:
     public static final androidx.compose.ui.graphics.vector.ImageVector getHelpCenter(androidx.compose.material.icons.Icons$Filled)
     public static synthetic void getHelpCenter$annotations(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.HelpKt:
-    private static androidx.compose.ui.graphics.vector.ImageVector _help
-    public static final androidx.compose.ui.graphics.vector.ImageVector getHelp(androidx.compose.material.icons.Icons$Filled)
     public static synthetic void getHelp$annotations(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.HelpOutlineKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _helpOutline
@@ -11683,9 +11678,6 @@ androidx.compose.material.icons.filled.IncompleteCircleKt:
 androidx.compose.material.icons.filled.IndeterminateCheckBoxKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _indeterminateCheckBox
     public static final androidx.compose.ui.graphics.vector.ImageVector getIndeterminateCheckBox(androidx.compose.material.icons.Icons$Filled)
-androidx.compose.material.icons.filled.InfoKt:
-    private static androidx.compose.ui.graphics.vector.ImageVector _info
-    public static final androidx.compose.ui.graphics.vector.ImageVector getInfo(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.InputKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _input
     public static final androidx.compose.ui.graphics.vector.ImageVector getInput(androidx.compose.material.icons.Icons$Filled)
@@ -12102,9 +12094,6 @@ androidx.compose.material.icons.filled.LocationSearchingKt:
 androidx.compose.material.icons.filled.LockClockKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _lockClock
     public static final androidx.compose.ui.graphics.vector.ImageVector getLockClock(androidx.compose.material.icons.Icons$Filled)
-androidx.compose.material.icons.filled.LockKt:
-    private static androidx.compose.ui.graphics.vector.ImageVector _lock
-    public static final androidx.compose.ui.graphics.vector.ImageVector getLock(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.LockOpenKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _lockOpen
     public static final androidx.compose.ui.graphics.vector.ImageVector getLockOpen(androidx.compose.material.icons.Icons$Filled)
@@ -72346,8 +72335,6 @@ com.kiriai.kiriorganization.data.local.NotificationPrefs_Factory:
     public static com.kiriai.kiriorganization.data.local.NotificationPrefs_Factory create(javax.inject.Provider)
 com.kiriai.kiriorganization.data.remote.AuthApi:
     public abstract java.lang.Object changePassword(java.util.Map,kotlin.coroutines.Continuation)
-com.kiriai.kiriorganization.data.remote.ChatApi:
-    public abstract java.lang.Object deleteAllConversations(kotlin.coroutines.Continuation)
 com.kiriai.kiriorganization.data.remote.SubscriptionApi:
     public abstract java.lang.Object getStatus(kotlin.coroutines.Continuation)
 com.kiriai.kiriorganization.data.repository.AuthRepository_Factory:
@@ -72416,6 +72403,7 @@ com.kiriai.kiriorganization.ui.theme.ColorKt:
     public static final long getBorderCream()
     public static final long getCharcoalWarm()
     public static final long getHoverOverlay()
+    public static final long getIvory()
     public static final long getKiriBackground()
     public static final long getKiriError()
     public static final long getKiriPrimary()
@@ -72423,7 +72411,9 @@ com.kiriai.kiriorganization.ui.theme.ColorKt:
     public static final long getKiriSurface()
     public static final long getLogoGradient()
     public static final long getObsidianSurface()
+    public static final long getOliveGray()
     public static final long getParchment()
+    public static final androidx.compose.ui.text.font.GenericFontFamily getSerifFont()
     public static final long getStoneGray()
     public static final long getTerracottaBrand()
     public static final long getWarmSand()
@@ -72431,6 +72421,7 @@ com.kiriai.kiriorganization.ui.theme.TypeKt:
     public static final androidx.compose.ui.text.font.GenericFontFamily getBugattiDisplayFont()
     public static final androidx.compose.ui.text.font.GenericFontFamily getBugattiMonoFont()
     public static final androidx.compose.ui.text.font.GenericFontFamily getBugattiTextFont()
+    public static final androidx.compose.ui.text.font.GenericFontFamily getJetBrainsMono()
 com.kiriai.kiriorganization.ui.viewmodels.AuthUiState:
     public static final int $stable
     public void <init>()
@@ -72481,6 +72472,8 @@ com.kiriai.kiriorganization.ui.viewmodels.ChatViewModel:
     public static final java.lang.String KEY_FILE_NAME
     public static final java.lang.String KEY_FILE_PATH
     public static final java.lang.String KEY_INPUT
+    public static synthetic void clearAllHistory$default(com.kiriai.kiriorganization.ui.viewmodels.ChatViewModel,kotlin.jvm.functions.Function0,int,java.lang.Object)
+    private static final kotlin.Unit clearAllHistory$lambda$7()
 com.kiriai.kiriorganization.ui.viewmodels.ChatViewModel_Factory:
     public void <init>(dagger.internal.Provider,dagger.internal.Provider,dagger.internal.Provider,dagger.internal.Provider)
     public static com.kiriai.kiriorganization.ui.viewmodels.ChatViewModel_Factory create(dagger.internal.Provider,dagger.internal.Provider,dagger.internal.Provider,dagger.internal.Provider)
@@ -117755,10 +117748,17 @@ androidx.compose.material3.BadgeDefaults:
     static void <clinit>()
     public static long getContainerColor()
 androidx.compose.material3.BadgeKt$Badge$1$1:
+    public final synthetic kotlin.jvm.functions.Function3 $content
     public final synthetic androidx.compose.foundation.layout.RowScopeInstance $this_Row
+    public void <init>(kotlin.jvm.functions.Function3)
     public final void invoke$2()
 androidx.compose.material3.BadgeKt$Badge$2:
+    public final synthetic int $$changed
     public final synthetic int $$default
+    public final synthetic long $containerColor
+    public final synthetic kotlin.jvm.functions.Function3 $content
+    public final synthetic long $contentColor
+    public final synthetic androidx.compose.ui.Modifier $modifier
     public final void invoke$2()
 androidx.compose.material3.BadgeKt$BadgedBox$2$1:
     public final void invoke$29()
@@ -117768,6 +117768,7 @@ androidx.compose.material3.BadgeKt$BadgedBox$4:
     public final synthetic int $$default
     public final void invoke$2()
 androidx.compose.material3.BadgeKt:
+    public static final float BadgeWithContentHorizontalPadding
     public static final float getBadgeOffset()
     public static final float getBadgeWithContentHorizontalOffset()
     public static final float getBadgeWithContentVerticalOffset()
@@ -125311,6 +125312,7 @@ androidx.compose.material3.tokens.BadgeTokens:
     public static final androidx.compose.material3.tokens.ColorSchemeKeyTokens LargeLabelTextColor
     public static final androidx.compose.material3.tokens.TypographyKeyTokens LargeLabelTextFont
     public static final androidx.compose.material3.tokens.ShapeKeyTokens LargeShape
+    public static final float LargeSize
     public static final androidx.compose.material3.tokens.ShapeKeyTokens Shape
     public static androidx.compose.material3.tokens.ColorSchemeKeyTokens getColor()
     public static androidx.compose.material3.tokens.TypographyKeyTokens getLargeLabelTextFont()
@@ -131877,7 +131879,6 @@ androidx.compose.ui.graphics.vector.ImageVector:
     public static float getViewportWidth()
 androidx.compose.ui.graphics.vector.PathBuilder:
     public static java.util.List getNodes()
-    public final void verticalLineTo(float)
 androidx.compose.ui.graphics.vector.PathComponent$pathMeasure$2:
     public static androidx.compose.ui.graphics.PathMeasure invoke()
 androidx.compose.ui.graphics.vector.PathComponent:
@@ -149048,10 +149049,13 @@ com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ProfileScreenKt$lamb
     public final void invoke$2()
 com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ProfileScreenKt$lambda-2$1:
     public final void invoke$2()
+com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ProfileScreenKt$lambda-3$1:
+    public final void invoke$23()
 com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ProfileScreenKt:
     public static final com.kiriai.kiriorganization.ui.screens.ComposableSingletons$ProfileScreenKt INSTANCE
     public static kotlin.jvm.functions.Function2 getLambda-1$app_release()
     public static kotlin.jvm.functions.Function2 getLambda-2$app_release()
+    public static kotlin.jvm.functions.Function3 getLambda-3$app_release()
 com.kiriai.kiriorganization.ui.screens.ImageLabScreenKt$ImageLabScreen$1$1:
     public final void invoke$2()
 com.kiriai.kiriorganization.ui.screens.ImageLabScreenKt$ImageLabScreen$1:
@@ -149096,7 +149100,7 @@ com.kiriai.kiriorganization.ui.screens.ProfileScreenKt$ProfileScreen$2$1:
 com.kiriai.kiriorganization.ui.screens.ProfileScreenKt$ProfileScreen$2:
     public final void invoke$2()
 com.kiriai.kiriorganization.ui.screens.ProfileScreenKt$ProfileScreen$3$1$1$1$1$2$1:
-    public final void invoke$59()
+    public final void invoke$2()
 com.kiriai.kiriorganization.ui.screens.ProfileScreenKt$ProfileScreen$3$1$1:
     public final void invoke$23()
 com.kiriai.kiriorganization.ui.screens.ProfileScreenKt$ProfileScreen$3$1$2:
@@ -149111,6 +149115,7 @@ com.kiriai.kiriorganization.ui.theme.ColorKt:
     public static final long BorderCream
     public static final long CharcoalWarm
     public static final long HoverOverlay
+    public static final long Ivory
     public static final long KiriBackground
     public static final long KiriError
     public static final long KiriPrimary
@@ -149118,7 +149123,9 @@ com.kiriai.kiriorganization.ui.theme.ColorKt:
     public static final long KiriSurface
     public static final long LogoGradient
     public static final long ObsidianSurface
+    public static final long OliveGray
     public static final long Parchment
+    public static final androidx.compose.ui.text.font.GenericFontFamily SerifFont
     public static final long StoneGray
     public static final long TerracottaBrand
     public static final long WarmSand
@@ -149131,6 +149138,7 @@ com.kiriai.kiriorganization.ui.theme.TypeKt:
     public static final androidx.compose.ui.text.font.GenericFontFamily BugattiDisplayFont
     public static final androidx.compose.ui.text.font.GenericFontFamily BugattiMonoFont
     public static final androidx.compose.ui.text.font.GenericFontFamily BugattiTextFont
+    public static final androidx.compose.ui.text.font.GenericFontFamily JetBrainsMono
 com.kiriai.kiriorganization.ui.viewmodels.AuthUiState:
     static void <clinit>()
     public static com.kiriai.kiriorganization.ui.viewmodels.AuthUiState copy()
@@ -149187,6 +149195,8 @@ com.kiriai.kiriorganization.ui.viewmodels.ChatUiState:
     public static boolean isConnected()
     public static boolean isLoadingMessages()
     public static boolean isSending()
+com.kiriai.kiriorganization.ui.viewmodels.ChatViewModel$clearAllHistory$2:
+    public final java.lang.Object invoke$3()
 com.kiriai.kiriorganization.ui.viewmodels.ChatViewModel$copyUriToInternalStorage$2:
     public int label
     public final java.lang.Object invoke$3()
