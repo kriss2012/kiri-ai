@@ -77,7 +77,7 @@ fun KiriMessageBubble(message: ChatMessage?) {
             if (isUser) {
                 UserContent(content)
             } else {
-                AssistantContent(content)
+                AssistantContent(message)
             }
         }
     }
@@ -116,7 +116,8 @@ private fun UserContent(content: String) {
 }
 
 @Composable
-private fun AssistantContent(content: String) {
+private fun AssistantContent(message: ChatMessage) {
+    val content = message.content ?: ""
     val clipboard = LocalClipboardManager.current
     
     // Segment logic for professional segmentation (Bugatti Intelligence Protocol)
@@ -156,7 +157,8 @@ private fun AssistantContent(content: String) {
                          fontSize = 10.sp
                      )
                 )
-                message.model?.let { modelName ->
+                val modelName = message.model
+                if (modelName != null) {
                     val shortModelName = modelName.split("/").last().uppercase()
                     Surface(
                         color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
