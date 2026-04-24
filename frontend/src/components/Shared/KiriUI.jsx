@@ -14,7 +14,7 @@ export const KiriButton = ({ children, onClick, type = 'button', variant = 'prim
   );
 };
 
-export const KiriTextField = ({ label, value, onChange, placeholder, type = 'text', required }) => {
+export const KiriTextField = ({ label, value, onChange, placeholder, type = 'text', required, disabled }) => {
   return (
     <div className="kiri-input-group">
       {label && <label className="kiri-label">{label.toUpperCase()}</label>}
@@ -25,7 +25,17 @@ export const KiriTextField = ({ label, value, onChange, placeholder, type = 'tex
         onChange={onChange}
         placeholder={placeholder}
         required={required}
+        disabled={disabled}
       />
+    </div>
+  );
+};
+
+export const KiriStatus = ({ message, type = 'info' }) => {
+  if (!message) return null;
+  return (
+    <div className={`kiri-status-banner ${type} cinematic-fade mono`}>
+      {message.toUpperCase()}
     </div>
   );
 };
