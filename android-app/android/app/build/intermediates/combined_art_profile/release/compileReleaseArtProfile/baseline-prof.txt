@@ -12038,6 +12038,7 @@ HSPLandroidx/compose/ui/graphics/vector/PathBuilder;->h(FF)V
 HSPLandroidx/compose/ui/graphics/vector/PathBuilder;->i(FFFF)V
 HSPLandroidx/compose/ui/graphics/vector/PathBuilder;->j(FFFF)V
 HSPLandroidx/compose/ui/graphics/vector/PathBuilder;->k(F)V
+HSPLandroidx/compose/ui/graphics/vector/PathBuilder;->l(F)V
 Landroidx/compose/ui/graphics/vector/PathComponent$pathMeasure$2;
 HSPLandroidx/compose/ui/graphics/vector/PathComponent$pathMeasure$2;-><clinit>()V
 HSPLandroidx/compose/ui/graphics/vector/PathComponent$pathMeasure$2;->invoke()Ljava/lang/Object;
