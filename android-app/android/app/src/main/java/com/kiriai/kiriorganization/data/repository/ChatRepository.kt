@@ -175,4 +175,22 @@ class ChatRepository @Inject constructor(
             Result.failure(e)
         }
     }
+
+    suspend fun deleteAllConversations(): Result<GenericResponse> {
+        return try {
+            val response = chatApi.deleteAllConversations()
+            val body = response.body()
+            if (response.isSuccessful && body != null) {
+                Result.success(body)
+            } else {
+                val errorBody = response.errorBody()?.string()
+                val message = if (errorBody?.trim()?.startsWith("{") == true) {
+                    try { com.google.gson.Gson().fromJson(errorBody, GenericResponse::class.java).message } catch(e: Exception) { null }
+                } else null
+                Result.failure(Exception(message ?: "Clear history failed (${response.code()})"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }
