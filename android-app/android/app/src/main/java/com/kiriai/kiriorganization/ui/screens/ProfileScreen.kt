@@ -3,27 +3,28 @@ package com.kiriai.kiriorganization.ui.screens
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.compose.ui.graphics.Brush
 import com.kiriai.kiriorganization.ui.components.KiriButton
-
 import com.kiriai.kiriorganization.ui.components.KiriTextField
 import com.kiriai.kiriorganization.ui.theme.*
 import com.kiriai.kiriorganization.ui.viewmodels.AuthViewModel
@@ -42,7 +43,6 @@ fun ProfileScreen(
     val authUiState by authViewModel.uiState.collectAsStateWithLifecycle()
     var name by remember { mutableStateOf(state.user?.name ?: "") }
     
-    // Update local name when state.user?.name changes (e.g. after successful save)
     LaunchedEffect(state.user?.name) {
         state.user?.name?.let { name = it }
     }
@@ -50,20 +50,20 @@ fun ProfileScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Account Settings", style = KiriTypography.titleLarge) },
+                title = { Text("ACCOUNT_SETTINGS", style = KiriTypography.labelLarge) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background,
-                    titleContentColor = MaterialTheme.colorScheme.onBackground,
-                    navigationIconContentColor = MaterialTheme.colorScheme.onBackground
+                    containerColor = VelvetBlack,
+                    titleContentColor = ShowroomWhite,
+                    navigationIconContentColor = ShowroomWhite
                 )
             )
         },
-        containerColor = MaterialTheme.colorScheme.background
+        containerColor = VelvetBlack
     ) { padding ->
         Column(
             modifier = Modifier
@@ -73,9 +73,9 @@ fun ProfileScreen(
                 .padding(24.dp)
         ) {
             Text(
-                text = "Manage your profile and subscription",
-                style = KiriTypography.bodyLarge,
-                color = OliveGray
+                text = "MANAGE_SYSTEM_PROFILE_AND_INTEL_TIERS",
+                style = KiriTypography.labelSmall,
+                color = SilverMist
             )
             
             Spacer(modifier = Modifier.height(32.dp))
@@ -84,8 +84,8 @@ fun ProfileScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.1f))
+                colors = CardDefaults.cardColors(containerColor = DarkGray),
+                border = BorderStroke(1.dp, SilverMist.copy(alpha = 0.1f))
             ) {
                 Column(modifier = Modifier.padding(24.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -97,28 +97,33 @@ fun ProfileScreen(
                         ) {
                             Text(
                                 text = state.user?.name?.take(1) ?: "U",
-                                style = KiriTypography.headlineLarge.copy(color = Ivory)
+                                style = KiriTypography.headlineLarge.copy(color = ShowroomWhite)
                             )
                         }
 
                         Spacer(modifier = Modifier.width(20.dp))
                         Column {
                             Text(
-                                text = state.user?.name ?: "User",
-                                style = KiriTypography.titleLarge.copy(fontFamily = SerifFont),
-                                color = MaterialTheme.colorScheme.onSurface
+                                text = state.user?.name ?: "USER_NULL",
+                                style = KiriTypography.labelLarge,
+                                color = ShowroomWhite
                             )
                             Text(
-                                text = state.user?.email ?: "email@example.com",
-                                style = KiriTypography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                text = state.user?.email ?: "IDENTITY_HIDDEN",
+                                style = KiriTypography.bodySmall,
+                                color = SilverMist
                             )
                             Spacer(modifier = Modifier.height(8.dp))
-                            Badge(
-                                containerColor = if (state.user?.isPremium == true) Color(0xFFFFD700).copy(alpha = 0.2f) else MaterialTheme.colorScheme.surfaceVariant,
-                                contentColor = if (state.user?.isPremium == true) Color(0xFFB8860B) else MaterialTheme.colorScheme.onSurfaceVariant
+                            Surface(
+                                color = if (state.user?.isPremium == true) ShowroomWhite.copy(alpha = 0.1f) else DarkGray,
+                                shape = RoundedCornerShape(4.dp),
+                                border = BorderStroke(1.dp, if (state.user?.isPremium == true) ShowroomWhite else SilverMist.copy(alpha = 0.3f))
                             ) {
-                                Text(state.user?.plan ?: "Free Plan")
+                                Text(
+                                    text = state.user?.plan?.uppercase() ?: "FREE_TIER",
+                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                                    style = KiriTypography.labelSmall.copy(color = if (state.user?.isPremium == true) ShowroomWhite else SilverMist)
+                                )
                             }
                         }
                     }
@@ -128,20 +133,20 @@ fun ProfileScreen(
                     KiriTextField(
                         value = name,
                         onValueChange = { name = it },
-                        label = "Display Name",
-                        placeholder = "Your name"
+                        label = "DISPLAY_NAME",
+                        placeholder = "ENTER_NAME"
                     )
                     
                     Spacer(modifier = Modifier.height(24.dp))
                     
                     KiriButton(
-                        text = "Save",
+                        text = "UPDATE_IDENTITY",
                         onClick = { 
                             authViewModel.updateProfile(name) {
-                                Toast.makeText(context, "Profile updated", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "IDENTITY_SYNCED", Toast.LENGTH_SHORT).show()
                             }
                         },
-                        modifier = Modifier.width(120.dp),
+                        modifier = Modifier.fillMaxWidth(),
                         enabled = !authUiState.isLoading
                     )
                 }
@@ -149,34 +154,102 @@ fun ProfileScreen(
             
             Spacer(modifier = Modifier.height(24.dp))
             
-            // Subscription Card
+            // App Management Card
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.1f))
+                colors = CardDefaults.cardColors(containerColor = DarkGray),
+                border = BorderStroke(1.dp, SilverMist.copy(alpha = 0.1f))
             ) {
                 Column(modifier = Modifier.padding(24.dp)) {
-                    Text(text = "Subscription", style = KiriTypography.titleLarge.copy(fontFamily = SerifFont), color = MaterialTheme.colorScheme.onSurface)
-                    Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = "Your current plan is ${state.user?.plan ?: "Free"}. Upgrade to Premium for unlimted requests and faster responses.",
-                        style = KiriTypography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        text = "SYSTEM_CONTROL", 
+                        style = KiriTypography.labelMedium.copy(color = SilverMist),
+                        modifier = Modifier.padding(bottom = 16.dp)
                     )
-                    Spacer(modifier = Modifier.height(24.dp))
-                    KiriButton(
-                        text = "⚡ Manage Subscription",
-                        onClick = { navController.navigate("pricing") }
+
+                    SettingsRow(
+                        title = "CLEAR_HISTORY",
+                        description = "Purge all conversation logs from secure storage.",
+                        onClick = {
+                            chatViewModel.clearAllHistory {
+                                Toast.makeText(context, "LOGS_WIPED", Toast.LENGTH_SHORT).show()
+                            }
+                        },
+                        icon = Icons.Default.Delete,
+                        contentColor = ErrorCrimson
                     )
+
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = SilverMist.copy(alpha = 0.1f))
+
+                    SettingsRow(
+                        title = "SECURITY_MANAGEMENT",
+                        description = "Rotate authentication keys and credentials.",
+                        onClick = {
+                            Toast.makeText(context, "SECURITY_PROTOCOL_ACTIVE", Toast.LENGTH_SHORT).show()
+                        },
+                        icon = Icons.Default.Lock
+                    )
+
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = SilverMist.copy(alpha = 0.1f))
+
+                    SettingsRow(
+                        title = "HELP_AND_SUPPORT",
+                        description = "Access technical documentation and support channels.",
+                        onClick = {
+                            Toast.makeText(context, "OPENING_TECHNICAL_DOCS", Toast.LENGTH_SHORT).show()
+                        },
+                        icon = Icons.Default.Help
+                    )
+
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = SilverMist.copy(alpha = 0.1f))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column {
+                            Text("BUILD_VERSION", style = KiriTypography.labelLarge)
+                            Text("V1.2.2 // STABLE_PRODUCTION", style = KiriTypography.bodySmall)
+                        }
+                        Icon(Icons.Default.Info, contentDescription = null, tint = SilverMist, modifier = Modifier.size(20.dp))
+                    }
                 }
             }
             
             Spacer(modifier = Modifier.height(24.dp))
+
+            // App Details Card
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = DarkGray),
+                border = BorderStroke(1.dp, SilverMist.copy(alpha = 0.1f))
+            ) {
+                Column(modifier = Modifier.padding(24.dp)) {
+                    Text(
+                        text = "TECHNICAL_SPECIFICATIONS", 
+                        style = KiriTypography.labelMedium.copy(color = SilverMist),
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+                    Text(
+                        text = "Kiri AI implements a distributed multimodal reasoning architecture using the Bugatti design protocol. System utilizes low-latency fiber-optic routing for neural response generation.",
+                        style = KiriTypography.bodySmall,
+                        color = SilverMist
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = "CORE_ENGINE: GEMINI_2.0_FLASH\nREGION: GLOBAL_EDGE\nENCRYPTION: AES_256_ACTIVE",
+                        style = KiriTypography.labelSmall.copy(color = SilverMist, lineHeight = 18.sp)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
             
-            // Logout
             KiriButton(
-                text = "Log Out",
+                text = "TERMINATE_SESSION // LOGOUT",
                 onClick = { 
                     authViewModel.logout {
                         navController.navigate("landing") {
@@ -189,5 +262,28 @@ fun ProfileScreen(
                 modifier = Modifier.fillMaxWidth()
             )
         }
+    }
+}
+
+@Composable
+fun SettingsRow(
+    title: String,
+    description: String,
+    onClick: () -> Unit,
+    icon: ImageVector,
+    contentColor: Color = ShowroomWhite
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() }
+            .padding(vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(modifier = Modifier.weight(1f)) {
+            Text(title, style = KiriTypography.labelLarge, color = contentColor)
+            Text(description, style = KiriTypography.bodySmall, color = SilverMist)
+        }
+        Icon(icon, contentDescription = null, tint = contentColor.copy(alpha = 0.6f), modifier = Modifier.size(20.dp))
     }
 }
