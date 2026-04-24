@@ -16,7 +16,8 @@ router.post('/register', async (req, res) => {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ success: false, message: 'Email already registered.' });
+      console.log(`[AUTH] Conflict: Email ${email} already exists.`);
+      return res.status(400).json({ success: false, message: 'This email is already registered. Please login or use a different email.' });
     }
 
     const verificationToken = uuidv4();
@@ -25,7 +26,7 @@ router.post('/register', async (req, res) => {
       email,
       password,
       verificationToken,
-      isVerified: true // Auto-verify for now; integrate email later
+      isVerified: true
     });
 
     const token = generateToken(user._id);
@@ -46,6 +47,13 @@ router.post('/register', async (req, res) => {
     });
   } catch (error) {
     console.error('Register error:', error);
+    if (error.name === 'ValidationError') {
+      const message = Object.values(error.errors).map(val => val.message).join(', ');
+      return res.status(400).json({ success: false, message });
+    }
+    if (error.code === 11000) {
+      return res.status(400).json({ success: false, message: 'Email already registered.' });
+    }
     res.status(500).json({ success: false, message: 'Server error. Please try again.' });
   }
 });
