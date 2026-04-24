@@ -63,6 +63,8 @@ class AuthViewModel @Inject constructor(
         savedStateHandle[KEY_EMAIL] = email
     }
     fun onPasswordChange(password: String) { _uiState.update { it.copy(password = password) } }
+    
+    fun setError(message: String?) { _uiState.update { it.copy(error = message) } }
 
     fun login(onSuccess: () -> Unit) {
         viewModelScope.launch {
