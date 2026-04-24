@@ -181,30 +181,16 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                 containerColor = VelvetBlack,
                 titleContentColor = ShowroomWhite,
                 textContentColor = ShowroomWhite,
-                title = { Text("KIRI // CRASH_DETECTED", style = KiriTypography.labelLarge) },
+                title = { Text("KIRI // SYSTEM_ERROR", style = KiriTypography.labelLarge) },
                 text = { 
-                    androidx.compose.foundation.lazy.LazyColumn(modifier = Modifier.heightIn(max = 400.dp)) {
-                        item {
-                            Text(
-                                text = "TECHNICAL_TRACE:\n\n$crashTrace",
-                                style = KiriTypography.bodySmall.copy(color = SilverMist)
-                            )
-                        }
-                    }
+                    Text(
+                        text = "The application encountered a temporary instability and has been restored. If this persists, please contact support.",
+                        style = KiriTypography.bodySmall.copy(color = SilverMist)
+                    )
                 },
                 confirmButton = {
-                    androidx.compose.material3.TextButton(onClick = {
-                        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                        val clip = ClipData.newPlainText("Kiri AI Crash", crashTrace)
-                        clipboard.setPrimaryClip(clip)
-                        android.widget.Toast.makeText(this, "TRACE_COPIED", android.widget.Toast.LENGTH_SHORT).show()
-                    }) {
-                        Text("COPY_TRACE", style = KiriTypography.labelMedium)
-                    }
-                },
-                dismissButton = {
                     androidx.compose.material3.TextButton(onClick = { showDialog.value = false }) {
-                        Text("DISMISS", style = KiriTypography.labelMedium)
+                        Text("RESTART_SESSION", style = KiriTypography.labelMedium)
                     }
                 }
             )
