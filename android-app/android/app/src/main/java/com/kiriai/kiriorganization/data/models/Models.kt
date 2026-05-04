@@ -5,8 +5,11 @@ import com.google.gson.annotations.SerializedName
 data class User(
     @SerializedName("_id", alternate = ["id"])
     val id: String? = null,
+    @SerializedName("name")
     val name: String? = null,
+    @SerializedName("email")
     val email: String? = null,
+    @SerializedName("plan")
     val plan: String? = "free",
     @SerializedName("dailyRequests")
     private val _dailyRequests: Any? = 0,
@@ -14,6 +17,7 @@ data class User(
     private val _totalRequests: Any? = 0,
     @SerializedName("isVerified")
     private val _isVerified: Any? = false,
+    @SerializedName("avatar")
     val avatar: String? = null,
     @SerializedName("isPremium")
     private val _isPremium: Any? = false,
@@ -33,24 +37,35 @@ data class User(
 }
 
 data class AuthResponse(
+    @SerializedName("success")
     val success: Boolean? = null,
+    @SerializedName("message")
     val message: String? = null,
+    @SerializedName("token")
     val token: String? = null,
+    @SerializedName("user")
     val user: User? = null
 )
 
 data class GenericResponse(
+    @SerializedName("success")
     val success: Boolean? = null,
+    @SerializedName("message")
     val message: String? = null
 )
 
 data class OrderResponse(
+    @SerializedName("success")
     val success: Boolean? = null,
+    @SerializedName("orderId")
     val orderId: String? = null,
     @SerializedName("amount")
     private val _amount: Any? = null,
+    @SerializedName("currency")
     val currency: String? = null,
+    @SerializedName("keyId")
     val keyId: String? = null,
+    @SerializedName("message")
     val message: String? = null
 ) {
     val amount: Int
@@ -58,14 +73,18 @@ data class OrderResponse(
 }
 
 data class ConversationsResponse(
+    @SerializedName("success")
     val success: Boolean? = null,
+    @SerializedName("conversations")
     val conversations: List<Conversation>? = emptyList()
 )
 
 data class Conversation(
     @SerializedName("_id", alternate = ["id"])
     val id: String? = null,
+    @SerializedName("title")
     val title: String? = "Untitled",
+    @SerializedName("model")
     val model: String? = null,
     @SerializedName("isPinned")
     private val _isPinned: Any? = false,
@@ -91,13 +110,18 @@ data class Conversation(
 }
 
 data class ConversationDetailResponse(
+    @SerializedName("success")
     val success: Boolean? = null,
+    @SerializedName("conversation")
     val conversation: ChatDetail? = null
 )
 
 data class ChatMessage(
+    @SerializedName("role")
     val role: String? = "user", // "user" or "assistant"
+    @SerializedName("content")
     val content: String? = "",
+    @SerializedName("model")
     val model: String? = "auto",
     @SerializedName("_id", alternate = ["id"])
     val id: String? = null,
@@ -114,8 +138,11 @@ data class ChatMessage(
 data class ChatDetail(
     @SerializedName("_id", alternate = ["id"])
     val id: String? = null,
+    @SerializedName("title")
     val title: String? = "Untitled",
+    @SerializedName("messages")
     val messages: List<ChatMessage>? = emptyList(),
+    @SerializedName("model")
     val model: String? = null,
     @SerializedName("updatedAt")
     private val _updatedAt: Any? = null
@@ -125,16 +152,24 @@ data class ChatDetail(
 }
 
 data class ChatRequest(
+    @SerializedName("message")
     val message: String,
+    @SerializedName("conversationId")
     val conversationId: String? = null,
+    @SerializedName("model")
     val model: String = "auto"
 )
 
 data class ChatResponse(
+    @SerializedName("success")
     val success: Boolean? = null,
+    @SerializedName("message")
     val message: String? = null,
+    @SerializedName("conversationId")
     val conversationId: String? = null,
+    @SerializedName("title")
     val title: String? = null,
+    @SerializedName("model")
     val model: String? = null,
     @SerializedName("requestsUsed")
     private val _requestsUsed: Any? = null,
