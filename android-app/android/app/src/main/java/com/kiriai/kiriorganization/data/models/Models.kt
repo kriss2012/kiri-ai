@@ -2,6 +2,11 @@ package com.kiriai.kiriorganization.data.models
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * STABILITY_NOTICE: All fields MUST have @SerializedName for R8/ProGuard compatibility.
+ * Use 'private val _field: Any?' pattern for types that might vary between environments.
+ */
+
 data class User(
     @SerializedName("_id", alternate = ["id"])
     val id: String? = null,
@@ -99,10 +104,8 @@ data class Conversation(
         get() = _isPinned?.toString()?.let { it.equals("true", true) || it == "1" } ?: false
     val messageCount: Int
         get() = _messageCount?.toString()?.toDoubleOrNull()?.toInt() ?: 0
-
     val lastMessage: String
         get() = _lastMessage?.toString() ?: ""
-
     val updatedAt: String
         get() = _updatedAt?.toString() ?: ""
 
@@ -118,7 +121,7 @@ data class ConversationDetailResponse(
 
 data class ChatMessage(
     @SerializedName("role")
-    val role: String? = "user", // "user" or "assistant"
+    val role: String? = "user",
     @SerializedName("content")
     val content: String? = "",
     @SerializedName("model")
@@ -127,11 +130,10 @@ data class ChatMessage(
     val id: String? = null,
     @SerializedName("timestamp")
     private val _timestamp: Any? = null,
-    val localId: String = java.util.UUID.randomUUID().toString() // PERMANENT_STABILITY_ANCHOR
+    val localId: String = java.util.UUID.randomUUID().toString()
 ) {
     val timestamp: String?
         get() = _timestamp?.toString()
-
     fun getStableId(): String = id ?: localId
 }
 

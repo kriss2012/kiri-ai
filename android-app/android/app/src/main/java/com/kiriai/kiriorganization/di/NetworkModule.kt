@@ -36,11 +36,23 @@ object NetworkModule {
                 }
             }
             
-            val request = chain.request().newBuilder()
+            val requestBuilder = chain.request().newBuilder()
             if (!token.isNullOrBlank()) {
-                request.header("Authorization", "Bearer $token")
+                requestBuilder.header("Authorization", "Bearer $token")
             }
-            chain.proceed(request.build())
+            
+            val response = chain.proceed(requestBuilder.build())
+            
+            // AUTOMATIC_LOGOUT_ON_401: If the server rejects the token, clear it locally
+            // to prevent the "Invalid or expired token" loop.
+            if (response.code == 401 && !token.isNullOrBlank()) {
+                android.util.Log.e("Kiri_DEBUG", "NetworkModule: 401 Unauthorized detected. Clearing invalid token.")
+                runBlocking {
+                    authDataStore.clearToken()
+                }
+            }
+            
+            response
         }
     }
 
