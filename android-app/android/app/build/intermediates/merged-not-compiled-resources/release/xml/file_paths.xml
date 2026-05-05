@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <external-path name="external_files" path="." />
-    <cache-path name="cache_files" path="." />
+    <!-- Internal App Storage (Context.getFilesDir()) -->
     <files-path name="internal_files" path="." />
-</paths>
 
+    <!-- Internal Cache Storage (Context.getCacheDir()) -->
+    <cache-path name="cache_files" path="." />
+
+    <!-- External App Storage (Context.getExternalFilesDir(null)) -->
+    <external-path name="external_files" path="." />
+
+    <!-- External Cache Storage (Context.getExternalCacheDir()) -->
+    <external-cache-path name="external_cache" path="." />
+
+    <!-- Root of the external storage (SD Card, etc.) -->
+    <!-- Note: Use with caution, requires READ_EXTERNAL_STORAGE on older Android versions -->
+    <external-path name="external_root" path="Android/data/com.kiriai.kiriorganization/" />
+</paths>
