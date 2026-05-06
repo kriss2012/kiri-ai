@@ -60,12 +60,12 @@ fun KiriTextField(
             isError = isError,
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
-            shape = RoundedCornerShape(6.dp), // Bugatti subtle radius
+            shape = RoundedCornerShape(12.dp),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),
-                focusedContainerColor = MaterialTheme.colorScheme.surface,
-                unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+                focusedBorderColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
+                unfocusedBorderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
+                focusedContainerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.3f),
+                unfocusedContainerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.1f),
                 cursorColor = MaterialTheme.colorScheme.primary,
                 focusedTextColor = MaterialTheme.colorScheme.onSurface,
                 unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
