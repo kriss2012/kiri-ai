@@ -25,17 +25,29 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
  * Bugatti Showroom Registration
  */
 
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.ui.graphics.Color
+
 @Composable
 fun RegisterScreen(
     navController: NavController,
     viewModel: AuthViewModel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val isDark = isSystemInDarkTheme()
+
+    val backgroundBrush = Brush.verticalGradient(
+        colors = listOf(
+            VelvetBlack,
+            if (isDark) DeepSpaceBlue else Color(0xFF111111)
+        )
+    )
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(VelvetBlack)
+            .background(backgroundBrush)
             .padding(32.dp),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Center
@@ -115,7 +127,8 @@ fun RegisterScreen(
                     }
                 }
             },
-            isLoading = state.isLoading
+            isLoading = state.isLoading,
+            modifier = Modifier.fillMaxWidth().height(56.dp)
         )
         
         Spacer(modifier = Modifier.height(32.dp))
