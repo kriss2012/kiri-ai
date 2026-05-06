@@ -86,16 +86,16 @@ fun PricingScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Choose Plan", style = KiriTypography.titleLarge) },
+                title = { Text("INTEL // SUBSCRIPTION", style = KiriTypography.labelLarge) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = ShowroomWhite)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background,
-                    titleContentColor = MaterialTheme.colorScheme.onBackground,
-                    navigationIconContentColor = MaterialTheme.colorScheme.onBackground
+                    containerColor = Color.Transparent,
+                    titleContentColor = ShowroomWhite,
+                    navigationIconContentColor = ShowroomWhite
                 )
             )
         },
@@ -105,41 +105,52 @@ fun PricingScreen(
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize()
+                .background(Brush.verticalGradient(listOf(VelvetBlack, DeepSpaceBlue)))
                 .verticalScroll(rememberScrollState())
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Unlock the full power of Kiri AI",
-                style = KiriTypography.displayLarge.copy(fontSize = 28.sp),
-                color = MaterialTheme.colorScheme.onBackground,
+                text = "HYPER-SCALE REASONING",
+                style = KiriTypography.headlineMedium.copy(letterSpacing = 4.sp),
+                color = ShowroomWhite,
                 textAlign = TextAlign.Center
             )
             
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = "Select an operational tier to increase throughput.",
+                style = KiriTypography.labelSmall.copy(color = SilverMist),
+                textAlign = TextAlign.Center
+            )
+            
+            Spacer(modifier = Modifier.height(40.dp))
 
             // Plan Toggle
-            Row(
+            Surface(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(50))
-                    .background(MaterialTheme.colorScheme.surfaceVariant)
-                    .padding(4.dp)
+                    .clip(RoundedCornerShape(24.dp))
+                    .border(0.5.dp, ShowroomWhite.copy(alpha = 0.1f), RoundedCornerShape(24.dp)),
+                color = GlassWhite
             ) {
-                val plans = listOf("premium_monthly" to "Monthly", "premium_yearly" to "Yearly")
-                plans.forEach { (id, label) ->
-                    val selected = selectedPlan == id
-                    Box(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(50))
-                            .background(if (selected) MaterialTheme.colorScheme.primary else Color.Transparent)
-                            .clickable { selectedPlan = id }
-                            .padding(horizontal = 24.dp, vertical = 8.dp)
-                    ) {
-                        Text(
-                            label,
-                            color = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
-                            style = KiriTypography.labelLarge
-                        )
+                Row(modifier = Modifier.padding(4.dp)) {
+                    val plans = listOf("premium_monthly" to "MONTHLY", "premium_yearly" to "ANNUAL")
+                    plans.forEach { (id, label) ->
+                        val selected = selectedPlan == id
+                        Box(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(if (selected) ShowroomWhite else Color.Transparent)
+                                .clickable { selectedPlan = id }
+                                .padding(horizontal = 24.dp, vertical = 10.dp)
+                        ) {
+                            Text(
+                                label,
+                                color = if (selected) VelvetBlack else SilverMist,
+                                style = KiriTypography.labelMedium.copy(fontWeight = FontWeight.Bold)
+                            )
+                        }
                     }
                 }
             }
@@ -173,44 +184,21 @@ fun PricingPlanCardEnhanced(
     isLoading: Boolean,
     onUpgrade: () -> Unit
 ) {
-    val infiniteTransition = rememberInfiniteTransition(label = "pricing_card_glow")
-    val borderAlpha by infiniteTransition.animateFloat(
-        initialValue = 0.5f,
-        targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(2000, easing = LinearEasing),
-            repeatMode = RepeatMode.Reverse
-        ), label = "border_alpha"
-    )
-
     val primaryColor = MaterialTheme.colorScheme.primary
     val outlineColor = MaterialTheme.colorScheme.outline
-    val animatedBrush = remember(borderAlpha) {
-        Brush.linearGradient(
-            colors = listOf(
-                primaryColor.copy(alpha = borderAlpha),
-                outlineColor.copy(alpha = borderAlpha)
-            )
-        )
-    }
-
-    Card(
+    
+    Surface(
         modifier = Modifier
-            .fillMaxWidth()
-            .border(
-                1.dp,
-                animatedBrush,
-                RoundedCornerShape(24.dp)
-            ),
+            .fillMaxWidth(),
         shape = RoundedCornerShape(24.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        )
+        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.4f),
+        border = BorderStroke(0.5.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.15f))
     ) {
         Column(modifier = Modifier.padding(32.dp)) {
             Box(
                 modifier = Modifier
-                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), RoundedCornerShape(50))
+                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.05f), RoundedCornerShape(50))
+                    .border(0.5.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.2f), RoundedCornerShape(50))
                     .padding(horizontal = 12.dp, vertical = 4.dp)
             ) {
                 Text(
@@ -276,11 +264,11 @@ fun PricingPlanCardEnhanced(
             KiriButton(
                 text = "UPGRADE_SYSTEM",
                 onClick = onUpgrade,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().height(56.dp),
                 isLoading = isLoading,
                 contentColor = MaterialTheme.colorScheme.onPrimary,
                 containerColor = MaterialTheme.colorScheme.primary,
-                shape = RoundedCornerShape(2.dp) // Professional sharp button
+                shape = RoundedCornerShape(16.dp)
             )
         }
     }
