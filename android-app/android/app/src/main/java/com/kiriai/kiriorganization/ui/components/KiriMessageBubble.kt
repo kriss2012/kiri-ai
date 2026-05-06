@@ -63,15 +63,37 @@ fun KiriMessageBubble(message: ChatMessage?) {
         )
 
         Surface(
-            color = if (isUser) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.1f) else MaterialTheme.colorScheme.surfaceVariant,
+            color = if (isUser) {
+                MaterialTheme.colorScheme.primary.copy(alpha = 0.08f)
+            } else {
+                MaterialTheme.colorScheme.surface.copy(alpha = 0.4f)
+            },
             shape = RoundedCornerShape(
-                topStart = if (isUser) 12.dp else 2.dp,
-                topEnd = if (isUser) 2.dp else 12.dp,
-                bottomStart = 12.dp,
-                bottomEnd = 12.dp
+                topStart = if (isUser) 16.dp else 4.dp,
+                topEnd = if (isUser) 4.dp else 16.dp,
+                bottomStart = 16.dp,
+                bottomEnd = 16.dp
             ),
-            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.1f)),
-            modifier = Modifier.widthIn(max = 320.dp)
+            border = BorderStroke(
+                width = 0.5.dp,
+                color = if (isUser) {
+                    MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
+                } else {
+                    MaterialTheme.colorScheme.outline.copy(alpha = 0.1f)
+                }
+            ),
+            modifier = Modifier
+                .widthIn(max = 320.dp)
+                .graphicsLayer {
+                    shadowElevation = 2f
+                    shape = RoundedCornerShape(
+                        topStart = if (isUser) 16.dp else 4.dp,
+                        topEnd = if (isUser) 4.dp else 16.dp,
+                        bottomStart = 16.dp,
+                        bottomEnd = 16.dp
+                    )
+                    clip = true
+                }
         ) {
             // DIRECT_CONTENT: Removed intermediate Box for flatter hierarchy
             if (isUser) {
@@ -197,11 +219,12 @@ private fun AssistantContent(message: ChatMessage) {
             h2 = KiriTypography.headlineMedium.copy(color = MaterialTheme.colorScheme.onSurface),
             paragraph = KiriTypography.bodyMedium.copy(
                 color = MaterialTheme.colorScheme.onSurface,
-                lineHeight = 26.sp
+                lineHeight = 26.sp,
+                letterSpacing = 0.2.sp
             ),
             code = KiriTypography.labelMedium.copy(
                 color = MaterialTheme.colorScheme.onSurface,
-                background = MaterialTheme.colorScheme.surface
+                background = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
             )
         )
         val markdownColors = markdownColor(
