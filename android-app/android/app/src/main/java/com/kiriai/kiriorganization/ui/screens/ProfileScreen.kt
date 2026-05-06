@@ -31,6 +31,9 @@ import com.kiriai.kiriorganization.ui.viewmodels.AuthViewModel
 import com.kiriai.kiriorganization.ui.viewmodels.ChatViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.foundation.isSystemInDarkTheme
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
@@ -42,6 +45,14 @@ fun ProfileScreen(
     val state by chatViewModel.uiState.collectAsStateWithLifecycle()
     val authUiState by authViewModel.uiState.collectAsStateWithLifecycle()
     var name by remember { mutableStateOf(state.user?.name ?: "") }
+    val isDark = isSystemInDarkTheme()
+
+    val backgroundBrush = Brush.verticalGradient(
+        colors = listOf(
+            VelvetBlack,
+            if (isDark) DeepSpaceBlue else Color(0xFF111111)
+        )
+    )
     
     LaunchedEffect(state.user?.name) {
         state.user?.name?.let { name = it }
@@ -57,18 +68,19 @@ fun ProfileScreen(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = VelvetBlack,
+                    containerColor = Color.Transparent,
                     titleContentColor = ShowroomWhite,
                     navigationIconContentColor = ShowroomWhite
                 )
             )
         },
-        containerColor = VelvetBlack
+        containerColor = Color.Transparent
     ) { padding ->
         Column(
             modifier = Modifier
-                .padding(padding)
                 .fillMaxSize()
+                .background(backgroundBrush)
+                .padding(padding)
                 .verticalScroll(rememberScrollState())
                 .padding(24.dp)
         ) {
@@ -81,11 +93,11 @@ fun ProfileScreen(
             Spacer(modifier = Modifier.height(32.dp))
             
             // Profile Card
-            Card(
+            Surface(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = DarkGray),
-                border = BorderStroke(1.dp, SilverMist.copy(alpha = 0.1f))
+                shape = RoundedCornerShape(24.dp),
+                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.4f),
+                border = BorderStroke(0.5.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.15f))
             ) {
                 Column(modifier = Modifier.padding(24.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -155,11 +167,11 @@ fun ProfileScreen(
             Spacer(modifier = Modifier.height(24.dp))
             
             // App Management Card
-            Card(
+            Surface(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = DarkGray),
-                border = BorderStroke(1.dp, SilverMist.copy(alpha = 0.1f))
+                shape = RoundedCornerShape(24.dp),
+                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.4f),
+                border = BorderStroke(0.5.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.15f))
             ) {
                 Column(modifier = Modifier.padding(24.dp)) {
                     Text(
@@ -222,11 +234,11 @@ fun ProfileScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             // App Details Card
-            Card(
+            Surface(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = DarkGray),
-                border = BorderStroke(1.dp, SilverMist.copy(alpha = 0.1f))
+                shape = RoundedCornerShape(24.dp),
+                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.4f),
+                border = BorderStroke(0.5.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.15f))
             ) {
                 Column(modifier = Modifier.padding(24.dp)) {
                     Text(
@@ -260,7 +272,8 @@ fun ProfileScreen(
                 },
                 containerColor = Color.Transparent,
                 contentColor = ErrorCrimson,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().height(56.dp),
+                border = BorderStroke(1.dp, ErrorCrimson.copy(alpha = 0.3f))
             )
         }
     }
