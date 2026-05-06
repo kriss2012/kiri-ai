@@ -1,6 +1,7 @@
 package com.kiriai.kiriorganization.ui.screens
 
 import android.widget.Toast
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -26,6 +27,9 @@ import coil.compose.AsyncImage
 import com.kiriai.kiriorganization.ui.components.KiriButton
 import com.kiriai.kiriorganization.ui.theme.*
 
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.foundation.isSystemInDarkTheme
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ImageLabScreen(navController: NavController) {
@@ -33,6 +37,14 @@ fun ImageLabScreen(navController: NavController) {
     var isGenerating by remember { mutableStateOf(false) }
     var imageUrl by remember { mutableStateOf<String?>(null) }
     val context = LocalContext.current
+    val isDark = isSystemInDarkTheme()
+
+    val backgroundBrush = Brush.verticalGradient(
+        colors = listOf(
+            VelvetBlack,
+            if (isDark) DeepSpaceBlue else Color(0xFF111111)
+        )
+    )
 
     Scaffold(
         topBar = {
@@ -43,42 +55,49 @@ fun ImageLabScreen(navController: NavController) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = VelvetBlack, titleContentColor = ShowroomWhite)
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent, titleContentColor = ShowroomWhite)
             )
         },
-        containerColor = VelvetBlack
+        containerColor = Color.Transparent
     ) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .background(backgroundBrush)
                 .padding(padding)
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Display Area
-            Box(
+            Surface(
                 modifier = Modifier
                     .weight(1f)
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .background(DarkGray)
-                    .padding(8.dp),
-                contentAlignment = Alignment.Center
+                    .fillMaxWidth(),
+                shape = RoundedCornerShape(24.dp),
+                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.4f),
+                border = BorderStroke(0.5.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.15f))
             ) {
-                if (isGenerating) {
-                    CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
-                } else if (imageUrl != null) {
-                    AsyncImage(
-                        model = imageUrl,
-                        contentDescription = "Generated Image",
-                        modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(8.dp)),
-                        contentScale = ContentScale.Fit
-                    )
-                } else {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Icon(Icons.Default.Image, contentDescription = null, tint = SilverMist, modifier = Modifier.size(48.dp))
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text("WAITING_FOR_PROMPT...", style = KiriTypography.labelSmall, color = SilverMist)
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(8.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    if (isGenerating) {
+                        CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                    } else if (imageUrl != null) {
+                        AsyncImage(
+                            model = imageUrl,
+                            contentDescription = "Generated Image",
+                            modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp)),
+                            contentScale = ContentScale.Fit
+                        )
+                    } else {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Icon(Icons.Default.Image, contentDescription = null, tint = SilverMist, modifier = Modifier.size(48.dp))
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text("WAITING_FOR_PROMPT...", style = KiriTypography.labelSmall, color = SilverMist)
+                        }
                     }
                 }
             }
@@ -90,23 +109,25 @@ fun ImageLabScreen(navController: NavController) {
                 value = prompt,
                 onValueChange = { prompt = it },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Describe the image...", style = KiriTypography.bodyMedium, color = SilverMist) },
+                placeholder = { Text("DESCRIBE_IMAGE...", style = KiriTypography.labelMedium, color = SilverMist.copy(alpha = 0.5f)) },
                 textStyle = KiriTypography.bodyMedium.copy(color = ShowroomWhite),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = ShowroomWhite,
-                    unfocusedBorderColor = SilverMist.copy(alpha = 0.3f),
+                    focusedBorderColor = ShowroomWhite.copy(alpha = 0.8f),
+                    unfocusedBorderColor = SilverMist.copy(alpha = 0.2f),
+                    focusedContainerColor = ShowroomWhite.copy(alpha = 0.05f),
+                    unfocusedContainerColor = ShowroomWhite.copy(alpha = 0.02f),
                     cursorColor = ShowroomWhite,
                     focusedTextColor = ShowroomWhite,
                     unfocusedTextColor = ShowroomWhite
                 ),
-                shape = RoundedCornerShape(8.dp),
+                shape = RoundedCornerShape(16.dp),
                 maxLines = 3
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
             KiriButton(
-                text = if (isGenerating) "GENERATING..." else "GENERATE",
+                text = if (isGenerating) "GENERATING..." else "GENERATE_ARTIFACT",
                 onClick = { 
                     isGenerating = true
                     // Simulate generation for now or connect to API if ViewModel is ready
@@ -115,7 +136,7 @@ fun ImageLabScreen(navController: NavController) {
                         Toast.makeText(context, "API_CONNECTION_PENDING", Toast.LENGTH_LONG).show()
                     }, 2000)
                 },
-                modifier = Modifier.fillMaxWidth().height(50.dp),
+                modifier = Modifier.fillMaxWidth().height(56.dp),
                 enabled = prompt.isNotBlank() && !isGenerating
             )
         }

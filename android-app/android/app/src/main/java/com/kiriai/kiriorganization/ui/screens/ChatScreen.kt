@@ -51,6 +51,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
  * Optimized for architectural stability and technical flair.
  */
 
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.TileMode
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScreen(
@@ -271,7 +275,7 @@ fun ChatScreen(
                     title = { 
                         Text(
                             state.currentTitle.uppercase(), 
-                            style = KiriTypography.labelLarge,
+                            style = KiriTypography.labelLarge.copy(letterSpacing = 2.sp),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         ) 
@@ -297,7 +301,7 @@ fun ChatScreen(
                         }
                     },
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.background,
+                        containerColor = MaterialTheme.colorScheme.background.copy(alpha = 0.8f),
                         titleContentColor = MaterialTheme.colorScheme.onBackground,
                         navigationIconContentColor = MaterialTheme.colorScheme.onBackground,
                         actionIconContentColor = MaterialTheme.colorScheme.onBackground
@@ -307,11 +311,19 @@ fun ChatScreen(
             bottomBar = {
                 // Moved into content for better IME control
             },
-            containerColor = MaterialTheme.colorScheme.background
+            containerColor = Color.Transparent
         ) { padding ->
+            val backgroundGradient = Brush.verticalGradient(
+                colors = listOf(
+                    MaterialTheme.colorScheme.background,
+                    if (isSystemInDarkTheme()) DeepSpaceBlue else MaterialTheme.colorScheme.background
+                )
+            )
+
             Column(
                 modifier = Modifier
                     .fillMaxSize()
+                    .background(backgroundGradient)
                     .padding(padding)
                     .imePadding() // Handles keyboard
             ) {
@@ -382,16 +394,26 @@ fun ChatScreen(
                 }
 
                 // Chat Input Bar at the bottom of the Column
-                ChatInputBar(
-                    message = state.inputMessage,
-                    onMessageChange = { viewModel.onMessageChange(it) },
-                    onSend = { viewModel.sendMessage() },
-                    onAttachClick = { filePickerLauncher.launch("*/*") },
-                    selectedFileUri = state.selectedFileUri,
-                    selectedFileName = state.selectedFileName,
-                    onClearFile = { viewModel.clearSelectedFile() },
-                    isSending = state.isSending
-                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(Color.Transparent, MaterialTheme.colorScheme.background.copy(alpha = 0.4f))
+                            )
+                        )
+                ) {
+                    ChatInputBar(
+                        message = state.inputMessage,
+                        onMessageChange = { viewModel.onMessageChange(it) },
+                        onSend = { viewModel.sendMessage() },
+                        onAttachClick = { filePickerLauncher.launch("*/*") },
+                        selectedFileUri = state.selectedFileUri,
+                        selectedFileName = state.selectedFileName,
+                        onClearFile = { viewModel.clearSelectedFile() },
+                        isSending = state.isSending
+                    )
+                }
             }
         }
     }

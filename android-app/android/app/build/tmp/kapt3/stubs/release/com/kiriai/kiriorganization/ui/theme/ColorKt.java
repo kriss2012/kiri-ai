@@ -1,6 +1,6 @@
 package com.kiriai.kiriorganization.ui.theme;
 
-@kotlin.Metadata(mv = {1, 9, 0}, k = 2, xi = 48, d1 = {"\u0000\u0012\n\u0000\n\u0002\u0018\u0002\n\u0002\b$\n\u0002\u0018\u0002\n\u0002\b\u000f\"\u0013\u0010\u0000\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u0002\u0010\u0003\"\u0013\u0010\u0005\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u0006\u0010\u0003\"\u0013\u0010\u0007\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\b\u0010\u0003\"\u0013\u0010\t\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\n\u0010\u0003\"\u0013\u0010\u000b\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\f\u0010\u0003\"\u0013\u0010\r\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u000e\u0010\u0003\"\u0013\u0010\u000f\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u0010\u0010\u0003\"\u0013\u0010\u0011\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u0012\u0010\u0003\"\u0013\u0010\u0013\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u0014\u0010\u0003\"\u0013\u0010\u0015\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u0016\u0010\u0003\"\u0013\u0010\u0017\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u0018\u0010\u0003\"\u0013\u0010\u0019\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u001a\u0010\u0003\"\u0013\u0010\u001b\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u001c\u0010\u0003\"\u0013\u0010\u001d\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u001e\u0010\u0003\"\u0013\u0010\u001f\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b \u0010\u0003\"\u0013\u0010!\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\"\u0010\u0003\"\u0013\u0010#\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b$\u0010\u0003\"\u0011\u0010%\u001a\u00020&\u00a2\u0006\b\n\u0000\u001a\u0004\b\'\u0010(\"\u0013\u0010)\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b*\u0010\u0003\"\u0013\u0010+\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b,\u0010\u0003\"\u0013\u0010-\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b.\u0010\u0003\"\u0013\u0010/\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b0\u0010\u0003\"\u0013\u00101\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b2\u0010\u0003\"\u0013\u00103\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b4\u0010\u0003\u00a8\u00065"}, d2 = {"ActiveOverlay", "Landroidx/compose/ui/graphics/Color;", "getActiveOverlay", "()J", "J", "AnthropicNearBlack", "getAnthropicNearBlack", "BorderCream", "getBorderCream", "CharcoalWarm", "getCharcoalWarm", "DarkGray", "getDarkGray", "ErrorCrimson", "getErrorCrimson", "HoverOverlay", "getHoverOverlay", "Ivory", "getIvory", "KiriBackground", "getKiriBackground", "KiriError", "getKiriError", "KiriPrimary", "getKiriPrimary", "KiriSecondary", "getKiriSecondary", "KiriSurface", "getKiriSurface", "LogoGradient", "getLogoGradient", "ObsidianSurface", "getObsidianSurface", "OliveGray", "getOliveGray", "Parchment", "getParchment", "SerifFont", "Landroidx/compose/ui/text/font/GenericFontFamily;", "getSerifFont", "()Landroidx/compose/ui/text/font/GenericFontFamily;", "ShowroomWhite", "getShowroomWhite", "SilverMist", "getSilverMist", "StoneGray", "getStoneGray", "TerracottaBrand", "getTerracottaBrand", "VelvetBlack", "getVelvetBlack", "WarmSand", "getWarmSand", "app_release"})
+@kotlin.Metadata(mv = {1, 9, 0}, k = 2, xi = 48, d1 = {"\u0000\u0012\n\u0000\n\u0002\u0018\u0002\n\u0002\b0\n\u0002\u0018\u0002\n\u0002\b\u0011\"\u0013\u0010\u0000\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u0002\u0010\u0003\"\u0013\u0010\u0005\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u0006\u0010\u0003\"\u0013\u0010\u0007\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\b\u0010\u0003\"\u0013\u0010\t\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\n\u0010\u0003\"\u0013\u0010\u000b\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\f\u0010\u0003\"\u0013\u0010\r\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u000e\u0010\u0003\"\u0013\u0010\u000f\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u0010\u0010\u0003\"\u0013\u0010\u0011\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u0012\u0010\u0003\"\u0013\u0010\u0013\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u0014\u0010\u0003\"\u0013\u0010\u0015\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u0016\u0010\u0003\"\u0013\u0010\u0017\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u0018\u0010\u0003\"\u0013\u0010\u0019\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u001a\u0010\u0003\"\u0013\u0010\u001b\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u001c\u0010\u0003\"\u0013\u0010\u001d\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\u001e\u0010\u0003\"\u0013\u0010\u001f\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b \u0010\u0003\"\u0013\u0010!\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b\"\u0010\u0003\"\u0013\u0010#\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b$\u0010\u0003\"\u0013\u0010%\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b&\u0010\u0003\"\u0013\u0010\'\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b(\u0010\u0003\"\u0013\u0010)\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b*\u0010\u0003\"\u0013\u0010+\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b,\u0010\u0003\"\u0013\u0010-\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b.\u0010\u0003\"\u0013\u0010/\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b0\u0010\u0003\"\u0011\u00101\u001a\u000202\u00a2\u0006\b\n\u0000\u001a\u0004\b3\u00104\"\u0013\u00105\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b6\u0010\u0003\"\u0013\u00107\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b8\u0010\u0003\"\u0013\u00109\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b:\u0010\u0003\"\u0013\u0010;\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b<\u0010\u0003\"\u0013\u0010=\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b>\u0010\u0003\"\u0013\u0010?\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\b@\u0010\u0003\"\u0013\u0010A\u001a\u00020\u0001\u00a2\u0006\n\n\u0002\u0010\u0004\u001a\u0004\bB\u0010\u0003\u00a8\u0006C"}, d2 = {"ActiveOverlay", "Landroidx/compose/ui/graphics/Color;", "getActiveOverlay", "()J", "J", "AnthropicNearBlack", "getAnthropicNearBlack", "BorderCream", "getBorderCream", "CharcoalWarm", "getCharcoalWarm", "DarkGray", "getDarkGray", "DeepSpaceBlue", "getDeepSpaceBlue", "ErrorCrimson", "getErrorCrimson", "GlassBlack", "getGlassBlack", "GlassBorderBlack", "getGlassBorderBlack", "GlassBorderWhite", "getGlassBorderWhite", "GlassWhite", "getGlassWhite", "HoverOverlay", "getHoverOverlay", "Ivory", "getIvory", "KiriBackground", "getKiriBackground", "KiriError", "getKiriError", "KiriPrimary", "getKiriPrimary", "KiriSecondary", "getKiriSecondary", "KiriSurface", "getKiriSurface", "LogoGradient", "getLogoGradient", "MidnightGrey", "getMidnightGrey", "ObsidianSurface", "getObsidianSurface", "OliveGray", "getOliveGray", "Parchment", "getParchment", "SerifFont", "Landroidx/compose/ui/text/font/GenericFontFamily;", "getSerifFont", "()Landroidx/compose/ui/text/font/GenericFontFamily;", "ShowroomWhite", "getShowroomWhite", "SilverMist", "getSilverMist", "StarlightBlue", "getStarlightBlue", "StoneGray", "getStoneGray", "TerracottaBrand", "getTerracottaBrand", "VelvetBlack", "getVelvetBlack", "WarmSand", "getWarmSand", "app_release"})
 public final class ColorKt {
     
     /**
@@ -34,6 +34,13 @@ public final class ColorKt {
     private static final long ObsidianSurface = 0L;
     private static final long HoverOverlay = 0L;
     private static final long ActiveOverlay = 0L;
+    private static final long GlassWhite = 0L;
+    private static final long GlassBlack = 0L;
+    private static final long GlassBorderWhite = 0L;
+    private static final long GlassBorderBlack = 0L;
+    private static final long DeepSpaceBlue = 0L;
+    private static final long MidnightGrey = 0L;
+    private static final long StarlightBlue = 0L;
     
     /**
      * Bugatti Design System Palette
@@ -135,6 +142,34 @@ public final class ColorKt {
     }
     
     public static final long getActiveOverlay() {
+        return 0L;
+    }
+    
+    public static final long getGlassWhite() {
+        return 0L;
+    }
+    
+    public static final long getGlassBlack() {
+        return 0L;
+    }
+    
+    public static final long getGlassBorderWhite() {
+        return 0L;
+    }
+    
+    public static final long getGlassBorderBlack() {
+        return 0L;
+    }
+    
+    public static final long getDeepSpaceBlue() {
+        return 0L;
+    }
+    
+    public static final long getMidnightGrey() {
+        return 0L;
+    }
+    
+    public static final long getStarlightBlue() {
         return 0L;
     }
 }

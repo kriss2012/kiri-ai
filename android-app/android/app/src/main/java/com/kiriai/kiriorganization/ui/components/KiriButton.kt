@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.dp
 import com.kiriai.kiriorganization.ui.theme.*
 
@@ -28,37 +29,38 @@ fun KiriButton(
     containerColor: Color = Color.Transparent,
     contentColor: Color = ShowroomWhite,
     isLoading: Boolean = false,
-    shape: Shape = CircleShape, // 9999px Pill
-    border: BorderStroke? = BorderStroke(1.dp, ShowroomWhite)
+    shape: Shape = RoundedCornerShape(12.dp),
+    border: BorderStroke? = BorderStroke(1.dp, ShowroomWhite.copy(alpha = 0.8f))
 ) {
-    Button(
+    Surface(
         onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
-            .height(48.dp), // Bugatti standard pill height
+            .height(52.dp),
         enabled = enabled && !isLoading,
         shape = shape,
-        contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = Color.Transparent,
-            disabledContentColor = SilverMist
-        ),
+        color = containerColor,
         border = border,
-        elevation = ButtonDefaults.buttonElevation(defaultElevation = 0.dp)
     ) {
-        if (isLoading) {
-            CircularProgressIndicator(
-                modifier = Modifier.size(20.dp),
-                color = contentColor,
-                strokeWidth = 2.dp
-            )
-        } else {
-            Text(
-                text = text.uppercase(),
-                style = KiriTypography.labelLarge.copy(color = contentColor)
-            )
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = androidx.compose.ui.Alignment.Center
+        ) {
+            if (isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(20.dp),
+                    color = contentColor,
+                    strokeWidth = 2.dp
+                )
+            } else {
+                Text(
+                    text = text.uppercase(),
+                    style = KiriTypography.labelLarge.copy(
+                        color = contentColor,
+                        letterSpacing = 1.sp
+                    )
+                )
+            }
         }
     }
 }

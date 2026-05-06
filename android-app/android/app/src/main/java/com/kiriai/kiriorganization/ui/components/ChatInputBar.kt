@@ -2,6 +2,7 @@ package com.kiriai.kiriorganization.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -122,10 +123,15 @@ fun ChatInputBar(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .weight(1f)
-                    .heightIn(min = 48.dp)
+                    .heightIn(min = 52.dp)
                     .background(
-                        color = colorScheme.surfaceVariant,
-                        shape = RoundedCornerShape(24.dp)
+                        color = colorScheme.surface.copy(alpha = 0.6f),
+                        shape = RoundedCornerShape(26.dp)
+                    )
+                    .border(
+                        width = 0.5.dp,
+                        color = colorScheme.outline.copy(alpha = 0.15f),
+                        shape = RoundedCornerShape(26.dp)
                     )
                     .padding(horizontal = 8.dp)
             ) {

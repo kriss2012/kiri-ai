@@ -26,17 +26,28 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
  * Bugatti Showroom Login
  */
 
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.foundation.isSystemInDarkTheme
+
 @Composable
 fun LoginScreen(
     navController: NavController,
     viewModel: AuthViewModel = hiltViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val isDark = isSystemInDarkTheme()
+
+    val backgroundBrush = Brush.verticalGradient(
+        colors = listOf(
+            VelvetBlack,
+            if (isDark) DeepSpaceBlue else Color(0xFF111111)
+        )
+    )
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(VelvetBlack)
+            .background(backgroundBrush)
             .padding(32.dp),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Center
@@ -99,7 +110,8 @@ fun LoginScreen(
                     }
                 }
             },
-            isLoading = state.isLoading
+            isLoading = state.isLoading,
+            modifier = Modifier.fillMaxWidth().height(56.dp)
         )
         
         Spacer(modifier = Modifier.height(32.dp))
