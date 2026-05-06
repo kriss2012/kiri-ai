@@ -32,10 +32,21 @@ import com.kiriai.kiriorganization.ui.theme.*
  * Focused on silent luxury and high-performance branding.
  */
 
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.foundation.isSystemInDarkTheme
+
 @Composable
 fun LandingScreen(navController: NavController) {
     val scrollState = rememberScrollState()
     var startAnimation by remember { mutableStateOf(false) }
+    val isDark = isSystemInDarkTheme()
+
+    val backgroundBrush = Brush.verticalGradient(
+        colors = listOf(
+            VelvetBlack,
+            if (isDark) DeepSpaceBlue else Color(0xFF111111)
+        )
+    )
 
     LaunchedEffect(Unit) {
         startAnimation = true
@@ -44,7 +55,7 @@ fun LandingScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(VelvetBlack)
+            .background(backgroundBrush)
             .verticalScroll(scrollState)
             .padding(horizontal = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
