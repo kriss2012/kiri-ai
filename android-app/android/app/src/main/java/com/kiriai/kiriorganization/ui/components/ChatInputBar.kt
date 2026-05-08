@@ -17,6 +17,8 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -118,19 +120,23 @@ fun ChatInputBar(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
         ) {
-            // Main Input Pill
+            // GLASS_INPUT_PILL: Implementing Glassmorphism
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .weight(1f)
                     .heightIn(min = 52.dp)
+                    .graphicsLayer {
+                        clip = true
+                        shape = RoundedCornerShape(26.dp)
+                    }
                     .background(
-                        color = colorScheme.surface.copy(alpha = 0.6f),
+                        color = if (isSystemInDarkTheme()) GlassBlack.copy(alpha = 0.4f) else Color.White.copy(alpha = 0.7f),
                         shape = RoundedCornerShape(26.dp)
                     )
                     .border(
                         width = 0.5.dp,
-                        color = colorScheme.outline.copy(alpha = 0.15f),
+                        brush = SolidColor(if (isSystemInDarkTheme()) GlassBorderWhite else GlassBorderBlack.copy(alpha = 0.1f)),
                         shape = RoundedCornerShape(26.dp)
                     )
                     .padding(horizontal = 8.dp)
