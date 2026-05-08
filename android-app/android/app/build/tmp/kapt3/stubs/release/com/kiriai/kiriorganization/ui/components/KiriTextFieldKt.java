@@ -4,12 +4,7 @@ package com.kiriai.kiriorganization.ui.components;
 public final class KiriTextFieldKt {
     
     /**
-     * Bugatti Monogram Input Field
-     *
-     * Aesthetic:
-     * - Technical Monochrome (#000000 / #FFFFFF)
-     * - 6px subtle corner radius
-     * - Monospace CAPS label
+     * Bugatti Monogram Input Field - Glassmorphism Enhanced
      */
     @kotlin.OptIn(markerClass = {androidx.compose.material3.ExperimentalMaterial3Api.class})
     @androidx.compose.runtime.Composable()
