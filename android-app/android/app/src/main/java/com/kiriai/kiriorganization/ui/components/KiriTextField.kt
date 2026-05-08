@@ -1,5 +1,6 @@
 package com.kiriai.kiriorganization.ui.components
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,12 +19,7 @@ import androidx.compose.ui.unit.sp
 import com.kiriai.kiriorganization.ui.theme.*
 
 /**
- * Bugatti Monogram Input Field
- * 
- * Aesthetic:
- * - Technical Monochrome (#000000 / #FFFFFF)
- * - 6px subtle corner radius
- * - Monospace CAPS label
+ * Bugatti Monogram Input Field - Glassmorphism Enhanced
  */
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,6 +35,8 @@ fun KiriTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default
 ) {
+    val isDark = isSystemInDarkTheme()
+    
     Column(modifier = modifier) {
         // Technical Mono Label
         Text(
@@ -62,13 +60,13 @@ fun KiriTextField(
             keyboardOptions = keyboardOptions,
             shape = RoundedCornerShape(12.dp),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
-                unfocusedBorderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
-                focusedContainerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.3f),
-                unfocusedContainerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.1f),
-                cursorColor = MaterialTheme.colorScheme.primary,
-                focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+                focusedBorderColor = (if (isDark) ShowroomWhite else VelvetBlack).copy(alpha = 0.6f),
+                unfocusedBorderColor = (if (isDark) GlassBorderWhite else GlassBorderBlack).copy(alpha = 0.1f),
+                focusedContainerColor = (if (isDark) GlassBlack else GlassWhite).copy(alpha = 0.2f),
+                unfocusedContainerColor = (if (isDark) GlassBlack else GlassWhite).copy(alpha = 0.05f),
+                cursorColor = if (isDark) ShowroomWhite else VelvetBlack,
+                focusedTextColor = if (isDark) ShowroomWhite else VelvetBlack,
+                unfocusedTextColor = if (isDark) ShowroomWhite else VelvetBlack,
                 errorBorderColor = MaterialTheme.colorScheme.error
             ),
             singleLine = true,
@@ -77,7 +75,7 @@ fun KiriTextField(
         if (isError && errorMessage != null) {
             Text(
                 text = errorMessage.uppercase(),
-                color = SilverMist,
+                color = if (isDark) ShowroomWhite else Color.Red,
                 style = KiriTypography.labelMedium,
                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
             )
