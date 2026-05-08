@@ -1,5 +1,6 @@
 package com.kiriai.kiriorganization.ui.components
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -14,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.kiriai.kiriorganization.ui.theme.*
 
 /**
- * Bugatti Design System Buttons
+ * Bugatti Design System Buttons - Glassmorphism Enhanced
  * 
  * Primary: White Outlined Pill (9999px radius)
  * Secondary: Technical Gray Outline (6px radius)
@@ -27,11 +28,15 @@ fun KiriButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     containerColor: Color = Color.Transparent,
-    contentColor: Color = ShowroomWhite,
+    contentColor: Color? = null,
     isLoading: Boolean = false,
     shape: Shape = RoundedCornerShape(12.dp),
-    border: BorderStroke? = BorderStroke(1.dp, ShowroomWhite.copy(alpha = 0.8f))
+    border: BorderStroke? = null
 ) {
+    val isDark = isSystemInDarkTheme()
+    val finalContentColor = contentColor ?: (if (isDark) ShowroomWhite else VelvetBlack)
+    val finalBorder = border ?: BorderStroke(1.dp, finalContentColor.copy(alpha = 0.8f))
+
     Surface(
         onClick = onClick,
         modifier = modifier
@@ -40,7 +45,7 @@ fun KiriButton(
         enabled = enabled && !isLoading,
         shape = shape,
         color = containerColor,
-        border = border,
+        border = finalBorder,
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -49,14 +54,14 @@ fun KiriButton(
             if (isLoading) {
                 CircularProgressIndicator(
                     modifier = Modifier.size(20.dp),
-                    color = contentColor,
+                    color = finalContentColor,
                     strokeWidth = 2.dp
                 )
             } else {
                 Text(
                     text = text.uppercase(),
                     style = KiriTypography.labelLarge.copy(
-                        color = contentColor,
+                        color = finalContentColor,
                         letterSpacing = 1.sp
                     )
                 )

@@ -52,17 +52,6 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
         startKiriService()
     }
 
-    /**
-     * ARCHITECTURAL_STABILITY_NOTICE
-     * This application uses a flat, technical design system to prevent native rendering
-     * recursion crashes (dispatchGetDisplayList). 
-     * 
-     * CORE_GUIDELINES:
-     * 1. Avoid nesting NavHosts or multiple Scaffolds.
-     * 2. Ensure all screens handle WindowInsets (IME, status, and navigation bars) at the root.
-     * 3. chat-related components must use explicit drawing layers (graphicsLayer).
-     */
-
     private fun startKiriService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val hasNotify = checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) == android.content.pm.PackageManager.PERMISSION_GRANTED
@@ -72,7 +61,6 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             val hasDataSync = checkSelfPermission(android.Manifest.permission.FOREGROUND_SERVICE_DATA_SYNC) == android.content.pm.PackageManager.PERMISSION_GRANTED
             if (!hasDataSync) {
-                // We request it in requestPermissions() but here we guard the service start
                 return
             }
         }
@@ -86,12 +74,11 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
 
     override fun onNewIntent(intent: android.content.Intent) {
         super.onNewIntent(intent)
-        setIntent(intent) // Essential for LaunchedEffect(intent) to pick up new intent
+        setIntent(intent) 
     }
 
     override fun onResume() {
         super.onResume()
-        // Reset the 6-hour inactivity timer when user opens the app
         val request = OneTimeWorkRequestBuilder<InactivityWorker>()
             .setInitialDelay(6, TimeUnit.HOURS)
             .build()
@@ -109,7 +96,6 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
         requestPermissions()
         WindowCompat.setDecorFitsSystemWindows(window, false)
         val lastCrash = com.kiriai.kiriorganization.utils.KiriCrashHandler.getAndClearLastCrash(this)
-        android.util.Log.d("Kiri_DEBUG", "MainActivity: onCreate - lastCrash detected=${lastCrash != null}")
 
         setContent {
             val viewModel: MainViewModel = hiltViewModel()
@@ -123,7 +109,6 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
 
                     val startDestination by viewModel.startDestination.collectAsState()
                     val startDest = startDestination
-                    android.util.Log.d("Kiri_DEBUG", "MainActivity: Start destination resolved to: $startDest")
                     
                     Surface(
                         modifier = Modifier.fillMaxSize(),
@@ -132,12 +117,20 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                         if (startDest != null) {
                             val navController = rememberNavController()
 
+                            // Deep Link handling
                             LaunchedEffect(intent) {
                                 val conversationId = intent?.getStringExtra("CONVERSATION_ID")
                                 if (!conversationId.isNullOrBlank()) {
                                     navController.navigate("chat?id=$conversationId") {
                                         launchSingleTop = true
                                     }
+                                }
+                            }
+
+                            // Navigation Sync: If startDest changes (e.g. logout), navigate
+                            LaunchedEffect(startDest) {
+                                navController.navigate(startDest) {
+                                    popUpTo(0) { inclusive = true }
                                 }
                             }
 
@@ -178,7 +171,7 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
         if (showDialog.value) {
             androidx.compose.material3.AlertDialog(
                 onDismissRequest = { showDialog.value = false },
-                containerColor = VelvetBlack,
+                containerColor = VelvetBlack.copy(alpha = 0.9f), // Subtle glass effect
                 titleContentColor = ShowroomWhite,
                 textContentColor = ShowroomWhite,
                 title = { Text("KIRI // SYSTEM_ERROR", style = KiriTypography.labelLarge) },
@@ -215,6 +208,7 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
             requestPermissionLauncher.launch(permissions.toTypedArray())
         }
     }
+
     override fun onPaymentSuccess(razorpayPaymentId: String?, paymentData: PaymentData?) {
         paymentData?.let {
             subscriptionViewModel.onPaymentSuccess(

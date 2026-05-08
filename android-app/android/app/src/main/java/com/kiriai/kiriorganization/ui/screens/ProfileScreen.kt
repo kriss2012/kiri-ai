@@ -1,9 +1,15 @@
 package com.kiriai.kiriorganization.ui.screens
 
+import android.net.Uri
 import android.widget.Toast
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -17,22 +23,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.kiriai.kiriorganization.ui.components.KiriButton
 import com.kiriai.kiriorganization.ui.components.KiriTextField
 import com.kiriai.kiriorganization.ui.theme.*
 import com.kiriai.kiriorganization.ui.viewmodels.AuthViewModel
 import com.kiriai.kiriorganization.ui.viewmodels.ChatViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-
-import androidx.compose.ui.graphics.TileMode
-import androidx.compose.foundation.isSystemInDarkTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,11 +50,18 @@ fun ProfileScreen(
     var name by remember { mutableStateOf(state.user?.name ?: "") }
     val isDark = isSystemInDarkTheme()
 
+    // THEME_ANIMATION_ENGINE: Consistent with ChatScreen
+    val animatedBgStart by animateColorAsState(
+        targetValue = if (isDark) DeepSpaceBlue else Color(0xFFF0F2F5),
+        animationSpec = tween(1200, easing = LinearOutSlowInEasing), label = "bgStart"
+    )
+    val animatedBgEnd by animateColorAsState(
+        targetValue = if (isDark) VelvetBlack else Color(0xFFFFFFFF),
+        animationSpec = tween(1200, easing = LinearOutSlowInEasing), label = "bgEnd"
+    )
+
     val backgroundBrush = Brush.verticalGradient(
-        colors = listOf(
-            VelvetBlack,
-            if (isDark) DeepSpaceBlue else Color(0xFF111111)
-        )
+        colors = listOf(animatedBgStart, animatedBgEnd)
     )
     
     LaunchedEffect(state.user?.name) {
@@ -69,8 +79,8 @@ fun ProfileScreen(
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = Color.Transparent,
-                    titleContentColor = ShowroomWhite,
-                    navigationIconContentColor = ShowroomWhite
+                    titleContentColor = if (isDark) ShowroomWhite else VelvetBlack,
+                    navigationIconContentColor = if (isDark) ShowroomWhite else VelvetBlack
                 )
             )
         },
@@ -92,171 +102,230 @@ fun ProfileScreen(
             
             Spacer(modifier = Modifier.height(32.dp))
             
-            // Profile Card
-            Surface(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(24.dp),
-                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.4f),
-                border = BorderStroke(0.5.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.15f))
+            // Profile Card (Glassmorphism)
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .graphicsLayer {
+                        clip = true
+                        shape = RoundedCornerShape(24.dp)
+                    }
+                    .background(
+                        color = (if (isDark) GlassBlack else GlassWhite).copy(alpha = 0.15f),
+                        shape = RoundedCornerShape(24.dp)
+                    )
+                    .border(
+                        width = 0.5.dp,
+                        brush = Brush.linearGradient(
+                            listOf(
+                                if (isDark) GlassBorderWhite else GlassBorderBlack.copy(alpha = 0.1f),
+                                Color.Transparent
+                            )
+                        ),
+                        shape = RoundedCornerShape(24.dp)
+                    )
+                    .padding(24.dp)
             ) {
-                Column(modifier = Modifier.padding(24.dp)) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Box(
-                            modifier = Modifier
-                                .size(72.dp)
-                                .background(Brush.linearGradient(listOf(VelvetBlack, DarkGray)), CircleShape),
-                            contentAlignment = Alignment.Center
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(
+                        modifier = Modifier
+                            .size(72.dp)
+                            .background(
+                                Brush.linearGradient(
+                                    listOf(
+                                        if (isDark) VelvetBlack else Color.White,
+                                        if (isDark) DarkGray else SilverMist.copy(alpha = 0.2f)
+                                    )
+                                ), 
+                                CircleShape
+                            )
+                            .border(0.5.dp, if (isDark) GlassBorderWhite else GlassBorderBlack.copy(alpha = 0.1f), CircleShape),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = state.user?.name?.take(1) ?: "U",
+                            style = KiriTypography.headlineLarge.copy(color = if (isDark) ShowroomWhite else VelvetBlack)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.width(20.dp))
+                    Column {
+                        Text(
+                            text = state.user?.name ?: "USER_NULL",
+                            style = KiriTypography.labelLarge,
+                            color = if (isDark) ShowroomWhite else VelvetBlack
+                        )
+                        Text(
+                            text = state.user?.email ?: "IDENTITY_HIDDEN",
+                            style = KiriTypography.bodySmall,
+                            color = SilverMist
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Surface(
+                            color = if (state.user?.isPremium == true) (if (isDark) ShowroomWhite else VelvetBlack).copy(alpha = 0.1f) else (if (isDark) DarkGray else SilverMist.copy(alpha = 0.1f)),
+                            shape = RoundedCornerShape(4.dp),
+                            border = BorderStroke(1.dp, if (state.user?.isPremium == true) (if (isDark) ShowroomWhite else VelvetBlack) else SilverMist.copy(alpha = 0.3f))
                         ) {
                             Text(
-                                text = state.user?.name?.take(1) ?: "U",
-                                style = KiriTypography.headlineLarge.copy(color = ShowroomWhite)
+                                text = state.user?.plan?.uppercase() ?: "FREE_TIER",
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                                style = KiriTypography.labelSmall.copy(color = if (state.user?.isPremium == true) (if (isDark) ShowroomWhite else VelvetBlack) else SilverMist)
                             )
-                        }
-
-                        Spacer(modifier = Modifier.width(20.dp))
-                        Column {
-                            Text(
-                                text = state.user?.name ?: "USER_NULL",
-                                style = KiriTypography.labelLarge,
-                                color = ShowroomWhite
-                            )
-                            Text(
-                                text = state.user?.email ?: "IDENTITY_HIDDEN",
-                                style = KiriTypography.bodySmall,
-                                color = SilverMist
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Surface(
-                                color = if (state.user?.isPremium == true) ShowroomWhite.copy(alpha = 0.1f) else DarkGray,
-                                shape = RoundedCornerShape(4.dp),
-                                border = BorderStroke(1.dp, if (state.user?.isPremium == true) ShowroomWhite else SilverMist.copy(alpha = 0.3f))
-                            ) {
-                                Text(
-                                    text = state.user?.plan?.uppercase() ?: "FREE_TIER",
-                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
-                                    style = KiriTypography.labelSmall.copy(color = if (state.user?.isPremium == true) ShowroomWhite else SilverMist)
-                                )
-                            }
                         }
                     }
-                    
-                    Spacer(modifier = Modifier.height(32.dp))
-                    
-                    KiriTextField(
-                        value = name,
-                        onValueChange = { name = it },
-                        label = "DISPLAY_NAME",
-                        placeholder = "ENTER_NAME"
-                    )
-                    
-                    Spacer(modifier = Modifier.height(24.dp))
-                    
-                    KiriButton(
-                        text = "UPDATE_IDENTITY",
-                        onClick = { 
-                            authViewModel.updateProfile(name) {
-                                Toast.makeText(context, "IDENTITY_SYNCED", Toast.LENGTH_SHORT).show()
-                            }
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                        enabled = !authUiState.isLoading
-                    )
                 }
+                
+                Spacer(modifier = Modifier.height(32.dp))
+                
+                KiriTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = "DISPLAY_NAME",
+                    placeholder = "ENTER_NAME"
+                )
+                
+                Spacer(modifier = Modifier.height(24.dp))
+                
+                KiriButton(
+                    text = "UPDATE_IDENTITY",
+                    onClick = { 
+                        authViewModel.updateProfile(name) {
+                            Toast.makeText(context, "IDENTITY_SYNCED", Toast.LENGTH_SHORT).show()
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = !authUiState.isLoading,
+                    border = BorderStroke(1.dp, (if (isDark) ShowroomWhite else VelvetBlack).copy(alpha = 0.8f)),
+                    contentColor = if (isDark) ShowroomWhite else VelvetBlack
+                )
             }
             
             Spacer(modifier = Modifier.height(24.dp))
             
-            // App Management Card
-            Surface(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(24.dp),
-                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.4f),
-                border = BorderStroke(0.5.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.15f))
-            ) {
-                Column(modifier = Modifier.padding(24.dp)) {
-                    Text(
-                        text = "SYSTEM_CONTROL", 
-                        style = KiriTypography.labelMedium.copy(color = SilverMist),
-                        modifier = Modifier.padding(bottom = 16.dp)
-                    )
-
-                    SettingsRow(
-                        title = "CLEAR_HISTORY",
-                        description = "Purge all conversation logs from secure storage.",
-                        onClick = {
-                            chatViewModel.clearAllHistory {
-                                Toast.makeText(context, "LOGS_WIPED", Toast.LENGTH_SHORT).show()
-                            }
-                        },
-                        icon = Icons.Default.Delete,
-                        contentColor = ErrorCrimson
-                    )
-
-                    HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = SilverMist.copy(alpha = 0.1f))
-
-                    SettingsRow(
-                        title = "SECURITY_MANAGEMENT",
-                        description = "Rotate authentication keys and credentials.",
-                        onClick = {
-                            Toast.makeText(context, "SECURITY_PROTOCOL_ACTIVE", Toast.LENGTH_SHORT).show()
-                        },
-                        icon = Icons.Default.Lock
-                    )
-
-                    HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = SilverMist.copy(alpha = 0.1f))
-
-                    SettingsRow(
-                        title = "HELP_AND_SUPPORT",
-                        description = "Access documentation or contact development team.",
-                        onClick = {
-                            val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse("https://github.com/kriss2012/kiri-ai/issues/18"))
-                            context.startActivity(intent)
-                        },
-                        icon = Icons.Default.Help
-                    )
-
-                    HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = SilverMist.copy(alpha = 0.1f))
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Column {
-                            Text("BUILD_VERSION", style = KiriTypography.labelLarge)
-                            Text("V1.2.3 // STABLE_PRODUCTION", style = KiriTypography.bodySmall)
-                        }
-                        Icon(Icons.Default.Info, contentDescription = null, tint = SilverMist, modifier = Modifier.size(20.dp))
+            // App Management Card (Glassmorphism)
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .graphicsLayer {
+                        clip = true
+                        shape = RoundedCornerShape(24.dp)
                     }
+                    .background(
+                        color = (if (isDark) GlassBlack else GlassWhite).copy(alpha = 0.15f),
+                        shape = RoundedCornerShape(24.dp)
+                    )
+                    .border(
+                        width = 0.5.dp,
+                        brush = Brush.linearGradient(
+                            listOf(
+                                if (isDark) GlassBorderWhite else GlassBorderBlack.copy(alpha = 0.1f),
+                                Color.Transparent
+                            )
+                        ),
+                        shape = RoundedCornerShape(24.dp)
+                    )
+                    .padding(24.dp)
+            ) {
+                Text(
+                    text = "SYSTEM_CONTROL", 
+                    style = KiriTypography.labelMedium.copy(color = SilverMist),
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
+
+                SettingsRow(
+                    title = "CLEAR_HISTORY",
+                    description = "Purge all conversation logs from secure storage.",
+                    onClick = {
+                        chatViewModel.clearAllHistory {
+                            Toast.makeText(context, "LOGS_WIPED", Toast.LENGTH_SHORT).show()
+                        }
+                    },
+                    icon = Icons.Default.Delete,
+                    contentColor = if (isDark) ErrorCrimson else Color(0xFFB00020),
+                    isDark = isDark
+                )
+
+                HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = SilverMist.copy(alpha = 0.1f))
+
+                SettingsRow(
+                    title = "SECURITY_MANAGEMENT",
+                    description = "Rotate authentication keys and credentials.",
+                    onClick = {
+                        Toast.makeText(context, "SECURITY_PROTOCOL_ACTIVE", Toast.LENGTH_SHORT).show()
+                    },
+                    icon = Icons.Default.Lock,
+                    isDark = isDark
+                )
+
+                HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = SilverMist.copy(alpha = 0.1f))
+
+                SettingsRow(
+                    title = "HELP_AND_SUPPORT",
+                    description = "Access documentation or contact development team.",
+                    onClick = {
+                        val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse("https://github.com/kriss2012/kiri-ai/issues/18"))
+                        context.startActivity(intent)
+                    },
+                    icon = Icons.Default.Help,
+                    isDark = isDark
+                )
+
+                HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = SilverMist.copy(alpha = 0.1f))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Text("BUILD_VERSION", style = KiriTypography.labelLarge, color = if (isDark) ShowroomWhite else VelvetBlack)
+                        Text("V1.2.3 // STABLE_PRODUCTION", style = KiriTypography.bodySmall, color = SilverMist)
+                    }
+                    Icon(Icons.Default.Info, contentDescription = null, tint = SilverMist, modifier = Modifier.size(20.dp))
                 }
             }
             
             Spacer(modifier = Modifier.height(24.dp))
 
-            // App Details Card
-            Surface(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(24.dp),
-                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.4f),
-                border = BorderStroke(0.5.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.15f))
+            // App Details Card (Glassmorphism)
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .graphicsLayer {
+                        clip = true
+                        shape = RoundedCornerShape(24.dp)
+                    }
+                    .background(
+                        color = (if (isDark) GlassBlack else GlassWhite).copy(alpha = 0.15f),
+                        shape = RoundedCornerShape(24.dp)
+                    )
+                    .border(
+                        width = 0.5.dp,
+                        brush = Brush.linearGradient(
+                            listOf(
+                                if (isDark) GlassBorderWhite else GlassBorderBlack.copy(alpha = 0.1f),
+                                Color.Transparent
+                            )
+                        ),
+                        shape = RoundedCornerShape(24.dp)
+                    )
+                    .padding(24.dp)
             ) {
-                Column(modifier = Modifier.padding(24.dp)) {
-                    Text(
-                        text = "TECHNICAL_SPECIFICATIONS", 
-                        style = KiriTypography.labelMedium.copy(color = SilverMist),
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                    Text(
-                        text = "Kiri AI implements a distributed multimodal reasoning architecture using the Bugatti design protocol. System utilizes low-latency fiber-optic routing for neural response generation.",
-                        style = KiriTypography.bodySmall,
-                        color = SilverMist
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        text = "CORE_ENGINE: GEMINI_2.0_FLASH\nREGION: GLOBAL_EDGE\nENCRYPTION: AES_256_ACTIVE",
-                        style = KiriTypography.labelSmall.copy(color = SilverMist, lineHeight = 18.sp)
-                    )
-                }
+                Text(
+                    text = "TECHNICAL_SPECIFICATIONS", 
+                    style = KiriTypography.labelMedium.copy(color = SilverMist),
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+                Text(
+                    text = "Kiri AI implements a distributed multimodal reasoning architecture using the Bugatti design protocol. System utilizes low-latency fiber-optic routing for neural response generation.",
+                    style = KiriTypography.bodySmall,
+                    color = SilverMist
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = "CORE_ENGINE: GEMINI_2.0_FLASH\nREGION: GLOBAL_EDGE\nENCRYPTION: AES_256_ACTIVE",
+                    style = KiriTypography.labelSmall.copy(color = SilverMist, lineHeight = 18.sp)
+                )
             }
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -271,9 +340,9 @@ fun ProfileScreen(
                     }
                 },
                 containerColor = Color.Transparent,
-                contentColor = ErrorCrimson,
+                contentColor = if (isDark) ErrorCrimson else Color(0xFFB00020),
                 modifier = Modifier.fillMaxWidth().height(56.dp),
-                border = BorderStroke(1.dp, ErrorCrimson.copy(alpha = 0.3f))
+                border = BorderStroke(1.dp, (if (isDark) ErrorCrimson else Color(0xFFB00020)).copy(alpha = 0.3f))
             )
         }
     }
@@ -285,8 +354,10 @@ fun SettingsRow(
     description: String,
     onClick: () -> Unit,
     icon: ImageVector,
-    contentColor: Color = ShowroomWhite
+    contentColor: Color? = null,
+    isDark: Boolean = true
 ) {
+    val finalContentColor = contentColor ?: (if (isDark) ShowroomWhite else VelvetBlack)
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -295,9 +366,9 @@ fun SettingsRow(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(modifier = Modifier.weight(1f)) {
-            Text(title, style = KiriTypography.labelLarge, color = contentColor)
+            Text(title, style = KiriTypography.labelLarge, color = finalContentColor)
             Text(description, style = KiriTypography.bodySmall, color = SilverMist)
         }
-        Icon(icon, contentDescription = null, tint = contentColor.copy(alpha = 0.6f), modifier = Modifier.size(20.dp))
+        Icon(icon, contentDescription = null, tint = finalContentColor.copy(alpha = 0.6f), modifier = Modifier.size(20.dp))
     }
 }

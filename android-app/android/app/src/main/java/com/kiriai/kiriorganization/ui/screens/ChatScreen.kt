@@ -5,7 +5,7 @@ import android.provider.OpenableColumns
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.*
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInVertically
@@ -69,11 +69,15 @@ fun ChatScreen(
     val scrollState = rememberLazyListState()
     val context = LocalContext.current
 
-    // Error Handling
+    // Error Handling - Enhanced to suppress Auth errors handled by navigation
     LaunchedEffect(state.error) {
         state.error?.let {
-            // GUIDELINE_COMPLIANCE: Suppress technical errors during Play Store review
-            // Only show user-friendly messages
+            // If the error is about tokens/auth, we let the MainActivity's navigation handle it
+            if (it.contains("token", ignoreCase = true) || it.contains("expired", ignoreCase = true) || it.contains("401")) {
+                android.util.Log.d("Kiri_DEBUG", "ChatScreen: Suppressing auth error toast, redirection expected.")
+                return@let
+            }
+
             val userFriendlyMessage = if (it.contains("API_KEY") || it.contains("HTTP_ERROR") || it.contains("SERVER")) {
                 "Service is currently optimizing. Please try again in a moment."
             } else {
@@ -125,14 +129,34 @@ fun ChatScreen(
         }
     }
 
+    val isDark = isSystemInDarkTheme()
+    
+    // THEME_ANIMATION_ENGINE: Smooth transition between light/dark glass tones
+    val animatedBgStart by animateColorAsState(
+        targetValue = if (isDark) DeepSpaceBlue else Color(0xFFF0F2F5),
+        animationSpec = tween(1200, easing = LinearOutSlowInEasing), label = "bgStart"
+    )
+    val animatedBgEnd by animateColorAsState(
+        targetValue = if (isDark) VelvetBlack else Color(0xFFFFFFFF),
+        animationSpec = tween(1200, easing = LinearOutSlowInEasing), label = "bgEnd"
+    )
+
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet(
-                drawerContainerColor = VelvetBlack,
-                drawerContentColor = ShowroomWhite,
+                drawerContainerColor = (if (isDark) VelvetBlack else Color.White).copy(alpha = 0.85f),
+                drawerContentColor = if (isDark) ShowroomWhite else VelvetBlack,
                 drawerShape = RoundedCornerShape(0.dp),
-                modifier = Modifier.fillMaxHeight().width(300.dp)
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .width(300.dp)
+                    .graphicsLayer { clip = true }
+                    .border(
+                        width = 1.dp, 
+                        brush = Brush.horizontalGradient(listOf(Color.Transparent, if (isDark) GlassBorderWhite else GlassBorderBlack.copy(alpha = 0.1f))),
+                        shape = RoundedCornerShape(0.dp)
+                    )
             ) {
                 Spacer(modifier = Modifier.height(64.dp))
                 Text(
@@ -301,7 +325,7 @@ fun ChatScreen(
                         }
                     },
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.background.copy(alpha = 0.8f),
+                        containerColor = (if (isDark) VelvetBlack else Color.White).copy(alpha = 0.7f),
                         titleContentColor = MaterialTheme.colorScheme.onBackground,
                         navigationIconContentColor = MaterialTheme.colorScheme.onBackground,
                         actionIconContentColor = MaterialTheme.colorScheme.onBackground
@@ -314,10 +338,7 @@ fun ChatScreen(
             containerColor = Color.Transparent
         ) { padding ->
             val backgroundGradient = Brush.verticalGradient(
-                colors = listOf(
-                    MaterialTheme.colorScheme.background,
-                    if (isSystemInDarkTheme()) DeepSpaceBlue else MaterialTheme.colorScheme.background
-                )
+                colors = listOf(animatedBgStart, animatedBgEnd)
             )
 
             Column(
@@ -325,7 +346,7 @@ fun ChatScreen(
                     .fillMaxSize()
                     .background(backgroundGradient)
                     .padding(padding)
-                    .imePadding() // Handles keyboard
+                    .imePadding()
             ) {
 
                 Box(
