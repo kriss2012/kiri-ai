@@ -43,15 +43,19 @@ val ObsidianSurface = Color(0xFF030303)
 val HoverOverlay = Color(0x1AFFFFFF)
 val ActiveOverlay = Color(0x33FFFFFF)
 
-// Glassmorphism Tones
-val GlassWhite = Color(0x1AFFFFFF)
-val GlassBlack = Color(0x33000000)
+// Glassmorphism Tones (Enhanced for Depth)
+val GlassWhite = Color(0x26FFFFFF) // 15% White
+val GlassBlack = Color(0x4D000000) // 30% Black
 val GlassBorderWhite = Color(0x33FFFFFF)
 val GlassBorderBlack = Color(0x1A000000)
+val GlassBackground = Color(0x0DFFFFFF) // 5% White overlay for texture
+val GlassWhiteLight = Color(0x40FFFFFF) // 25% White for light mode surfaces
+val GlassBlackLight = Color(0x0D000000) // 5% Black for light mode depth
 
-// Gradient Accents
-val DeepSpaceBlue = Color(0xFF040B14)
-val MidnightGrey = Color(0xFF0F0F0F)
-val StarlightBlue = Color(0xFF1B2735)
+// Gradient Accents (Cinematic)
+val DeepSpaceBlue = Color(0xFF02060C)
+val MidnightGrey = Color(0xFF080808)
+val StarlightBlue = Color(0xFF0F172A)
+val ElectricBlue = Color(0xFF3B82F6) // For subtle glow effects
 
 // Removed: BrandPink, SoftGray, FocusBlue, BugattiBlue (Brand drift)
