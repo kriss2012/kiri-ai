@@ -141,6 +141,9 @@ class ChatViewModel @Inject constructor(
             .onEach { token ->
                 if (!token.isNullOrBlank()) {
                     loadConversations()
+                } else {
+                    // AUTH_STATE_RESET: Clear any persistent error when the token is purged
+                    _uiState.update { it.copy(error = null, messages = emptyList(), conversations = emptyList()) }
                 }
             }
             .launchIn(viewModelScope)
