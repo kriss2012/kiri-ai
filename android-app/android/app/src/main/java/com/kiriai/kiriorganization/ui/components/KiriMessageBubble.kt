@@ -64,9 +64,10 @@ fun KiriMessageBubble(message: ChatMessage?) {
 
         Surface(
             color = if (isUser) {
-                MaterialTheme.colorScheme.primary.copy(alpha = 0.08f)
+                MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
             } else {
-                MaterialTheme.colorScheme.surface.copy(alpha = 0.4f)
+                if (androidx.compose.foundation.isSystemInDarkTheme()) GlassBlack.copy(alpha = 0.4f) 
+                else Color.White.copy(alpha = 0.7f)
             },
             shape = RoundedCornerShape(
                 topStart = if (isUser) 16.dp else 4.dp,
@@ -77,15 +78,16 @@ fun KiriMessageBubble(message: ChatMessage?) {
             border = BorderStroke(
                 width = 0.5.dp,
                 color = if (isUser) {
-                    MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
+                    MaterialTheme.colorScheme.primary.copy(alpha = 0.2f)
                 } else {
-                    MaterialTheme.colorScheme.outline.copy(alpha = 0.1f)
+                    if (androidx.compose.foundation.isSystemInDarkTheme()) GlassBorderWhite.copy(alpha = 0.2f)
+                    else GlassBorderBlack.copy(alpha = 0.1f)
                 }
             ),
             modifier = Modifier
                 .widthIn(max = 320.dp)
                 .graphicsLayer {
-                    shadowElevation = 2f
+                    shadowElevation = if (isUser) 0f else 4f
                     shape = RoundedCornerShape(
                         topStart = if (isUser) 16.dp else 4.dp,
                         topEnd = if (isUser) 4.dp else 16.dp,
