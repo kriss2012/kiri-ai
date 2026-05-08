@@ -2,38 +2,25 @@ package com.kiriai.kiriorganization.ui.screens
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.kiriai.kiriorganization.R
+import com.kiriai.kiriorganization.ui.components.BugattiLogo
 import com.kiriai.kiriorganization.ui.components.KiriButton
 import com.kiriai.kiriorganization.ui.components.KiriSecondaryButton
-import com.kiriai.kiriorganization.ui.components.BugattiLogo
 import com.kiriai.kiriorganization.ui.theme.*
-
-/**
- * Kiri AI - Landing Screen
- * 
- * Cinematic, monumental landing experience implementing the Bugatti Design System.
- * Focused on silent luxury and high-performance branding.
- */
-
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.foundation.isSystemInDarkTheme
 
 @Composable
 fun LandingScreen(navController: NavController) {
@@ -41,11 +28,18 @@ fun LandingScreen(navController: NavController) {
     var startAnimation by remember { mutableStateOf(false) }
     val isDark = isSystemInDarkTheme()
 
+    // THEME_ANIMATION_ENGINE: Consistent with ChatScreen
+    val animatedBgStart by animateColorAsState(
+        targetValue = if (isDark) DeepSpaceBlue else Color(0xFFF0F2F5),
+        animationSpec = tween(1200, easing = LinearOutSlowInEasing), label = "bgStart"
+    )
+    val animatedBgEnd by animateColorAsState(
+        targetValue = if (isDark) VelvetBlack else Color(0xFFFFFFFF),
+        animationSpec = tween(1200, easing = LinearOutSlowInEasing), label = "bgEnd"
+    )
+
     val backgroundBrush = Brush.verticalGradient(
-        colors = listOf(
-            VelvetBlack,
-            if (isDark) DeepSpaceBlue else Color(0xFF111111)
-        )
+        colors = listOf(animatedBgStart, animatedBgEnd)
     )
 
     LaunchedEffect(Unit) {
@@ -80,7 +74,7 @@ fun LandingScreen(navController: NavController) {
             Text(
                 text = "HYPER-PERFORMANCE REASONING // ATELIER_V1",
                 style = KiriTypography.labelLarge.copy(
-                    color = SilverMist,
+                    color = if (isDark) SilverMist else VelvetBlack.copy(alpha = 0.6f),
                     textAlign = TextAlign.Center,
                     letterSpacing = 4.sp
                 ),
@@ -99,7 +93,7 @@ fun LandingScreen(navController: NavController) {
             Text(
                 text = "HYPER-PERFORMANCE REASONING ENGINE.\nBUILT FOR COUTRE SOLUTIONS.",
                 style = KiriTypography.labelMedium.copy(
-                    color = SilverMist,
+                    color = if (isDark) SilverMist else VelvetBlack.copy(alpha = 0.8f),
                     textAlign = TextAlign.Center,
                     lineHeight = 24.sp
                 ),
@@ -121,7 +115,9 @@ fun LandingScreen(navController: NavController) {
                 KiriButton(
                     text = "ENTER THE ATELIER",
                     onClick = { navController.navigate("register") },
-                    modifier = Modifier.width(280.dp)
+                    modifier = Modifier.width(280.dp),
+                    contentColor = if (isDark) ShowroomWhite else VelvetBlack,
+                    border = androidx.compose.foundation.BorderStroke(1.dp, (if (isDark) ShowroomWhite else VelvetBlack).copy(alpha = 0.8f))
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
