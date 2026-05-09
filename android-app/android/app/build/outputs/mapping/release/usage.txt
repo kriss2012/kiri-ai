@@ -51449,7 +51449,6 @@ androidx.compose.ui.text.font.FontWeight$Companion:
     public static synthetic void getLight$annotations()
     public static synthetic void getMedium$annotations()
     public static synthetic void getNormal$annotations()
-    public final androidx.compose.ui.text.font.FontWeight getSemiBold()
     public static synthetic void getSemiBold$annotations()
     public final androidx.compose.ui.text.font.FontWeight getThin()
     public static synthetic void getThin$annotations()
@@ -51474,7 +51473,6 @@ androidx.compose.ui.text.font.FontWeight:
     public static final synthetic androidx.compose.ui.text.font.FontWeight access$getBlack$cp()
     public static final synthetic androidx.compose.ui.text.font.FontWeight access$getExtraBold$cp()
     public static final synthetic androidx.compose.ui.text.font.FontWeight access$getExtraLight$cp()
-    public static final synthetic androidx.compose.ui.text.font.FontWeight access$getSemiBold$cp()
     public static final synthetic androidx.compose.ui.text.font.FontWeight access$getThin$cp()
     public static final synthetic java.util.List access$getValues$cp()
     public static final synthetic androidx.compose.ui.text.font.FontWeight access$getW100$cp()
@@ -136474,6 +136472,7 @@ androidx.compose.ui.text.font.FontWeight$Companion:
     public static androidx.compose.ui.text.font.FontWeight getLight()
     public static androidx.compose.ui.text.font.FontWeight getMedium()
     public static androidx.compose.ui.text.font.FontWeight getNormal()
+    public static androidx.compose.ui.text.font.FontWeight getSemiBold()
     public static androidx.compose.ui.text.font.FontWeight getW400()
     public static androidx.compose.ui.text.font.FontWeight getW500()
     public static androidx.compose.ui.text.font.FontWeight getW600()
@@ -136482,7 +136481,6 @@ androidx.compose.ui.text.font.FontWeight:
     public static final androidx.compose.ui.text.font.FontWeight$Companion Companion
     public static final androidx.compose.ui.text.font.FontWeight ExtraBold
     public static final androidx.compose.ui.text.font.FontWeight ExtraLight
-    public static final androidx.compose.ui.text.font.FontWeight SemiBold
     public static final androidx.compose.ui.text.font.FontWeight Thin
     public static final androidx.compose.ui.text.font.FontWeight W100
     public static final androidx.compose.ui.text.font.FontWeight W200

@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -161,7 +162,8 @@ fun ChatInputBar(
                         .padding(horizontal = 8.dp, vertical = 12.dp),
                     textStyle = TextStyle(
                         color = colorScheme.onSurface,
-                        fontSize = 16.sp
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium
                     ),
                     cursorBrush = SolidColor(colorScheme.primary),
                     decorationBox = { innerTextField ->
@@ -169,9 +171,10 @@ fun ChatInputBar(
                             Text(
                                 text = "MESSAGE / LOG",
                                 style = TextStyle(
-                                    color = colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                                    color = colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
                                     fontSize = 15.sp,
-                                    letterSpacing = 1.sp
+                                    letterSpacing = 1.sp,
+                                    fontWeight = FontWeight.Bold
                                 )
                             )
                         }

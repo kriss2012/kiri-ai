@@ -55,19 +55,20 @@ fun KiriMessageBubble(message: ChatMessage?) {
         Text(
             text = (if (isUser) "USER // ATELIER" else "KIRI // INTELLIGENCE").uppercase(),
             style = KiriTypography.labelMedium.copy(
-                color = if (isUser) MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f) 
-                        else MaterialTheme.colorScheme.secondary.copy(alpha = 0.8f),
-                letterSpacing = 2.sp
+                color = if (isUser) MaterialTheme.colorScheme.onBackground.copy(alpha = 0.85f) 
+                        else MaterialTheme.colorScheme.primary.copy(alpha = 0.9f),
+                letterSpacing = 2.sp,
+                fontWeight = FontWeight.Bold
             ),
             modifier = Modifier.padding(bottom = 8.dp)
         )
 
         Surface(
             color = if (isUser) {
-                MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
+                MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
             } else {
-                if (androidx.compose.foundation.isSystemInDarkTheme()) GlassBlack.copy(alpha = 0.4f) 
-                else Color.White.copy(alpha = 0.7f)
+                if (androidx.compose.foundation.isSystemInDarkTheme()) GlassBlack.copy(alpha = 0.7f) 
+                else Color.White.copy(alpha = 0.9f)
             },
             shape = RoundedCornerShape(
                 topStart = if (isUser) 16.dp else 4.dp,
@@ -133,7 +134,10 @@ private fun UserContent(content: String) {
         if (textPart.isNotEmpty()) {
             Text(
                 text = textPart,
-                style = KiriTypography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurface)
+                style = KiriTypography.bodyMedium.copy(
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontWeight = FontWeight.Medium
+                )
             )
         }
     }
@@ -177,8 +181,9 @@ private fun AssistantContent(message: ChatMessage) {
                 Text(
                      text = "ANALYSIS_STREAM",
                      style = KiriTypography.labelMedium.copy(
-                         color = SilverMist,
-                         fontSize = 10.sp
+                         color = ShowroomWhite.copy(alpha = 0.7f),
+                         fontSize = 11.sp,
+                         fontWeight = FontWeight.SemiBold
                      )
                 )
                 val modelName = message.model
@@ -221,12 +226,13 @@ private fun AssistantContent(message: ChatMessage) {
             h2 = KiriTypography.headlineMedium.copy(color = MaterialTheme.colorScheme.onSurface),
             paragraph = KiriTypography.bodyMedium.copy(
                 color = MaterialTheme.colorScheme.onSurface,
-                lineHeight = 26.sp,
-                letterSpacing = 0.2.sp
+                lineHeight = 24.sp,
+                letterSpacing = 0.25.sp,
+                fontWeight = FontWeight.Medium
             ),
             code = KiriTypography.labelMedium.copy(
                 color = MaterialTheme.colorScheme.onSurface,
-                background = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+                background = MaterialTheme.colorScheme.surface.copy(alpha = 0.7f)
             )
         )
         val markdownColors = markdownColor(
