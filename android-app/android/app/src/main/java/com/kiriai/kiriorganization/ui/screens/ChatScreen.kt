@@ -129,7 +129,7 @@ fun ChatScreen(
         }
     }
 
-    val isDark = isSystemInDarkTheme()
+    val isDark = LocalThemeMode.current
     
     // THEME_ANIMATION_ENGINE: Smooth transition between light/dark glass tones
     val animatedBgStart by animateColorAsState(
@@ -143,10 +143,11 @@ fun ChatScreen(
 
     ModalNavigationDrawer(
         drawerState = drawerState,
+        scrimColor = Color.Black.copy(alpha = 0.5f),
         drawerContent = {
             ModalDrawerSheet(
-                drawerContainerColor = (if (isDark) VelvetBlack else Color.White).copy(alpha = 0.85f),
-                drawerContentColor = if (isDark) ShowroomWhite else VelvetBlack,
+                drawerContainerColor = (if (isDark) VelvetBlack else Color.White).copy(alpha = 0.95f),
+                drawerContentColor = MaterialTheme.colorScheme.onSurface,
                 drawerShape = RoundedCornerShape(0.dp),
                 modifier = Modifier
                     .fillMaxHeight()
@@ -163,7 +164,7 @@ fun ChatScreen(
                     text = "KIRI // ATELIER",
                     style = KiriTypography.labelLarge,
                     modifier = Modifier.padding(horizontal = 24.dp),
-                    color = ShowroomWhite
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.height(32.dp))
                 
@@ -191,8 +192,8 @@ fun ChatScreen(
                     icon = { Icon(Icons.Default.Chat, contentDescription = null, modifier = Modifier.size(16.dp)) },
                     colors = NavigationDrawerItemDefaults.colors(
                         unselectedContainerColor = Color.Transparent,
-                        selectedContainerColor = DarkGray,
-                        selectedTextColor = ShowroomWhite,
+                        selectedContainerColor = if (isDark) DarkGray else Color.Black.copy(alpha = 0.05f),
+                        selectedTextColor = MaterialTheme.colorScheme.primary,
                         unselectedTextColor = SilverMist
                     ),
                     shape = RoundedCornerShape(0.dp),
@@ -209,7 +210,7 @@ fun ChatScreen(
                     icon = { Icon(Icons.Default.Image, contentDescription = null, modifier = Modifier.size(16.dp)) },
                     colors = NavigationDrawerItemDefaults.colors(
                         unselectedContainerColor = Color.Transparent,
-                        selectedTextColor = ShowroomWhite,
+                        selectedTextColor = MaterialTheme.colorScheme.primary,
                         unselectedTextColor = SilverMist
                     ),
                     shape = RoundedCornerShape(0.dp),
@@ -226,7 +227,7 @@ fun ChatScreen(
                     icon = { Icon(Icons.Default.Code, contentDescription = null, modifier = Modifier.size(16.dp)) },
                     colors = NavigationDrawerItemDefaults.colors(
                         unselectedContainerColor = Color.Transparent,
-                        selectedTextColor = ShowroomWhite,
+                        selectedTextColor = MaterialTheme.colorScheme.primary,
                         unselectedTextColor = SilverMist
                     ),
                     shape = RoundedCornerShape(0.dp),
@@ -262,8 +263,8 @@ fun ChatScreen(
                             },
                             colors = NavigationDrawerItemDefaults.colors(
                                 unselectedContainerColor = Color.Transparent,
-                                selectedContainerColor = DarkGray,
-                                selectedTextColor = ShowroomWhite,
+                                selectedContainerColor = if (isDark) DarkGray else Color.Black.copy(alpha = 0.05f),
+                                selectedTextColor = MaterialTheme.colorScheme.primary,
                                 unselectedTextColor = SilverMist
                             ),
                             shape = RoundedCornerShape(0.dp),
@@ -285,7 +286,7 @@ fun ChatScreen(
                     Text(
                         state.user?.name?.uppercase() ?: "USER_NULL", 
                         style = KiriTypography.labelLarge,
-                        color = ShowroomWhite
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Icon(Icons.Default.Settings, contentDescription = null, tint = SilverMist, modifier = Modifier.size(16.dp))
