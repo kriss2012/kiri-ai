@@ -100,6 +100,8 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
         setContent {
             val viewModel: MainViewModel = hiltViewModel()
             val themeMode by viewModel.isDarkMode.collectAsState()
+            val startDestination by viewModel.startDestination.collectAsState()
+            val navController = rememberNavController()
             
             CompositionLocalProvider(LocalThemeMode provides themeMode) {
                 KiriTheme(darkTheme = themeMode) {
@@ -107,36 +109,39 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                         CrashDialog(lastCrash)
                     }
 
-                    val startDestination by viewModel.startDestination.collectAsState()
-                    val startDest = startDestination
-                    
                     Surface(
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        if (startDest != null) {
-                            val navController = rememberNavController()
-
-                            // Deep Link handling
-                            LaunchedEffect(intent) {
-                                val conversationId = intent?.getStringExtra("CONVERSATION_ID")
-                                if (!conversationId.isNullOrBlank()) {
-                                    navController.navigate("chat?id=$conversationId") {
-                                        launchSingleTop = true
+                        val currentStartDest = startDestination
+                        if (currentStartDest != null) {
+                            // Navigation Sync: Auth-based redirection
+                            // Improved logic to prevent unexpected "blank" screens during transitions.
+                            // We use the same navController instance across the entire session.
+                            LaunchedEffect(currentStartDest) {
+                                val currentRoute = navController.currentBackStackEntry?.destination?.route?.split("?")?.first()
+                                
+                                android.util.Log.d("Kiri_DEBUG", "MainActivity: AuthSync startDest=$currentStartDest current=$currentRoute")
+                                
+                                when {
+                                    currentStartDest == "landing" && (currentRoute != "landing" && currentRoute != "login" && currentRoute != "register" && currentRoute != null) -> {
+                                        android.util.Log.d("Kiri_DEBUG", "MainActivity: Redirecting to landing (Logout)")
+                                        navController.navigate("landing") {
+                                            popUpTo(0) { inclusive = true }
+                                        }
                                     }
-                                }
-                            }
-
-                            // Navigation Sync: If startDest changes (e.g. logout), navigate
-                            LaunchedEffect(startDest) {
-                                navController.navigate(startDest) {
-                                    popUpTo(0) { inclusive = true }
+                                    currentStartDest == "chat" && (currentRoute == "landing" || currentRoute == "login" || currentRoute == "register") -> {
+                                        android.util.Log.d("Kiri_DEBUG", "MainActivity: Redirecting to chat (Login)")
+                                        navController.navigate("chat") {
+                                            popUpTo(0) { inclusive = true }
+                                        }
+                                    }
                                 }
                             }
 
                             NavHost(
                                 navController = navController,
-                                startDestination = startDest
+                                startDestination = currentStartDest
                             ) {
                                 composable("landing") { LandingScreen(navController) }
                                 composable("login") { LoginScreen(navController) }
