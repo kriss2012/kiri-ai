@@ -134,7 +134,10 @@ private fun UserContent(content: String) {
         if (textPart.isNotEmpty()) {
             Text(
                 text = textPart,
-                style = KiriTypography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurface)
+                style = KiriTypography.bodyMedium.copy(
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontWeight = FontWeight.Medium
+                )
             )
         }
     }
