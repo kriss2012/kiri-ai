@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,14 +40,13 @@ class MainViewModel @Inject constructor(
     private fun checkAuthStatus() {
         android.util.Log.d("Kiri_DEBUG", "MainViewModel: Starting auth status observation...")
         viewModelScope.launch {
-            authRepository.token.collect { token ->
-                android.util.Log.d("Kiri_DEBUG", "MainViewModel: Token state changed. Active=${token != null}")
-                if (token != null) {
-                    _startDestination.value = "chat"
-                } else {
-                    _startDestination.value = "landing"
+            authRepository.token
+                .map { if (it != null) "chat" else "landing" }
+                .distinctUntilChanged()
+                .collect { dest ->
+                    android.util.Log.d("Kiri_DEBUG", "MainViewModel: Destination determined: $dest")
+                    _startDestination.value = dest
                 }
-            }
         }
     }
 }
