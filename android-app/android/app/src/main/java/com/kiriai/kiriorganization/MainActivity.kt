@@ -31,6 +31,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.kiriai.kiriorganization.ui.screens.*
 import com.kiriai.kiriorganization.ui.theme.*
 import com.kiriai.kiriorganization.ui.viewmodels.MainViewModel
@@ -99,9 +100,10 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
 
         setContent {
             val viewModel: MainViewModel = hiltViewModel()
-            val themeMode by viewModel.isDarkMode.collectAsState()
-            val startDestination by viewModel.startDestination.collectAsState()
+            val themeMode by viewModel.isDarkMode.collectAsStateWithLifecycle()
+            val startDestination by viewModel.startDestination.collectAsStateWithLifecycle()
             val navController = rememberNavController()
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
             
             CompositionLocalProvider(LocalThemeMode provides themeMode) {
                 KiriTheme(darkTheme = themeMode) {
@@ -113,25 +115,22 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        val currentStartDest = startDestination
-                        if (currentStartDest != null) {
-                            // Navigation Sync: Auth-based redirection
-                            // Improved logic to prevent unexpected "blank" screens during transitions.
-                            // We use the same navController instance across the entire session.
-                            LaunchedEffect(currentStartDest) {
+                        // REFINED_NAVIGATION_SYNC: We use a stable start destination and 
+                        // only perform redirects when the auth state explicitly changes.
+                        val initialRoute = remember(startDestination) { startDestination }
+                        
+                        if (initialRoute != null) {
+                            LaunchedEffect(startDestination) {
                                 val currentRoute = navController.currentBackStackEntry?.destination?.route?.split("?")?.first()
-                                
-                                android.util.Log.d("Kiri_DEBUG", "MainActivity: AuthSync startDest=$currentStartDest current=$currentRoute")
+                                android.util.Log.d("Kiri_DEBUG", "MainActivity: AuthSync destination=$startDestination currentRoute=$currentRoute")
                                 
                                 when {
-                                    currentStartDest == "landing" && (currentRoute != "landing" && currentRoute != "login" && currentRoute != "register" && currentRoute != null) -> {
-                                        android.util.Log.d("Kiri_DEBUG", "MainActivity: Redirecting to landing (Logout)")
+                                    startDestination == "landing" && currentRoute != "landing" && currentRoute != "login" && currentRoute != "register" -> {
                                         navController.navigate("landing") {
                                             popUpTo(0) { inclusive = true }
                                         }
                                     }
-                                    currentStartDest == "chat" && (currentRoute == "landing" || currentRoute == "login" || currentRoute == "register") -> {
-                                        android.util.Log.d("Kiri_DEBUG", "MainActivity: Redirecting to chat (Login)")
+                                    startDestination == "chat" && (currentRoute == "landing" || currentRoute == "login" || currentRoute == "register") -> {
                                         navController.navigate("chat") {
                                             popUpTo(0) { inclusive = true }
                                         }
@@ -141,7 +140,7 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
 
                             NavHost(
                                 navController = navController,
-                                startDestination = currentStartDest
+                                startDestination = if (initialRoute == "chat") "chat?id={id}" else initialRoute
                             ) {
                                 composable("landing") { LandingScreen(navController) }
                                 composable("login") { LoginScreen(navController) }
@@ -161,6 +160,11 @@ class MainActivity : ComponentActivity(), PaymentResultWithDataListener {
                                 composable("profile") { ProfileScreen(navController) }
                                 composable("pricing") { PricingScreen(navController, subscriptionViewModel) }
                                 composable("imagelab") { ImageLabScreen(navController) }
+                            }
+                        } else {
+                            // Initializing State: Prevent blank screen by showing a subtle loader
+                            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                                CircularProgressIndicator(color = MaterialTheme.colorScheme.primary, strokeWidth = 2.dp)
                             }
                         }
                     }
