@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: kiricar-backend
+    env: docker
+    dockerfilePath: backend/Dockerfile
+    dockerContext: backend
+    plan: free
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false # Set your MongoDB connection URI in the Render dashboard
+      - key: JWT_SECRET
+        sync: false # Set a secure random JWT secret in the Render dashboard
+      - key: GEMINI_API_KEY
+        sync: false # Set your Google Gemini API Key in the Render dashboard
