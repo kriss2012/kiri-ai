@@ -55,6 +55,14 @@ app.use('/api/auth', authLimiter, require('./routes/auth'));
 app.use('/api/chat', require('./routes/chat'));
 app.use('/api/image', require('./routes/image'));
 app.use('/api/subscription', require('./routes/subscription'));
+// Keep-alive/ping endpoint for cron jobs to prevent Render cold starts
+app.get('/ping', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'pong',
+    timestamp: new Date().toISOString()
+  });
+});
 
 app.get('/api/health', async (req, res) => {
   try {
