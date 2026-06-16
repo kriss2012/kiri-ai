@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: kiricar-backend
+    name: kiri-ai-backend
     env: docker
     dockerfilePath: backend/Dockerfile
     dockerContext: backend
