@@ -90,7 +90,7 @@ data class ChatDetail(
 data class ChatRequest(
     val message: String,
     val conversationId: String? = null,
-    val model: String = "google/gemini-2.0-flash-001"
+    val model: String = "google/gemini-3.5-flash"
 )
 
 data class ChatResponse(

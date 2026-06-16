@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const { protect, checkRequestLimit } = require('../middleware/auth');
 const Conversation = require('../models/Conversation');
 const multer = require('multer');
-const { routeModel } = require('../utils/modelRouter');
+const { routeModel, mapModel } = require('../utils/modelRouter');
 const upload = multer({
   limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
   storage: multer.memoryStorage()
@@ -36,6 +36,7 @@ const sanitizeConvId = (id) =>
 router.post('/message', protect, checkRequestLimit, async (req, res) => {
   try {
     let { message, conversationId, model } = req.body;
+    model = mapModel(model);
     const safeConvId = sanitizeConvId(conversationId);
 
     if (!message || !message.trim()) {
@@ -43,7 +44,7 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
     }
 
     // Smart Routing: If model is default or auto, determine the best one
-    if (!model || model === 'auto' || model === 'google/gemini-2.0-flash-001') {
+    if (!model || model === 'auto' || model === 'google/gemini-2.0-flash-001' || model === 'google/gemini-3.5-flash') {
       const suggestedModel = routeModel(message, req.user.tier);
       if (suggestedModel === 'IMAGE_GENERATION_PENDING') {
         return res.json({ 
@@ -106,7 +107,7 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
     while (retries > 0) {
       try {
         completion = await openai.chat.completions.create({
-          model: model || 'google/gemini-2.0-flash-001',
+          model: model,
           messages: history,
           temperature: 0.7,
           max_tokens: 2048
@@ -156,7 +157,8 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
 // @POST /api/chat/message/upload - Send message with file to Gemini
 router.post('/message/upload', protect, checkRequestLimit, upload.single('file'), async (req, res) => {
   try {
-    const { content, conversationId, model = 'google/gemini-2.0-flash-001' } = req.body;
+    let { content, conversationId, model } = req.body;
+    model = mapModel(model);
     const safeConvId = sanitizeConvId(conversationId);
     const file = req.file;
 
@@ -218,7 +220,7 @@ router.post('/message/upload', protect, checkRequestLimit, upload.single('file')
     const openai = getOpenAIClient();
 
     const completion = await openai.chat.completions.create({
-      model: model || 'google/gemini-2.0-flash-001',
+      model: model,
       messages: history,
       temperature: 0.7,
       max_tokens: 2048
@@ -264,7 +266,8 @@ router.post('/message/upload', protect, checkRequestLimit, upload.single('file')
 // @POST /api/chat/stream - Streaming response
 router.post('/stream', protect, checkRequestLimit, async (req, res) => {
   try {
-    const { message, conversationId, model = 'google/gemini-2.0-flash-001' } = req.body;
+    let { message, conversationId, model } = req.body;
+    model = mapModel(model);
     const safeConvId = sanitizeConvId(conversationId);
 
     if (!message || !message.trim()) {
@@ -302,7 +305,7 @@ router.post('/stream', protect, checkRequestLimit, async (req, res) => {
 
     let fullResponse = '';
     const stream = await openai.chat.completions.create({
-      model: model || 'google/gemini-2.0-flash-001',
+      model: model,
       messages: history,
       stream: true,
       max_tokens: 2048
