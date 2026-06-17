@@ -2,94 +2,114 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 24px;
+  padding: 14px 28px;
   background-color: var(--accent);
-  color: var(--bg-primary);
-  border-radius: 4px;
+  color: var(--color-black);
+  border-radius: var(--border-radius);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  border: 1px solid transparent;
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--shadow-color);
+  transition: all var(--transition-speed) ease;
   width: 100%;
 }
 
 .kiri-button:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
+  transform: translate(-2px, -2px);
+  box-shadow: calc(var(--shadow-offset) + 2px) calc(var(--shadow-offset) + 2px) 0px 0px var(--shadow-color);
+}
+
+.kiri-button:active {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: 0px 0px 0px 0px var(--shadow-color);
 }
 
 .kiri-button:disabled {
-  opacity: 0.5;
+  background-color: var(--color-light-gray);
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+  box-shadow: none;
   cursor: not-allowed;
+  transform: none;
 }
 
 .kiri-button.outline {
-  background-color: transparent;
+  background-color: var(--bg-surface);
   color: var(--text-primary);
-  border-color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.kiri-button.outline:hover {
+  background-color: var(--accent);
 }
 
 .kiri-input-group {
   margin-bottom: 24px;
+  width: 100%;
 }
 
 .kiri-label {
   display: block;
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
+  font-weight: 800;
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   margin-bottom: 8px;
   letter-spacing: 1px;
 }
 
 .kiri-input {
   width: 100%;
-  padding: 12px 16px;
-  background-color: var(--color-surface-variant);
-  border: 1px solid transparent;
-  border-radius: 4px;
+  padding: 14px 18px;
+  background-color: var(--bg-surface);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
   color: var(--text-primary);
   font-size: 16px;
+  font-weight: 700;
+  transition: background-color var(--transition-speed) ease;
 }
 
 .kiri-input:focus {
-  border-color: var(--text-secondary);
+  background-color: var(--accent);
 }
 
 .avatar {
   background-color: var(--accent);
-  color: var(--bg-primary);
+  color: var(--color-black);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  font-weight: 600;
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid var(--border-color);
+  font-weight: 900;
 }
 
 .kiri-status-banner {
-  padding: 12px 20px;
+  padding: 14px 20px;
   margin-bottom: 24px;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--shadow-color);
   font-size: 13px;
+  font-weight: 900;
   text-align: center;
   letter-spacing: 1px;
 }
 
 .kiri-status-banner.success {
-  background-color: rgba(76, 175, 80, 0.1);
-  color: #4caf50;
-  border: 1px solid rgba(76, 175, 80, 0.2);
+  background-color: var(--accent);
+  color: var(--color-black);
 }
 
 .kiri-status-banner.error {
-  background-color: rgba(176, 0, 32, 0.1);
-  color: var(--color-error);
-  border: 1px solid rgba(176, 0, 32, 0.2);
+  background-color: var(--color-error);
+  color: var(--color-white);
 }
 
 .kiri-status-banner.info {
-  background-color: var(--color-surface-variant);
-  color: var(--text-secondary);
-  border: 1px solid var(--text-secondary);
+  background-color: var(--color-light-gray);
+  color: var(--color-black);
 }

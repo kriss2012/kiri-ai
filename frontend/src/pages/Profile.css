@@ -34,27 +34,35 @@
   width: 120px;
   height: 120px;
   background-color: var(--accent);
-  color: var(--bg-primary);
-  border-radius: 50%;
+  color: var(--color-black);
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--shadow-color);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 48px;
-  font-weight: 600;
+  font-weight: 900;
   margin-bottom: 24px;
+  text-transform: uppercase;
 }
 
 .profile-sidebar h2 {
-  font-size: 20px;
+  font-size: 24px;
+  font-weight: 900;
   margin-bottom: 8px;
 }
 
 .user-badge {
   font-size: 11px;
-  background: var(--color-surface-variant);
+  font-weight: 900;
+  background: var(--color-yellow-dark);
+  color: var(--color-black);
+  border: 2px solid var(--border-color);
   padding: 4px 12px;
   border-radius: 4px;
   margin-bottom: 32px;
+  letter-spacing: 1px;
 }
 
 .profile-nav {
@@ -69,23 +77,26 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 16px;
-  border-radius: 4px;
+  padding: 14px 16px;
+  border-radius: var(--border-radius);
+  border: 2px solid transparent;
   cursor: pointer;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font-size: 13px;
+  font-weight: 800;
   text-align: left;
+  transition: all var(--transition-speed) ease;
 }
 
 .nav-item:hover {
-  background-color: var(--color-surface-variant);
-  color: var(--text-primary);
+  background-color: var(--color-light-gray);
+  border-color: var(--border-color);
 }
 
 .nav-item.active {
-  background-color: var(--color-surface-variant);
-  color: var(--text-primary);
-  border-left: 3px solid var(--accent);
+  background-color: var(--accent);
+  border-color: var(--border-color);
+  box-shadow: 2px 2px 0px 0px var(--shadow-color);
 }
 
 .profile-main {
@@ -97,36 +108,40 @@
 
 .status-msg {
   padding: 16px;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: 2px 2px 0px 0px var(--shadow-color);
   font-size: 12px;
+  font-weight: 800;
   margin-bottom: 24px;
 }
 
 .status-msg.success {
-  background: rgba(0, 128, 0, 0.1);
-  color: #008000;
-  border-left: 3px solid #008000;
+  background: var(--accent);
+  color: var(--color-black);
 }
 
 .status-msg.error {
-  background: rgba(176, 0, 32, 0.1);
-  color: var(--color-error);
-  border-left: 3px solid var(--color-error);
+  background: var(--color-error);
+  color: var(--color-white);
 }
 
 .profile-section h3 {
-  font-size: 14px;
-  color: var(--text-secondary);
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--text-primary);
   margin-bottom: 24px;
-  border-bottom: 1px solid var(--color-surface-variant);
+  border-bottom: var(--border-width) solid var(--border-color);
   padding-bottom: 8px;
+  text-transform: uppercase;
 }
 
 .status-card {
   background-color: var(--bg-surface);
-  border: 1px solid var(--color-surface-variant);
+  border: var(--border-width) solid var(--border-color);
   padding: 24px;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--shadow-color);
   margin-bottom: 24px;
 }
 
@@ -136,26 +151,36 @@
   margin-bottom: 12px;
 }
 
+.status-item:last-child {
+  margin-bottom: 0;
+}
+
 .status-item .label {
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 800;
   color: var(--text-secondary);
 }
 
 .status-item .value {
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 900;
 }
 
 .status-item .value.active {
-  color: #008000;
+  color: var(--color-black);
+  background: var(--accent);
+  border: 1.5px solid var(--border-color);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
 
 .danger-zone {
   margin-top: 48px;
   padding: 24px;
-  border: 1px solid rgba(176, 0, 32, 0.2);
-  background: rgba(176, 0, 32, 0.05);
-  border-radius: 4px;
+  border: var(--border-width) solid var(--border-color);
+  background: var(--bg-surface);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--shadow-color);
 }
 
 .danger-zone h4 {
@@ -163,30 +188,38 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 900;
   margin-bottom: 12px;
+  text-transform: uppercase;
 }
 
 .mono-desc {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 700;
   color: var(--text-secondary);
   margin-bottom: 20px;
 }
 
 .delete-acc-btn {
-  background: transparent;
-  border: 1px solid var(--color-error);
+  background: var(--color-white);
+  border: var(--border-width) solid var(--border-color);
   color: var(--color-error);
-  padding: 10px 20px;
-  border-radius: 4px;
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 900;
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--shadow-color);
+  transition: all var(--transition-speed) ease;
 }
 
 .delete-acc-btn:hover {
   background: var(--color-error);
   color: white;
+  transform: translate(-1px, -1px);
+  box-shadow: calc(var(--shadow-offset) + 1px) calc(var(--shadow-offset) + 1px) 0px 0px var(--shadow-color);
 }
 
 @media (max-width: 900px) {
