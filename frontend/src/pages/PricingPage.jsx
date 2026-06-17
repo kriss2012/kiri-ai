@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Check, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { KiriButton, KiriStatus } from '../components/Shared/KiriUI';
@@ -37,6 +38,7 @@ const PRICING_PLANS = [
 ];
 
 const PricingPage = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState({ message: '', type: 'info' });
@@ -69,7 +71,7 @@ const PricingPage = () => {
               });
               if (verifyRes.data.success) {
                 setStatus({ message: 'DATA_SYNC_COMPLETE: Subscription Activated.', type: 'success' });
-                setTimeout(() => window.location.href = '/', 2000);
+                setTimeout(() => navigate('/'), 2000);
               }
             } catch (err) {
               setStatus({ message: 'VERIFICATION_ERROR: Payment sync failed.', type: 'error' });
