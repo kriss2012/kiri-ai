@@ -16,3 +16,15 @@ services:
         sync: false # Set a secure random JWT secret in the Render dashboard
       - key: GEMINI_API_KEY
         sync: false # Set your Google Gemini API Key in the Render dashboard
+
+  - type: web
+    name: kiri-ai-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
