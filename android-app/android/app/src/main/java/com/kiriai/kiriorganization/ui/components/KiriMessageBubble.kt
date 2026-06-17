@@ -3,6 +3,7 @@ package com.kiriai.kiriorganization.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -29,14 +30,7 @@ import com.mikepenz.markdown.m3.markdownColor
 import com.mikepenz.markdown.m3.markdownTypography
 
 /**
- * KiriMessageBubble Component // PROJECT_ZERO_G REINFORCED
- * 
- * Implements the Bugatti Design System's monochromatic aesthetic.
- * 
- * STABILITY_CONTROLS:
- * 1. graphicsLayer isolation to prevent dispatchGetDisplayList recursion.
- * 2. Immutable monochromatic palette to reduce Draw-phase color resolution steps.
- * 3. Segmented intelligence interpretation.
+ * Neo-Brutalist Message Bubble with high contrast, offset shadows, and 3dp borders.
  */
 @Composable
 fun KiriMessageBubble(message: ChatMessage?) {
@@ -45,64 +39,52 @@ fun KiriMessageBubble(message: ChatMessage?) {
     val isUser = role == "user"
     val content = message.content ?: ""
 
+    val bubbleBg = if (isUser) BrutalistYellow else BrutalistWhite
+    val textColor = BrutalistBlack
+    val shadowColor = BrutalistBlack
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 12.dp, horizontal = 16.dp),
         horizontalAlignment = if (isUser) Alignment.End else Alignment.Start
     ) {
-        // MONOGRAM_IDENTIFIER (Technical Header)
+        // MONOGRAM_IDENTIFIER
         Text(
             text = (if (isUser) "USER // ATELIER" else "KIRI // INTELLIGENCE").uppercase(),
             style = KiriTypography.labelMedium.copy(
-                color = if (isUser) MaterialTheme.colorScheme.onBackground.copy(alpha = 0.85f) 
-                        else MaterialTheme.colorScheme.primary.copy(alpha = 0.9f),
+                color = BrutalistBlack,
                 letterSpacing = 2.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Black
             ),
             modifier = Modifier.padding(bottom = 8.dp)
         )
 
-        Surface(
-            color = if (isUser) {
-                MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
-            } else {
-                if (androidx.compose.foundation.isSystemInDarkTheme()) GlassBlack.copy(alpha = 0.7f) 
-                else Color.White.copy(alpha = 0.9f)
-            },
-            shape = RoundedCornerShape(
-                topStart = if (isUser) 16.dp else 4.dp,
-                topEnd = if (isUser) 4.dp else 16.dp,
-                bottomStart = 16.dp,
-                bottomEnd = 16.dp
-            ),
-            border = BorderStroke(
-                width = 0.5.dp,
-                color = if (isUser) {
-                    MaterialTheme.colorScheme.primary.copy(alpha = 0.2f)
-                } else {
-                    if (androidx.compose.foundation.isSystemInDarkTheme()) GlassBorderWhite.copy(alpha = 0.2f)
-                    else GlassBorderBlack.copy(alpha = 0.1f)
-                }
-            ),
-            modifier = Modifier
-                .widthIn(max = 320.dp)
-                .graphicsLayer {
-                    shadowElevation = if (isUser) 0f else 4f
-                    shape = RoundedCornerShape(
-                        topStart = if (isUser) 16.dp else 4.dp,
-                        topEnd = if (isUser) 4.dp else 16.dp,
-                        bottomStart = 16.dp,
-                        bottomEnd = 16.dp
-                    )
-                    clip = true
-                }
+        Box(
+            modifier = Modifier.widthIn(max = 320.dp)
         ) {
-            // DIRECT_CONTENT: Removed intermediate Box for flatter hierarchy
-            if (isUser) {
-                UserContent(content)
-            } else {
-                AssistantContent(message)
+            // Offset Shadow
+            Box(
+                modifier = Modifier
+                    .matchParentSize()
+                    .offset(x = 4.dp, y = 4.dp)
+                    .background(color = shadowColor, shape = RoundedCornerShape(8.dp))
+                    .border(width = 3.dp, color = BrutalistBlack, shape = RoundedCornerShape(8.dp))
+            )
+
+            // Foreground container
+            Box(
+                modifier = Modifier
+                    .widthIn(max = 320.dp)
+                    .background(bubbleBg, RoundedCornerShape(8.dp))
+                    .border(width = 3.dp, color = BrutalistBlack, shape = RoundedCornerShape(8.dp))
+                    .padding(16.dp)
+            ) {
+                if (isUser) {
+                    UserContent(content)
+                } else {
+                    AssistantContent(message)
+                }
             }
         }
     }
@@ -114,29 +96,28 @@ private fun UserContent(content: String) {
     val match = imageRegex.find(content)
     val textPart = if (match != null) content.replace(match.value, "").trim() else content
 
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column {
         match?.let {
             val uriString = it.groupValues[1]
-            // We need to ensure the URI is something coil can handle.
-            // If it's a content URI or file URI, it should work if permissions are right.
             AsyncImage(
                 model = uriString,
                 contentDescription = "Attachment",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .heightIn(max = 320.dp) // Increased height for better visibility
-                    .clip(RoundedCornerShape(8.dp))
-                    .padding(bottom = 12.dp)
-                    .background(Color.Black.copy(alpha = 0.05f)),
-                contentScale = ContentScale.Fit // Changed to Fit to see the whole image
+                    .heightIn(max = 320.dp)
+                    .clip(RoundedCornerShape(4.dp))
+                    .border(2.dp, BrutalistBlack, RoundedCornerShape(4.dp))
+                    .padding(bottom = 8.dp)
+                    .background(BrutalistLightGray),
+                contentScale = ContentScale.Fit
             )
         }
         if (textPart.isNotEmpty()) {
             Text(
                 text = textPart,
                 style = KiriTypography.bodyMedium.copy(
-                    color = MaterialTheme.colorScheme.onSurface,
-                    fontWeight = FontWeight.Medium
+                    color = BrutalistBlack,
+                    fontWeight = FontWeight.Bold
                 )
             )
         }
@@ -147,31 +128,8 @@ private fun UserContent(content: String) {
 private fun AssistantContent(message: ChatMessage) {
     val content = message.content ?: ""
     val clipboard = LocalClipboardManager.current
-    
-    // Segment logic for professional segmentation (Bugatti Intelligence Protocol)
-    val segments = remember(content) {
-        val list = mutableListOf<Pair<String, String>>()
-        var current = content
-        
-        val types = listOf(
-            "CONTEXT" to "TECHNICAL_CONTEXT",
-            "OUTPUT" to "REASONING_OUTPUT",
-            "NEXT_STEPS" to "ACTIONABLE_PROJECTION"
-        )
-        
-        types.forEach { (marker, label) ->
-            if (current.contains("${marker}:")) {
-                val parts = current.split("${marker}:", limit = 2)
-                if (parts[0].trim().isNotEmpty()) list.add("STREAM" to parts[0].trim())
-                current = parts[1]
-                list.add(label to "") // Marker
-            }
-        }
-        if (current.trim().isNotEmpty()) list.add("DATA" to current.trim())
-        list
-    }
 
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column {
         Row(
             modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -181,26 +139,27 @@ private fun AssistantContent(message: ChatMessage) {
                 Text(
                      text = "ANALYSIS_STREAM",
                      style = KiriTypography.labelMedium.copy(
-                         color = ShowroomWhite.copy(alpha = 0.7f),
+                         color = BrutalistDarkGray,
                          fontSize = 11.sp,
-                         fontWeight = FontWeight.SemiBold
+                         fontWeight = FontWeight.Black
                      )
                 )
                 val modelName = message.model
                 if (modelName != null) {
                     val shortModelName = modelName.split("/").last().uppercase()
-                    Surface(
-                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
-                        shape = RoundedCornerShape(4.dp),
-                        modifier = Modifier.padding(start = 8.dp)
+                    Box(
+                        modifier = Modifier
+                            .padding(start = 8.dp)
+                            .background(BrutalistYellowDark, RoundedCornerShape(4.dp))
+                            .border(1.5.dp, BrutalistBlack, RoundedCornerShape(4.dp))
+                            .padding(horizontal = 6.dp, vertical = 2.dp)
                     ) {
                         Text(
                             text = shortModelName,
-                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
                             style = KiriTypography.labelSmall.copy(
-                                color = MaterialTheme.colorScheme.primary,
+                                color = BrutalistBlack,
                                 fontSize = 8.sp,
-                                fontWeight = FontWeight.Bold
+                                fontWeight = FontWeight.Black
                             )
                         )
                     }
@@ -208,38 +167,36 @@ private fun AssistantContent(message: ChatMessage) {
             }
             IconButton(
                 onClick = { clipboard.setText(AnnotatedString(content)) },
-                modifier = Modifier.size(20.dp)
+                modifier = Modifier.size(24.dp)
             ) {
                 Icon(
                     Icons.Default.ContentCopy, 
                     contentDescription = "Copy", 
-                    tint = SilverMist, 
-                    modifier = Modifier.size(16.dp)
+                    tint = BrutalistBlack, 
+                    modifier = Modifier.size(18.dp)
                 )
             }
         }
 
-        // STABILITY_OPTIMIZATION: markdownTypography and markdownColor are @Composable 
-        // functions that already handle internal remembering. Call them directly.
         val markdownTypography = markdownTypography(
-            h1 = KiriTypography.headlineLarge.copy(color = MaterialTheme.colorScheme.onSurface),
-            h2 = KiriTypography.headlineMedium.copy(color = MaterialTheme.colorScheme.onSurface),
+            h1 = KiriTypography.headlineLarge.copy(color = BrutalistBlack, fontWeight = FontWeight.Black),
+            h2 = KiriTypography.headlineMedium.copy(color = BrutalistBlack, fontWeight = FontWeight.Bold),
             paragraph = KiriTypography.bodyMedium.copy(
-                color = MaterialTheme.colorScheme.onSurface,
+                color = BrutalistBlack,
                 lineHeight = 24.sp,
                 letterSpacing = 0.25.sp,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Bold
             ),
             code = KiriTypography.labelMedium.copy(
-                color = MaterialTheme.colorScheme.onSurface,
-                background = MaterialTheme.colorScheme.surface.copy(alpha = 0.7f)
+                color = BrutalistBlack,
+                background = BrutalistLightGray
             )
         )
         val markdownColors = markdownColor(
-            text = MaterialTheme.colorScheme.onSurface,
-            codeText = MaterialTheme.colorScheme.onSurface,
-            inlineCodeText = MaterialTheme.colorScheme.onSurface,
-            linkText = MaterialTheme.colorScheme.primary
+            text = BrutalistBlack,
+            codeText = BrutalistBlack,
+            inlineCodeText = BrutalistBlack,
+            linkText = BrutalistDarkGray
         )
 
         val contentKey = remember(content) { content.hashCode() }
@@ -253,4 +210,3 @@ private fun AssistantContent(message: ChatMessage) {
         }
     }
 }
-

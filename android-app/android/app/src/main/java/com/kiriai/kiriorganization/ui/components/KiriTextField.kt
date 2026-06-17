@@ -1,6 +1,6 @@
 package com.kiriai.kiriorganization.ui.components
 
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,13 +15,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.kiriai.kiriorganization.ui.theme.*
 
 /**
- * Bugatti Monogram Input Field - Glassmorphism Enhanced
+ * Neo-Brutalist Input Field with thick borders and a yellow accent focus state.
  */
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun KiriTextField(
@@ -35,48 +33,59 @@ fun KiriTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default
 ) {
-    val isDark = isSystemInDarkTheme()
-    
     Column(modifier = modifier) {
-        // Technical Mono Label
         Text(
             text = label.uppercase(),
-            style = KiriTypography.labelMedium.copy(color = SilverMist)
+            style = KiriTypography.labelMedium.copy(
+                color = BrutalistBlack,
+                fontWeight = FontWeight.Bold
+            )
         )
         Spacer(modifier = Modifier.height(8.dp))
         
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(
+                    width = 3.dp,
+                    color = if (isError) KiriError else BrutalistBlack,
+                    shape = RoundedCornerShape(8.dp)
+                ),
             placeholder = {
                 Text(
                     text = placeholder.uppercase(),
-                    style = KiriTypography.labelMedium.copy(color = SilverMist.copy(alpha = 0.5f))
+                    style = KiriTypography.labelMedium.copy(color = BrutalistDarkGray.copy(alpha = 0.6f))
                 )
             },
             isError = isError,
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(8.dp),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = (if (isDark) ShowroomWhite else VelvetBlack).copy(alpha = 0.6f),
-                unfocusedBorderColor = (if (isDark) GlassBorderWhite else GlassBorderBlack).copy(alpha = 0.1f),
-                focusedContainerColor = (if (isDark) GlassBlack else GlassWhite).copy(alpha = 0.2f),
-                unfocusedContainerColor = (if (isDark) GlassBlack else GlassWhite).copy(alpha = 0.05f),
-                cursorColor = if (isDark) ShowroomWhite else VelvetBlack,
-                focusedTextColor = if (isDark) ShowroomWhite else VelvetBlack,
-                unfocusedTextColor = if (isDark) ShowroomWhite else VelvetBlack,
-                errorBorderColor = MaterialTheme.colorScheme.error
+                focusedBorderColor = Color.Transparent,
+                unfocusedBorderColor = Color.Transparent,
+                disabledBorderColor = Color.Transparent,
+                errorBorderColor = Color.Transparent,
+                focusedContainerColor = BrutalistYellow,
+                unfocusedContainerColor = BrutalistWhite,
+                cursorColor = BrutalistBlack,
+                focusedTextColor = BrutalistBlack,
+                unfocusedTextColor = BrutalistBlack,
+                errorTextColor = BrutalistBlack
             ),
             singleLine = true,
-            textStyle = KiriTypography.bodyMedium
+            textStyle = KiriTypography.bodyMedium.copy(
+                color = BrutalistBlack,
+                fontWeight = FontWeight.Bold
+            )
         )
         if (isError && errorMessage != null) {
             Text(
                 text = errorMessage.uppercase(),
-                color = if (isDark) ShowroomWhite else Color.Red,
-                style = KiriTypography.labelMedium,
+                color = KiriError,
+                style = KiriTypography.labelMedium.copy(fontWeight = FontWeight.Bold),
                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
             )
         }

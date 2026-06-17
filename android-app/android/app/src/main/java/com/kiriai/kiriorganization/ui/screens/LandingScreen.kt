@@ -11,8 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,20 +27,8 @@ fun LandingScreen(navController: NavController) {
     val scrollState = rememberScrollState()
     var startAnimation by remember { mutableStateOf(false) }
     val isDark = isSystemInDarkTheme()
-
-    // THEME_ANIMATION_ENGINE: Consistent with ChatScreen
-    val animatedBgStart by animateColorAsState(
-        targetValue = if (isDark) DeepSpaceBlue else Color(0xFFF0F2F5),
-        animationSpec = tween(1200, easing = LinearOutSlowInEasing), label = "bgStart"
-    )
-    val animatedBgEnd by animateColorAsState(
-        targetValue = if (isDark) VelvetBlack else Color(0xFFFFFFFF),
-        animationSpec = tween(1200, easing = LinearOutSlowInEasing), label = "bgEnd"
-    )
-
-    val backgroundBrush = Brush.verticalGradient(
-        colors = listOf(animatedBgStart, animatedBgEnd)
-    )
+    val bgColor = if (isDark) BrutalistBlack else BrutalistWhite
+    val textColor = if (isDark) BrutalistWhite else BrutalistBlack
 
     LaunchedEffect(Unit) {
         startAnimation = true
@@ -49,64 +37,61 @@ fun LandingScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(backgroundBrush)
+            .background(bgColor)
             .verticalScroll(scrollState)
             .padding(horizontal = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Top Spacer for Cinematic Air
         Spacer(modifier = Modifier.height(80.dp))
 
-        // App Logo - Cinematic Enhancement
         AnimatedVisibility(
             visible = startAnimation,
-            enter = fadeIn(animationSpec = tween(1200, delayMillis = 200)) +
-                    scaleIn(animationSpec = tween(1000, easing = EaseOutExpo), initialScale = 0.8f)
+            enter = fadeIn(animationSpec = tween(1000, delayMillis = 200)) +
+                    scaleIn(animationSpec = tween(800, easing = EaseOutExpo), initialScale = 0.8f)
         ) {
             BugattiLogo(modifier = Modifier.padding(bottom = 48.dp))
         }
 
-        // Feature Description (Quiet Mono)
         AnimatedVisibility(
             visible = startAnimation,
-            enter = fadeIn(animationSpec = tween(1200, delayMillis = 600))
+            enter = fadeIn(animationSpec = tween(1000, delayMillis = 400))
         ) {
             Text(
                 text = "HYPER-PERFORMANCE REASONING // ATELIER_V1",
                 style = KiriTypography.labelLarge.copy(
-                    color = if (isDark) SilverMist else VelvetBlack.copy(alpha = 0.6f),
+                    color = if (isDark) BrutalistYellow else BrutalistDarkGray,
                     textAlign = TextAlign.Center,
-                    letterSpacing = 4.sp
+                    letterSpacing = 2.sp,
+                    fontWeight = FontWeight.Bold
                 ),
                 modifier = Modifier.padding(horizontal = 32.dp)
             )
         }
 
-        Spacer(modifier = Modifier.height(60.dp))
+        Spacer(modifier = Modifier.height(40.dp))
 
-        // Feature Description (Quiet Mono)
         AnimatedVisibility(
             visible = startAnimation,
-            enter = fadeIn(animationSpec = tween(1200, delayMillis = 500)) + 
+            enter = fadeIn(animationSpec = tween(1000, delayMillis = 500)) + 
                     slideInVertically(initialOffsetY = { 20 })
         ) {
             Text(
                 text = "HYPER-PERFORMANCE REASONING ENGINE.\nBUILT FOR COUTRE SOLUTIONS.",
                 style = KiriTypography.labelMedium.copy(
-                    color = if (isDark) SilverMist else VelvetBlack.copy(alpha = 0.8f),
+                    color = if (isDark) BrutalistLightGray else BrutalistDarkGray,
                     textAlign = TextAlign.Center,
-                    lineHeight = 24.sp
+                    lineHeight = 24.sp,
+                    fontWeight = FontWeight.Bold
                 ),
                 modifier = Modifier.padding(horizontal = 32.dp)
             )
         }
 
-        Spacer(modifier = Modifier.height(120.dp))
+        Spacer(modifier = Modifier.height(80.dp))
 
-        // Primary Call to Action
         AnimatedVisibility(
             visible = startAnimation,
-            enter = fadeIn(animationSpec = tween(1000, delayMillis = 800))
+            enter = fadeIn(animationSpec = tween(800, delayMillis = 600))
         ) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
@@ -115,12 +100,10 @@ fun LandingScreen(navController: NavController) {
                 KiriButton(
                     text = "ENTER THE ATELIER",
                     onClick = { navController.navigate("register") },
-                    modifier = Modifier.width(280.dp),
-                    contentColor = if (isDark) ShowroomWhite else VelvetBlack,
-                    border = androidx.compose.foundation.BorderStroke(1.dp, (if (isDark) ShowroomWhite else VelvetBlack).copy(alpha = 0.8f))
+                    modifier = Modifier.width(280.dp)
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
                 KiriSecondaryButton(
                     text = "SIGN IN",
@@ -130,12 +113,14 @@ fun LandingScreen(navController: NavController) {
             }
         }
 
-        // Bottom Decorative Spacer
         Spacer(modifier = Modifier.height(100.dp))
         
         Text(
-            text = "KIRI AI // MULTIMODAL_INTEL // V1.2.3",
-            style = KiriTypography.labelMedium.copy(color = SilverMist.copy(alpha = 0.3f)),
+            text = "KIRI AI // MULTIMODAL_INTEL // V2.0",
+            style = KiriTypography.labelMedium.copy(
+                color = if (isDark) BrutalistYellowDark.copy(alpha = 0.5f) else BrutalistDarkGray.copy(alpha = 0.5f),
+                fontWeight = FontWeight.Bold
+            ),
             textAlign = TextAlign.Center
         )
         

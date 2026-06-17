@@ -3,59 +3,60 @@ package com.kiriai.kiriorganization.ui.theme
 import androidx.compose.ui.graphics.Color
 
 /**
- * Bugatti Design System Palette
- * 
- * Based on the extreme monochromatic showroom aesthetic:
- * Pure Black, Brilliant White, and Technical Gray.
+ * Modern Neo-Brutalist Design System Palette
  */
 
-// Core Canvas (Velvet Black)
-val VelvetBlack = Color(0xFF000000)
-val ShowroomWhite = Color(0xFFFFFFFF)
-val SilverMist = Color(0xFF999999) 
-val DarkGray = Color(0xFF111111) // Technical depth only
+// Core Canvas Tones
+val BrutalistWhite = Color(0xFFFFFFFF)
+val BrutalistYellow = Color(0xFFFFF4B8)      // Primary accent / highlight (80% Light)
+val BrutalistYellowDark = Color(0xFFFFE680)  // Selected/Active state indicator
+val BrutalistBlack = Color(0xFF000000)
+val BrutalistDarkGray = Color(0xFF333333)
+val BrutalistLightGray = Color(0xFFF3F3F3)
 
-// Semantic Aliases for high-performance interaction
-val KiriBackground = VelvetBlack
-val KiriSurface = VelvetBlack
-val KiriPrimary = ShowroomWhite
-val KiriSecondary = SilverMist
-val KiriError = SilverMist // Bugatti doesn't use red
+// Semantic Mappings
+val KiriBackground = BrutalistWhite
+val KiriSurface = BrutalistWhite
+val KiriPrimary = BrutalistYellow
+val KiriSecondary = BrutalistYellowDark
+val KiriError = Color(0xFFE1251B)
 
-// Legacy compatibility (re-mapped to Bugatti tokens)
-val Ivory = ShowroomWhite
-val Parchment = VelvetBlack
-val OliveGray = SilverMist
-val StoneGray = SilverMist
-val TerracottaBrand = ShowroomWhite
-val ErrorCrimson = SilverMist
-val AnthropicNearBlack = VelvetBlack
-val BorderCream = SilverMist
-val LogoGradient = ShowroomWhite
-val WarmSand = SilverMist
-val CharcoalWarm = DarkGray
+// Legacy aliases mapping to Brutalist tokens for zero-break compatibility
+val VelvetBlack = BrutalistBlack
+val ShowroomWhite = BrutalistWhite
+val SilverMist = BrutalistDarkGray
+val DarkGray = BrutalistDarkGray
+val Ivory = BrutalistWhite
+val Parchment = BrutalistWhite
+val OliveGray = BrutalistDarkGray
+val StoneGray = BrutalistDarkGray
+val TerracottaBrand = BrutalistYellow
+val ErrorCrimson = Color(0xFFE1251B)
+val AnthropicNearBlack = BrutalistBlack
+val BorderCream = BrutalistBlack
+val LogoGradient = BrutalistBlack
+val WarmSand = BrutalistLightGray
+val CharcoalWarm = BrutalistDarkGray
 val SerifFont = androidx.compose.ui.text.font.FontFamily.SansSerif
 
 // Technical / Semantic
-val ObsidianSurface = Color(0xFF030303)
+val ObsidianSurface = BrutalistWhite
 
 // Interaction states
-val HoverOverlay = Color(0x1AFFFFFF)
-val ActiveOverlay = Color(0x33FFFFFF)
+val HoverOverlay = Color(0x1A000000)
+val ActiveOverlay = Color(0x33000000)
 
-// Glassmorphism Tones (Enhanced for Depth)
-val GlassWhite = Color(0x26FFFFFF) // 15% White
-val GlassBlack = Color(0x4D000000) // 30% Black
-val GlassBorderWhite = Color(0x33FFFFFF)
-val GlassBorderBlack = Color(0x1A000000)
-val GlassBackground = Color(0x0DFFFFFF) // 5% White overlay for texture
-val GlassWhiteLight = Color(0x40FFFFFF) // 25% White for light mode surfaces
-val GlassBlackLight = Color(0x0D000000) // 5% Black for light mode depth
+// Glassmorphism aliases mapped to flat colors for Neo-Brutalist compatibility
+val GlassWhite = BrutalistWhite
+val GlassBlack = BrutalistLightGray
+val GlassBorderWhite = BrutalistBlack
+val GlassBorderBlack = BrutalistBlack
+val GlassBackground = BrutalistWhite
+val GlassWhiteLight = BrutalistWhite
+val GlassBlackLight = BrutalistLightGray
 
-// Gradient Accents (Cinematic)
-val DeepSpaceBlue = Color(0xFF02060C)
-val MidnightGrey = Color(0xFF080808)
-val StarlightBlue = Color(0xFF0F172A)
-val ElectricBlue = Color(0xFF3B82F6) // For subtle glow effects
-
-// Removed: BrandPink, SoftGray, FocusBlue, BugattiBlue (Brand drift)
+// Flat Accent Colors
+val DeepSpaceBlue = BrutalistWhite
+val MidnightGrey = BrutalistWhite
+val StarlightBlue = BrutalistWhite
+val ElectricBlue = BrutalistYellow

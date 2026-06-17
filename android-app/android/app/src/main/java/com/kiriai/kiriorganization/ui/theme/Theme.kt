@@ -9,45 +9,44 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.compositionLocalOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val KiriDarkColorScheme = darkColorScheme(
-    primary = ShowroomWhite,
-    secondary = SilverMist,
-    tertiary = DarkGray,
-    background = VelvetBlack,
-    surface = Color(0xFF0A0A0A), // Slightly elevated from pure black
-    onPrimary = VelvetBlack,
-    onSecondary = ShowroomWhite,
-    onBackground = ShowroomWhite,
-    onSurface = ShowroomWhite,
-    onSurfaceVariant = SilverMist,
+    primary = BrutalistYellowDark,
+    onPrimary = BrutalistBlack,
+    secondary = BrutalistYellow,
+    onSecondary = BrutalistBlack,
+    tertiary = BrutalistWhite,
+    background = BrutalistBlack,
+    onBackground = BrutalistWhite,
+    surface = BrutalistBlack,
+    onSurface = BrutalistWhite,
+    onSurfaceVariant = BrutalistLightGray,
     error = Color(0xFFCF6679),
-    outline = SilverMist,
-    surfaceVariant = Color(0xFF1A1A1A)
+    outline = BrutalistWhite,
+    surfaceVariant = BrutalistDarkGray
 )
 
 private val KiriLightColorScheme = lightColorScheme(
-    primary = VelvetBlack,
-    secondary = DarkGray,
-    tertiary = SilverMist,
-    background = Color(0xFFF9F7F2), // Premium Parchment White
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = VelvetBlack,
-    onBackground = Color(0xFF1C1C1C), // Off-black for better readability
-    onSurface = Color(0xFF1C1C1C),
-    onSurfaceVariant = Color(0xFF4A4A4A),
-    error = Color(0xFFB00020),
-    outline = Color(0xFF8E8E8E),
-    surfaceVariant = Color(0xFFECEAE4) // Slightly warmer variant
+    primary = BrutalistYellow,
+    onPrimary = BrutalistBlack,
+    secondary = BrutalistYellowDark,
+    onSecondary = BrutalistBlack,
+    tertiary = BrutalistDarkGray,
+    background = BrutalistWhite,
+    onBackground = BrutalistBlack,
+    surface = BrutalistWhite,
+    onSurface = BrutalistBlack,
+    onSurfaceVariant = BrutalistDarkGray,
+    error = Color(0xFFE1251B),
+    outline = BrutalistBlack,
+    surfaceVariant = BrutalistLightGray
 )
 
-val LocalThemeMode = compositionLocalOf { true } // true = dark
+val LocalThemeMode = compositionLocalOf { false } // Default to light mode (Brutalist style)
 
 @Composable
 fun KiriTheme(
