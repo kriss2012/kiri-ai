@@ -2,6 +2,7 @@ services:
   - type: web
     name: kiri-ai-backend
     env: docker
+    branch: v2
     dockerfilePath: backend/Dockerfile
     dockerContext: backend
     plan: free
@@ -20,6 +21,7 @@ services:
   - type: web
     name: kiri-ai-frontend
     runtime: static
+    branch: v2
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
