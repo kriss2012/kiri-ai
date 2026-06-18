@@ -1,0 +1,29 @@
+# Environment variables
+backend/.env
+.env
+.env.local
+
+# Dependency directories
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Production build outputs
+dist/
+frontend/dist/
+
+# IDE files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Android build outputs, logs, and local caches
+.gradle/
+.gradle_home/
+**/build/
+**/capacitor-cordova-android-plugins/
+*.log
