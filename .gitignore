@@ -20,3 +20,10 @@ frontend/dist/
 *.njsproj
 *.sln
 *.swp
+
+# Android build outputs, logs, and local caches
+.gradle/
+.gradle_home/
+**/build/
+**/capacitor-cordova-android-plugins/
+*.log
