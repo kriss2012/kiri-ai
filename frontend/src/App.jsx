@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }) => {
   const { token, loading } = useAuth();
   
   if (loading) return (
-    <div className="system-loader bg-ivory">
+    <div className="system-loader">
       <div className="mono">INITIALIZING_CORE_SERVICES...</div>
     </div>
   );
