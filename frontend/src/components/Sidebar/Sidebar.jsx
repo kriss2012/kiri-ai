@@ -14,7 +14,7 @@ const Sidebar = ({ isOpen, onClose, conversations, currentId, onSelect, onNewCha
   return (
     <div className={`sidebar ${isOpen ? 'open' : ''}`}>
       <div className="sidebar-header">
-        <img src="./logo.svg" alt="Kiri Logo" className="sidebar-logo" />
+        <div className="avatar micro" style={{ backgroundColor: 'var(--accent)', marginRight: '8px' }}>K</div>
         <h2 className="mono">Kiri // Atelier</h2>
       </div>
 

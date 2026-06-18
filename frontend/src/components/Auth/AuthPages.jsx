@@ -33,7 +33,7 @@ export const LoginPage = () => {
   return (
     <div className="auth-page cinematic-fade">
       <div className="auth-container">
-        <img src="./logo.svg" alt="Kiri Logo" className="auth-logo" />
+        <div className="auth-brand-logo mono">KIRI_AI</div>
         <div className="mono-label mono">SECURITY_GATEWAY</div>
         <h2 className="mono">Login_User</h2>
         <form onSubmit={handleSubmit}>
@@ -94,7 +94,7 @@ export const RegisterPage = () => {
   return (
     <div className="auth-page cinematic-fade">
       <div className="auth-container">
-        <img src="./logo.svg" alt="Kiri Logo" className="auth-logo" />
+        <div className="auth-brand-logo mono">KIRI_AI</div>
         <div className="mono-label mono">IDENTITY_PROVISIONING</div>
         <h2 className="mono">Create_Account</h2>
         <form onSubmit={handleSubmit}>

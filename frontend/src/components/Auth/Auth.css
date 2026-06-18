@@ -19,12 +19,16 @@
   flex-direction: column;
 }
 
-.auth-logo {
-  height: 64px;
-  width: auto;
-  margin-bottom: 32px;
+.auth-brand-logo {
+  font-size: 24px;
+  font-weight: 900;
+  background-color: var(--accent);
+  color: var(--color-black);
+  border: var(--border-width) solid var(--border-color);
+  padding: 8px 16px;
   align-self: center;
-  filter: drop-shadow(2px 2px 0px var(--shadow-color));
+  margin-bottom: 24px;
+  box-shadow: 2px 2px 0px 0px var(--shadow-color);
 }
 
 .auth-container h2 {

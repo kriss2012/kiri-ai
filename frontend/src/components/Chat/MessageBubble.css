@@ -102,17 +102,23 @@
 }
 
 .message-image {
-  max-width: 100%;
-  border-radius: var(--border-radius);
+  max-width: 480px;
+  width: 100%;
   margin-bottom: 12px;
+  border-radius: var(--border-radius);
   overflow: hidden;
   border: var(--border-width) solid var(--border-color);
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--shadow-color);
+  background-color: var(--color-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .message-image img {
   width: 100%;
   height: auto;
+  max-height: 400px;
+  object-fit: contain;
   display: block;
 }
 
