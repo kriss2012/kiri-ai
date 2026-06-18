@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import ChatPage from './components/Chat/ChatPage';
@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }) => {
   const { token, loading } = useAuth();
   
   if (loading) return (
-    <div className="system-loader bg-ivory">
+    <div className="system-loader">
       <div className="mono">INITIALIZING_CORE_SERVICES...</div>
     </div>
   );

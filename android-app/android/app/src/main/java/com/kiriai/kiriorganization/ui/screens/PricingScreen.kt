@@ -6,6 +6,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -19,8 +20,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -36,7 +35,6 @@ import com.kiriai.kiriorganization.utils.findActivity
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.razorpay.Checkout
 import org.json.JSONObject
-import android.app.Activity
 import android.widget.Toast
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,6 +46,10 @@ fun PricingScreen(
     val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var selectedPlan by remember { mutableStateOf("premium_monthly") }
+    val isDark = isSystemInDarkTheme()
+    val bgColor = if (isDark) BrutalistBlack else BrutalistWhite
+    val textColor = if (isDark) BrutalistWhite else BrutalistBlack
+    val toggleBg = if (isDark) BrutalistDarkGray else BrutalistWhite
 
     LaunchedEffect(uiState.orderData) {
         uiState.orderData?.let { data ->
@@ -62,7 +64,7 @@ fun PricingScreen(
                 options.put("amount", data.amount)
                 
                 val prefill = JSONObject()
-                prefill.put("email", "user@example.com") // Ideally from user data
+                prefill.put("email", "user@example.com")
                 options.put("prefill", prefill)
 
                 context.findActivity()?.let { activity ->
@@ -85,70 +87,99 @@ fun PricingScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("INTEL // SUBSCRIPTION", style = KiriTypography.labelLarge) },
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = ShowroomWhite)
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Transparent,
-                    titleContentColor = ShowroomWhite,
-                    navigationIconContentColor = ShowroomWhite
+            Column {
+                TopAppBar(
+                    title = { 
+                        Text(
+                            "INTEL // SUBSCRIPTION", 
+                            style = KiriTypography.headlineMedium, 
+                            fontWeight = FontWeight.Black,
+                            color = textColor
+                        ) 
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { navController.popBackStack() }) {
+                            Icon(
+                                Icons.Default.ArrowBack, 
+                                contentDescription = "Back", 
+                                tint = textColor
+                            )
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = bgColor,
+                        titleContentColor = textColor,
+                        navigationIconContentColor = textColor
+                    )
                 )
-            )
+                // Thick black divider line below TopAppBar
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(3.dp)
+                        .background(textColor)
+                )
+            }
         },
-        containerColor = MaterialTheme.colorScheme.background
+        containerColor = bgColor
     ) { padding ->
         Column(
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize()
-                .background(Brush.verticalGradient(listOf(VelvetBlack, DeepSpaceBlue)))
+                .background(bgColor)
                 .verticalScroll(rememberScrollState())
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = "HYPER-SCALE REASONING",
-                style = KiriTypography.headlineMedium.copy(letterSpacing = 4.sp),
-                color = ShowroomWhite,
-                textAlign = TextAlign.Center
+                style = KiriTypography.headlineLarge,
+                color = textColor,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Black
             )
             
             Spacer(modifier = Modifier.height(12.dp))
 
             Text(
                 text = "Select an operational tier to increase throughput.",
-                style = KiriTypography.labelSmall.copy(color = SilverMist),
+                style = KiriTypography.labelMedium.copy(
+                    color = if (isDark) BrutalistLightGray else BrutalistDarkGray,
+                    fontWeight = FontWeight.Bold
+                ),
                 textAlign = TextAlign.Center
             )
             
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(32.dp))
 
-            // Plan Toggle
-            Surface(
+            // Plan Toggle - Brutalist styling
+            Box(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(24.dp))
-                    .border(0.5.dp, ShowroomWhite.copy(alpha = 0.1f), RoundedCornerShape(24.dp)),
-                color = GlassWhite
+                    .background(toggleBg, RoundedCornerShape(8.dp))
+                    .border(3.dp, textColor, RoundedCornerShape(8.dp))
+                    .padding(4.dp)
             ) {
-                Row(modifier = Modifier.padding(4.dp)) {
+                Row {
                     val plans = listOf("premium_monthly" to "MONTHLY", "premium_yearly" to "ANNUAL")
                     plans.forEach { (id, label) ->
                         val selected = selectedPlan == id
                         Box(
                             modifier = Modifier
-                                .clip(RoundedCornerShape(20.dp))
-                                .background(if (selected) ShowroomWhite else Color.Transparent)
+                                .clip(RoundedCornerShape(6.dp))
+                                .background(if (selected) BrutalistYellow else Color.Transparent)
+                                .border(
+                                    width = if (selected) 2.dp else 0.dp,
+                                    color = if (selected) textColor else Color.Transparent,
+                                    shape = RoundedCornerShape(6.dp)
+                                )
                                 .clickable { selectedPlan = id }
                                 .padding(horizontal = 24.dp, vertical = 10.dp)
                         ) {
                             Text(
                                 label,
-                                color = if (selected) VelvetBlack else SilverMist,
-                                style = KiriTypography.labelMedium.copy(fontWeight = FontWeight.Bold)
+                                color = textColor,
+                                style = KiriTypography.labelMedium.copy(fontWeight = FontWeight.Black)
                             )
                         }
                     }
@@ -184,29 +215,43 @@ fun PricingPlanCardEnhanced(
     isLoading: Boolean,
     onUpgrade: () -> Unit
 ) {
-    val primaryColor = MaterialTheme.colorScheme.primary
-    val outlineColor = MaterialTheme.colorScheme.outline
-    
-    Surface(
-        modifier = Modifier
-            .fillMaxWidth(),
-        shape = RoundedCornerShape(24.dp),
-        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.4f),
-        border = BorderStroke(0.5.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.15f))
+    val isDark = isSystemInDarkTheme()
+    val textColor = if (isDark) BrutalistWhite else BrutalistBlack
+    val cardBg = if (isDark) BrutalistDarkGray else BrutalistWhite
+    val shadowColor = if (isDark) BrutalistLightGray else BrutalistBlack
+
+    Box(
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Column(modifier = Modifier.padding(32.dp)) {
+        // Offset shadow layer
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .offset(x = 6.dp, y = 6.dp)
+                .background(color = shadowColor, shape = RoundedCornerShape(12.dp))
+                .border(width = 3.dp, color = textColor, shape = RoundedCornerShape(12.dp))
+        )
+
+        // Card Foreground Content
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(cardBg, RoundedCornerShape(12.dp))
+                .border(width = 3.dp, color = textColor, shape = RoundedCornerShape(12.dp))
+                .padding(32.dp)
+        ) {
             Box(
                 modifier = Modifier
-                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.05f), RoundedCornerShape(50))
-                    .border(0.5.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.2f), RoundedCornerShape(50))
-                    .padding(horizontal = 12.dp, vertical = 4.dp)
+                    .background(BrutalistYellow, RoundedCornerShape(4.dp))
+                    .border(2.dp, textColor, RoundedCornerShape(4.dp))
+                    .padding(horizontal = 12.dp, vertical = 6.dp)
             ) {
                 Text(
                     "PREMIUM // ACCESS",
                     style = KiriTypography.labelMedium.copy(
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                        letterSpacing = 2.sp
+                        color = BrutalistBlack,
+                        fontWeight = FontWeight.Black,
+                        letterSpacing = 1.sp
                     )
                 )
             }
@@ -216,61 +261,65 @@ fun PricingPlanCardEnhanced(
             Row(verticalAlignment = Alignment.Bottom) {
                 Text(
                     text = "₹$price", 
-                    style = KiriTypography.displayLarge.copy(fontSize = 56.sp),
-                    color = MaterialTheme.colorScheme.onSurface
+                    style = KiriTypography.displayLarge.copy(fontWeight = FontWeight.Black),
+                    color = textColor
                 )
                 Text(
                     text = period, 
-                    style = KiriTypography.titleLarge, 
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f), 
-                    modifier = Modifier.padding(bottom = 12.dp, start = 4.dp)
+                    style = KiriTypography.headlineMedium, 
+                    color = textColor.copy(alpha = 0.8f), 
+                    modifier = Modifier.padding(bottom = 6.dp, start = 4.dp),
+                    fontWeight = FontWeight.Bold
                 )
             }
             
+            Spacer(modifier = Modifier.height(6.dp))
+            
             Text(
                 text = "TECHNICAL_SPEC: UNLIMITED_REASONING_CAPACITY",
-                style = KiriTypography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                style = KiriTypography.bodySmall.copy(fontWeight = FontWeight.Bold),
+                color = if (isDark) BrutalistLightGray else BrutalistDarkGray
             )
             
             Spacer(modifier = Modifier.height(32.dp))
             
             features.forEach { feature ->
-                Row(modifier = Modifier.padding(vertical = 10.dp), verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    modifier = Modifier.padding(vertical = 10.dp), 
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Box(
                         modifier = Modifier
-                            .size(18.dp)
-                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), CircleShape),
+                            .size(22.dp)
+                            .background(BrutalistYellow, CircleShape)
+                            .border(2.dp, textColor, CircleShape),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
                             Icons.Default.Check, 
                             contentDescription = null, 
-                            tint = MaterialTheme.colorScheme.primary, 
-                            modifier = Modifier.size(12.dp)
+                            tint = BrutalistBlack, 
+                            modifier = Modifier.size(14.dp)
                         )
                     }
                     Spacer(modifier = Modifier.width(16.dp))
                     Text(
                         text = feature.uppercase(), 
                         style = KiriTypography.labelMedium, 
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = textColor,
+                        fontWeight = FontWeight.Bold
                     )
                 }
             }
             
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(32.dp))
             
             KiriButton(
                 text = "UPGRADE_SYSTEM",
                 onClick = onUpgrade,
-                modifier = Modifier.fillMaxWidth().height(56.dp),
-                isLoading = isLoading,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
-                containerColor = MaterialTheme.colorScheme.primary,
-                shape = RoundedCornerShape(16.dp)
+                modifier = Modifier.fillMaxWidth(),
+                isLoading = isLoading
             )
         }
     }
 }
-

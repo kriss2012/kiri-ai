@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { KiriButton, KiriTextField } from '../Shared/KiriUI';
 import './Auth.css';
 
 export const LoginPage = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -17,7 +19,7 @@ export const LoginPage = () => {
     try {
       const res = await login(email, password);
       if (res.success) {
-        window.location.href = '/';
+        navigate('/');
       } else {
         setError(res.message);
       }
@@ -31,7 +33,7 @@ export const LoginPage = () => {
   return (
     <div className="auth-page cinematic-fade">
       <div className="auth-container">
-        <img src="/logo.svg" alt="Kiri Logo" className="auth-logo" />
+        <div className="auth-brand-logo mono">KIRI_AI</div>
         <div className="mono-label mono">SECURITY_GATEWAY</div>
         <h2 className="mono">Login_User</h2>
         <form onSubmit={handleSubmit}>
@@ -57,7 +59,7 @@ export const LoginPage = () => {
           </KiriButton>
         </form>
         <div className="auth-links mono">
-          NO_ACCOUNT? <a href="/register">INITIALIZE_NEW_ID</a>
+          NO_ACCOUNT? <Link to="/register">INITIALIZE_NEW_ID</Link>
         </div>
       </div>
     </div>
@@ -65,6 +67,7 @@ export const LoginPage = () => {
 };
 
 export const RegisterPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
   const { register } = useAuth();
@@ -77,7 +80,7 @@ export const RegisterPage = () => {
     try {
       const res = await register(formData.name, formData.email, formData.password);
       if (res.success) {
-        window.location.href = '/';
+        navigate('/');
       } else {
         setError(res.message);
       }
@@ -91,7 +94,7 @@ export const RegisterPage = () => {
   return (
     <div className="auth-page cinematic-fade">
       <div className="auth-container">
-        <img src="/logo.svg" alt="Kiri Logo" className="auth-logo" />
+        <div className="auth-brand-logo mono">KIRI_AI</div>
         <div className="mono-label mono">IDENTITY_PROVISIONING</div>
         <h2 className="mono">Create_Account</h2>
         <form onSubmit={handleSubmit}>
@@ -124,7 +127,7 @@ export const RegisterPage = () => {
           </KiriButton>
         </form>
         <div className="auth-links mono">
-          EXISTING_USER? <a href="/login">RETURN_TO_GATEWAY</a>
+          EXISTING_USER? <Link to="/login">RETURN_TO_GATEWAY</Link>
         </div>
       </div>
     </div>

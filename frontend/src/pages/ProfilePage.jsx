@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { KiriButton, KiriTextField } from '../components/Shared/KiriUI';
 import { ArrowLeft, User, Shield, CreditCard, AlertTriangle } from 'lucide-react';
@@ -6,6 +7,7 @@ import api from '../utils/api';
 import './Profile.css';
 
 const ProfilePage = () => {
+  const navigate = useNavigate();
   const { user, updateProfile, logout } = useAuth();
   const [activeTab, setActiveTab] = useState('identity');
   const [name, setName] = useState(user?.name || '');
@@ -59,7 +61,7 @@ const ProfilePage = () => {
         const res = await api.delete('/auth/account');
         if (res.data.success) {
           logout();
-          window.location.href = '/login';
+          navigate('/login');
         }
       } catch (err) {
         alert('SYSTEM_ERROR: Could not terminate account.');
@@ -70,7 +72,7 @@ const ProfilePage = () => {
   return (
     <div className="profile-page cinematic-fade">
       <header className="profile-header">
-        <button className="back-btn" onClick={() => window.location.href = '/'}>
+        <button className="back-btn" onClick={() => navigate('/')}>
           <ArrowLeft size={20} />
         </button>
         <div className="mono-label mono">USER_MANIFEST</div>
@@ -155,7 +157,7 @@ const ProfilePage = () => {
                   </div>
                 )}
               </div>
-              <KiriButton onClick={() => window.location.href = '/pricing'} className="upgrade-btn">
+              <KiriButton onClick={() => navigate('/pricing')} className="upgrade-btn">
                 {user?.plan === 'free' ? 'UPGRADE_TO_PREMIUM' : 'MANAGE_SUBSCRIPTION'}
               </KiriButton>
             </section>

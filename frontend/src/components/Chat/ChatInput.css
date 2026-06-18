@@ -10,9 +10,10 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: var(--color-surface-variant);
+  background: var(--accent);
   padding: 8px 12px;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--border-color);
   width: fit-content;
 }
 
@@ -20,13 +21,15 @@
   position: relative;
   width: 48px;
   height: 48px;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .preview-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 4px;
 }
 
 .remove-btn {
@@ -35,18 +38,22 @@
   right: -6px;
   background: var(--color-error);
   color: white;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .preview-info {
   font-size: 11px;
-  color: var(--text-secondary);
+  font-weight: 800;
+  color: var(--text-primary);
   max-width: 150px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -57,9 +64,16 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  background-color: var(--color-surface-variant);
+  background-color: var(--bg-surface);
   padding: 8px 16px;
-  border-radius: 30px;
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--shadow-color);
+  transition: background-color var(--transition-speed) ease;
+}
+
+.chat-input-form:focus-within {
+  background-color: var(--accent);
 }
 
 .message-input {
@@ -68,31 +82,44 @@
   border: none;
   padding: 12px 8px;
   color: var(--text-primary);
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .attach-btn, .send-btn {
-  color: var(--text-secondary);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px;
+  border-radius: var(--border-radius);
+  border: 2px solid transparent;
+  transition: all var(--transition-speed) ease;
 }
 
 .attach-btn:hover {
-  color: var(--text-primary);
+  background-color: var(--accent);
+  border-color: var(--border-color);
 }
 
 .send-btn {
-  background: var(--accent);
-  color: var(--bg-primary);
-  border-radius: 50%;
-  padding: 10px;
-  opacity: 0.3;
+  background: var(--color-light-gray);
+  color: var(--text-secondary);
+  border: 2px solid var(--border-color);
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .send-btn.active {
+  background: var(--accent-hover);
+  color: var(--color-black);
   opacity: 1;
+  cursor: pointer;
+}
+
+.send-btn.active:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 2px 2px 0px 0px var(--shadow-color);
 }
 
 @media (max-width: 768px) {

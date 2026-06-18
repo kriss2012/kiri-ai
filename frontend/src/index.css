@@ -1,14 +1,15 @@
 @import './styles/variables.css';
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&family=Outfit:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
 
 * {
   box-sizing: border-box;
   scrollbar-width: thin;
-  scrollbar-color: var(--color-silver-mist) transparent;
+  scrollbar-color: var(--color-black) transparent;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -16,22 +17,32 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-silver-mist);
+  background-color: var(--border-color);
+  border: 2px solid var(--bg-primary);
   border-radius: 10px;
 }
 
-h1, h2, h3, h4, .mono {
-  font-family: var(--font-mono);
-  letter-spacing: 0.05em;
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin: 0 0 16px 0;
   text-transform: uppercase;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
 }
 
 button {
   cursor: pointer;
   border: none;
   background: none;
-  font-family: var(--font-mono);
-  transition: all 0.3s ease;
+  font-family: var(--font-display);
 }
 
 input, textarea {
@@ -40,11 +51,11 @@ input, textarea {
 }
 
 .cinematic-fade {
-  animation: fadeIn 0.5s ease-out;
+  animation: fadeIn 0.2s ease-out;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -52,4 +63,17 @@ input, textarea {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.system-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 900;
+  z-index: 9999;
 }

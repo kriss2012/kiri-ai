@@ -430,7 +430,7 @@ class ChatViewModel @Inject constructor(
             val prompt = if (message.trim().isEmpty()) "Analyze this image and explain what is shown in it." else message
             
             val contentPart = MultipartBody.Part.createFormData("content", prompt)
-            val modelPart = MultipartBody.Part.createFormData("model", "google/gemini-2.0-flash-001")
+            val modelPart = MultipartBody.Part.createFormData("model", "google/gemini-3.5-flash")
             
             // Pass the conversation ID as a string in the multipart request
             val currentId = _uiState.value.currentConversationId

@@ -1,0 +1,12 @@
+node_modules
+frontend
+android-app
+.git
+.idea
+.vscode
+backend/node_modules
+backend/error.log
+backend/.env
+Dockerfile
+.dockerignore
+render.yaml

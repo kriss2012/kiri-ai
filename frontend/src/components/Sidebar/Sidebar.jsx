@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { LogOut, Settings, Plus, MessageSquare, Sun, Moon } from 'lucide-react';
@@ -6,13 +7,14 @@ import { KiriButton } from '../Shared/KiriUI';
 import './Sidebar.css';
 
 const Sidebar = ({ isOpen, onClose, conversations, currentId, onSelect, onNewChat }) => {
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
   const { isDarkMode, toggleTheme } = useTheme();
 
   return (
     <div className={`sidebar ${isOpen ? 'open' : ''}`}>
       <div className="sidebar-header">
-        <img src="/logo.svg" alt="Kiri Logo" className="sidebar-logo" />
+        <div className="avatar micro" style={{ backgroundColor: 'var(--accent)', marginRight: '8px' }}>K</div>
         <h2 className="mono">Kiri // Atelier</h2>
       </div>
 
@@ -27,10 +29,10 @@ const Sidebar = ({ isOpen, onClose, conversations, currentId, onSelect, onNewCha
         <div className="mode-item active">
           <MessageSquare size={16} /> <span>CORE_CHAT</span>
         </div>
-        <div className="mode-item" onClick={() => window.location.href = '/image-lab'}>
+        <div className="mode-item" onClick={() => navigate('/image-lab')}>
           <img src="https://img.icons8.com/ios-glyphs/30/null/paint-palette.png" style={{filter: 'invert(1)', width: 16, height: 16}} alt="" /> <span>IMAGE_LAB</span>
         </div>
-        <div className="mode-item" onClick={() => window.location.href = '/code-space'}>
+        <div className="mode-item" onClick={() => navigate('/code-space')}>
           <img src="https://img.icons8.com/ios-glyphs/30/null/code.png" style={{filter: 'invert(1)', width: 16, height: 16}} alt="" /> <span>CODE_SPACE</span>
         </div>
       </div>
@@ -52,7 +54,7 @@ const Sidebar = ({ isOpen, onClose, conversations, currentId, onSelect, onNewCha
       </div>
 
       <div className="sidebar-footer">
-        <div className="user-profile" onClick={() => window.location.href = '/profile'}>
+        <div className="user-profile" onClick={() => navigate('/profile')}>
           <div className="avatar micro">{user?.name?.charAt(0) || 'U'}</div>
           <div className="user-info">
             <div className="user-name mono">{user?.name?.toUpperCase() || 'USER_NULL'}</div>
@@ -64,7 +66,7 @@ const Sidebar = ({ isOpen, onClose, conversations, currentId, onSelect, onNewCha
           <button onClick={toggleTheme} className="footer-btn">
             {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
           </button>
-          <button onClick={() => window.location.href = '/profile'} className="footer-btn">
+          <button onClick={() => navigate('/profile')} className="footer-btn">
             <Settings size={18} />
           </button>
           <button onClick={logout} className="footer-btn logout">

@@ -32,13 +32,11 @@ const MessageBubble = ({ message }) => {
   return (
     <div className={`message-row ${isUser ? 'user' : 'assistant'} cinematic-fade`}>
       <div className="message-container">
-        <div className="message-avatar">
-          {isUser ? (
-            user?.name?.charAt(0).toUpperCase() || 'U'
-          ) : (
-            <img src="/logo.svg" alt="Kiri AI" />
-          )}
-        </div>
+        {isUser && (
+          <div className="message-avatar">
+            {user?.name?.charAt(0).toUpperCase() || 'U'}
+          </div>
+        )}
 
         <div className="message-content-wrapper">
           <div className="message-label mono">

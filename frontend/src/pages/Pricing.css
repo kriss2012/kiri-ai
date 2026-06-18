@@ -15,23 +15,37 @@
 }
 
 .back-btn {
-  padding: 8px;
+  padding: 10px;
   color: var(--text-primary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background: var(--bg-surface);
+  box-shadow: 2px 2px 0px 0px var(--shadow-color);
+  transition: all var(--transition-speed) ease;
+}
+
+.back-btn:hover {
+  background: var(--accent);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px 0px var(--shadow-color);
 }
 
 .pricing-title-area {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 48px;
 }
 
 .pricing-title-area h1 {
-  font-size: 48px;
+  font-size: 56px;
+  font-weight: 900;
   margin-bottom: 16px;
+  letter-spacing: -1px;
 }
 
 .pricing-title-area p {
   color: var(--text-secondary);
   font-size: 18px;
+  font-weight: 700;
 }
 
 .plans-grid {
@@ -45,45 +59,62 @@
 
 .plan-card {
   background-color: var(--bg-surface);
-  border: 1px solid var(--color-surface-variant);
-  border-radius: 4px;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
   padding: 40px;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--shadow-color);
+  position: relative;
+  transition: all var(--transition-speed) ease;
 }
 
 .plan-card.highlight {
-  border: 1px solid var(--accent);
+  background-color: var(--accent);
+  box-shadow: calc(var(--shadow-offset) + 2px) calc(var(--shadow-offset) + 2px) 0px 0px var(--shadow-color);
 }
 
 .plan-name-badge {
   font-size: 12px;
-  background: var(--color-surface-variant);
+  font-weight: 900;
+  text-transform: uppercase;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
   padding: 4px 12px;
   width: fit-content;
   margin-bottom: 24px;
+  letter-spacing: 1px;
 }
 
 .plan-price {
   margin-bottom: 8px;
+  display: flex;
+  align-items: baseline;
 }
 
 .plan-price .amount {
-  font-size: 42px;
-  font-weight: 500;
+  font-size: 56px;
+  font-weight: 900;
+  font-family: var(--font-display);
 }
 
 .plan-price .period {
-  font-size: 14px;
-  color: var(--text-secondary);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-primary);
   margin-left: 8px;
+  text-transform: uppercase;
 }
 
 .plan-specs {
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 800;
   color: var(--text-secondary);
   margin-bottom: 32px;
-  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .features-list {
@@ -101,12 +132,21 @@
 }
 
 .feature-item .mono {
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 800;
   letter-spacing: 1px;
+  color: var(--text-primary);
 }
 
 .check-icon {
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  padding: 4px;
 }
 
 .subscribe-btn {
@@ -118,6 +158,6 @@
     padding: 24px;
   }
   .pricing-title-area h1 {
-    font-size: 32px;
+    font-size: 36px;
   }
 }

@@ -1,6 +1,5 @@
 package com.kiriai.kiriorganization.ui.components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -12,7 +11,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.*
@@ -45,26 +43,37 @@ fun ChatInputBar(
     modifier: Modifier = Modifier
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
-    val colorScheme = MaterialTheme.colorScheme
+    val isDark = isSystemInDarkTheme()
+    val textColor = if (isDark) BrutalistWhite else BrutalistBlack
+    val inputBg = if (isDark) BrutalistDarkGray else BrutalistWhite
+    val attachBtnColor = if (isDark) BrutalistYellow else BrutalistBlack
 
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 8.dp)
+            .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
-        // Advanced File/Image Preview
+        // Neo-Brutalist File/Image Preview
         if (selectedFileName != null) {
-            Surface(
-                color = colorScheme.surfaceVariant,
-                shape = RoundedCornerShape(12.dp),
-                border = BorderStroke(1.dp, colorScheme.outline.copy(alpha = 0.2f)),
-                modifier = Modifier.padding(bottom = 8.dp, start = 8.dp)
+            Box(
+                modifier = Modifier.padding(bottom = 12.dp, start = 4.dp)
             ) {
+                // Offset shadow layer
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .offset(x = 4.dp, y = 4.dp)
+                        .background(color = textColor, shape = RoundedCornerShape(8.dp))
+                )
+
+                // Foreground
                 Row(
-                    modifier = Modifier.padding(8.dp),
+                    modifier = Modifier
+                        .background(BrutalistYellow, RoundedCornerShape(8.dp))
+                        .border(3.dp, textColor, RoundedCornerShape(8.dp))
+                        .padding(10.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Thumbnail if it's an image (simulated check via extension)
                     val isImage = selectedFileName.lowercase().let { 
                         it.endsWith(".jpg") || it.endsWith(".jpeg") || it.endsWith(".png") || it.endsWith(".webp")
                     }
@@ -73,28 +82,29 @@ fun ChatInputBar(
                         coil.compose.AsyncImage(
                             model = selectedFileUri,
                             contentDescription = null,
-                            placeholder = androidx.compose.ui.graphics.painter.ColorPainter(colorScheme.surfaceVariant),
-                            error = androidx.compose.ui.graphics.painter.ColorPainter(colorScheme.errorContainer),
+                            placeholder = androidx.compose.ui.graphics.painter.ColorPainter(BrutalistLightGray),
+                            error = androidx.compose.ui.graphics.painter.ColorPainter(KiriError),
                             modifier = Modifier
                                 .size(40.dp)
-                                .clip(RoundedCornerShape(6.dp))
-                                .background(Color.Black.copy(alpha = 0.05f)),
+                                .clip(RoundedCornerShape(4.dp))
+                                .border(2.dp, textColor, RoundedCornerShape(4.dp))
+                                .background(BrutalistWhite),
                             contentScale = androidx.compose.ui.layout.ContentScale.Crop
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                     }
 
-                    Column {
+                    Column(modifier = Modifier.weight(1f, fill = false)) {
                         Text(
                             text = "FILE_ATTACHED",
-                            style = KiriTypography.labelSmall.copy(color = colorScheme.primary.copy(alpha = 0.6f))
+                            style = KiriTypography.labelSmall.copy(color = textColor)
                         )
                         Text(
                             text = selectedFileName,
-                            style = KiriTypography.labelMedium.copy(color = colorScheme.onSurfaceVariant),
+                            style = KiriTypography.labelMedium.copy(color = textColor),
                             maxLines = 1,
                             overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
-                            modifier = Modifier.widthIn(max = 200.dp)
+                            modifier = Modifier.widthIn(max = 180.dp)
                         )
                     }
                     
@@ -104,12 +114,12 @@ fun ChatInputBar(
                         onClick = onClearFile, 
                         modifier = Modifier
                             .size(24.dp)
-                            .background(colorScheme.onSurfaceVariant.copy(alpha = 0.1f), CircleShape)
+                            .background(textColor, CircleShape)
                     ) {
                         Icon(
                             Icons.Default.Close, 
                             contentDescription = "Clear", 
-                            tint = colorScheme.onSurfaceVariant, 
+                            tint = if (isDark) BrutalistBlack else BrutalistWhite, 
                             modifier = Modifier.size(14.dp)
                         )
                     }
@@ -121,36 +131,25 @@ fun ChatInputBar(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
         ) {
-            // GLASS_INPUT_PILL: Implementing Glassmorphism
+            // Neo-Brutalist Text Input container
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .weight(1f)
-                    .heightIn(min = 52.dp)
-                    .graphicsLayer {
-                        clip = true
-                        shape = RoundedCornerShape(26.dp)
-                    }
-                    .background(
-                        color = if (isSystemInDarkTheme()) GlassBlack.copy(alpha = 0.4f) else Color.White.copy(alpha = 0.7f),
-                        shape = RoundedCornerShape(26.dp)
-                    )
-                    .border(
-                        width = 0.5.dp,
-                        brush = SolidColor(if (isSystemInDarkTheme()) GlassBorderWhite else GlassBorderBlack.copy(alpha = 0.1f)),
-                        shape = RoundedCornerShape(26.dp)
-                    )
+                    .heightIn(min = 54.dp)
+                    .background(inputBg, RoundedCornerShape(8.dp))
+                    .border(3.dp, textColor, RoundedCornerShape(8.dp))
                     .padding(horizontal = 8.dp)
             ) {
-                // Attach Button (Plus Icon)
+                // Attach Button
                 IconButton(
                     onClick = onAttachClick,
                     modifier = Modifier.size(36.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Add, // Using Add (Plus) for modern feel
+                        imageVector = Icons.Default.Add,
                         contentDescription = "Attach File",
-                        tint = colorScheme.primary
+                        tint = attachBtnColor
                     )
                 }
 
@@ -161,20 +160,20 @@ fun ChatInputBar(
                         .weight(1f)
                         .padding(horizontal = 8.dp, vertical = 12.dp),
                     textStyle = TextStyle(
-                        color = colorScheme.onSurface,
+                        color = textColor,
                         fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Bold
                     ),
-                    cursorBrush = SolidColor(colorScheme.primary),
+                    cursorBrush = SolidColor(textColor),
                     decorationBox = { innerTextField ->
                         if (message.isEmpty()) {
                             Text(
                                 text = "MESSAGE / LOG",
                                 style = TextStyle(
-                                    color = colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                                    color = textColor.copy(alpha = 0.5f),
                                     fontSize = 15.sp,
                                     letterSpacing = 1.sp,
-                                    fontWeight = FontWeight.Bold
+                                    fontWeight = FontWeight.Black
                                 )
                             )
                         }
@@ -192,18 +191,17 @@ fun ChatInputBar(
                 )
             }
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(10.dp))
 
-            // Action Button (Send)
+            // Action Button (Send) - Neo-Brutalist Button Card
             val showSend = message.isNotBlank() || selectedFileName != null
+            val buttonBg = if (showSend) BrutalistYellow else BrutalistLightGray
             
             Box(
                 modifier = Modifier
-                    .size(48.dp)
-                    .background(
-                        color = if (showSend) colorScheme.primary else colorScheme.primary.copy(alpha = 0.3f),
-                        shape = CircleShape
-                    )
+                    .size(54.dp)
+                    .background(buttonBg, RoundedCornerShape(8.dp))
+                    .border(3.dp, textColor, RoundedCornerShape(8.dp))
                     .clickable(
                         enabled = showSend && !isSending,
                         onClick = onSend
@@ -212,15 +210,15 @@ fun ChatInputBar(
             ) {
                 if (isSending) {
                     CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        color = colorScheme.onPrimary,
-                        strokeWidth = 2.dp
+                        modifier = Modifier.size(22.dp),
+                        color = textColor,
+                        strokeWidth = 3.dp
                     )
                 } else {
                     Icon(
                         imageVector = Icons.Default.Send,
                         contentDescription = "Send",
-                        tint = if (showSend) colorScheme.onPrimary else colorScheme.onPrimary.copy(alpha = 0.5f)
+                        tint = textColor
                     )
                 }
             }

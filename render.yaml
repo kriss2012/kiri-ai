@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: kiri-ai-backend
+    env: docker
+    branch: v2
+    dockerfilePath: backend/Dockerfile
+    dockerContext: backend
+    plan: free
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false # Set your MongoDB connection URI in the Render dashboard
+      - key: JWT_SECRET
+        sync: false # Set a secure random JWT secret in the Render dashboard
+      - key: GEMINI_API_KEY
+        sync: false # Set your Google Gemini API Key in the Render dashboard
+
+  - type: web
+    name: kiri-ai-frontend
+    runtime: static
+    branch: v2
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+

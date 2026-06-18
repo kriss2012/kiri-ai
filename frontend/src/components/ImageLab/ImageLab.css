@@ -7,7 +7,7 @@
   flex: 1;
   display: flex;
   overflow: hidden;
-  background-color: var(--bg-main);
+  background-color: var(--bg-primary);
 }
 
 .generation-area {
@@ -25,19 +25,19 @@
   align-items: center;
   gap: 20px;
   color: var(--text-secondary);
-  opacity: 0.5;
+  font-weight: 700;
 }
 
 .image-display-container {
   width: 100%;
-  max-width: 800px;
+  max-width: 600px;
   aspect-ratio: 1;
-  background: var(--color-surface-variant);
-  border-radius: 12px;
+  background: var(--bg-surface);
+  border-radius: var(--border-radius);
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
   position: relative;
-  border: 1px solid var(--color-surface-variant);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--shadow-color);
 }
 
 .main-image {
@@ -51,13 +51,14 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 24px;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  padding: 20px;
+  background: var(--bg-surface);
+  border-top: var(--border-width) solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-speed) ease;
 }
 
 .image-display-container:hover .image-overlay {
@@ -65,8 +66,9 @@
 }
 
 .prompt-badge {
-  color: white;
-  font-size: 12px;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 800;
   max-width: 70%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -75,7 +77,7 @@
 
 .history-sidebar {
   width: 260px;
-  border-left: 1px solid var(--color-surface-variant);
+  border-left: var(--border-width) solid var(--border-color);
   background-color: var(--bg-surface);
   display: flex;
   flex-direction: column;
@@ -85,27 +87,31 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-  padding: 12px;
+  padding: 16px;
   overflow-y: auto;
 }
 
 .history-thumb {
   aspect-ratio: 1;
-  border-radius: 6px;
+  border-radius: var(--border-radius);
   overflow: hidden;
   cursor: pointer;
-  border: 2px solid transparent;
-  transition: all 0.2s ease;
-  opacity: 0.7;
+  border: var(--border-width) solid transparent;
+  transition: all var(--transition-speed) ease;
+  box-shadow: 2px 2px 0px 0px transparent;
 }
 
 .history-thumb:hover {
-  opacity: 1;
+  transform: translate(-1px, -1px);
+  border-color: var(--border-color);
+  box-shadow: 2px 2px 0px 0px var(--shadow-color);
 }
 
 .history-thumb.active {
-  border-color: var(--color-primary);
-  opacity: 1;
+  border-color: var(--border-color);
+  background-color: var(--accent);
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0px 0px var(--shadow-color);
 }
 
 .history-thumb img {
@@ -116,6 +122,8 @@
 
 .prompt-footer {
   padding: 24px 40px;
+  border-top: var(--border-width) solid var(--border-color);
+  background-color: var(--bg-surface);
 }
 
 .prompt-form {
@@ -129,17 +137,19 @@
 .prompt-input {
   flex: 1;
   background: var(--bg-surface);
-  border: 1px solid var(--color-surface-variant);
-  border-radius: 8px;
-  padding: 12px 20px;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 14px 20px;
   color: var(--text-primary);
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 700;
   outline: none;
-  transition: border-color 0.2s ease;
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--shadow-color);
+  transition: background-color var(--transition-speed) ease;
 }
 
 .prompt-input:focus {
-  border-color: var(--color-primary);
+  background-color: var(--accent);
 }
 
 .spin {

@@ -33,7 +33,7 @@ const ConversationSchema = new mongoose.Schema({
   messages: [MessageSchema],
   model: {
     type: String,
-    default: 'google/gemini-2.0-flash-001'
+    default: 'google/gemini-3.5-flash'
   },
   isArchived: {
     type: Boolean,

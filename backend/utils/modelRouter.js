@@ -4,12 +4,26 @@
  */
 
 const MODELS = {
-  GENERAL: 'google/gemini-2.0-flash-001',
-  COMPLEX: 'anthropic/claude-3.5-sonnet',
+  GENERAL: 'google/gemini-3.5-flash',
+  COMPLEX: 'anthropic/claude-sonnet-4',
   CODE: 'meta-llama/llama-3.1-70b-instruct',
-  SPEED: 'google/gemini-2.0-flash-lite-001',
+  SPEED: 'google/gemini-3.1-flash-lite',
   REASONING: 'openai/gpt-4o-mini'
 };
+
+/**
+ * Maps outdated/deprecated model slugs to their current equivalents.
+ */
+const mapModel = (model) => {
+  if (!model || model === 'auto') return MODELS.GENERAL;
+  const mapping = {
+    'google/gemini-2.0-flash-001': MODELS.GENERAL,
+    'google/gemini-2.0-flash-lite-001': MODELS.SPEED,
+    'anthropic/claude-3.5-sonnet': MODELS.COMPLEX
+  };
+  return mapping[model] || model;
+};
+
 
 /**
  * Routes a query to the most appropriate model.
@@ -45,5 +59,6 @@ const routeModel = (query, userTier = 'free') => {
 
 module.exports = {
   routeModel,
+  mapModel,
   MODELS
 };

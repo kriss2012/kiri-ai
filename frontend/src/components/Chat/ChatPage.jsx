@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Sidebar from '../Sidebar/Sidebar';
 import MessageBubble from './MessageBubble';
@@ -9,6 +10,7 @@ import { useTheme } from '../../context/ThemeContext';
 import './Chat.css';
 
 const ChatPage = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const { isDarkMode, toggleTheme } = useTheme();
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 1024);
@@ -159,7 +161,7 @@ const ChatPage = () => {
             <button className="icon-btn theme-toggle" onClick={toggleTheme}>
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
-            <button className="icon-btn premium-btn" onClick={() => window.location.href = '/pricing'}>
+            <button className="icon-btn premium-btn" onClick={() => navigate('/pricing')}>
               <Star size={20} fill={user?.isPremium ? 'gold' : 'none'} />
             </button>
           </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Sidebar from '../Sidebar/Sidebar';
 import api from '../../utils/api';
@@ -8,6 +9,7 @@ import { KiriButton } from '../Shared/KiriUI';
 import './ImageLab.css';
 
 const ImageLab = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const { isDarkMode, toggleTheme } = useTheme();
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 1024);
@@ -59,7 +61,7 @@ const ImageLab = () => {
         onClose={() => setIsSidebarOpen(false)}
         conversations={[]} // Optional: load image history if stored in DB
         onSelect={() => {}} 
-        onNewChat={() => window.location.href = '/'}
+        onNewChat={() => navigate('/')}
       />
 
       <div className="main-viewport image-lab-viewport">
