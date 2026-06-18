@@ -64,3 +64,16 @@ input, textarea {
   display: flex;
   flex-direction: column;
 }
+
+.system-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 900;
+  z-index: 9999;
+}
