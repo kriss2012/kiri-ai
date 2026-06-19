@@ -1,110 +1,412 @@
 .chat-input-wrapper {
-  padding: 16px 24px 24px;
-  background-color: var(--bg-primary);
+  padding: 8px 20px 18px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  width: 100%;
 }
 
-.file-preview-area {
+/* Vision Warning Banner */
+.vision-warn {
   display: flex;
   align-items: center;
-  gap: 16px;
-  background: var(--color-surface-variant);
-  padding: 8px 12px;
+  gap: 8px;
+  max-width: 740px;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 10px 16px;
+  background: rgba(253, 176, 57, 0.08);
+  border-radius: 10px;
+  font-size: 13px;
+  color: var(--orange);
+  border: 1px solid rgba(253, 176, 57, 0.2);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.vision-warn code {
+  background: rgba(253, 176, 57, 0.15);
+  padding: 1px 4px;
   border-radius: 4px;
-  width: fit-content;
 }
 
-.preview-container {
+/* File Attachment Bar */
+.fbar {
+  max-width: 740px;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 10px 14px 4px;
+}
+
+.img-preview {
   position: relative;
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--bd);
 }
 
-.preview-container img {
+.img-preview img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 4px;
 }
 
-.remove-btn {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  background: var(--color-error);
-  color: white;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
+.pdf-preview {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 0;
+  gap: 10px;
+  padding: 8px 14px;
+  background: var(--bg3);
+  border-radius: 12px;
+  border: 1px solid var(--bd);
 }
 
-.preview-info {
-  font-size: 11px;
-  color: var(--text-secondary);
-  max-width: 150px;
+.pdf-preview .p-info {
+  display: flex;
+  flex-direction: column;
+  max-width: 130px;
+}
+
+.pdf-preview strong {
+  font-size: 12px;
+  color: var(--t1);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.chat-input-form {
+.pdf-preview span {
+  font-size: 10px;
+  color: var(--t3);
+}
+
+.f-rm {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 12px;
-  background-color: var(--color-surface-variant);
-  padding: 8px 16px;
-  border-radius: 30px;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.15s;
+}
+
+.f-rm:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.pdf-preview .f-rm {
+  position: relative;
+  top: 0;
+  right: 0;
+  background: transparent;
+  color: var(--t3);
+  width: auto;
+  height: auto;
+}
+
+.pdf-preview .f-rm:hover {
+  color: var(--red);
+  background: transparent;
+}
+
+/* Main Input Wrapper */
+.iw {
+  max-width: 740px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-inp);
+  border: 1px solid var(--bd);
+  border-radius: 22px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  overflow: visible;
+  position: relative;
+}
+
+.iw.highlight, .iw:focus-within {
+  border-color: var(--bd2);
+  box-shadow: 0 2px 20px var(--shd);
+}
+
+/* Model Selector Row */
+.model-row {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px 0;
+  gap: 6px;
+}
+
+.model-dd {
+  position: relative;
+}
+
+.model-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px 5px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--bd);
+  background: var(--bg3);
+  color: var(--t2);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.model-btn:hover {
+  background: var(--bgh);
+  border-color: var(--bd2);
+  color: var(--t1);
+}
+
+.model-btn svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.model-btn .chev {
+  font-size: 9px;
+  color: var(--t3);
+  margin-left: 2px;
+  transition: transform 0.2s;
+}
+
+.model-btn.open .chev {
+  transform: rotate(180deg);
+}
+
+/* Model Dropdown Menu */
+.model-menu {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  background: var(--bg3);
+  border: 1px solid var(--bd);
+  border-radius: 16px;
+  padding: 6px;
+  min-width: 250px;
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 200;
+  box-shadow: 0 12px 36px var(--shd);
+  animation: menuPop 0.15s ease;
+}
+
+@keyframes menuPop {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mm-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.13s;
+}
+
+.mm-opt:hover {
+  background: var(--bgh);
+}
+
+.mm-opt.sel {
+  background: var(--bga);
+}
+
+.mmo-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--grad1), var(--grad2), var(--grad3));
+  color: #fff;
+}
+
+.mmo-info {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.mmo-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--t1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mmo-desc {
+  font-size: 11px;
+  color: var(--t3);
+  margin-top: 1px;
+}
+
+.mmo-chk {
+  color: var(--grad1);
+  font-size: 12px;
+  margin-left: auto;
+}
+
+/* Temperature Control */
+.temp-ctrl {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.temp-lbl {
+  font-size: 11px;
+  color: var(--t3);
+  font-weight: 500;
+}
+
+.temp-input {
+  background: var(--bg3);
+  border: 1px solid var(--bd);
+  color: var(--t1);
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  width: 54px;
+  text-align: center;
+  font-family: var(--font);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.temp-input:focus {
+  border-color: var(--bd2);
+}
+
+/* Textarea and Send Button Row */
+.text-row {
+  display: flex;
+  align-items: flex-end;
+  padding: 6px 8px 8px 16px;
 }
 
 .message-input {
   flex: 1;
   background: transparent;
   border: none;
-  padding: 12px 8px;
-  color: var(--text-primary);
+  outline: none;
+  font-family: var(--font);
   font-size: 15px;
+  color: var(--t1);
+  resize: none;
+  max-height: 200px;
+  line-height: 1.55;
+  padding: 6px 4px;
 }
 
-.attach-btn, .send-btn {
-  color: var(--text-secondary);
+.message-input::placeholder {
+  color: var(--t3);
+}
+
+.ia {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.ib2 {
+  background: none;
+  border: none;
+  color: var(--t3);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  font-size: 15px;
+  transition: background 0.15s, color 0.15s;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px;
+  width: 36px;
+  height: 36px;
 }
 
-.attach-btn:hover {
-  color: var(--text-primary);
+.ib2:hover {
+  background: var(--bgh);
+  color: var(--t1);
 }
 
-.send-btn {
-  background: var(--accent);
-  color: var(--bg-primary);
-  border-radius: 50%;
-  padding: 10px;
-  opacity: 0.3;
+.sbtn {
+  background: var(--bd);
+  color: var(--bg);
+  transition: background 0.2s, transform 0.12s;
 }
 
-.send-btn.active {
-  opacity: 1;
+.sbtn.active {
+  background: var(--t1);
+  color: var(--bg);
+  cursor: pointer;
+}
+
+.sbtn.active:hover {
+  transform: scale(1.06);
+}
+
+.sbtn.active:active {
+  transform: scale(0.94);
+}
+
+.stbtn {
+  background: var(--t1);
+  color: var(--bg);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.stbtn:hover {
+  opacity: 0.85;
+}
+
+.disc {
+  font-size: 11.5px;
+  color: var(--t3);
+  text-align: center;
+  margin-top: 8px;
+  max-width: 740px;
 }
 
 @media (max-width: 768px) {
   .chat-input-wrapper {
-    padding: 12px;
+    padding: 6px 12px 14px;
   }
-  .chat-input-form {
-    padding: 6px 12px;
-    gap: 8px;
-  }
-  .message-input {
-    font-size: 14px;
-    padding: 8px 4px;
+  .text-row {
+    padding: 6px 8px 8px 12px;
   }
 }
