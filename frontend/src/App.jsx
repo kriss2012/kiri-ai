@@ -27,7 +27,7 @@ const App = () => {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <Router basename={import.meta.env.BASE_URL}>
+        <Router>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
