@@ -80,6 +80,10 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
       content: msg.content
     }));
 
+    if (req.body.systemInstruction) {
+      history.unshift({ role: 'system', content: req.body.systemInstruction });
+    }
+
     // Add current message to history
     history.push({ role: 'user', content: message });
 
@@ -109,7 +113,7 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
         completion = await openai.chat.completions.create({
           model: model,
           messages: history,
-          temperature: 0.7,
+          temperature: req.body.temperature !== undefined ? parseFloat(req.body.temperature) : 0.7,
           max_tokens: 2048
         });
         break; // Success
@@ -214,6 +218,10 @@ router.post('/message/upload', protect, checkRequestLimit, upload.single('file')
       content: msg.content
     }));
 
+    if (req.body.systemInstruction) {
+      history.unshift({ role: 'system', content: req.body.systemInstruction });
+    }
+
     // Add current multimodal message
     history.push({ role: 'user', content: userMessageContent });
 
@@ -222,7 +230,7 @@ router.post('/message/upload', protect, checkRequestLimit, upload.single('file')
     const completion = await openai.chat.completions.create({
       model: model,
       messages: history,
-      temperature: 0.7,
+      temperature: req.body.temperature !== undefined ? parseFloat(req.body.temperature) : 0.7,
       max_tokens: 2048
     });
 
@@ -301,6 +309,11 @@ router.post('/stream', protect, checkRequestLimit, async (req, res) => {
       role: msg.role === 'assistant' ? 'assistant' : 'user',
       content: msg.content
     }));
+    
+    if (req.body.systemInstruction) {
+      history.unshift({ role: 'system', content: req.body.systemInstruction });
+    }
+    
     history.push({ role: 'user', content: message });
 
     let fullResponse = '';
