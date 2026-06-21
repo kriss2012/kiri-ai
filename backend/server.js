@@ -6,7 +6,13 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const rateLimit = require('express-rate-limit');
 
+const os = require('os');
+
 const app = express();
+
+let lastCpuUsage = os.cpus();
+let lastCpuTime = Date.now();
+
 
 // Required for Render/Heroku/etc. behind a reverse proxy
 app.set('trust proxy', 1);
@@ -62,6 +68,42 @@ app.get('/ping', (req, res) => {
     message: 'pong',
     timestamp: new Date().toISOString()
   });
+});
+
+app.get('/api/stats', (req, res) => {
+  try {
+    const currentCpuUsage = os.cpus();
+    const currentTime = Date.now();
+    let totalDiff = 0;
+    let idleDiff = 0;
+
+    for (let i = 0; i < currentCpuUsage.length; i++) {
+      const last = lastCpuUsage[i];
+      const curr = currentCpuUsage[i];
+      if (!last || !curr) continue;
+      const lastTotal = Object.values(last.times).reduce((a, b) => a + b, 0);
+      const currTotal = Object.values(curr.times).reduce((a, b) => a + b, 0);
+      totalDiff += (currTotal - lastTotal);
+      idleDiff += (curr.times.idle - last.times.idle);
+    }
+
+    lastCpuUsage = currentCpuUsage;
+    lastCpuTime = currentTime;
+
+    const cpu_percent = totalDiff === 0 ? 0 : Math.round(100 - (100 * idleDiff / totalDiff));
+    
+    const totalMem = os.totalmem();
+    const freeMem = os.freemem();
+    const ram_percent = Math.round(((totalMem - freeMem) / totalMem) * 100);
+
+    res.json({
+      success: true,
+      cpu_percent,
+      ram_percent
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
 });
 
 app.get('/api/health', async (req, res) => {
