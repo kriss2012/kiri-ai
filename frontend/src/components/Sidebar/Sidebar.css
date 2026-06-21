@@ -1,6 +1,7 @@
 .sidebar {
   width: var(--sb-w);
   min-width: var(--sb-w);
+<<<<<<< Updated upstream
   height: 100vh;
   background: var(--bg2);
   border-right: 1px solid var(--bd);
@@ -97,12 +98,106 @@
   display: flex;
   flex-direction: column;
   gap: 1px;
+=======
+  background: var(--bg2);
+  border-right: 1px solid var(--bd);
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform var(--spd) ease,
+    min-width var(--spd) ease,
+    width var(--spd) ease;
+  z-index: 50;
+  overflow: hidden;
+  height: 100vh;
+}
+.sidebar.off {
+  transform: translateX(-100%);
+  min-width: 0;
+  width: 0;
+  pointer-events: none;
 }
 
+/* Sidebar header */
+.sb-hd {
+  padding: 16px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sb-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 6px 8px;
+}
+.sb-brand-icon {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(
+    135deg,
+    var(--grad1),
+    var(--grad2),
+    var(--grad3)
+  );
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sb-brand-icon svg {
+  width: 14px;
+  height: 14px;
+}
+.sb-brand-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--t1);
+  letter-spacing: -0.3px;
+>>>>>>> Stashed changes
+}
+
+/* New chat button */
+.nc-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--bd);
+  background: transparent;
+  color: var(--t2);
+  font-family: var(--font);
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background var(--spd),
+    border-color var(--spd),
+    color var(--spd);
+}
+.nc-btn:hover {
+  background: var(--bgh);
+  border-color: var(--bd2);
+  color: var(--t1);
+}
+
+/* Sidebar modes */
+.sidebar-modes {
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-bottom: 1px solid var(--bd);
+}
 .mode-item {
   display: flex;
   align-items: center;
   gap: 10px;
+<<<<<<< Updated upstream
   padding: 9px 12px;
   border-radius: 10px;
   cursor: pointer;
@@ -110,16 +205,24 @@
   transition: all 0.15s ease;
   font-family: var(--font-text);
   font-size: 13px;
+=======
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.13s, color 0.13s;
+  font-size: 13px;
+  color: var(--t2);
+  font-weight: 500;
+>>>>>>> Stashed changes
 }
-
 .mode-item:hover {
   background: var(--bgh);
   color: var(--t1);
 }
-
 .mode-item.active {
   background: var(--bga);
   color: var(--t1);
+<<<<<<< Updated upstream
   font-weight: 500;
 }
 
@@ -134,11 +237,26 @@
 
 .mode-item.active .mode-icon {
   color: var(--grad1);
+=======
+}
+.mode-item span {
+  flex: 1;
+>>>>>>> Stashed changes
 }
 
-.sidebar-content {
+/* Conversation list */
+.sb-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--t3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 10px 14px 4px;
+}
+.sb-list {
   flex: 1;
   overflow-y: auto;
+<<<<<<< Updated upstream
   padding: 4px 6px;
 }
 
@@ -172,12 +290,18 @@
 }
 
 .conversation-item {
+=======
+  padding: 4px 8px;
+}
+.cv {
+>>>>>>> Stashed changes
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 9px 12px;
   border-radius: 10px;
   cursor: pointer;
+<<<<<<< Updated upstream
   color: var(--t2);
   transition: background 0.13s, color 0.13s;
   position: relative;
@@ -336,10 +460,152 @@
 }
 
 @media (max-width: 1024px) {
+=======
+  transition: background 0.13s;
+  margin-bottom: 1px;
+  position: relative;
+}
+.cv:hover {
+  background: var(--bgh);
+}
+.cv.act {
+  background: var(--bga);
+}
+.cv .ci {
+  font-size: 13px;
+  color: var(--t3);
+  flex-shrink: 0;
+}
+.cv .ct {
+  flex: 1;
+  font-size: 13px;
+  color: var(--t2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cv.act .ct {
+  color: var(--t1);
+}
+.cv .cd {
+  opacity: 0;
+  background: none;
+  border: none;
+  color: var(--t3);
+  cursor: pointer;
+  padding: 4px 5px;
+  border-radius: 6px;
+  transition:
+    opacity 0.15s,
+    color 0.15s;
+  font-size: 12px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cv:hover .cd {
+  opacity: 1;
+}
+.cv .cd:hover {
+  color: var(--red);
+}
+
+/* Sidebar footer */
+.sidebar-footer {
+  padding: 12px;
+  border-top: 1px solid var(--bd);
+  background: var(--bg2);
+}
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.13s;
+  margin-bottom: 8px;
+}
+.user-profile:hover {
+  background: var(--bgh);
+}
+.avatar.micro {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg3);
+  border: 1px solid var(--bd);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--t2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+.user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--t1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.user-plan {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 1px;
+}
+
+.sb-ft {
+  padding: 10px 4px 0px;
+  border-top: 1px solid var(--bd);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.sf-btn {
+  background: none;
+  border: none;
+  color: var(--t3);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition:
+    background 0.15s,
+    color 0.15s;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sf-btn:hover {
+  background: var(--bgh);
+  color: var(--t1);
+}
+.sf-btn.logout:hover {
+  color: var(--red);
+}
+.sf-sp {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+>>>>>>> Stashed changes
   .sidebar {
     position: fixed;
     left: 0;
     top: 0;
+<<<<<<< Updated upstream
     bottom: 0;
     width: var(--sb-w);
     transform: translateX(-100%);
@@ -347,5 +613,11 @@
   .sidebar.open {
     transform: translateX(0);
     box-shadow: 12px 0 36px var(--shd);
+=======
+    height: 100%;
+  }
+  .sidebar.off {
+    transform: translateX(-100%);
+>>>>>>> Stashed changes
   }
 }
