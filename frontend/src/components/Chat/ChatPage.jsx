@@ -60,18 +60,30 @@ const ChatPage = () => {
     scrollToBottom();
   }, [messages, isSending]);
 
-  // Simulate local hardware usage fluctuations
+  // Poll real hardware stats from backend, with fallback to simulation
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCpu(prev => {
-        const delta = Math.floor(Math.random() * 9) - 4; // -4% to +4%
-        return Math.max(10, Math.min(85, prev + delta));
-      });
-      setRam(prev => {
-        const delta = Math.floor(Math.random() * 3) - 1; // -1% to +1%
-        return Math.max(40, Math.min(95, prev + delta));
-      });
-    }, 4000);
+    const fetchStats = async () => {
+      try {
+        const res = await api.get('/stats');
+        if (res.data.success) {
+          setCpu(res.data.cpu_percent);
+          setRam(res.data.ram_percent);
+        }
+      } catch (err) {
+        // Fallback to simulation
+        setCpu(prev => {
+          const delta = Math.floor(Math.random() * 9) - 4; // -4% to +4%
+          return Math.max(10, Math.min(85, prev + delta));
+        });
+        setRam(prev => {
+          const delta = Math.floor(Math.random() * 3) - 1; // -1% to +1%
+          return Math.max(40, Math.min(95, prev + delta));
+        });
+      }
+    };
+
+    fetchStats();
+    const interval = setInterval(fetchStats, 4000);
     return () => clearInterval(interval);
   }, []);
 
@@ -272,7 +284,7 @@ const ChatPage = () => {
         currentId={currentConvId}
         onSelect={selectConversation}
         onNewChat={handleNewChat}
-        onDeleteChat={deleteConversation}
+        onDelete={deleteConversation}
         onClearAll={clearAllConversations}
       />
 
