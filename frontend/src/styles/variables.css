@@ -1,4 +1,5 @@
 :root {
+<<<<<<< Updated upstream
   --font: 'Inter', sans-serif;
   --font-display: 'Outfit', sans-serif;
   --font-text: 'Inter', sans-serif;
@@ -67,6 +68,34 @@
   --color-surface-variant: var(--bg3);
 }
 
+=======
+  /* Font Family Fallbacks */
+  --font-display: 'Inter', sans-serif;
+  --font-text: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Border and Radius override for modern premium feel */
+  --border-width: 1px;
+  --border-radius: 12px;
+  --radius: 12px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+  --shadow-offset: 0px;
+  --shadow-color: transparent;
+  --transition-speed: 0.2s;
+  --sb-w: 260px;
+  --spd: 0.2s;
+
+  /* Brand gradient — Gemini palette */
+  --grad1: #4285f4;
+  --grad2: #9b72cb;
+  --grad3: #d96570;
+  
+  /* Shared sizes */
+  --font: 'Inter', sans-serif;
+}
+
+>>>>>>> Stashed changes
 [data-theme='light'] {
   --bg: #ffffff;
   --bg2: #f4f4f4;
@@ -90,14 +119,18 @@
   --ov: rgba(0, 0, 0, 0.3);
   --tst: #2a2a2a;
 
+<<<<<<< Updated upstream
   --grad1: #4285f4;
   --grad2: #9b72cb;
   --grad3: #d96570;
 
+=======
+>>>>>>> Stashed changes
   --green: #1e8e3e;
   --red: #d93025;
   --orange: #f29900;
 
+<<<<<<< Updated upstream
   /* Legacy Mapping */
   --bg-primary: var(--bg);
   --bg-surface: var(--bg2);
@@ -105,14 +138,62 @@
   --text-secondary: var(--t2);
   --accent: var(--grad1);
   --color-surface-variant: var(--bg3);
+=======
+  /* Legacy variables mapping to support other pages */
+  --bg-primary: var(--bg);
+  --bg-surface: var(--bg);
+  --text-primary: var(--t1);
+  --text-secondary: var(--t2);
+  --accent: var(--bg2);
+  --accent-hover: var(--bg3);
+  --border-color: var(--bd);
+  --shadow-color: var(--shd);
+  --color-black: #1a1a1a;
+  --color-white: #ffffff;
+  --color-light-gray: #f4f4f4;
+  --color-error: var(--red);
+>>>>>>> Stashed changes
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-text);
-  transition: background-color var(--transition-speed), color var(--transition-speed);
-  -webkit-font-smoothing: antialiased;
+/* Default state (prefers-color-scheme or default database preference is dark) */
+:root, [data-theme='dark'] {
+  --bg: #212121;
+  --bg2: #171717;
+  --bg3: #2a2a2a;
+  --bg-u: #2f2f2f;
+  --bg-inp: #2f2f2f;
+
+  --bgh: rgba(255, 255, 255, 0.07);
+  --bga: rgba(255, 255, 255, 0.1);
+
+  --t1: #ececec;
+  --t2: #a0a0a0;
+  --t3: #6b6b6b;
+
+  --bd: #3a3a3a;
+  --bd2: #555555;
+
+  --code: #1a1a1a;
+  --scr: #555;
+  --shd: rgba(0, 0, 0, 0.5);
+  --ov: rgba(0, 0, 0, 0.6);
+  --tst: #3a3a3a;
+
+  --green: #6dd58c;
+  --red: #f28b82;
+  --orange: #fdb039;
+
+  /* Legacy variables mapping to support other pages */
+  --bg-primary: var(--bg);
+  --bg-surface: var(--bg);
+  --text-primary: var(--t1);
+  --text-secondary: var(--t2);
+  --accent: var(--bg3);
+  --accent-hover: var(--bgh);
+  --border-color: var(--bd);
+  --shadow-color: var(--shd);
+  --color-black: #212121;
+  --color-white: #ffffff;
+  --color-light-gray: #171717;
+  --color-error: var(--red);
 }
