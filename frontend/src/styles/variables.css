@@ -1,74 +1,4 @@
 :root {
-<<<<<<< Updated upstream
-  --font: 'Inter', sans-serif;
-  --font-display: 'Outfit', sans-serif;
-  --font-text: 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-
-  --sb-w: 260px;
-  --spd: 0.2s;
-  --radius: 12px;
-  --radius-lg: 18px;
-  --radius-pill: 999px;
-  --transition-speed: 0.2s;
-
-  /* Legacy Compatibility Core Palette Mapping */
-  --color-ivory: #F9F7F2;
-  --color-velvet-black: #050505;
-  --color-showroom-white: #FFFFFF;
-  --color-silver-mist: #C0C0C0;
-  --color-dark-gray: #1A1A1A;
-  --color-error: var(--red);
-}
-
-[data-theme='dark'] {
-  /* Backgrounds — ChatGPT layering */
-  --bg: #212121;
-  --bg2: #171717;
-  --bg3: #2a2a2a;
-  --bg-u: #2f2f2f;
-  --bg-inp: #2f2f2f;
-
-  /* Hovers */
-  --bgh: rgba(255, 255, 255, 0.07);
-  --bga: rgba(255, 255, 255, 0.1);
-
-  /* Text */
-  --t1: #ececec;
-  --t2: #a0a0a0;
-  --t3: #6b6b6b;
-
-  /* Borders */
-  --bd: #3a3a3a;
-  --bd2: #555555;
-
-  /* Code & misc */
-  --code: #1a1a1a;
-  --scr: #555;
-  --shd: rgba(0, 0, 0, 0.5);
-  --ov: rgba(0, 0, 0, 0.6);
-  --tst: #3a3a3a;
-
-  /* Brand gradient — Gemini palette */
-  --grad1: #4285f4;
-  --grad2: #9b72cb;
-  --grad3: #d96570;
-
-  /* Status */
-  --green: #6dd58c;
-  --red: #f28b82;
-  --orange: #fdb039;
-
-  /* Legacy Mapping */
-  --bg-primary: var(--bg);
-  --bg-surface: var(--bg2);
-  --text-primary: var(--t1);
-  --text-secondary: var(--t2);
-  --accent: var(--grad1);
-  --color-surface-variant: var(--bg3);
-}
-
-=======
   /* Font Family Fallbacks */
   --font-display: 'Inter', sans-serif;
   --font-text: 'Inter', sans-serif;
@@ -95,7 +25,6 @@
   --font: 'Inter', sans-serif;
 }
 
->>>>>>> Stashed changes
 [data-theme='light'] {
   --bg: #ffffff;
   --bg2: #f4f4f4;
@@ -119,26 +48,10 @@
   --ov: rgba(0, 0, 0, 0.3);
   --tst: #2a2a2a;
 
-<<<<<<< Updated upstream
-  --grad1: #4285f4;
-  --grad2: #9b72cb;
-  --grad3: #d96570;
-
-=======
->>>>>>> Stashed changes
   --green: #1e8e3e;
   --red: #d93025;
   --orange: #f29900;
 
-<<<<<<< Updated upstream
-  /* Legacy Mapping */
-  --bg-primary: var(--bg);
-  --bg-surface: var(--bg2);
-  --text-primary: var(--t1);
-  --text-secondary: var(--t2);
-  --accent: var(--grad1);
-  --color-surface-variant: var(--bg3);
-=======
   /* Legacy variables mapping to support other pages */
   --bg-primary: var(--bg);
   --bg-surface: var(--bg);
@@ -152,7 +65,11 @@
   --color-white: #ffffff;
   --color-light-gray: #f4f4f4;
   --color-error: var(--red);
->>>>>>> Stashed changes
+  --color-ivory: var(--bg2);
+  --color-velvet-black: #1a1a1a;
+  --color-showroom-white: #ffffff;
+  --color-silver-mist: var(--bd2);
+  --color-dark-gray: var(--t2);
 }
 
 /* Default state (prefers-color-scheme or default database preference is dark) */
@@ -196,4 +113,9 @@
   --color-white: #ffffff;
   --color-light-gray: #171717;
   --color-error: var(--red);
+  --color-ivory: var(--bg-inp);
+  --color-velvet-black: #171717;
+  --color-showroom-white: #ffffff;
+  --color-silver-mist: var(--bd2);
+  --color-dark-gray: var(--t2);
 }
