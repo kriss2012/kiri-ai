@@ -4,7 +4,7 @@
 
 ---
 
-APP From Here :=
+APP From Here :=https://kriss2012.github.io/kiri-ai/
 
 ## 🗂 Project Structure
 
