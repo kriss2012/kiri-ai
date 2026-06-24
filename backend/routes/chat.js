@@ -113,8 +113,13 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
         completion = await openai.chat.completions.create({
           model: model,
           messages: history,
+<<<<<<< Updated upstream
           temperature: req.body.temperature !== undefined ? parseFloat(req.body.temperature) : 0.7,
           max_tokens: 2048
+=======
+          temperature: 0.7,
+          max_tokens: 1500
+>>>>>>> Stashed changes
         });
         break; // Success
       } catch (error) {
@@ -230,8 +235,13 @@ router.post('/message/upload', protect, checkRequestLimit, upload.single('file')
     const completion = await openai.chat.completions.create({
       model: model,
       messages: history,
+<<<<<<< Updated upstream
       temperature: req.body.temperature !== undefined ? parseFloat(req.body.temperature) : 0.7,
       max_tokens: 2048
+=======
+      temperature: 0.7,
+      max_tokens: 1500
+>>>>>>> Stashed changes
     });
 
     const assistantMessage = completion.choices[0].message.content;
@@ -321,7 +331,7 @@ router.post('/stream', protect, checkRequestLimit, async (req, res) => {
       model: model,
       messages: history,
       stream: true,
-      max_tokens: 2048
+      max_tokens: 1500
     });
 
     for await (const chunk of stream) {
