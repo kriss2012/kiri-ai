@@ -12,7 +12,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -85,6 +85,7 @@ fun PricingScreen(
 
     Scaffold(
         topBar = {
+<<<<<<< Updated upstream
             TopAppBar(
                 title = { Text("INTEL // SUBSCRIPTION", style = KiriTypography.labelLarge) },
                 navigationIcon = {
@@ -96,6 +97,32 @@ fun PricingScreen(
                     containerColor = Color.Transparent,
                     titleContentColor = ShowroomWhite,
                     navigationIconContentColor = ShowroomWhite
+=======
+            Column {
+                TopAppBar(
+                    title = { 
+                        Text(
+                            "INTEL // SUBSCRIPTION", 
+                            style = KiriTypography.headlineMedium, 
+                            fontWeight = FontWeight.Black,
+                            color = textColor
+                        ) 
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { navController.popBackStack() }) {
+                            Icon(
+                                Icons.AutoMirrored.Filled.ArrowBack, 
+                                contentDescription = "Back", 
+                                tint = textColor
+                            )
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = bgColor,
+                        titleContentColor = textColor,
+                        navigationIconContentColor = textColor
+                    )
+>>>>>>> Stashed changes
                 )
             )
         },
