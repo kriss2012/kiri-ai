@@ -16,6 +16,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -70,6 +72,7 @@ fun ProfileScreen(
 
     Scaffold(
         topBar = {
+<<<<<<< Updated upstream
             TopAppBar(
                 title = { Text("ACCOUNT_SETTINGS", style = KiriTypography.labelLarge) },
                 navigationIcon = {
@@ -81,6 +84,32 @@ fun ProfileScreen(
                     containerColor = Color.Transparent,
                     titleContentColor = if (isDark) ShowroomWhite else VelvetBlack,
                     navigationIconContentColor = if (isDark) ShowroomWhite else VelvetBlack
+=======
+            Column {
+                TopAppBar(
+                    title = { 
+                        Text(
+                            "ACCOUNT_SETTINGS", 
+                            style = KiriTypography.headlineMedium,
+                            fontWeight = FontWeight.Black,
+                            color = textColor
+                        ) 
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { navController.popBackStack() }) {
+                            Icon(
+                                Icons.AutoMirrored.Filled.ArrowBack, 
+                                contentDescription = "Back",
+                                tint = textColor
+                            )
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = bgColor,
+                        titleContentColor = textColor,
+                        navigationIconContentColor = textColor
+                    )
+>>>>>>> Stashed changes
                 )
             )
         },
@@ -202,6 +231,7 @@ fun ProfileScreen(
             
             Spacer(modifier = Modifier.height(24.dp))
             
+<<<<<<< Updated upstream
             // App Management Card (Glassmorphism)
             Column(
                 modifier = Modifier
@@ -209,6 +239,91 @@ fun ProfileScreen(
                     .graphicsLayer {
                         clip = true
                         shape = RoundedCornerShape(24.dp)
+=======
+            // App Management Card (Neo-Brutalist)
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .offset(x = 6.dp, y = 6.dp)
+                        .background(color = shadowColor, shape = RoundedCornerShape(12.dp))
+                        .border(width = 3.dp, color = textColor, shape = RoundedCornerShape(12.dp))
+                )
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(color = cardBg, shape = RoundedCornerShape(12.dp))
+                        .border(width = 3.dp, color = textColor, shape = RoundedCornerShape(12.dp))
+                        .padding(24.dp)
+                ) {
+                    Text(
+                        text = "SYSTEM_CONTROL", 
+                        style = KiriTypography.labelMedium.copy(
+                            color = textColor,
+                            fontWeight = FontWeight.Black
+                        ),
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+
+                    SettingsRow(
+                        title = "CLEAR_HISTORY",
+                        description = "Purge all conversation logs from secure storage.",
+                        onClick = {
+                            chatViewModel.clearAllHistory {
+                                Toast.makeText(context, "LOGS_WIPED", Toast.LENGTH_SHORT).show()
+                            }
+                        },
+                        icon = Icons.Default.Delete,
+                        contentColor = KiriError,
+                        isDark = isDark
+                    )
+
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = textColor.copy(alpha = 0.2f), thickness = 2.dp)
+
+                    SettingsRow(
+                        title = "SECURITY_MANAGEMENT",
+                        description = "Rotate authentication keys and credentials.",
+                        onClick = {
+                            Toast.makeText(context, "SECURITY_PROTOCOL_ACTIVE", Toast.LENGTH_SHORT).show()
+                        },
+                        icon = Icons.Default.Lock,
+                        isDark = isDark
+                    )
+
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = textColor.copy(alpha = 0.2f), thickness = 2.dp)
+
+                    SettingsRow(
+                        title = "HELP_AND_SUPPORT",
+                        description = "Access documentation or contact development team.",
+                        onClick = {
+                            val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse("https://github.com/kriss2012/kiri-ai/issues/18"))
+                            context.startActivity(intent)
+                        },
+                        icon = Icons.AutoMirrored.Filled.Help,
+                        isDark = isDark
+                    )
+
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = textColor.copy(alpha = 0.2f), thickness = 2.dp)
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column {
+                            Text(
+                                "BUILD_VERSION", 
+                                style = KiriTypography.labelLarge.copy(fontWeight = FontWeight.Black), 
+                                color = textColor
+                            )
+                            Text(
+                                "V2.0.0 // BRUTALIST", 
+                                style = KiriTypography.bodySmall.copy(fontWeight = FontWeight.Bold), 
+                                color = if (isDark) BrutalistLightGray else BrutalistDarkGray
+                            )
+                        }
+                        Icon(Icons.Default.Info, contentDescription = null, tint = textColor, modifier = Modifier.size(22.dp))
+>>>>>>> Stashed changes
                     }
                     .background(
                         color = (if (isDark) GlassBlack else GlassWhite).copy(alpha = 0.15f),
