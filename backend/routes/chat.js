@@ -114,7 +114,7 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
           model: model,
           messages: history,
           temperature: req.body.temperature !== undefined ? parseFloat(req.body.temperature) : 0.7,
-          max_tokens: 2048
+          max_tokens: 1500
         });
         break; // Success
       } catch (error) {
@@ -231,7 +231,7 @@ router.post('/message/upload', protect, checkRequestLimit, upload.single('file')
       model: model,
       messages: history,
       temperature: req.body.temperature !== undefined ? parseFloat(req.body.temperature) : 0.7,
-      max_tokens: 2048
+      max_tokens: 1500
     });
 
     const assistantMessage = completion.choices[0].message.content;
