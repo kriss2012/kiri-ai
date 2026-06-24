@@ -1,4 +1,4 @@
-package com.kiriai.kiriorganization.ui.screens
+﻿package com.kiriai.kiriorganization.ui.screens
 
 import android.net.Uri
 import android.provider.OpenableColumns
@@ -190,11 +190,7 @@ fun ChatScreen(
                     label = { Text("CORE_CHAT", style = KiriTypography.labelMedium) },
                     selected = true,
                     onClick = { scope.launch { drawerState.close() } },
-<<<<<<< Updated upstream
-                    icon = { Icon(Icons.Default.Chat, contentDescription = null, modifier = Modifier.size(16.dp)) },
-=======
-                    icon = { Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = null, modifier = Modifier.size(18.dp), tint = BrutalistBlack) },
->>>>>>> Stashed changes
+                    icon = { Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = null, modifier = Modifier.size(16.dp)) },
                     colors = NavigationDrawerItemDefaults.colors(
                         unselectedContainerColor = Color.Transparent,
                         selectedContainerColor = if (isDark) DarkGray else Color.Black.copy(alpha = 0.05f),
