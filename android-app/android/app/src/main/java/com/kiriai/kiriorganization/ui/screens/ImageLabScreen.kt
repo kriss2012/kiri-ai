@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -48,6 +49,7 @@ fun ImageLabScreen(navController: NavController) {
 
     Scaffold(
         topBar = {
+<<<<<<< Updated upstream
             TopAppBar(
                 title = { Text("IMAGE_LAB // V1.0", style = KiriTypography.labelLarge) },
                 navigationIcon = {
@@ -57,6 +59,35 @@ fun ImageLabScreen(navController: NavController) {
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent, titleContentColor = ShowroomWhite)
             )
+=======
+            Column {
+                TopAppBar(
+                    title = { 
+                        Text(
+                            "IMAGE_LAB // V2.0", 
+                            style = KiriTypography.headlineMedium,
+                            fontWeight = FontWeight.Black,
+                            color = textColor
+                        ) 
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { navController.popBackStack() }) {
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = textColor)
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = bgColor,
+                        titleContentColor = textColor
+                    )
+                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(3.dp)
+                        .background(textColor)
+                )
+            }
+>>>>>>> Stashed changes
         },
         containerColor = Color.Transparent
     ) { padding ->
