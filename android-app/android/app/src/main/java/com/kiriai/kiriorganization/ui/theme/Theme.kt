@@ -9,9 +9,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.compositionLocalOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
@@ -61,9 +59,6 @@ fun KiriTheme(
         SideEffect {
             val window = (view.context.findActivity() as? Activity)?.window
             window?.let {
-                it.statusBarColor = colorScheme.background.toArgb()
-                it.navigationBarColor = colorScheme.background.toArgb()
-                
                 val controller = WindowCompat.getInsetsController(it, view)
                 controller.isAppearanceLightStatusBars = !darkTheme
                 controller.isAppearanceLightNavigationBars = !darkTheme
