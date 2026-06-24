@@ -49,45 +49,15 @@ fun ImageLabScreen(navController: NavController) {
 
     Scaffold(
         topBar = {
-<<<<<<< Updated upstream
             TopAppBar(
                 title = { Text("IMAGE_LAB // V1.0", style = KiriTypography.labelLarge) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent, titleContentColor = ShowroomWhite)
             )
-=======
-            Column {
-                TopAppBar(
-                    title = { 
-                        Text(
-                            "IMAGE_LAB // V2.0", 
-                            style = KiriTypography.headlineMedium,
-                            fontWeight = FontWeight.Black,
-                            color = textColor
-                        ) 
-                    },
-                    navigationIcon = {
-                        IconButton(onClick = { navController.popBackStack() }) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = textColor)
-                        }
-                    },
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = bgColor,
-                        titleContentColor = textColor
-                    )
-                )
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(3.dp)
-                        .background(textColor)
-                )
-            }
->>>>>>> Stashed changes
         },
         containerColor = Color.Transparent
     ) { padding ->
