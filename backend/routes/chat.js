@@ -47,10 +47,10 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
     if (!model || model === 'auto' || model === 'google/gemini-2.0-flash-001' || model === 'google/gemini-3.5-flash') {
       const suggestedModel = routeModel(message, req.user.tier);
       if (suggestedModel === 'IMAGE_GENERATION_PENDING') {
-        return res.json({ 
-          success: true, 
-          action: 'SWITCH_TO_IMAGE', 
-          message: 'I noticed you want to generate an image. Switching to Image Lab...' 
+        return res.json({
+          success: true,
+          action: 'SWITCH_TO_IMAGE',
+          message: 'I noticed you want to generate an image. Switching to Image Lab...'
         });
       }
       model = suggestedModel;
@@ -113,13 +113,8 @@ router.post('/message', protect, checkRequestLimit, async (req, res) => {
         completion = await openai.chat.completions.create({
           model: model,
           messages: history,
-<<<<<<< Updated upstream
           temperature: req.body.temperature !== undefined ? parseFloat(req.body.temperature) : 0.7,
           max_tokens: 2048
-=======
-          temperature: 0.7,
-          max_tokens: 1500
->>>>>>> Stashed changes
         });
         break; // Success
       } catch (error) {
@@ -191,7 +186,7 @@ router.post('/message/upload', protect, checkRequestLimit, upload.single('file')
     // Prepare message content for OpenAI/OpenRouter (Gemini supports multimodal via base64)
     // Prepare message content for OpenAI/OpenRouter (Gemini supports multimodal via base64)
     const base64Image = file.buffer.toString('base64');
-    
+
     // DETECT_MIME_TYPE: Ensure we don't send application/octet-stream to Gemini
     let mimeType = file.mimetype;
     if (mimeType === 'application/octet-stream' || !mimeType) {
@@ -235,13 +230,8 @@ router.post('/message/upload', protect, checkRequestLimit, upload.single('file')
     const completion = await openai.chat.completions.create({
       model: model,
       messages: history,
-<<<<<<< Updated upstream
       temperature: req.body.temperature !== undefined ? parseFloat(req.body.temperature) : 0.7,
       max_tokens: 2048
-=======
-      temperature: 0.7,
-      max_tokens: 1500
->>>>>>> Stashed changes
     });
 
     const assistantMessage = completion.choices[0].message.content;
@@ -319,11 +309,11 @@ router.post('/stream', protect, checkRequestLimit, async (req, res) => {
       role: msg.role === 'assistant' ? 'assistant' : 'user',
       content: msg.content
     }));
-    
+
     if (req.body.systemInstruction) {
       history.unshift({ role: 'system', content: req.body.systemInstruction });
     }
-    
+
     history.push({ role: 'user', content: message });
 
     let fullResponse = '';
@@ -363,7 +353,7 @@ router.post('/stream', protect, checkRequestLimit, async (req, res) => {
     try {
       res.write(`data: ${JSON.stringify({ error: 'Stream failed. Please try again.', done: true })}\n\n`);
       res.end();
-    } catch (_) {}
+    } catch (_) { }
   }
 });
 
