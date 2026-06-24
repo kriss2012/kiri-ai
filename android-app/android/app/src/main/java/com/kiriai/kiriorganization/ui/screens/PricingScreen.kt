@@ -1,4 +1,4 @@
-package com.kiriai.kiriorganization.ui.screens
+﻿package com.kiriai.kiriorganization.ui.screens
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
@@ -85,44 +85,17 @@ fun PricingScreen(
 
     Scaffold(
         topBar = {
-<<<<<<< Updated upstream
             TopAppBar(
                 title = { Text("INTEL // SUBSCRIPTION", style = KiriTypography.labelLarge) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = ShowroomWhite)
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = ShowroomWhite)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = Color.Transparent,
                     titleContentColor = ShowroomWhite,
                     navigationIconContentColor = ShowroomWhite
-=======
-            Column {
-                TopAppBar(
-                    title = { 
-                        Text(
-                            "INTEL // SUBSCRIPTION", 
-                            style = KiriTypography.headlineMedium, 
-                            fontWeight = FontWeight.Black,
-                            color = textColor
-                        ) 
-                    },
-                    navigationIcon = {
-                        IconButton(onClick = { navController.popBackStack() }) {
-                            Icon(
-                                Icons.AutoMirrored.Filled.ArrowBack, 
-                                contentDescription = "Back", 
-                                tint = textColor
-                            )
-                        }
-                    },
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = bgColor,
-                        titleContentColor = textColor,
-                        navigationIconContentColor = textColor
-                    )
->>>>>>> Stashed changes
                 )
             )
         },
