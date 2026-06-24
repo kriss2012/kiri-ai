@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -189,7 +190,11 @@ fun ChatScreen(
                     label = { Text("CORE_CHAT", style = KiriTypography.labelMedium) },
                     selected = true,
                     onClick = { scope.launch { drawerState.close() } },
+<<<<<<< Updated upstream
                     icon = { Icon(Icons.Default.Chat, contentDescription = null, modifier = Modifier.size(16.dp)) },
+=======
+                    icon = { Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = null, modifier = Modifier.size(18.dp), tint = BrutalistBlack) },
+>>>>>>> Stashed changes
                     colors = NavigationDrawerItemDefaults.colors(
                         unselectedContainerColor = Color.Transparent,
                         selectedContainerColor = if (isDark) DarkGray else Color.Black.copy(alpha = 0.05f),
