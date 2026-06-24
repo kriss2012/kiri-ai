@@ -1,168 +1,209 @@
-# Kiri AI 🤖
+🚀 Kiri AI – Intelligent AI Assistant Platform
 
-**A full-stack AI chat application powered by Google Gemini**
+<div align="center">🤖 AI-Powered Conversations • ⚡ Lightning Fast • 🔒 Secure • 📱 Cross-Platform
+
+Kiri AI is a modern full-stack AI assistant powered by Google's Gemini models, designed to provide intelligent conversations, productivity assistance, coding support, content generation, and personalized AI experiences through a beautiful, responsive interface.
+
+🌐 Live Demo: https://kriss2012.github.io/kiri-ai/
+
+</div>---
+
+✨ Why Kiri AI?
+
+Kiri AI combines the power of advanced Generative AI with a modern user experience to deliver:
+
+- 🧠 Human-like AI conversations
+- 💻 Programming and debugging assistance
+- ✍️ Content creation and writing support
+- 📊 Research and knowledge exploration
+- 🚀 Fast and scalable cloud architecture
+- 🔐 Enterprise-grade security practices
+- 📱 Mobile-first responsive design
+- 🌙 Premium modern dark interface
 
 ---
 
-APP From Here :=
+🏗️ Architecture
 
-## 🗂 Project Structure
+┌─────────────────────────┐
+│      Frontend UI        │
+│  HTML • CSS • JS        │
+└──────────┬──────────────┘
+           │ REST API
+           ▼
+┌─────────────────────────┐
+│     Express Backend     │
+│ JWT • Auth • Limits     │
+└──────────┬──────────────┘
+           │
+           ▼
+┌─────────────────────────┐
+│     Google Gemini AI    │
+│  AI Processing Engine   │
+└─────────────────────────┘
 
-```
+---
+
+🚀 Core Features
+
+🤖 Advanced AI Chat
+
+- Gemini-powered intelligent conversations
+- Context-aware responses
+- Natural language understanding
+- Multi-topic discussions
+- Fast response generation
+
+🔐 User Authentication
+
+- Secure JWT authentication
+- User registration & login
+- Session management
+- Protected API endpoints
+- Profile management
+
+💬 Smart Conversations
+
+- Persistent chat history
+- Local conversation storage
+- Conversation continuity
+- Markdown support
+- Code syntax highlighting
+
+📈 Usage Analytics
+
+- Daily AI request tracking
+- Subscription management
+- User activity monitoring
+- Plan-based limitations
+
+💳 Subscription System
+
+- Free Plan
+- Premium Monthly Plan
+- Annual Subscription Plan
+- Upgrade management
+
+📱 Cross Platform
+
+- Desktop optimized
+- Tablet responsive
+- Mobile friendly
+- Android ready via Capacitor
+
+---
+
+🛠️ Technology Stack
+
+Frontend
+
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- Responsive Design
+- Local Storage API
+
+Backend
+
+- Node.js
+- Express.js
+- JWT Authentication
+- Express Rate Limiter
+- RESTful APIs
+
+AI Engine
+
+- Google Gemini API
+- Generative AI Processing
+- Context Management
+
+Deployment
+
+- GitHub Pages
+- Netlify
+- Vercel
+- Railway
+- Render
+- Fly.io
+
+---
+
+📂 Project Structure
+
 kiri-ai/
+│
 ├── backend/
-│   ├── server.js          ← Express API server
-│   └── package.json
-└── frontend/
-    ├── index.html         ← Complete single-file frontend
-    └── kiri-intro.html    ← 4K Logo intro animation
-├── android-app/           ← Capacitor Android project
-└── ...
-```
+│   ├── server.js
+│   ├── package.json
+│   └── .env
+│
+├── frontend/
+│   ├── index.html
+│   ├── kiri-intro.html
+│   └── assets/
+│
+├── android-app/
+│
+├── README.md
+└── LICENSE
 
 ---
 
-## 🚀 Quick Setup
+🎯 Future Roadmap
 
-### 1. Backend
+Version 2.0
 
-```bash
-cd backend
-npm install
-```
+- Voice Assistant
+- AI Image Generation
+- AI File Analysis
+- Multiple AI Models
+- Team Workspaces
+- AI Agents
+- Custom AI Personalities
+- Cloud Chat Synchronization
 
-Create a `.env` file:
-```env
-GEMINI_API_KEY=your_google_gemini_api_key_here
-JWT_SECRET=your_random_secret_key_here_make_it_long
-PORT=3001
-```
+Version 3.0
 
-Start the server:
-```bash
-npm start
-# or for development with auto-reload:
-npm run dev
-```
-
-### 2. Frontend
-
-Open `frontend/index.html` in a browser **or** serve it:
-```bash
-# Using Python
-cd frontend && python3 -m http.server 8080
-
-# Using Node.js (npx)
-cd frontend && npx serve .
-```
-
-Then visit `http://localhost:8080`
+- Video Generation
+- AI Automation Workflows
+- Enterprise Dashboard
+- API Marketplace
+- Browser Extension
+- Desktop Application
 
 ---
 
-## 🎨 Branding & Animations
+🔒 Security & Reliability
 
-### Kiri AI Intro Animation
-Located at `frontend/kiri-intro.html`. This is a high-fidelity 4K-ready CSS/JS animation for app splash screens or video intros.
-
-**How to export as Video:**
-1. Open `frontend/kiri-intro.html` in Chrome.
-2. Press `F11` for full screen.
-3. Record with OBS Studio (3840x2160, 60fps).
-4. Use the resulting `.mp4` for your App Store preview or splash screen.
+- JWT Authentication
+- Rate Limiting Protection
+- Environment Variable Security
+- Secure API Architecture
+- HTTPS Ready
+- Scalable Backend Design
 
 ---
 
-## 🔑 Get Your Gemini API Key
+📊 Subscription Plans
 
-1. Go to https://aistudio.google.com/app/apikey
-2. Click **Create API Key**
-3. Copy and paste it into your `.env` file
-
----
-
-## 💰 Pricing Plans
-
-| Plan    | Price    | Daily Limit  |
-|---------|----------|--------------|
-| Free    | ₹0       | 50 requests  |
-| Premium | ₹149/mo  | Unlimited    |
-| Yearly  | ₹1500/yr | Unlimited    |
+Plan| Monthly Price| Features
+Free| ₹0| 50 Requests/Day
+Premium| ₹149| Unlimited Usage
+Yearly| ₹1500| Unlimited Usage + Priority Access
 
 ---
 
-## 🔐 API Endpoints
+🌟 Vision
 
-| Method | Route              | Auth | Description          |
-|--------|--------------------|------|----------------------|
-| POST   | /api/auth/register | No   | Create account       |
-| POST   | /api/auth/login    | No   | Login                |
-| GET    | /api/auth/me       | Yes  | Get current user     |
-| POST   | /api/chat          | Yes  | Send message to AI   |
-| GET    | /api/plans         | No   | Get available plans  |
-| POST   | /api/subscribe     | Yes  | Upgrade subscription |
-| GET    | /api/usage         | Yes  | Check daily usage    |
-| PUT    | /api/profile       | Yes  | Update profile       |
-| GET    | /api/health        | No   | Health check         |
+Our mission is to make advanced AI technology accessible, affordable, and useful for students, developers, professionals, and businesses worldwide.
+
+Kiri AI is more than a chatbot—it's an intelligent productivity companion designed to help users learn faster, work smarter, and create better.
 
 ---
 
-## 🌐 Deployment
+Developed by Krishna Patil
 
-### Backend (Railway / Render / Fly.io)
+Building intelligent solutions powered by Artificial Intelligence, Cloud Technologies, and Modern Web Development.
 
-```bash
-# Render: connect GitHub repo, set env vars in dashboard
-# Railway: railway up
-# Fly.io: fly deploy
-```
-
-### Frontend (Netlify / Vercel / GitHub Pages)
-
-1. Upload `frontend/index.html`
-2. Update the `API` constant at top of script to your deployed backend URL:
-```js
-const API = 'https://your-backend.railway.app/api';
-```
-
-### Production Database
-Replace the in-memory `Map()` storage in `server.js` with:
-- **MongoDB** (mongoose) — recommended
-- **PostgreSQL** (prisma or pg)
-- **Supabase** — easiest for quick deployment
-
----
-
-## ✨ Features
-
-- 🔐 JWT Authentication (register/login)
-- 💬 Real-time chat with Gemini AI
-- 📊 Daily usage tracking per user
-- 💳 Subscription plans (Free/Premium/Yearly)
-- 📱 Fully responsive mobile UI
-- 🎨 Beautiful dark theme with Kiri branding
-- 📝 Markdown rendering with syntax highlighting
-- 💾 Local chat history persistence
-- ⌨️ Keyboard shortcuts (Ctrl+K = New Chat)
-
----
-
-## 🔧 Customization
-
-- Change colors in CSS `:root` variables
-- Change AI personality in the `systemInstruction` in `server.js`
-- Add payment gateway (Razorpay/Stripe) in `/api/subscribe`
-- Add MongoDB persistence for production
-
----
-
-## 🔒 Security Notes
-
-- Change `JWT_SECRET` to a long random string in production
-- Add rate limiting (already included via `express-rate-limit`)
-- Use HTTPS in production
-- Store API keys in environment variables only, never in code
-
----
-
+⭐ Star the repository if you found this project useful.
 *Built with Express.js + Google Gemini + Vanilla JS*
