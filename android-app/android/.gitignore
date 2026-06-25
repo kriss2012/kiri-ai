@@ -1,0 +1,21 @@
+# Built artifacts
+build/
+.gradle/
+.gradle_home/
+
+# Local config
+local.properties
+
+# IDE
+.idea/
+*.iml
+
+# Keystore (keep in repo for CI, but listed here as reference)
+# kiri-ai.jks
+
+# Log files
+*.log
+build_*.log
+
+# Kotlin build cache
+app/build/
