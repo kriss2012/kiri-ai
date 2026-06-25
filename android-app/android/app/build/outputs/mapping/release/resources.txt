@@ -1,167 +1,167 @@
-Marking string:default_error_message:2131558429 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking drawable:app_logo:2131165185 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:tag_screen_reader_focusable:2131230844 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:tag_accessibility_heading:2131230839 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:tag_state_description:2131230845 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:tag_accessibility_clickable_spans:2131230838 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_action_clickable_span:2131230720 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:tag_accessibility_actions:2131230837 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking bool:workmanager_test_configuration:2130968580 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:is_pooling_container_tag:2131230802 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:hide_in_inspector_tag:2131230793 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking attr:windowSplashScreenBackground:2130903129 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking attr:windowSplashScreenAnimatedIcon:2130903127 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking attr:splashScreenIconSize:2130903112 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking attr:postSplashScreenTheme:2130903106 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:default_popup_window_title:2131558430 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:compose_view_saveable_id_tag:2131230777 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_picker_year_picker_pane_title:2131558461 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:view_tree_on_back_pressed_dispatcher_owner:2131230859 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:report_drawn:2131230822 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:view_tree_saved_state_registry_owner:2131230860 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_google_play_services_enable_title:2131558413 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_google_play_services_update_title:2131558423 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_google_play_services_install_title:2131558416 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_google_play_services_unknown_issue:2131558419 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_google_play_services_updating_text:2131558424 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_google_play_services_unsupported_text:2131558420 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_google_play_services_enable_text:2131558412 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_google_play_services_wear_update_text:2131558425 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_google_play_services_update_text:2131558422 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_google_play_services_install_text:2131558415 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_google_play_services_enable_button:2131558411 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_google_play_services_update_button:2131558421 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_google_play_services_install_button:2131558414 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:nav_controller_view_tag:2131230813 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_input_invalid_for_pattern:2131558441 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_input_invalid_year_range:2131558443 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_input_invalid_not_allowed:2131558442 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_range_input_invalid_range_input:2131558462 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_range_picker_start_headline:2131558468 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_range_picker_end_headline:2131558465 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:androidx_compose_ui_view_composition_context:2131230764 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_picker_scroll_to_earlier_years:2131558451 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_picker_scroll_to_later_years:2131558452 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_picker_switch_to_next_month:2131558456 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking drawable:common_google_signin_btn_icon_dark:2131165187 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking drawable:common_google_signin_btn_icon_light:2131165192 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking drawable:common_google_signin_btn_text_dark:2131165196 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking drawable:common_google_signin_btn_text_light:2131165201 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking color:common_google_signin_btn_tint:2131034126 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking color:common_google_signin_btn_text_dark:2131034116 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking color:common_google_signin_btn_text_light:2131034121 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_signin_button_text_long:2131558428 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_signin_button_text:2131558427 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:fragment_container_view_tag:2131230785 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:wrapped_composition_tag:2131230865 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_google_play_services_notification_ticker:2131558418 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_open_on_phone:2131558426 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking drawable:common_full_open_on_phone:2131165186 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:common_google_play_services_notification_channel_name:2131558417 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking attr:alpha:2130903041 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking attr:lStar:2130903082 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:tag_unhandled_key_event_manager:2131230847 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:tag_window_insets_animation_callback:2131230849 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:tag_on_apply_window_listener:2131230841 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking style:FloatingDialogWindowTheme:2131623948 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking style:DialogWindowTheme:2131623944 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:pooling_container_listener_holder_tag:2131230819 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:view_tree_lifecycle_owner:2131230858 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_picker_navigate_to_year_description:2131558449 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_picker_title:2131558459 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_input_title:2131558446 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_0:2131230721 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_1:2131230722 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_2:2131230733 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_3:2131230744 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_4:2131230747 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_5:2131230748 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_6:2131230749 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_7:2131230750 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_8:2131230751 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_9:2131230752 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_10:2131230723 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_11:2131230724 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_12:2131230725 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_13:2131230726 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_14:2131230727 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_15:2131230728 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_16:2131230729 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_17:2131230730 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_18:2131230731 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_19:2131230732 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_20:2131230734 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_21:2131230735 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_22:2131230736 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_23:2131230737 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_24:2131230738 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_25:2131230739 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_26:2131230740 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_27:2131230741 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_28:2131230742 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_29:2131230743 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_30:2131230745 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:accessibility_custom_action_31:2131230746 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:indeterminate:2131558433 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:state_off:2131558497 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:state_on:2131558498 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:selected:2131558495 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:not_selected:2131558492 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:template_percent:2131558502 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:in_progress:2131558432 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:state_empty:2131558496 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_range_picker_day_in_range:2131558464 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_picker_today_description:2131558460 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_dialog:2131558470 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:close_sheet:2131558410 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_bottom_sheet_drag_handle_description:2131558436 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking color:call_notification_decline_color:2131034115 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:call_notification_hang_up_action:2131558405 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking drawable:ic_call_decline:2131165214 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_picker_switch_to_input_mode:2131558455 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking drawable:abc_vector_test:2131165184 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_time_picker_pm:2131558488 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_picker_no_selection_description:2131558450 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_input_no_input_description:2131558445 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_picker_headline:2131558447 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_input_headline:2131558439 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_picker_headline_description:2131558448 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_input_headline_description:2131558440 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:consume_window_insets_tag:2131230778 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:tab:2131558501 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:switch_role:2131558500 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_picker_switch_to_calendar_mode:2131558453 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:tag_unhandled_key_listeners:2131230848 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:androidx_startup:2131558400 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:visible_removing_fragment_view_tag:2131230862 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:hide_graphics_layer_in_inspector_tag:2131230791 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:special_effects_controller_view_tag:2131230833 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:tooltip_description:2131558503 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:tooltip_label:2131558504 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking animator:fragment_fade_enter:2130837506 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking animator:fragment_fade_exit:2130837507 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking animator:fragment_close_enter:2130837504 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking animator:fragment_close_exit:2130837505 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking animator:fragment_open_enter:2130837508 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking animator:fragment_open_exit:2130837509 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_time_picker_am:2131558477 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:coil_request_manager:2131230776 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_picker_switch_to_previous_month:2131558457 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_snackbar_dismiss:2131558475 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:navigation_menu:2131558491 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:close_drawer:2131558409 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_picker_switch_to_day_selection:2131558454 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_picker_switch_to_year_selection:2131558458 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:tag_accessibility_pane_title:2131230840 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_range_picker_scroll_to_previous_month:2131558467 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_range_picker_scroll_to_next_month:2131558466 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_time_picker_period_toggle_description:2131558487 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_range_picker_title:2131558469 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_range_input_title:2131558463 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking style:EdgeToEdgeFloatingDialogWindowTheme:2131623946 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:view_tree_view_model_store_owner:2131230861 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking id:inspection_slot_table_set:2131230801 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
-Marking string:m3c_date_input_label:2131558444 reachable: referenced from D:\A-Telegram\kiri_ai\kiri-ai-complete\kiri-ai\android-app\android\app\build\intermediates\dex\release\minifyReleaseWithR8\classes.dex
+Marking string:default_error_message:2131558429 reachable: referenced from base/dex/classes.dex
+Marking drawable:app_logo:2131165185 reachable: referenced from base/dex/classes.dex
+Marking id:tag_screen_reader_focusable:2131230844 reachable: referenced from base/dex/classes.dex
+Marking id:tag_accessibility_heading:2131230839 reachable: referenced from base/dex/classes.dex
+Marking id:tag_state_description:2131230845 reachable: referenced from base/dex/classes.dex
+Marking id:tag_accessibility_clickable_spans:2131230838 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_action_clickable_span:2131230720 reachable: referenced from base/dex/classes.dex
+Marking id:tag_accessibility_actions:2131230837 reachable: referenced from base/dex/classes.dex
+Marking bool:workmanager_test_configuration:2130968580 reachable: referenced from base/dex/classes.dex
+Marking id:is_pooling_container_tag:2131230802 reachable: referenced from base/dex/classes.dex
+Marking id:hide_in_inspector_tag:2131230793 reachable: referenced from base/dex/classes.dex
+Marking attr:windowSplashScreenBackground:2130903129 reachable: referenced from base/dex/classes.dex
+Marking attr:windowSplashScreenAnimatedIcon:2130903127 reachable: referenced from base/dex/classes.dex
+Marking attr:splashScreenIconSize:2130903112 reachable: referenced from base/dex/classes.dex
+Marking attr:postSplashScreenTheme:2130903106 reachable: referenced from base/dex/classes.dex
+Marking string:default_popup_window_title:2131558430 reachable: referenced from base/dex/classes.dex
+Marking id:compose_view_saveable_id_tag:2131230777 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_picker_year_picker_pane_title:2131558461 reachable: referenced from base/dex/classes.dex
+Marking id:view_tree_on_back_pressed_dispatcher_owner:2131230859 reachable: referenced from base/dex/classes.dex
+Marking id:report_drawn:2131230822 reachable: referenced from base/dex/classes.dex
+Marking id:view_tree_saved_state_registry_owner:2131230860 reachable: referenced from base/dex/classes.dex
+Marking string:common_google_play_services_enable_title:2131558413 reachable: referenced from base/dex/classes.dex
+Marking string:common_google_play_services_update_title:2131558423 reachable: referenced from base/dex/classes.dex
+Marking string:common_google_play_services_install_title:2131558416 reachable: referenced from base/dex/classes.dex
+Marking string:common_google_play_services_unknown_issue:2131558419 reachable: referenced from base/dex/classes.dex
+Marking string:common_google_play_services_updating_text:2131558424 reachable: referenced from base/dex/classes.dex
+Marking string:common_google_play_services_unsupported_text:2131558420 reachable: referenced from base/dex/classes.dex
+Marking string:common_google_play_services_enable_text:2131558412 reachable: referenced from base/dex/classes.dex
+Marking string:common_google_play_services_wear_update_text:2131558425 reachable: referenced from base/dex/classes.dex
+Marking string:common_google_play_services_update_text:2131558422 reachable: referenced from base/dex/classes.dex
+Marking string:common_google_play_services_install_text:2131558415 reachable: referenced from base/dex/classes.dex
+Marking string:common_google_play_services_enable_button:2131558411 reachable: referenced from base/dex/classes.dex
+Marking string:common_google_play_services_update_button:2131558421 reachable: referenced from base/dex/classes.dex
+Marking string:common_google_play_services_install_button:2131558414 reachable: referenced from base/dex/classes.dex
+Marking id:nav_controller_view_tag:2131230813 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_input_invalid_for_pattern:2131558441 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_input_invalid_year_range:2131558443 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_input_invalid_not_allowed:2131558442 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_range_input_invalid_range_input:2131558462 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_range_picker_start_headline:2131558468 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_range_picker_end_headline:2131558465 reachable: referenced from base/dex/classes.dex
+Marking id:androidx_compose_ui_view_composition_context:2131230764 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_picker_scroll_to_earlier_years:2131558451 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_picker_scroll_to_later_years:2131558452 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_picker_switch_to_next_month:2131558456 reachable: referenced from base/dex/classes.dex
+Marking drawable:common_google_signin_btn_icon_dark:2131165187 reachable: referenced from base/dex/classes.dex
+Marking drawable:common_google_signin_btn_icon_light:2131165192 reachable: referenced from base/dex/classes.dex
+Marking drawable:common_google_signin_btn_text_dark:2131165196 reachable: referenced from base/dex/classes.dex
+Marking drawable:common_google_signin_btn_text_light:2131165201 reachable: referenced from base/dex/classes.dex
+Marking color:common_google_signin_btn_tint:2131034126 reachable: referenced from base/dex/classes.dex
+Marking color:common_google_signin_btn_text_dark:2131034116 reachable: referenced from base/dex/classes.dex
+Marking color:common_google_signin_btn_text_light:2131034121 reachable: referenced from base/dex/classes.dex
+Marking string:common_signin_button_text_long:2131558428 reachable: referenced from base/dex/classes.dex
+Marking string:common_signin_button_text:2131558427 reachable: referenced from base/dex/classes.dex
+Marking id:fragment_container_view_tag:2131230785 reachable: referenced from base/dex/classes.dex
+Marking id:wrapped_composition_tag:2131230865 reachable: referenced from base/dex/classes.dex
+Marking string:common_google_play_services_notification_ticker:2131558418 reachable: referenced from base/dex/classes.dex
+Marking string:common_open_on_phone:2131558426 reachable: referenced from base/dex/classes.dex
+Marking drawable:common_full_open_on_phone:2131165186 reachable: referenced from base/dex/classes.dex
+Marking string:common_google_play_services_notification_channel_name:2131558417 reachable: referenced from base/dex/classes.dex
+Marking attr:alpha:2130903041 reachable: referenced from base/dex/classes.dex
+Marking attr:lStar:2130903082 reachable: referenced from base/dex/classes.dex
+Marking id:tag_unhandled_key_event_manager:2131230847 reachable: referenced from base/dex/classes.dex
+Marking id:tag_window_insets_animation_callback:2131230849 reachable: referenced from base/dex/classes.dex
+Marking id:tag_on_apply_window_listener:2131230841 reachable: referenced from base/dex/classes.dex
+Marking style:FloatingDialogWindowTheme:2131623948 reachable: referenced from base/dex/classes.dex
+Marking style:DialogWindowTheme:2131623944 reachable: referenced from base/dex/classes.dex
+Marking id:pooling_container_listener_holder_tag:2131230819 reachable: referenced from base/dex/classes.dex
+Marking id:view_tree_lifecycle_owner:2131230858 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_picker_navigate_to_year_description:2131558449 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_picker_title:2131558459 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_input_title:2131558446 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_0:2131230721 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_1:2131230722 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_2:2131230733 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_3:2131230744 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_4:2131230747 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_5:2131230748 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_6:2131230749 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_7:2131230750 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_8:2131230751 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_9:2131230752 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_10:2131230723 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_11:2131230724 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_12:2131230725 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_13:2131230726 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_14:2131230727 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_15:2131230728 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_16:2131230729 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_17:2131230730 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_18:2131230731 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_19:2131230732 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_20:2131230734 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_21:2131230735 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_22:2131230736 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_23:2131230737 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_24:2131230738 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_25:2131230739 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_26:2131230740 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_27:2131230741 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_28:2131230742 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_29:2131230743 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_30:2131230745 reachable: referenced from base/dex/classes.dex
+Marking id:accessibility_custom_action_31:2131230746 reachable: referenced from base/dex/classes.dex
+Marking string:indeterminate:2131558433 reachable: referenced from base/dex/classes.dex
+Marking string:state_off:2131558497 reachable: referenced from base/dex/classes.dex
+Marking string:state_on:2131558498 reachable: referenced from base/dex/classes.dex
+Marking string:selected:2131558495 reachable: referenced from base/dex/classes.dex
+Marking string:not_selected:2131558492 reachable: referenced from base/dex/classes.dex
+Marking string:template_percent:2131558502 reachable: referenced from base/dex/classes.dex
+Marking string:in_progress:2131558432 reachable: referenced from base/dex/classes.dex
+Marking string:state_empty:2131558496 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_range_picker_day_in_range:2131558464 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_picker_today_description:2131558460 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_dialog:2131558470 reachable: referenced from base/dex/classes.dex
+Marking string:close_sheet:2131558410 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_bottom_sheet_drag_handle_description:2131558436 reachable: referenced from base/dex/classes.dex
+Marking color:call_notification_decline_color:2131034115 reachable: referenced from base/dex/classes.dex
+Marking string:call_notification_hang_up_action:2131558405 reachable: referenced from base/dex/classes.dex
+Marking drawable:ic_call_decline:2131165214 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_picker_switch_to_input_mode:2131558455 reachable: referenced from base/dex/classes.dex
+Marking drawable:abc_vector_test:2131165184 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_time_picker_pm:2131558488 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_picker_no_selection_description:2131558450 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_input_no_input_description:2131558445 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_picker_headline:2131558447 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_input_headline:2131558439 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_picker_headline_description:2131558448 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_input_headline_description:2131558440 reachable: referenced from base/dex/classes.dex
+Marking id:consume_window_insets_tag:2131230778 reachable: referenced from base/dex/classes.dex
+Marking string:tab:2131558501 reachable: referenced from base/dex/classes.dex
+Marking string:switch_role:2131558500 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_picker_switch_to_calendar_mode:2131558453 reachable: referenced from base/dex/classes.dex
+Marking id:tag_unhandled_key_listeners:2131230848 reachable: referenced from base/dex/classes.dex
+Marking string:androidx_startup:2131558400 reachable: referenced from base/dex/classes.dex
+Marking id:visible_removing_fragment_view_tag:2131230862 reachable: referenced from base/dex/classes.dex
+Marking id:hide_graphics_layer_in_inspector_tag:2131230791 reachable: referenced from base/dex/classes.dex
+Marking id:special_effects_controller_view_tag:2131230833 reachable: referenced from base/dex/classes.dex
+Marking string:tooltip_description:2131558503 reachable: referenced from base/dex/classes.dex
+Marking string:tooltip_label:2131558504 reachable: referenced from base/dex/classes.dex
+Marking animator:fragment_fade_enter:2130837506 reachable: referenced from base/dex/classes.dex
+Marking animator:fragment_fade_exit:2130837507 reachable: referenced from base/dex/classes.dex
+Marking animator:fragment_close_enter:2130837504 reachable: referenced from base/dex/classes.dex
+Marking animator:fragment_close_exit:2130837505 reachable: referenced from base/dex/classes.dex
+Marking animator:fragment_open_enter:2130837508 reachable: referenced from base/dex/classes.dex
+Marking animator:fragment_open_exit:2130837509 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_time_picker_am:2131558477 reachable: referenced from base/dex/classes.dex
+Marking id:coil_request_manager:2131230776 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_picker_switch_to_previous_month:2131558457 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_snackbar_dismiss:2131558475 reachable: referenced from base/dex/classes.dex
+Marking string:navigation_menu:2131558491 reachable: referenced from base/dex/classes.dex
+Marking string:close_drawer:2131558409 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_picker_switch_to_day_selection:2131558454 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_picker_switch_to_year_selection:2131558458 reachable: referenced from base/dex/classes.dex
+Marking id:tag_accessibility_pane_title:2131230840 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_range_picker_scroll_to_previous_month:2131558467 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_range_picker_scroll_to_next_month:2131558466 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_time_picker_period_toggle_description:2131558487 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_range_picker_title:2131558469 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_range_input_title:2131558463 reachable: referenced from base/dex/classes.dex
+Marking style:EdgeToEdgeFloatingDialogWindowTheme:2131623946 reachable: referenced from base/dex/classes.dex
+Marking id:view_tree_view_model_store_owner:2131230861 reachable: referenced from base/dex/classes.dex
+Marking id:inspection_slot_table_set:2131230801 reachable: referenced from base/dex/classes.dex
+Marking string:m3c_date_input_label:2131558444 reachable: referenced from base/dex/classes.dex
 android.content.res.Resources#getIdentifier present: true
 Web content present: true
 Referenced Strings:
@@ -1527,6 +1527,7 @@ rawSocket
 year
 validateValue
 androidx/navigation/NavType$Companion...
+AutoMirrored.Filled.ArrowBack
 androidx/compose/ui/graphics/Rectangl...
 ExitTransition.None
 KeyframeEntity
@@ -2971,6 +2972,7 @@ ConcurrentModificationException
 Serializable
 FORMAT
 valueCase_
+AutoMirrored.Filled.Help
 TransformStopped
 getAndroidLevel
 newSelection
@@ -3003,7 +3005,6 @@ sender
 cellular
 getNamesAndValues$okhttp
 androidx.compose.foundation.MarqueeMo...
-Filled.Send
 SurfaceContainerHigh
 androidx.lifecycle.LiveDataScopeImpl$...
 Bitmask
@@ -3062,7 +3063,6 @@ kotlin/collections/CollectionsKt___Co...
 SIGN_IN_REQUIRED
 compose:lazy:prefetch:compose
 Short
-Filled.ArrowBack
 androidx/navigation/NavController$onB...
 setFinished
 area
@@ -3110,6 +3110,7 @@ acquirers
 getInitialWindowSize
 fileOperator
 okio/Throttler$source$1
+AutoMirrored.Filled.Send
 withCertificateChainCleaner$okhttp
 AddressAuxiliaryDetails
 setPingInterval$okhttp
@@ -3118,7 +3119,6 @@ navigationBars
 dynamicTableIndex
 deqIdx
 googleSignInOptions
-Filled.Help
 mobile
 androidx.compose.material3.SegmentedB...
 allowedPaymentMethods
@@ -3776,6 +3776,7 @@ setProxy$okhttp
 TextFieldClassName
 isFinal
 userResponse
+AutoMirrored.Filled.Chat
 OpenDocument
 getLengths$okhttp
 androidx/compose/material3/DatePicker...
@@ -4312,6 +4313,7 @@ OnExitAnimationListener
 setExchange$okhttp
 kotlinx/coroutines/flow/FlowKt__ShareKt
 BROWSER_COMPATIBLE_DATE_FORMAT_STRINGS
+navBackStackEntry
 androidx/compose/runtime/CompositionK...
 validateCloseCode
 TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
@@ -5077,7 +5079,6 @@ ALIGN_TEXT_TOP
 SRATIONAL
 androidx.compose.foundation.gestures....
 CustomTrustRootIndex
-Filled.Chat
 withFrameNanos
 androidx/compose/foundation/text/sele...
 decor
@@ -11270,696 +11271,696 @@ Marking animator:fragment_open_exit:2130837509 used because it matches string po
 Marking attr:fragmentMode:2130903077 used because it matches string pool constant fragment
 Marking attr:fragmentStyle:2130903078 used because it matches string pool constant fragment
 Marking id:fragment_container_view_tag:2131230785 used because it matches string pool constant fragment
-@anim/fragment_fast_out_extra_slow_in : reachable=true
-@animator/fragment_close_enter : reachable=true
-    @anim/fragment_fast_out_extra_slow_in
-@animator/fragment_close_exit : reachable=true
-    @anim/fragment_fast_out_extra_slow_in
-@animator/fragment_fade_enter : reachable=true
-@animator/fragment_fade_exit : reachable=true
-@animator/fragment_open_enter : reachable=true
-    @anim/fragment_fast_out_extra_slow_in
-@animator/fragment_open_exit : reachable=true
-    @anim/fragment_fast_out_extra_slow_in
-@attr/action : reachable=true
-@attr/alpha : reachable=true
-@attr/ambientEnabled : reachable=false
-@attr/appTheme : reachable=false
-@attr/argType : reachable=false
-@attr/buttonSize : reachable=false
-@attr/buyButtonAppearance : reachable=false
-@attr/buyButtonHeight : reachable=false
-@attr/buyButtonText : reachable=false
-@attr/buyButtonWidth : reachable=false
-@attr/cameraBearing : reachable=true
-@attr/cameraMaxZoomPreference : reachable=true
-@attr/cameraMinZoomPreference : reachable=true
-@attr/cameraTargetLat : reachable=true
-@attr/cameraTargetLng : reachable=true
-@attr/cameraTilt : reachable=true
-@attr/cameraZoom : reachable=true
-@attr/circleCrop : reachable=false
-@attr/colorScheme : reachable=true
-@attr/customThemeStyle : reachable=true
-@attr/data : reachable=true
-@attr/dataPattern : reachable=true
-@attr/destination : reachable=true
-@attr/enterAnim : reachable=true
-@attr/environment : reachable=false
-@attr/exitAnim : reachable=true
-@attr/font : reachable=true
-@attr/fontProviderAuthority : reachable=true
-@attr/fontProviderCerts : reachable=true
-@attr/fontProviderFetchStrategy : reachable=true
-@attr/fontProviderFetchTimeout : reachable=true
-@attr/fontProviderPackage : reachable=true
-@attr/fontProviderQuery : reachable=true
-@attr/fontProviderSystemFontFamily : reachable=true
-@attr/fontStyle : reachable=true
-@attr/fontVariationSettings : reachable=true
-@attr/fontWeight : reachable=true
-@attr/fragmentMode : reachable=true
-@attr/fragmentStyle : reachable=true
-@attr/graph : reachable=true
-@attr/imageAspectRatio : reachable=true
-@attr/imageAspectRatioAdjust : reachable=true
-@attr/lStar : reachable=true
-@attr/latLngBoundsNorthEastLatitude : reachable=true
-@attr/latLngBoundsNorthEastLongitude : reachable=true
-@attr/latLngBoundsSouthWestLatitude : reachable=true
-@attr/latLngBoundsSouthWestLongitude : reachable=true
-@attr/launchSingleTop : reachable=false
-@attr/liteMode : reachable=false
-@attr/mapType : reachable=true
-@attr/maskedWalletDetailsBackground : reachable=true
-@attr/maskedWalletDetailsButtonBackground : reachable=true
-@attr/maskedWalletDetailsButtonTextAppearance : reachable=true
-@attr/maskedWalletDetailsHeaderTextAppearance : reachable=true
-@attr/maskedWalletDetailsLogoImageType : reachable=true
-@attr/maskedWalletDetailsLogoTextColor : reachable=true
-@attr/maskedWalletDetailsTextAppearance : reachable=true
-@attr/mimeType : reachable=false
-@attr/navGraph : reachable=false
-@attr/nestedScrollViewStyle : reachable=false
-@attr/nullable : reachable=true
-@attr/popEnterAnim : reachable=true
-@attr/popExitAnim : reachable=true
-@attr/popUpTo : reachable=true
-@attr/popUpToInclusive : reachable=true
-@attr/popUpToSaveState : reachable=true
-@attr/postSplashScreenTheme : reachable=true
-@attr/queryPatterns : reachable=true
-@attr/restoreState : reachable=false
-@attr/route : reachable=true
-@attr/scopeUris : reachable=true
-@attr/shortcutMatchRequired : reachable=true
-@attr/splashScreenIconSize : reachable=true
-@attr/startDestination : reachable=true
-@attr/targetPackage : reachable=true
-@attr/toolbarTextColorStyle : reachable=false
-@attr/ttcIndex : reachable=false
-@attr/uiCompass : reachable=false
-@attr/uiMapToolbar : reachable=false
-@attr/uiRotateGestures : reachable=false
-@attr/uiScrollGestures : reachable=false
-@attr/uiScrollGesturesDuringRotateOrZoom : reachable=false
-@attr/uiTiltGestures : reachable=false
-@attr/uiZoomControls : reachable=false
-@attr/uiZoomGestures : reachable=false
-@attr/uri : reachable=true
-@attr/useViewLifecycle : reachable=false
-@attr/windowSplashScreenAnimatedIcon : reachable=true
-@attr/windowSplashScreenAnimationDuration : reachable=true
-@attr/windowSplashScreenBackground : reachable=true
-@attr/windowSplashScreenIconBackgroundColor : reachable=true
-@attr/windowTransitionStyle : reachable=true
-@attr/zOrderOnTop : reachable=true
-@bool/enable_system_alarm_service_default : reachable=true
-@bool/enable_system_foreground_service_default : reachable=true
-@bool/enable_system_job_service_default : reachable=true
-@bool/isTablet : reachable=true
-@bool/workmanager_test_configuration : reachable=true
-@color/androidx_core_ripple_material_light : reachable=true
-@color/androidx_core_secondary_text_default_material_light : reachable=true
-@color/call_notification_answer_color : reachable=true
-@color/call_notification_decline_color : reachable=true
-@color/common_google_signin_btn_text_dark : reachable=true
-    @color/common_google_signin_btn_text_dark_disabled
-    @color/common_google_signin_btn_text_dark_pressed
-    @color/common_google_signin_btn_text_dark_focused
-    @color/common_google_signin_btn_text_dark_default
-@color/common_google_signin_btn_text_dark_default : reachable=false
-@color/common_google_signin_btn_text_dark_disabled : reachable=false
-@color/common_google_signin_btn_text_dark_focused : reachable=false
-@color/common_google_signin_btn_text_dark_pressed : reachable=false
-@color/common_google_signin_btn_text_light : reachable=true
-    @color/common_google_signin_btn_text_light_disabled
-    @color/common_google_signin_btn_text_light_pressed
-    @color/common_google_signin_btn_text_light_focused
-    @color/common_google_signin_btn_text_light_default
-@color/common_google_signin_btn_text_light_default : reachable=false
-@color/common_google_signin_btn_text_light_disabled : reachable=false
-@color/common_google_signin_btn_text_light_focused : reachable=false
-@color/common_google_signin_btn_text_light_pressed : reachable=false
-@color/common_google_signin_btn_tint : reachable=true
-@color/ic_launcher_background : reachable=false
-@color/notification_action_color_filter : reachable=true
-    @color/androidx_core_secondary_text_default_material_light
-@color/notification_icon_bg_color : reachable=true
-@color/vector_tint_color : reachable=true
-@color/vector_tint_theme_color : reachable=true
-@color/wallet_bright_foreground_disabled_holo_light : reachable=true
-@color/wallet_bright_foreground_holo_dark : reachable=true
-@color/wallet_bright_foreground_holo_light : reachable=true
-@color/wallet_dim_foreground_disabled_holo_dark : reachable=true
-@color/wallet_dim_foreground_holo_dark : reachable=true
-@color/wallet_highlighted_text_holo_dark : reachable=true
-@color/wallet_highlighted_text_holo_light : reachable=true
-@color/wallet_hint_foreground_holo_dark : reachable=true
-@color/wallet_hint_foreground_holo_light : reachable=true
-@color/wallet_holo_blue_light : reachable=true
-@color/wallet_link_text_light : reachable=true
-@color/wallet_primary_text_holo_light : reachable=true
-    @color/wallet_bright_foreground_disabled_holo_light
-    @color/wallet_bright_foreground_holo_light
-@color/wallet_secondary_text_holo_dark : reachable=true
-    @color/wallet_dim_foreground_disabled_holo_dark
-    @color/wallet_dim_foreground_holo_dark
-@dimen/compat_button_inset_horizontal_material : reachable=false
-@dimen/compat_button_inset_vertical_material : reachable=false
-@dimen/compat_button_padding_horizontal_material : reachable=false
-@dimen/compat_button_padding_vertical_material : reachable=false
-@dimen/compat_control_corner_material : reachable=false
-@dimen/compat_notification_large_icon_max_height : reachable=false
-@dimen/compat_notification_large_icon_max_width : reachable=false
-@dimen/notification_action_icon_size : reachable=true
-@dimen/notification_action_text_size : reachable=true
-@dimen/notification_big_circle_margin : reachable=true
-@dimen/notification_content_margin_start : reachable=true
-@dimen/notification_large_icon_height : reachable=true
-@dimen/notification_large_icon_width : reachable=true
-@dimen/notification_main_column_padding_top : reachable=true
-@dimen/notification_media_narrow_margin : reachable=true
-@dimen/notification_right_icon_size : reachable=true
-@dimen/notification_right_side_padding_top : reachable=true
-@dimen/notification_small_icon_background_padding : reachable=true
-@dimen/notification_small_icon_size_as_large : reachable=true
-@dimen/notification_subtext_size : reachable=true
-@dimen/notification_top_pad : reachable=true
-@dimen/notification_top_pad_large_text : reachable=true
-@dimen/splashscreen_icon_mask_size_no_background : reachable=false
-@dimen/splashscreen_icon_mask_size_with_background : reachable=false
-@dimen/splashscreen_icon_mask_stroke_no_background : reachable=false
-@dimen/splashscreen_icon_mask_stroke_with_background : reachable=false
-@dimen/splashscreen_icon_size : reachable=false
-    @attr/splashScreenIconSize
-@dimen/splashscreen_icon_size_no_background : reachable=false
-@dimen/splashscreen_icon_size_with_background : reachable=false
-@drawable/abc_vector_test : reachable=true
-@drawable/app_logo : reachable=true
-@drawable/common_full_open_on_phone : reachable=true
-@drawable/common_google_signin_btn_icon_dark : reachable=true
-    @drawable/common_google_signin_btn_icon_disabled
-    @drawable/common_google_signin_btn_icon_dark_focused
-    @drawable/common_google_signin_btn_icon_dark_normal
-@drawable/common_google_signin_btn_icon_dark_focused : reachable=false
-    @drawable/common_google_signin_btn_icon_dark_normal
-@drawable/common_google_signin_btn_icon_dark_normal : reachable=false
-    @drawable/common_google_signin_btn_icon_dark_normal_background
-    @drawable/googleg_standard_color_18
-@drawable/common_google_signin_btn_icon_dark_normal_background : reachable=false
-@drawable/common_google_signin_btn_icon_disabled : reachable=false
-    @drawable/googleg_disabled_color_18
-@drawable/common_google_signin_btn_icon_light : reachable=true
-    @drawable/common_google_signin_btn_icon_disabled
-    @drawable/common_google_signin_btn_icon_light_focused
-    @drawable/common_google_signin_btn_icon_light_normal
-@drawable/common_google_signin_btn_icon_light_focused : reachable=false
-    @drawable/common_google_signin_btn_icon_light_normal
-@drawable/common_google_signin_btn_icon_light_normal : reachable=false
-    @drawable/common_google_signin_btn_icon_light_normal_background
-    @drawable/googleg_standard_color_18
-@drawable/common_google_signin_btn_icon_light_normal_background : reachable=false
-@drawable/common_google_signin_btn_text_dark : reachable=true
-    @drawable/common_google_signin_btn_text_disabled
-    @drawable/common_google_signin_btn_text_dark_focused
-    @drawable/common_google_signin_btn_text_dark_normal
-@drawable/common_google_signin_btn_text_dark_focused : reachable=false
-    @drawable/common_google_signin_btn_text_dark_normal
-@drawable/common_google_signin_btn_text_dark_normal : reachable=false
-    @drawable/common_google_signin_btn_text_dark_normal_background
-    @drawable/googleg_standard_color_18
-@drawable/common_google_signin_btn_text_dark_normal_background : reachable=false
-@drawable/common_google_signin_btn_text_disabled : reachable=false
-    @drawable/googleg_disabled_color_18
-@drawable/common_google_signin_btn_text_light : reachable=true
-    @drawable/common_google_signin_btn_text_disabled
-    @drawable/common_google_signin_btn_text_light_focused
-    @drawable/common_google_signin_btn_text_light_normal
-@drawable/common_google_signin_btn_text_light_focused : reachable=false
-    @drawable/common_google_signin_btn_text_light_normal
-@drawable/common_google_signin_btn_text_light_normal : reachable=false
-    @drawable/common_google_signin_btn_text_light_normal_background
-    @drawable/googleg_standard_color_18
-@drawable/common_google_signin_btn_text_light_normal_background : reachable=false
-@drawable/compat_splash_screen : reachable=false
-    @attr/windowSplashScreenBackground
-    @dimen/splashscreen_icon_size_with_background
-    @drawable/icon_background
-    @attr/windowSplashScreenAnimatedIcon
-    @dimen/splashscreen_icon_mask_size_with_background
-    @dimen/splashscreen_icon_mask_stroke_with_background
-@drawable/compat_splash_screen_no_icon_background : reachable=false
-    @attr/windowSplashScreenBackground
-    @dimen/splashscreen_icon_size_no_background
-    @attr/windowSplashScreenAnimatedIcon
-    @dimen/splashscreen_icon_mask_size_no_background
-    @dimen/splashscreen_icon_mask_stroke_no_background
-@drawable/googleg_disabled_color_18 : reachable=false
-@drawable/googleg_standard_color_18 : reachable=false
-@drawable/ic_alert : reachable=true
-@drawable/ic_call_answer : reachable=false
-@drawable/ic_call_answer_low : reachable=false
-@drawable/ic_call_answer_video : reachable=false
-@drawable/ic_call_answer_video_low : reachable=false
-@drawable/ic_call_decline : reachable=true
-@drawable/ic_call_decline_low : reachable=false
-@drawable/ic_launcher_foreground : reachable=false
-@drawable/ic_tick_mark : reachable=true
-@drawable/icon_background : reachable=true
-    @attr/windowSplashScreenIconBackgroundColor
-@drawable/notification_action_background : reachable=true
-    @color/androidx_core_ripple_material_light
-    @dimen/compat_button_inset_horizontal_material
-    @dimen/compat_button_inset_vertical_material
-    @dimen/compat_control_corner_material
-    @dimen/compat_button_padding_horizontal_material
-    @dimen/compat_button_padding_vertical_material
-@drawable/notification_bg : reachable=true
-    @drawable/notification_bg_normal_pressed
-    @drawable/notification_bg_normal
-@drawable/notification_bg_low : reachable=true
-    @drawable/notification_bg_low_pressed
-    @drawable/notification_bg_low_normal
-@drawable/notification_bg_low_normal : reachable=true
-@drawable/notification_bg_low_pressed : reachable=true
-@drawable/notification_bg_normal : reachable=true
-@drawable/notification_bg_normal_pressed : reachable=true
-@drawable/notification_icon_background : reachable=true
-    @color/notification_icon_bg_color
-@drawable/notification_oversize_large_icon_bg : reachable=true
-@drawable/notification_template_icon_bg : reachable=true
-@drawable/notification_template_icon_low_bg : reachable=true
-@drawable/notification_tile_bg : reachable=true
-    @drawable/notify_panel_notification_icon_bg
-@drawable/notify_panel_notification_icon_bg : reachable=true
-@drawable/rzp_border : reachable=false
-@drawable/rzp_border_bottom : reachable=false
-@drawable/rzp_green_button : reachable=false
-@drawable/rzp_loader_circle : reachable=false
-@drawable/rzp_logo : reachable=false
-@drawable/rzp_name_logo : reachable=false
-@drawable/rzp_poweredby : reachable=false
-@drawable/rzp_secured_by_bg : reachable=false
-@drawable/rzp_white_border_black_bg : reachable=false
-@id/accessibility_action_clickable_span : reachable=true
-@id/accessibility_custom_action_0 : reachable=true
-@id/accessibility_custom_action_1 : reachable=true
-@id/accessibility_custom_action_10 : reachable=true
-@id/accessibility_custom_action_11 : reachable=true
-@id/accessibility_custom_action_12 : reachable=true
-@id/accessibility_custom_action_13 : reachable=true
-@id/accessibility_custom_action_14 : reachable=true
-@id/accessibility_custom_action_15 : reachable=true
-@id/accessibility_custom_action_16 : reachable=true
-@id/accessibility_custom_action_17 : reachable=true
-@id/accessibility_custom_action_18 : reachable=true
-@id/accessibility_custom_action_19 : reachable=true
-@id/accessibility_custom_action_2 : reachable=true
-@id/accessibility_custom_action_20 : reachable=true
-@id/accessibility_custom_action_21 : reachable=true
-@id/accessibility_custom_action_22 : reachable=true
-@id/accessibility_custom_action_23 : reachable=true
-@id/accessibility_custom_action_24 : reachable=true
-@id/accessibility_custom_action_25 : reachable=true
-@id/accessibility_custom_action_26 : reachable=true
-@id/accessibility_custom_action_27 : reachable=true
-@id/accessibility_custom_action_28 : reachable=true
-@id/accessibility_custom_action_29 : reachable=true
-@id/accessibility_custom_action_3 : reachable=true
-@id/accessibility_custom_action_30 : reachable=true
-@id/accessibility_custom_action_31 : reachable=true
-@id/accessibility_custom_action_4 : reachable=true
-@id/accessibility_custom_action_5 : reachable=true
-@id/accessibility_custom_action_6 : reachable=true
-@id/accessibility_custom_action_7 : reachable=true
-@id/accessibility_custom_action_8 : reachable=true
-@id/accessibility_custom_action_9 : reachable=true
-@id/action_container : reachable=true
-@id/action_divider : reachable=true
-@id/action_image : reachable=true
-@id/action_text : reachable=true
-@id/actions : reachable=true
-@id/adjust_height : reachable=false
-@id/adjust_width : reachable=false
-@id/android_pay : reachable=true
-@id/android_pay_dark : reachable=true
-@id/android_pay_light : reachable=true
-@id/android_pay_light_with_border : reachable=true
-@id/androidx_compose_ui_view_composition_context : reachable=true
-@id/async : reachable=false
-@id/auto : reachable=true
-@id/blocking : reachable=true
-@id/book_now : reachable=false
-@id/buyButton : reachable=false
-@id/buy_now : reachable=false
-@id/buy_with : reachable=false
-@id/buy_with_google : reachable=false
-@id/check_list : reachable=true
-@id/chronometer : reachable=false
-@id/classic : reachable=true
-@id/coil_request_manager : reachable=true
-@id/compose_view_saveable_id_tag : reachable=true
-@id/consume_window_insets_tag : reachable=true
-@id/dark : reachable=false
-@id/dialog_button : reachable=true
-@id/donate_with : reachable=false
-@id/donate_with_google : reachable=false
-@id/edit_text_id : reachable=true
-@id/forever : reachable=false
-@id/fragment_container_view_tag : reachable=true
-@id/googleMaterial2 : reachable=false
-@id/google_wallet_classic : reachable=false
-@id/google_wallet_grayscale : reachable=false
-@id/google_wallet_monochrome : reachable=false
-@id/grayscale : reachable=false
-@id/hide_graphics_layer_in_inspector_tag : reachable=true
-@id/hide_ime_id : reachable=false
-@id/hide_in_inspector_tag : reachable=true
-@id/holo_dark : reachable=false
-@id/holo_light : reachable=false
-@id/hybrid : reachable=false
-@id/icon : reachable=true
-@id/icon_group : reachable=true
-@id/icon_only : reachable=true
-@id/info : reachable=true
-@id/inspection_slot_table_set : reachable=true
-@id/is_pooling_container_tag : reachable=true
-@id/italic : reachable=false
-@id/iv_check_mark : reachable=true
-@id/light : reachable=false
-@id/line1 : reachable=true
-@id/line3 : reachable=true
-@id/ll_loader : reachable=true
-@id/logo_only : reachable=true
-@id/match_parent : reachable=true
-@id/material : reachable=false
-@id/monochrome : reachable=false
-@id/nav_controller_view_tag : reachable=true
-@id/none : reachable=true
-@id/normal : reachable=false
-@id/notification_background : reachable=true
-@id/notification_main_column : reachable=true
-@id/notification_main_column_container : reachable=true
-@id/pooling_container_listener_holder_tag : reachable=true
-@id/production : reachable=true
-@id/progressBar : reachable=true
-@id/report_drawn : reachable=true
-@id/right_icon : reachable=true
-@id/right_side : reachable=true
-@id/rzp_innerbox : reachable=false
-@id/rzp_outerbox : reachable=false
-@id/rzp_securedpayments : reachable=false
-@id/rzp_theMainMagicView : reachable=false
-@id/sandbox : reachable=false
-@id/satellite : reachable=false
-@id/selectionDetails : reachable=true
-@id/slide : reachable=false
-@id/special_effects_controller_view_tag : reachable=true
-@id/splashscreen_icon_view : reachable=false
-@id/standard : reachable=true
-@id/strict_sandbox : reachable=true
-@id/tag_accessibility_actions : reachable=true
-@id/tag_accessibility_clickable_spans : reachable=true
-@id/tag_accessibility_heading : reachable=true
-@id/tag_accessibility_pane_title : reachable=true
-@id/tag_on_apply_window_listener : reachable=true
-@id/tag_on_receive_content_listener : reachable=true
-@id/tag_on_receive_content_mime_types : reachable=true
-@id/tag_screen_reader_focusable : reachable=true
-@id/tag_state_description : reachable=true
-@id/tag_transition_group : reachable=true
-@id/tag_unhandled_key_event_manager : reachable=true
-@id/tag_unhandled_key_listeners : reachable=true
-@id/tag_window_insets_animation_callback : reachable=true
-@id/terrain : reachable=false
-@id/test : reachable=true
-@id/text : reachable=true
-@id/text2 : reachable=true
-@id/time : reachable=true
-@id/title : reachable=true
-@id/tv_sub_item : reachable=true
-@id/tv_title : reachable=true
-@id/view_tree_lifecycle_owner : reachable=true
-@id/view_tree_on_back_pressed_dispatcher_owner : reachable=true
-@id/view_tree_saved_state_registry_owner : reachable=true
-@id/view_tree_view_model_store_owner : reachable=true
-@id/visible_removing_fragment_view_tag : reachable=true
-@id/wide : reachable=false
-@id/wrap_content : reachable=false
-@id/wrapped_composition_tag : reachable=true
-@integer/default_icon_animation_duration : reachable=true
-@integer/google_play_services_version : reachable=true
-@integer/m3c_window_layout_in_display_cutout_mode : reachable=false
-@integer/status_bar_notification_info_maxnum : reachable=true
-@layout/custom_dialog : reachable=true
-@layout/ime_base_split_test_activity : reachable=true
-@layout/ime_secondary_split_test_activity : reachable=true
-@layout/notification_action : reachable=true
-    @style/Widget_Compat_NotificationActionContainer
-    @dimen/notification_action_icon_size
-    @style/Widget_Compat_NotificationActionText
-@layout/notification_action_tombstone : reachable=true
-    @style/Widget_Compat_NotificationActionContainer
-    @dimen/notification_action_icon_size
-    @style/Widget_Compat_NotificationActionText
-@layout/notification_template_custom_big : reachable=true
-    @dimen/notification_large_icon_width
-    @dimen/notification_large_icon_height
-    @layout/notification_template_icon_group
-    @dimen/notification_right_side_padding_top
-    @layout/notification_template_part_time
-    @layout/notification_template_part_chronometer
-    @style/TextAppearance_Compat_Notification_Info
-@layout/notification_template_icon_group : reachable=true
-    @dimen/notification_large_icon_width
-    @dimen/notification_large_icon_height
-    @dimen/notification_big_circle_margin
-    @dimen/notification_right_icon_size
-@layout/notification_template_part_chronometer : reachable=true
-    @style/TextAppearance_Compat_Notification_Time
-@layout/notification_template_part_time : reachable=true
-    @style/TextAppearance_Compat_Notification_Time
-@layout/rzp_loader : reachable=true
-    @drawable/rzp_loader_circle
-    @drawable/rzp_logo
-@layout/rzp_magic_base : reachable=false
-    @drawable/rzp_poweredby
-@layout/sdk_integration_status : reachable=true
-    @drawable/rzp_logo
-@layout/single_item : reachable=true
-    @drawable/ic_tick_mark
-@layout/splash_screen_view : reachable=false
-    @attr/splashScreenIconSize
-@layout/wallet_test_layout : reachable=true
-@mipmap/ic_launcher : reachable=false
-    @color/ic_launcher_background
-    @drawable/ic_launcher_foreground
-@mipmap/ic_launcher_round : reachable=false
-    @color/ic_launcher_background
-    @drawable/ic_launcher_foreground
-@raw/rzp_config : reachable=true
-@string/androidx_startup : reachable=true
-@string/app_name : reachable=true
-@string/call_notification_answer_action : reachable=true
-@string/call_notification_answer_video_action : reachable=true
-@string/call_notification_decline_action : reachable=true
-@string/call_notification_hang_up_action : reachable=true
-@string/call_notification_incoming_text : reachable=true
-@string/call_notification_ongoing_text : reachable=true
-@string/call_notification_screening_text : reachable=true
-@string/close_drawer : reachable=true
-@string/close_sheet : reachable=true
-@string/common_google_play_services_enable_button : reachable=true
-@string/common_google_play_services_enable_text : reachable=true
-@string/common_google_play_services_enable_title : reachable=true
-@string/common_google_play_services_install_button : reachable=true
-@string/common_google_play_services_install_text : reachable=true
-@string/common_google_play_services_install_title : reachable=true
-@string/common_google_play_services_notification_channel_name : reachable=true
-@string/common_google_play_services_notification_ticker : reachable=true
-@string/common_google_play_services_unknown_issue : reachable=true
-@string/common_google_play_services_unsupported_text : reachable=true
-@string/common_google_play_services_update_button : reachable=true
-@string/common_google_play_services_update_text : reachable=true
-@string/common_google_play_services_update_title : reachable=true
-@string/common_google_play_services_updating_text : reachable=true
-@string/common_google_play_services_wear_update_text : reachable=true
-@string/common_open_on_phone : reachable=true
-@string/common_signin_button_text : reachable=true
-@string/common_signin_button_text_long : reachable=true
-@string/default_error_message : reachable=true
-@string/default_popup_window_title : reachable=true
-@string/dropdown_menu : reachable=false
-@string/in_progress : reachable=true
-@string/indeterminate : reachable=true
-@string/m3c_bottom_sheet_collapse_description : reachable=false
-@string/m3c_bottom_sheet_dismiss_description : reachable=false
-@string/m3c_bottom_sheet_drag_handle_description : reachable=true
-@string/m3c_bottom_sheet_expand_description : reachable=false
-@string/m3c_bottom_sheet_pane_title : reachable=false
-@string/m3c_date_input_headline : reachable=true
-@string/m3c_date_input_headline_description : reachable=true
-@string/m3c_date_input_invalid_for_pattern : reachable=true
-@string/m3c_date_input_invalid_not_allowed : reachable=true
-@string/m3c_date_input_invalid_year_range : reachable=true
-@string/m3c_date_input_label : reachable=true
-@string/m3c_date_input_no_input_description : reachable=true
-@string/m3c_date_input_title : reachable=true
-@string/m3c_date_picker_headline : reachable=true
-@string/m3c_date_picker_headline_description : reachable=true
-@string/m3c_date_picker_navigate_to_year_description : reachable=true
-@string/m3c_date_picker_no_selection_description : reachable=true
-@string/m3c_date_picker_scroll_to_earlier_years : reachable=true
-@string/m3c_date_picker_scroll_to_later_years : reachable=true
-@string/m3c_date_picker_switch_to_calendar_mode : reachable=true
-@string/m3c_date_picker_switch_to_day_selection : reachable=true
-@string/m3c_date_picker_switch_to_input_mode : reachable=true
-@string/m3c_date_picker_switch_to_next_month : reachable=true
-@string/m3c_date_picker_switch_to_previous_month : reachable=true
-@string/m3c_date_picker_switch_to_year_selection : reachable=true
-@string/m3c_date_picker_title : reachable=true
-@string/m3c_date_picker_today_description : reachable=true
-@string/m3c_date_picker_year_picker_pane_title : reachable=true
-@string/m3c_date_range_input_invalid_range_input : reachable=true
-@string/m3c_date_range_input_title : reachable=true
-@string/m3c_date_range_picker_day_in_range : reachable=true
-@string/m3c_date_range_picker_end_headline : reachable=true
-@string/m3c_date_range_picker_scroll_to_next_month : reachable=true
-@string/m3c_date_range_picker_scroll_to_previous_month : reachable=true
-@string/m3c_date_range_picker_start_headline : reachable=true
-@string/m3c_date_range_picker_title : reachable=true
-@string/m3c_dialog : reachable=true
-@string/m3c_dropdown_menu_collapsed : reachable=false
-@string/m3c_dropdown_menu_expanded : reachable=false
-@string/m3c_dropdown_menu_toggle : reachable=false
-@string/m3c_search_bar_search : reachable=false
-@string/m3c_snackbar_dismiss : reachable=true
-@string/m3c_suggestions_available : reachable=false
-@string/m3c_time_picker_am : reachable=true
-@string/m3c_time_picker_hour : reachable=false
-@string/m3c_time_picker_hour_24h_suffix : reachable=false
-@string/m3c_time_picker_hour_selection : reachable=false
-@string/m3c_time_picker_hour_suffix : reachable=false
-@string/m3c_time_picker_hour_text_field : reachable=false
-@string/m3c_time_picker_minute : reachable=false
-@string/m3c_time_picker_minute_selection : reachable=false
-@string/m3c_time_picker_minute_suffix : reachable=false
-@string/m3c_time_picker_minute_text_field : reachable=false
-@string/m3c_time_picker_period_toggle_description : reachable=true
-@string/m3c_time_picker_pm : reachable=true
-@string/m3c_tooltip_long_press_label : reachable=false
-@string/m3c_tooltip_pane_description : reachable=false
-@string/navigation_menu : reachable=true
-@string/not_selected : reachable=true
-@string/range_end : reachable=true
-@string/range_start : reachable=true
-@string/selected : reachable=true
-@string/state_empty : reachable=true
-@string/state_off : reachable=true
-@string/state_on : reachable=true
-@string/status_bar_notification_info_overflow : reachable=true
-@string/switch_role : reachable=true
-@string/tab : reachable=true
-@string/template_percent : reachable=true
-@string/tooltip_description : reachable=true
-@string/tooltip_label : reachable=true
-@string/wallet_buy_button_place_holder : reachable=true
-@style/Base_Theme_SplashScreen : reachable=false
-    @style/Base_v21_Theme_SplashScreen
-    @style/Base_v27_Theme_SplashScreen
-@style/Base_Theme_SplashScreen_DayNight : reachable=false
-    @style/Base_Theme_SplashScreen_Light
-    @style/Base_Theme_SplashScreen
-@style/Base_Theme_SplashScreen_Light : reachable=false
-    @style/Base_v21_Theme_SplashScreen_Light
-    @style/Base_v27_Theme_SplashScreen_Light
-    @style/Base_Theme_SplashScreen
-@style/Base_v21_Theme_SplashScreen : reachable=false
-@style/Base_v21_Theme_SplashScreen_Light : reachable=false
-@style/Base_v27_Theme_SplashScreen : reachable=false
-    @style/Base_v21_Theme_SplashScreen
-@style/Base_v27_Theme_SplashScreen_Light : reachable=false
-    @style/Base_v21_Theme_SplashScreen_Light
-@style/CheckoutTheme : reachable=true
-@style/DialogWindowTheme : reachable=true
-@style/EdgeToEdgeFloatingDialogTheme : reachable=false
-    @integer/m3c_window_layout_in_display_cutout_mode
-@style/EdgeToEdgeFloatingDialogWindowTheme : reachable=true
-    @style/EdgeToEdgeFloatingDialogTheme
-@style/FloatingDialogTheme : reachable=false
-@style/FloatingDialogWindowTheme : reachable=true
-    @style/FloatingDialogTheme
-@style/TextAppearance_Compat_Notification : reachable=true
-@style/TextAppearance_Compat_Notification_Info : reachable=true
-@style/TextAppearance_Compat_Notification_Line2 : reachable=true
-    @style/TextAppearance_Compat_Notification_Info
-@style/TextAppearance_Compat_Notification_Time : reachable=true
-@style/TextAppearance_Compat_Notification_Title : reachable=true
-@style/Theme_App_Starting : reachable=true
-    @style/Theme_SplashScreen
-    @style/Theme_KiriAI
-    @attr/postSplashScreenTheme
-    @drawable/app_logo
-    @attr/windowSplashScreenAnimatedIcon
-    @attr/windowSplashScreenBackground
-@style/Theme_KiriAI : reachable=true
-@style/Theme_SplashScreen : reachable=false
-    @style/Theme_SplashScreen_Common
-    @attr/postSplashScreenTheme
-    @attr/windowSplashScreenAnimatedIcon
-    @integer/default_icon_animation_duration
-    @attr/windowSplashScreenAnimationDuration
-    @attr/windowSplashScreenBackground
-    @style/Base_Theme_SplashScreen_DayNight
-@style/Theme_SplashScreen_Common : reachable=false
-    @style/Base_Theme_SplashScreen_DayNight
-    @drawable/compat_splash_screen_no_icon_background
-    @dimen/splashscreen_icon_size_no_background
-    @attr/splashScreenIconSize
-@style/Theme_SplashScreen_IconBackground : reachable=false
-    @style/Theme_SplashScreen
-    @drawable/compat_splash_screen
-    @dimen/splashscreen_icon_size_with_background
-    @attr/splashScreenIconSize
-    @attr/windowSplashScreenIconBackgroundColor
-@style/WalletFragmentDefaultButtonTextAppearance : reachable=false
-    @color/wallet_primary_text_holo_light
-    @color/wallet_highlighted_text_holo_light
-    @color/wallet_hint_foreground_holo_light
-    @color/wallet_link_text_light
-@style/WalletFragmentDefaultDetailsHeaderTextAppearance : reachable=false
-    @style/WalletFragmentDefaultDetailsTextAppearance
-@style/WalletFragmentDefaultDetailsTextAppearance : reachable=false
-    @color/wallet_secondary_text_holo_dark
-    @color/wallet_highlighted_text_holo_dark
-    @color/wallet_hint_foreground_holo_dark
-    @color/wallet_holo_blue_light
-@style/WalletFragmentDefaultStyle : reachable=false
-    @attr/buyButtonAppearance
-    @attr/buyButtonHeight
-    @attr/buyButtonText
-    @attr/buyButtonWidth
-    @color/wallet_bright_foreground_holo_light
-    @attr/maskedWalletDetailsBackground
-    @attr/maskedWalletDetailsButtonBackground
-    @style/WalletFragmentDefaultButtonTextAppearance
-    @attr/maskedWalletDetailsButtonTextAppearance
-    @style/WalletFragmentDefaultDetailsHeaderTextAppearance
-    @attr/maskedWalletDetailsHeaderTextAppearance
-    @attr/maskedWalletDetailsLogoImageType
-    @color/wallet_bright_foreground_holo_dark
-    @attr/maskedWalletDetailsLogoTextColor
-    @style/WalletFragmentDefaultDetailsTextAppearance
-    @attr/maskedWalletDetailsTextAppearance
-@style/Widget_Compat_NotificationActionContainer : reachable=false
-    @drawable/notification_action_background
-@style/Widget_Compat_NotificationActionText : reachable=false
-    @dimen/notification_action_text_size
-    @color/androidx_core_secondary_text_default_material_light
-@xml/config : reachable=true
-@xml/file_paths : reachable=true
-@xml/file_provider_path : reachable=true
+@com.kiriai.kiriorganization:anim/fragment_fast_out_extra_slow_in : reachable=true
+@com.kiriai.kiriorganization:animator/fragment_close_enter : reachable=true
+    @com.kiriai.kiriorganization:anim/fragment_fast_out_extra_slow_in
+@com.kiriai.kiriorganization:animator/fragment_close_exit : reachable=true
+    @com.kiriai.kiriorganization:anim/fragment_fast_out_extra_slow_in
+@com.kiriai.kiriorganization:animator/fragment_fade_enter : reachable=true
+@com.kiriai.kiriorganization:animator/fragment_fade_exit : reachable=true
+@com.kiriai.kiriorganization:animator/fragment_open_enter : reachable=true
+    @com.kiriai.kiriorganization:anim/fragment_fast_out_extra_slow_in
+@com.kiriai.kiriorganization:animator/fragment_open_exit : reachable=true
+    @com.kiriai.kiriorganization:anim/fragment_fast_out_extra_slow_in
+@com.kiriai.kiriorganization:attr/action : reachable=true
+@com.kiriai.kiriorganization:attr/alpha : reachable=true
+@com.kiriai.kiriorganization:attr/ambientEnabled : reachable=false
+@com.kiriai.kiriorganization:attr/appTheme : reachable=false
+@com.kiriai.kiriorganization:attr/argType : reachable=false
+@com.kiriai.kiriorganization:attr/buttonSize : reachable=false
+@com.kiriai.kiriorganization:attr/buyButtonAppearance : reachable=false
+@com.kiriai.kiriorganization:attr/buyButtonHeight : reachable=false
+@com.kiriai.kiriorganization:attr/buyButtonText : reachable=false
+@com.kiriai.kiriorganization:attr/buyButtonWidth : reachable=false
+@com.kiriai.kiriorganization:attr/cameraBearing : reachable=true
+@com.kiriai.kiriorganization:attr/cameraMaxZoomPreference : reachable=true
+@com.kiriai.kiriorganization:attr/cameraMinZoomPreference : reachable=true
+@com.kiriai.kiriorganization:attr/cameraTargetLat : reachable=true
+@com.kiriai.kiriorganization:attr/cameraTargetLng : reachable=true
+@com.kiriai.kiriorganization:attr/cameraTilt : reachable=true
+@com.kiriai.kiriorganization:attr/cameraZoom : reachable=true
+@com.kiriai.kiriorganization:attr/circleCrop : reachable=false
+@com.kiriai.kiriorganization:attr/colorScheme : reachable=true
+@com.kiriai.kiriorganization:attr/customThemeStyle : reachable=true
+@com.kiriai.kiriorganization:attr/data : reachable=true
+@com.kiriai.kiriorganization:attr/dataPattern : reachable=true
+@com.kiriai.kiriorganization:attr/destination : reachable=true
+@com.kiriai.kiriorganization:attr/enterAnim : reachable=true
+@com.kiriai.kiriorganization:attr/environment : reachable=false
+@com.kiriai.kiriorganization:attr/exitAnim : reachable=true
+@com.kiriai.kiriorganization:attr/font : reachable=true
+@com.kiriai.kiriorganization:attr/fontProviderAuthority : reachable=true
+@com.kiriai.kiriorganization:attr/fontProviderCerts : reachable=true
+@com.kiriai.kiriorganization:attr/fontProviderFetchStrategy : reachable=true
+@com.kiriai.kiriorganization:attr/fontProviderFetchTimeout : reachable=true
+@com.kiriai.kiriorganization:attr/fontProviderPackage : reachable=true
+@com.kiriai.kiriorganization:attr/fontProviderQuery : reachable=true
+@com.kiriai.kiriorganization:attr/fontProviderSystemFontFamily : reachable=true
+@com.kiriai.kiriorganization:attr/fontStyle : reachable=true
+@com.kiriai.kiriorganization:attr/fontVariationSettings : reachable=true
+@com.kiriai.kiriorganization:attr/fontWeight : reachable=true
+@com.kiriai.kiriorganization:attr/fragmentMode : reachable=true
+@com.kiriai.kiriorganization:attr/fragmentStyle : reachable=true
+@com.kiriai.kiriorganization:attr/graph : reachable=true
+@com.kiriai.kiriorganization:attr/imageAspectRatio : reachable=true
+@com.kiriai.kiriorganization:attr/imageAspectRatioAdjust : reachable=true
+@com.kiriai.kiriorganization:attr/lStar : reachable=true
+@com.kiriai.kiriorganization:attr/latLngBoundsNorthEastLatitude : reachable=true
+@com.kiriai.kiriorganization:attr/latLngBoundsNorthEastLongitude : reachable=true
+@com.kiriai.kiriorganization:attr/latLngBoundsSouthWestLatitude : reachable=true
+@com.kiriai.kiriorganization:attr/latLngBoundsSouthWestLongitude : reachable=true
+@com.kiriai.kiriorganization:attr/launchSingleTop : reachable=false
+@com.kiriai.kiriorganization:attr/liteMode : reachable=false
+@com.kiriai.kiriorganization:attr/mapType : reachable=true
+@com.kiriai.kiriorganization:attr/maskedWalletDetailsBackground : reachable=true
+@com.kiriai.kiriorganization:attr/maskedWalletDetailsButtonBackground : reachable=true
+@com.kiriai.kiriorganization:attr/maskedWalletDetailsButtonTextAppearance : reachable=true
+@com.kiriai.kiriorganization:attr/maskedWalletDetailsHeaderTextAppearance : reachable=true
+@com.kiriai.kiriorganization:attr/maskedWalletDetailsLogoImageType : reachable=true
+@com.kiriai.kiriorganization:attr/maskedWalletDetailsLogoTextColor : reachable=true
+@com.kiriai.kiriorganization:attr/maskedWalletDetailsTextAppearance : reachable=true
+@com.kiriai.kiriorganization:attr/mimeType : reachable=false
+@com.kiriai.kiriorganization:attr/navGraph : reachable=false
+@com.kiriai.kiriorganization:attr/nestedScrollViewStyle : reachable=false
+@com.kiriai.kiriorganization:attr/nullable : reachable=true
+@com.kiriai.kiriorganization:attr/popEnterAnim : reachable=true
+@com.kiriai.kiriorganization:attr/popExitAnim : reachable=true
+@com.kiriai.kiriorganization:attr/popUpTo : reachable=true
+@com.kiriai.kiriorganization:attr/popUpToInclusive : reachable=true
+@com.kiriai.kiriorganization:attr/popUpToSaveState : reachable=true
+@com.kiriai.kiriorganization:attr/postSplashScreenTheme : reachable=true
+@com.kiriai.kiriorganization:attr/queryPatterns : reachable=true
+@com.kiriai.kiriorganization:attr/restoreState : reachable=false
+@com.kiriai.kiriorganization:attr/route : reachable=true
+@com.kiriai.kiriorganization:attr/scopeUris : reachable=true
+@com.kiriai.kiriorganization:attr/shortcutMatchRequired : reachable=true
+@com.kiriai.kiriorganization:attr/splashScreenIconSize : reachable=true
+@com.kiriai.kiriorganization:attr/startDestination : reachable=true
+@com.kiriai.kiriorganization:attr/targetPackage : reachable=true
+@com.kiriai.kiriorganization:attr/toolbarTextColorStyle : reachable=false
+@com.kiriai.kiriorganization:attr/ttcIndex : reachable=false
+@com.kiriai.kiriorganization:attr/uiCompass : reachable=false
+@com.kiriai.kiriorganization:attr/uiMapToolbar : reachable=false
+@com.kiriai.kiriorganization:attr/uiRotateGestures : reachable=false
+@com.kiriai.kiriorganization:attr/uiScrollGestures : reachable=false
+@com.kiriai.kiriorganization:attr/uiScrollGesturesDuringRotateOrZoom : reachable=false
+@com.kiriai.kiriorganization:attr/uiTiltGestures : reachable=false
+@com.kiriai.kiriorganization:attr/uiZoomControls : reachable=false
+@com.kiriai.kiriorganization:attr/uiZoomGestures : reachable=false
+@com.kiriai.kiriorganization:attr/uri : reachable=true
+@com.kiriai.kiriorganization:attr/useViewLifecycle : reachable=false
+@com.kiriai.kiriorganization:attr/windowSplashScreenAnimatedIcon : reachable=true
+@com.kiriai.kiriorganization:attr/windowSplashScreenAnimationDuration : reachable=true
+@com.kiriai.kiriorganization:attr/windowSplashScreenBackground : reachable=true
+@com.kiriai.kiriorganization:attr/windowSplashScreenIconBackgroundColor : reachable=true
+@com.kiriai.kiriorganization:attr/windowTransitionStyle : reachable=true
+@com.kiriai.kiriorganization:attr/zOrderOnTop : reachable=true
+@com.kiriai.kiriorganization:bool/enable_system_alarm_service_default : reachable=true
+@com.kiriai.kiriorganization:bool/enable_system_foreground_service_default : reachable=true
+@com.kiriai.kiriorganization:bool/enable_system_job_service_default : reachable=true
+@com.kiriai.kiriorganization:bool/isTablet : reachable=true
+@com.kiriai.kiriorganization:bool/workmanager_test_configuration : reachable=true
+@com.kiriai.kiriorganization:color/androidx_core_ripple_material_light : reachable=true
+@com.kiriai.kiriorganization:color/androidx_core_secondary_text_default_material_light : reachable=true
+@com.kiriai.kiriorganization:color/call_notification_answer_color : reachable=true
+@com.kiriai.kiriorganization:color/call_notification_decline_color : reachable=true
+@com.kiriai.kiriorganization:color/common_google_signin_btn_text_dark : reachable=true
+    @com.kiriai.kiriorganization:color/common_google_signin_btn_text_dark_disabled
+    @com.kiriai.kiriorganization:color/common_google_signin_btn_text_dark_pressed
+    @com.kiriai.kiriorganization:color/common_google_signin_btn_text_dark_focused
+    @com.kiriai.kiriorganization:color/common_google_signin_btn_text_dark_default
+@com.kiriai.kiriorganization:color/common_google_signin_btn_text_dark_default : reachable=false
+@com.kiriai.kiriorganization:color/common_google_signin_btn_text_dark_disabled : reachable=false
+@com.kiriai.kiriorganization:color/common_google_signin_btn_text_dark_focused : reachable=false
+@com.kiriai.kiriorganization:color/common_google_signin_btn_text_dark_pressed : reachable=false
+@com.kiriai.kiriorganization:color/common_google_signin_btn_text_light : reachable=true
+    @com.kiriai.kiriorganization:color/common_google_signin_btn_text_light_disabled
+    @com.kiriai.kiriorganization:color/common_google_signin_btn_text_light_pressed
+    @com.kiriai.kiriorganization:color/common_google_signin_btn_text_light_focused
+    @com.kiriai.kiriorganization:color/common_google_signin_btn_text_light_default
+@com.kiriai.kiriorganization:color/common_google_signin_btn_text_light_default : reachable=false
+@com.kiriai.kiriorganization:color/common_google_signin_btn_text_light_disabled : reachable=false
+@com.kiriai.kiriorganization:color/common_google_signin_btn_text_light_focused : reachable=false
+@com.kiriai.kiriorganization:color/common_google_signin_btn_text_light_pressed : reachable=false
+@com.kiriai.kiriorganization:color/common_google_signin_btn_tint : reachable=true
+@com.kiriai.kiriorganization:color/ic_launcher_background : reachable=false
+@com.kiriai.kiriorganization:color/notification_action_color_filter : reachable=true
+    @com.kiriai.kiriorganization:color/androidx_core_secondary_text_default_material_light
+@com.kiriai.kiriorganization:color/notification_icon_bg_color : reachable=true
+@com.kiriai.kiriorganization:color/vector_tint_color : reachable=true
+@com.kiriai.kiriorganization:color/vector_tint_theme_color : reachable=true
+@com.kiriai.kiriorganization:color/wallet_bright_foreground_disabled_holo_light : reachable=true
+@com.kiriai.kiriorganization:color/wallet_bright_foreground_holo_dark : reachable=true
+@com.kiriai.kiriorganization:color/wallet_bright_foreground_holo_light : reachable=true
+@com.kiriai.kiriorganization:color/wallet_dim_foreground_disabled_holo_dark : reachable=true
+@com.kiriai.kiriorganization:color/wallet_dim_foreground_holo_dark : reachable=true
+@com.kiriai.kiriorganization:color/wallet_highlighted_text_holo_dark : reachable=true
+@com.kiriai.kiriorganization:color/wallet_highlighted_text_holo_light : reachable=true
+@com.kiriai.kiriorganization:color/wallet_hint_foreground_holo_dark : reachable=true
+@com.kiriai.kiriorganization:color/wallet_hint_foreground_holo_light : reachable=true
+@com.kiriai.kiriorganization:color/wallet_holo_blue_light : reachable=true
+@com.kiriai.kiriorganization:color/wallet_link_text_light : reachable=true
+@com.kiriai.kiriorganization:color/wallet_primary_text_holo_light : reachable=true
+    @com.kiriai.kiriorganization:color/wallet_bright_foreground_disabled_holo_light
+    @com.kiriai.kiriorganization:color/wallet_bright_foreground_holo_light
+@com.kiriai.kiriorganization:color/wallet_secondary_text_holo_dark : reachable=true
+    @com.kiriai.kiriorganization:color/wallet_dim_foreground_disabled_holo_dark
+    @com.kiriai.kiriorganization:color/wallet_dim_foreground_holo_dark
+@com.kiriai.kiriorganization:dimen/compat_button_inset_horizontal_material : reachable=false
+@com.kiriai.kiriorganization:dimen/compat_button_inset_vertical_material : reachable=false
+@com.kiriai.kiriorganization:dimen/compat_button_padding_horizontal_material : reachable=false
+@com.kiriai.kiriorganization:dimen/compat_button_padding_vertical_material : reachable=false
+@com.kiriai.kiriorganization:dimen/compat_control_corner_material : reachable=false
+@com.kiriai.kiriorganization:dimen/compat_notification_large_icon_max_height : reachable=false
+@com.kiriai.kiriorganization:dimen/compat_notification_large_icon_max_width : reachable=false
+@com.kiriai.kiriorganization:dimen/notification_action_icon_size : reachable=true
+@com.kiriai.kiriorganization:dimen/notification_action_text_size : reachable=true
+@com.kiriai.kiriorganization:dimen/notification_big_circle_margin : reachable=true
+@com.kiriai.kiriorganization:dimen/notification_content_margin_start : reachable=true
+@com.kiriai.kiriorganization:dimen/notification_large_icon_height : reachable=true
+@com.kiriai.kiriorganization:dimen/notification_large_icon_width : reachable=true
+@com.kiriai.kiriorganization:dimen/notification_main_column_padding_top : reachable=true
+@com.kiriai.kiriorganization:dimen/notification_media_narrow_margin : reachable=true
+@com.kiriai.kiriorganization:dimen/notification_right_icon_size : reachable=true
+@com.kiriai.kiriorganization:dimen/notification_right_side_padding_top : reachable=true
+@com.kiriai.kiriorganization:dimen/notification_small_icon_background_padding : reachable=true
+@com.kiriai.kiriorganization:dimen/notification_small_icon_size_as_large : reachable=true
+@com.kiriai.kiriorganization:dimen/notification_subtext_size : reachable=true
+@com.kiriai.kiriorganization:dimen/notification_top_pad : reachable=true
+@com.kiriai.kiriorganization:dimen/notification_top_pad_large_text : reachable=true
+@com.kiriai.kiriorganization:dimen/splashscreen_icon_mask_size_no_background : reachable=false
+@com.kiriai.kiriorganization:dimen/splashscreen_icon_mask_size_with_background : reachable=false
+@com.kiriai.kiriorganization:dimen/splashscreen_icon_mask_stroke_no_background : reachable=false
+@com.kiriai.kiriorganization:dimen/splashscreen_icon_mask_stroke_with_background : reachable=false
+@com.kiriai.kiriorganization:dimen/splashscreen_icon_size : reachable=false
+    @com.kiriai.kiriorganization:attr/splashScreenIconSize
+@com.kiriai.kiriorganization:dimen/splashscreen_icon_size_no_background : reachable=false
+@com.kiriai.kiriorganization:dimen/splashscreen_icon_size_with_background : reachable=false
+@com.kiriai.kiriorganization:drawable/abc_vector_test : reachable=true
+@com.kiriai.kiriorganization:drawable/app_logo : reachable=true
+@com.kiriai.kiriorganization:drawable/common_full_open_on_phone : reachable=true
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_dark : reachable=true
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_disabled
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_dark_focused
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_dark_normal
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_dark_focused : reachable=false
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_dark_normal
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_dark_normal : reachable=false
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_dark_normal_background
+    @com.kiriai.kiriorganization:drawable/googleg_standard_color_18
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_dark_normal_background : reachable=false
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_disabled : reachable=false
+    @com.kiriai.kiriorganization:drawable/googleg_disabled_color_18
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_light : reachable=true
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_disabled
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_light_focused
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_light_normal
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_light_focused : reachable=false
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_light_normal
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_light_normal : reachable=false
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_light_normal_background
+    @com.kiriai.kiriorganization:drawable/googleg_standard_color_18
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_icon_light_normal_background : reachable=false
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_dark : reachable=true
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_disabled
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_dark_focused
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_dark_normal
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_dark_focused : reachable=false
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_dark_normal
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_dark_normal : reachable=false
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_dark_normal_background
+    @com.kiriai.kiriorganization:drawable/googleg_standard_color_18
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_dark_normal_background : reachable=false
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_disabled : reachable=false
+    @com.kiriai.kiriorganization:drawable/googleg_disabled_color_18
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_light : reachable=true
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_disabled
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_light_focused
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_light_normal
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_light_focused : reachable=false
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_light_normal
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_light_normal : reachable=false
+    @com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_light_normal_background
+    @com.kiriai.kiriorganization:drawable/googleg_standard_color_18
+@com.kiriai.kiriorganization:drawable/common_google_signin_btn_text_light_normal_background : reachable=false
+@com.kiriai.kiriorganization:drawable/compat_splash_screen : reachable=false
+    @com.kiriai.kiriorganization:attr/windowSplashScreenBackground
+    @com.kiriai.kiriorganization:drawable/icon_background
+    @com.kiriai.kiriorganization:dimen/splashscreen_icon_size_with_background
+    @com.kiriai.kiriorganization:attr/windowSplashScreenAnimatedIcon
+    @com.kiriai.kiriorganization:dimen/splashscreen_icon_mask_size_with_background
+    @com.kiriai.kiriorganization:dimen/splashscreen_icon_mask_stroke_with_background
+@com.kiriai.kiriorganization:drawable/compat_splash_screen_no_icon_background : reachable=false
+    @com.kiriai.kiriorganization:attr/windowSplashScreenBackground
+    @com.kiriai.kiriorganization:attr/windowSplashScreenAnimatedIcon
+    @com.kiriai.kiriorganization:dimen/splashscreen_icon_size_no_background
+    @com.kiriai.kiriorganization:dimen/splashscreen_icon_mask_size_no_background
+    @com.kiriai.kiriorganization:dimen/splashscreen_icon_mask_stroke_no_background
+@com.kiriai.kiriorganization:drawable/googleg_disabled_color_18 : reachable=false
+@com.kiriai.kiriorganization:drawable/googleg_standard_color_18 : reachable=false
+@com.kiriai.kiriorganization:drawable/ic_alert : reachable=true
+@com.kiriai.kiriorganization:drawable/ic_call_answer : reachable=false
+@com.kiriai.kiriorganization:drawable/ic_call_answer_low : reachable=false
+@com.kiriai.kiriorganization:drawable/ic_call_answer_video : reachable=false
+@com.kiriai.kiriorganization:drawable/ic_call_answer_video_low : reachable=false
+@com.kiriai.kiriorganization:drawable/ic_call_decline : reachable=true
+@com.kiriai.kiriorganization:drawable/ic_call_decline_low : reachable=false
+@com.kiriai.kiriorganization:drawable/ic_launcher_foreground : reachable=false
+@com.kiriai.kiriorganization:drawable/ic_tick_mark : reachable=true
+@com.kiriai.kiriorganization:drawable/icon_background : reachable=true
+    @com.kiriai.kiriorganization:attr/windowSplashScreenIconBackgroundColor
+@com.kiriai.kiriorganization:drawable/notification_action_background : reachable=true
+    @com.kiriai.kiriorganization:color/androidx_core_ripple_material_light
+    @com.kiriai.kiriorganization:dimen/compat_button_inset_horizontal_material
+    @com.kiriai.kiriorganization:dimen/compat_button_inset_vertical_material
+    @com.kiriai.kiriorganization:dimen/compat_control_corner_material
+    @com.kiriai.kiriorganization:dimen/compat_button_padding_vertical_material
+    @com.kiriai.kiriorganization:dimen/compat_button_padding_horizontal_material
+@com.kiriai.kiriorganization:drawable/notification_bg : reachable=true
+    @com.kiriai.kiriorganization:drawable/notification_bg_normal_pressed
+    @com.kiriai.kiriorganization:drawable/notification_bg_normal
+@com.kiriai.kiriorganization:drawable/notification_bg_low : reachable=true
+    @com.kiriai.kiriorganization:drawable/notification_bg_low_pressed
+    @com.kiriai.kiriorganization:drawable/notification_bg_low_normal
+@com.kiriai.kiriorganization:drawable/notification_bg_low_normal : reachable=true
+@com.kiriai.kiriorganization:drawable/notification_bg_low_pressed : reachable=true
+@com.kiriai.kiriorganization:drawable/notification_bg_normal : reachable=true
+@com.kiriai.kiriorganization:drawable/notification_bg_normal_pressed : reachable=true
+@com.kiriai.kiriorganization:drawable/notification_icon_background : reachable=true
+    @com.kiriai.kiriorganization:color/notification_icon_bg_color
+@com.kiriai.kiriorganization:drawable/notification_oversize_large_icon_bg : reachable=true
+@com.kiriai.kiriorganization:drawable/notification_template_icon_bg : reachable=true
+@com.kiriai.kiriorganization:drawable/notification_template_icon_low_bg : reachable=true
+@com.kiriai.kiriorganization:drawable/notification_tile_bg : reachable=true
+    @com.kiriai.kiriorganization:drawable/notify_panel_notification_icon_bg
+@com.kiriai.kiriorganization:drawable/notify_panel_notification_icon_bg : reachable=true
+@com.kiriai.kiriorganization:drawable/rzp_border : reachable=false
+@com.kiriai.kiriorganization:drawable/rzp_border_bottom : reachable=false
+@com.kiriai.kiriorganization:drawable/rzp_green_button : reachable=false
+@com.kiriai.kiriorganization:drawable/rzp_loader_circle : reachable=false
+@com.kiriai.kiriorganization:drawable/rzp_logo : reachable=false
+@com.kiriai.kiriorganization:drawable/rzp_name_logo : reachable=false
+@com.kiriai.kiriorganization:drawable/rzp_poweredby : reachable=false
+@com.kiriai.kiriorganization:drawable/rzp_secured_by_bg : reachable=false
+@com.kiriai.kiriorganization:drawable/rzp_white_border_black_bg : reachable=false
+@com.kiriai.kiriorganization:id/accessibility_action_clickable_span : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_0 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_1 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_10 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_11 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_12 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_13 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_14 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_15 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_16 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_17 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_18 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_19 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_2 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_20 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_21 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_22 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_23 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_24 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_25 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_26 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_27 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_28 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_29 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_3 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_30 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_31 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_4 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_5 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_6 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_7 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_8 : reachable=true
+@com.kiriai.kiriorganization:id/accessibility_custom_action_9 : reachable=true
+@com.kiriai.kiriorganization:id/action_container : reachable=true
+@com.kiriai.kiriorganization:id/action_divider : reachable=true
+@com.kiriai.kiriorganization:id/action_image : reachable=true
+@com.kiriai.kiriorganization:id/action_text : reachable=true
+@com.kiriai.kiriorganization:id/actions : reachable=true
+@com.kiriai.kiriorganization:id/adjust_height : reachable=false
+@com.kiriai.kiriorganization:id/adjust_width : reachable=false
+@com.kiriai.kiriorganization:id/android_pay : reachable=true
+@com.kiriai.kiriorganization:id/android_pay_dark : reachable=true
+@com.kiriai.kiriorganization:id/android_pay_light : reachable=true
+@com.kiriai.kiriorganization:id/android_pay_light_with_border : reachable=true
+@com.kiriai.kiriorganization:id/androidx_compose_ui_view_composition_context : reachable=true
+@com.kiriai.kiriorganization:id/async : reachable=false
+@com.kiriai.kiriorganization:id/auto : reachable=true
+@com.kiriai.kiriorganization:id/blocking : reachable=true
+@com.kiriai.kiriorganization:id/book_now : reachable=false
+@com.kiriai.kiriorganization:id/buyButton : reachable=false
+@com.kiriai.kiriorganization:id/buy_now : reachable=false
+@com.kiriai.kiriorganization:id/buy_with : reachable=false
+@com.kiriai.kiriorganization:id/buy_with_google : reachable=false
+@com.kiriai.kiriorganization:id/check_list : reachable=true
+@com.kiriai.kiriorganization:id/chronometer : reachable=false
+@com.kiriai.kiriorganization:id/classic : reachable=true
+@com.kiriai.kiriorganization:id/coil_request_manager : reachable=true
+@com.kiriai.kiriorganization:id/compose_view_saveable_id_tag : reachable=true
+@com.kiriai.kiriorganization:id/consume_window_insets_tag : reachable=true
+@com.kiriai.kiriorganization:id/dark : reachable=false
+@com.kiriai.kiriorganization:id/dialog_button : reachable=true
+@com.kiriai.kiriorganization:id/donate_with : reachable=false
+@com.kiriai.kiriorganization:id/donate_with_google : reachable=false
+@com.kiriai.kiriorganization:id/edit_text_id : reachable=true
+@com.kiriai.kiriorganization:id/forever : reachable=false
+@com.kiriai.kiriorganization:id/fragment_container_view_tag : reachable=true
+@com.kiriai.kiriorganization:id/googleMaterial2 : reachable=false
+@com.kiriai.kiriorganization:id/google_wallet_classic : reachable=false
+@com.kiriai.kiriorganization:id/google_wallet_grayscale : reachable=false
+@com.kiriai.kiriorganization:id/google_wallet_monochrome : reachable=false
+@com.kiriai.kiriorganization:id/grayscale : reachable=false
+@com.kiriai.kiriorganization:id/hide_graphics_layer_in_inspector_tag : reachable=true
+@com.kiriai.kiriorganization:id/hide_ime_id : reachable=false
+@com.kiriai.kiriorganization:id/hide_in_inspector_tag : reachable=true
+@com.kiriai.kiriorganization:id/holo_dark : reachable=false
+@com.kiriai.kiriorganization:id/holo_light : reachable=false
+@com.kiriai.kiriorganization:id/hybrid : reachable=false
+@com.kiriai.kiriorganization:id/icon : reachable=true
+@com.kiriai.kiriorganization:id/icon_group : reachable=true
+@com.kiriai.kiriorganization:id/icon_only : reachable=true
+@com.kiriai.kiriorganization:id/info : reachable=true
+@com.kiriai.kiriorganization:id/inspection_slot_table_set : reachable=true
+@com.kiriai.kiriorganization:id/is_pooling_container_tag : reachable=true
+@com.kiriai.kiriorganization:id/italic : reachable=false
+@com.kiriai.kiriorganization:id/iv_check_mark : reachable=true
+@com.kiriai.kiriorganization:id/light : reachable=false
+@com.kiriai.kiriorganization:id/line1 : reachable=true
+@com.kiriai.kiriorganization:id/line3 : reachable=true
+@com.kiriai.kiriorganization:id/ll_loader : reachable=true
+@com.kiriai.kiriorganization:id/logo_only : reachable=true
+@com.kiriai.kiriorganization:id/match_parent : reachable=true
+@com.kiriai.kiriorganization:id/material : reachable=false
+@com.kiriai.kiriorganization:id/monochrome : reachable=false
+@com.kiriai.kiriorganization:id/nav_controller_view_tag : reachable=true
+@com.kiriai.kiriorganization:id/none : reachable=true
+@com.kiriai.kiriorganization:id/normal : reachable=false
+@com.kiriai.kiriorganization:id/notification_background : reachable=true
+@com.kiriai.kiriorganization:id/notification_main_column : reachable=true
+@com.kiriai.kiriorganization:id/notification_main_column_container : reachable=true
+@com.kiriai.kiriorganization:id/pooling_container_listener_holder_tag : reachable=true
+@com.kiriai.kiriorganization:id/production : reachable=true
+@com.kiriai.kiriorganization:id/progressBar : reachable=true
+@com.kiriai.kiriorganization:id/report_drawn : reachable=true
+@com.kiriai.kiriorganization:id/right_icon : reachable=true
+@com.kiriai.kiriorganization:id/right_side : reachable=true
+@com.kiriai.kiriorganization:id/rzp_innerbox : reachable=false
+@com.kiriai.kiriorganization:id/rzp_outerbox : reachable=false
+@com.kiriai.kiriorganization:id/rzp_securedpayments : reachable=false
+@com.kiriai.kiriorganization:id/rzp_theMainMagicView : reachable=false
+@com.kiriai.kiriorganization:id/sandbox : reachable=false
+@com.kiriai.kiriorganization:id/satellite : reachable=false
+@com.kiriai.kiriorganization:id/selectionDetails : reachable=true
+@com.kiriai.kiriorganization:id/slide : reachable=false
+@com.kiriai.kiriorganization:id/special_effects_controller_view_tag : reachable=true
+@com.kiriai.kiriorganization:id/splashscreen_icon_view : reachable=false
+@com.kiriai.kiriorganization:id/standard : reachable=true
+@com.kiriai.kiriorganization:id/strict_sandbox : reachable=true
+@com.kiriai.kiriorganization:id/tag_accessibility_actions : reachable=true
+@com.kiriai.kiriorganization:id/tag_accessibility_clickable_spans : reachable=true
+@com.kiriai.kiriorganization:id/tag_accessibility_heading : reachable=true
+@com.kiriai.kiriorganization:id/tag_accessibility_pane_title : reachable=true
+@com.kiriai.kiriorganization:id/tag_on_apply_window_listener : reachable=true
+@com.kiriai.kiriorganization:id/tag_on_receive_content_listener : reachable=true
+@com.kiriai.kiriorganization:id/tag_on_receive_content_mime_types : reachable=true
+@com.kiriai.kiriorganization:id/tag_screen_reader_focusable : reachable=true
+@com.kiriai.kiriorganization:id/tag_state_description : reachable=true
+@com.kiriai.kiriorganization:id/tag_transition_group : reachable=true
+@com.kiriai.kiriorganization:id/tag_unhandled_key_event_manager : reachable=true
+@com.kiriai.kiriorganization:id/tag_unhandled_key_listeners : reachable=true
+@com.kiriai.kiriorganization:id/tag_window_insets_animation_callback : reachable=true
+@com.kiriai.kiriorganization:id/terrain : reachable=false
+@com.kiriai.kiriorganization:id/test : reachable=true
+@com.kiriai.kiriorganization:id/text : reachable=true
+@com.kiriai.kiriorganization:id/text2 : reachable=true
+@com.kiriai.kiriorganization:id/time : reachable=true
+@com.kiriai.kiriorganization:id/title : reachable=true
+@com.kiriai.kiriorganization:id/tv_sub_item : reachable=true
+@com.kiriai.kiriorganization:id/tv_title : reachable=true
+@com.kiriai.kiriorganization:id/view_tree_lifecycle_owner : reachable=true
+@com.kiriai.kiriorganization:id/view_tree_on_back_pressed_dispatcher_owner : reachable=true
+@com.kiriai.kiriorganization:id/view_tree_saved_state_registry_owner : reachable=true
+@com.kiriai.kiriorganization:id/view_tree_view_model_store_owner : reachable=true
+@com.kiriai.kiriorganization:id/visible_removing_fragment_view_tag : reachable=true
+@com.kiriai.kiriorganization:id/wide : reachable=false
+@com.kiriai.kiriorganization:id/wrap_content : reachable=false
+@com.kiriai.kiriorganization:id/wrapped_composition_tag : reachable=true
+@com.kiriai.kiriorganization:integer/default_icon_animation_duration : reachable=true
+@com.kiriai.kiriorganization:integer/google_play_services_version : reachable=true
+@com.kiriai.kiriorganization:integer/m3c_window_layout_in_display_cutout_mode : reachable=false
+@com.kiriai.kiriorganization:integer/status_bar_notification_info_maxnum : reachable=true
+@com.kiriai.kiriorganization:layout/custom_dialog : reachable=true
+@com.kiriai.kiriorganization:layout/ime_base_split_test_activity : reachable=true
+@com.kiriai.kiriorganization:layout/ime_secondary_split_test_activity : reachable=true
+@com.kiriai.kiriorganization:layout/notification_action : reachable=true
+    @com.kiriai.kiriorganization:style/Widget_Compat_NotificationActionContainer
+    @com.kiriai.kiriorganization:dimen/notification_action_icon_size
+    @com.kiriai.kiriorganization:style/Widget_Compat_NotificationActionText
+@com.kiriai.kiriorganization:layout/notification_action_tombstone : reachable=true
+    @com.kiriai.kiriorganization:style/Widget_Compat_NotificationActionContainer
+    @com.kiriai.kiriorganization:dimen/notification_action_icon_size
+    @com.kiriai.kiriorganization:style/Widget_Compat_NotificationActionText
+@com.kiriai.kiriorganization:layout/notification_template_custom_big : reachable=true
+    @com.kiriai.kiriorganization:layout/notification_template_icon_group
+    @com.kiriai.kiriorganization:dimen/notification_large_icon_width
+    @com.kiriai.kiriorganization:dimen/notification_large_icon_height
+    @com.kiriai.kiriorganization:dimen/notification_right_side_padding_top
+    @com.kiriai.kiriorganization:layout/notification_template_part_time
+    @com.kiriai.kiriorganization:layout/notification_template_part_chronometer
+    @com.kiriai.kiriorganization:style/TextAppearance_Compat_Notification_Info
+@com.kiriai.kiriorganization:layout/notification_template_icon_group : reachable=true
+    @com.kiriai.kiriorganization:dimen/notification_large_icon_width
+    @com.kiriai.kiriorganization:dimen/notification_large_icon_height
+    @com.kiriai.kiriorganization:dimen/notification_big_circle_margin
+    @com.kiriai.kiriorganization:dimen/notification_right_icon_size
+@com.kiriai.kiriorganization:layout/notification_template_part_chronometer : reachable=true
+    @com.kiriai.kiriorganization:style/TextAppearance_Compat_Notification_Time
+@com.kiriai.kiriorganization:layout/notification_template_part_time : reachable=true
+    @com.kiriai.kiriorganization:style/TextAppearance_Compat_Notification_Time
+@com.kiriai.kiriorganization:layout/rzp_loader : reachable=true
+    @com.kiriai.kiriorganization:drawable/rzp_loader_circle
+    @com.kiriai.kiriorganization:drawable/rzp_logo
+@com.kiriai.kiriorganization:layout/rzp_magic_base : reachable=false
+    @com.kiriai.kiriorganization:drawable/rzp_poweredby
+@com.kiriai.kiriorganization:layout/sdk_integration_status : reachable=true
+    @com.kiriai.kiriorganization:drawable/rzp_logo
+@com.kiriai.kiriorganization:layout/single_item : reachable=true
+    @com.kiriai.kiriorganization:drawable/ic_tick_mark
+@com.kiriai.kiriorganization:layout/splash_screen_view : reachable=false
+    @com.kiriai.kiriorganization:attr/splashScreenIconSize
+@com.kiriai.kiriorganization:layout/wallet_test_layout : reachable=true
+@com.kiriai.kiriorganization:mipmap/ic_launcher : reachable=false
+    @com.kiriai.kiriorganization:color/ic_launcher_background
+    @com.kiriai.kiriorganization:drawable/ic_launcher_foreground
+@com.kiriai.kiriorganization:mipmap/ic_launcher_round : reachable=false
+    @com.kiriai.kiriorganization:color/ic_launcher_background
+    @com.kiriai.kiriorganization:drawable/ic_launcher_foreground
+@com.kiriai.kiriorganization:raw/rzp_config : reachable=true
+@com.kiriai.kiriorganization:string/androidx_startup : reachable=true
+@com.kiriai.kiriorganization:string/app_name : reachable=true
+@com.kiriai.kiriorganization:string/call_notification_answer_action : reachable=true
+@com.kiriai.kiriorganization:string/call_notification_answer_video_action : reachable=true
+@com.kiriai.kiriorganization:string/call_notification_decline_action : reachable=true
+@com.kiriai.kiriorganization:string/call_notification_hang_up_action : reachable=true
+@com.kiriai.kiriorganization:string/call_notification_incoming_text : reachable=true
+@com.kiriai.kiriorganization:string/call_notification_ongoing_text : reachable=true
+@com.kiriai.kiriorganization:string/call_notification_screening_text : reachable=true
+@com.kiriai.kiriorganization:string/close_drawer : reachable=true
+@com.kiriai.kiriorganization:string/close_sheet : reachable=true
+@com.kiriai.kiriorganization:string/common_google_play_services_enable_button : reachable=true
+@com.kiriai.kiriorganization:string/common_google_play_services_enable_text : reachable=true
+@com.kiriai.kiriorganization:string/common_google_play_services_enable_title : reachable=true
+@com.kiriai.kiriorganization:string/common_google_play_services_install_button : reachable=true
+@com.kiriai.kiriorganization:string/common_google_play_services_install_text : reachable=true
+@com.kiriai.kiriorganization:string/common_google_play_services_install_title : reachable=true
+@com.kiriai.kiriorganization:string/common_google_play_services_notification_channel_name : reachable=true
+@com.kiriai.kiriorganization:string/common_google_play_services_notification_ticker : reachable=true
+@com.kiriai.kiriorganization:string/common_google_play_services_unknown_issue : reachable=true
+@com.kiriai.kiriorganization:string/common_google_play_services_unsupported_text : reachable=true
+@com.kiriai.kiriorganization:string/common_google_play_services_update_button : reachable=true
+@com.kiriai.kiriorganization:string/common_google_play_services_update_text : reachable=true
+@com.kiriai.kiriorganization:string/common_google_play_services_update_title : reachable=true
+@com.kiriai.kiriorganization:string/common_google_play_services_updating_text : reachable=true
+@com.kiriai.kiriorganization:string/common_google_play_services_wear_update_text : reachable=true
+@com.kiriai.kiriorganization:string/common_open_on_phone : reachable=true
+@com.kiriai.kiriorganization:string/common_signin_button_text : reachable=true
+@com.kiriai.kiriorganization:string/common_signin_button_text_long : reachable=true
+@com.kiriai.kiriorganization:string/default_error_message : reachable=true
+@com.kiriai.kiriorganization:string/default_popup_window_title : reachable=true
+@com.kiriai.kiriorganization:string/dropdown_menu : reachable=false
+@com.kiriai.kiriorganization:string/in_progress : reachable=true
+@com.kiriai.kiriorganization:string/indeterminate : reachable=true
+@com.kiriai.kiriorganization:string/m3c_bottom_sheet_collapse_description : reachable=false
+@com.kiriai.kiriorganization:string/m3c_bottom_sheet_dismiss_description : reachable=false
+@com.kiriai.kiriorganization:string/m3c_bottom_sheet_drag_handle_description : reachable=true
+@com.kiriai.kiriorganization:string/m3c_bottom_sheet_expand_description : reachable=false
+@com.kiriai.kiriorganization:string/m3c_bottom_sheet_pane_title : reachable=false
+@com.kiriai.kiriorganization:string/m3c_date_input_headline : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_input_headline_description : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_input_invalid_for_pattern : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_input_invalid_not_allowed : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_input_invalid_year_range : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_input_label : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_input_no_input_description : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_input_title : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_picker_headline : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_picker_headline_description : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_picker_navigate_to_year_description : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_picker_no_selection_description : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_picker_scroll_to_earlier_years : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_picker_scroll_to_later_years : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_picker_switch_to_calendar_mode : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_picker_switch_to_day_selection : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_picker_switch_to_input_mode : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_picker_switch_to_next_month : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_picker_switch_to_previous_month : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_picker_switch_to_year_selection : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_picker_title : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_picker_today_description : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_picker_year_picker_pane_title : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_range_input_invalid_range_input : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_range_input_title : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_range_picker_day_in_range : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_range_picker_end_headline : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_range_picker_scroll_to_next_month : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_range_picker_scroll_to_previous_month : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_range_picker_start_headline : reachable=true
+@com.kiriai.kiriorganization:string/m3c_date_range_picker_title : reachable=true
+@com.kiriai.kiriorganization:string/m3c_dialog : reachable=true
+@com.kiriai.kiriorganization:string/m3c_dropdown_menu_collapsed : reachable=false
+@com.kiriai.kiriorganization:string/m3c_dropdown_menu_expanded : reachable=false
+@com.kiriai.kiriorganization:string/m3c_dropdown_menu_toggle : reachable=false
+@com.kiriai.kiriorganization:string/m3c_search_bar_search : reachable=false
+@com.kiriai.kiriorganization:string/m3c_snackbar_dismiss : reachable=true
+@com.kiriai.kiriorganization:string/m3c_suggestions_available : reachable=false
+@com.kiriai.kiriorganization:string/m3c_time_picker_am : reachable=true
+@com.kiriai.kiriorganization:string/m3c_time_picker_hour : reachable=false
+@com.kiriai.kiriorganization:string/m3c_time_picker_hour_24h_suffix : reachable=false
+@com.kiriai.kiriorganization:string/m3c_time_picker_hour_selection : reachable=false
+@com.kiriai.kiriorganization:string/m3c_time_picker_hour_suffix : reachable=false
+@com.kiriai.kiriorganization:string/m3c_time_picker_hour_text_field : reachable=false
+@com.kiriai.kiriorganization:string/m3c_time_picker_minute : reachable=false
+@com.kiriai.kiriorganization:string/m3c_time_picker_minute_selection : reachable=false
+@com.kiriai.kiriorganization:string/m3c_time_picker_minute_suffix : reachable=false
+@com.kiriai.kiriorganization:string/m3c_time_picker_minute_text_field : reachable=false
+@com.kiriai.kiriorganization:string/m3c_time_picker_period_toggle_description : reachable=true
+@com.kiriai.kiriorganization:string/m3c_time_picker_pm : reachable=true
+@com.kiriai.kiriorganization:string/m3c_tooltip_long_press_label : reachable=false
+@com.kiriai.kiriorganization:string/m3c_tooltip_pane_description : reachable=false
+@com.kiriai.kiriorganization:string/navigation_menu : reachable=true
+@com.kiriai.kiriorganization:string/not_selected : reachable=true
+@com.kiriai.kiriorganization:string/range_end : reachable=true
+@com.kiriai.kiriorganization:string/range_start : reachable=true
+@com.kiriai.kiriorganization:string/selected : reachable=true
+@com.kiriai.kiriorganization:string/state_empty : reachable=true
+@com.kiriai.kiriorganization:string/state_off : reachable=true
+@com.kiriai.kiriorganization:string/state_on : reachable=true
+@com.kiriai.kiriorganization:string/status_bar_notification_info_overflow : reachable=true
+@com.kiriai.kiriorganization:string/switch_role : reachable=true
+@com.kiriai.kiriorganization:string/tab : reachable=true
+@com.kiriai.kiriorganization:string/template_percent : reachable=true
+@com.kiriai.kiriorganization:string/tooltip_description : reachable=true
+@com.kiriai.kiriorganization:string/tooltip_label : reachable=true
+@com.kiriai.kiriorganization:string/wallet_buy_button_place_holder : reachable=true
+@com.kiriai.kiriorganization:style/Base_Theme_SplashScreen : reachable=false
+    @com.kiriai.kiriorganization:style/Base_v21_Theme_SplashScreen
+    @com.kiriai.kiriorganization:style/Base_v27_Theme_SplashScreen
+@com.kiriai.kiriorganization:style/Base_Theme_SplashScreen_DayNight : reachable=false
+    @com.kiriai.kiriorganization:style/Base_Theme_SplashScreen_Light
+    @com.kiriai.kiriorganization:style/Base_Theme_SplashScreen
+@com.kiriai.kiriorganization:style/Base_Theme_SplashScreen_Light : reachable=false
+    @com.kiriai.kiriorganization:style/Base_v21_Theme_SplashScreen_Light
+    @com.kiriai.kiriorganization:style/Base_v27_Theme_SplashScreen_Light
+    @com.kiriai.kiriorganization:style/Base_Theme_SplashScreen
+@com.kiriai.kiriorganization:style/Base_v21_Theme_SplashScreen : reachable=false
+@com.kiriai.kiriorganization:style/Base_v21_Theme_SplashScreen_Light : reachable=false
+@com.kiriai.kiriorganization:style/Base_v27_Theme_SplashScreen : reachable=false
+    @com.kiriai.kiriorganization:style/Base_v21_Theme_SplashScreen
+@com.kiriai.kiriorganization:style/Base_v27_Theme_SplashScreen_Light : reachable=false
+    @com.kiriai.kiriorganization:style/Base_v21_Theme_SplashScreen_Light
+@com.kiriai.kiriorganization:style/CheckoutTheme : reachable=true
+@com.kiriai.kiriorganization:style/DialogWindowTheme : reachable=true
+@com.kiriai.kiriorganization:style/EdgeToEdgeFloatingDialogTheme : reachable=false
+    @com.kiriai.kiriorganization:integer/m3c_window_layout_in_display_cutout_mode
+@com.kiriai.kiriorganization:style/EdgeToEdgeFloatingDialogWindowTheme : reachable=true
+    @com.kiriai.kiriorganization:style/EdgeToEdgeFloatingDialogTheme
+@com.kiriai.kiriorganization:style/FloatingDialogTheme : reachable=false
+@com.kiriai.kiriorganization:style/FloatingDialogWindowTheme : reachable=true
+    @com.kiriai.kiriorganization:style/FloatingDialogTheme
+@com.kiriai.kiriorganization:style/TextAppearance_Compat_Notification : reachable=true
+@com.kiriai.kiriorganization:style/TextAppearance_Compat_Notification_Info : reachable=true
+@com.kiriai.kiriorganization:style/TextAppearance_Compat_Notification_Line2 : reachable=true
+    @com.kiriai.kiriorganization:style/TextAppearance_Compat_Notification_Info
+@com.kiriai.kiriorganization:style/TextAppearance_Compat_Notification_Time : reachable=true
+@com.kiriai.kiriorganization:style/TextAppearance_Compat_Notification_Title : reachable=true
+@com.kiriai.kiriorganization:style/Theme_App_Starting : reachable=true
+    @com.kiriai.kiriorganization:style/Theme_SplashScreen
+    @com.kiriai.kiriorganization:attr/windowSplashScreenBackground
+    @com.kiriai.kiriorganization:drawable/app_logo
+    @com.kiriai.kiriorganization:attr/windowSplashScreenAnimatedIcon
+    @com.kiriai.kiriorganization:style/Theme_KiriAI
+    @com.kiriai.kiriorganization:attr/postSplashScreenTheme
+@com.kiriai.kiriorganization:style/Theme_KiriAI : reachable=true
+@com.kiriai.kiriorganization:style/Theme_SplashScreen : reachable=false
+    @com.kiriai.kiriorganization:style/Theme_SplashScreen_Common
+    @com.kiriai.kiriorganization:attr/postSplashScreenTheme
+    @com.kiriai.kiriorganization:integer/default_icon_animation_duration
+    @com.kiriai.kiriorganization:attr/windowSplashScreenAnimationDuration
+    @com.kiriai.kiriorganization:attr/windowSplashScreenBackground
+    @com.kiriai.kiriorganization:attr/windowSplashScreenAnimatedIcon
+    @com.kiriai.kiriorganization:style/Base_Theme_SplashScreen_DayNight
+@com.kiriai.kiriorganization:style/Theme_SplashScreen_Common : reachable=false
+    @com.kiriai.kiriorganization:style/Base_Theme_SplashScreen_DayNight
+    @com.kiriai.kiriorganization:drawable/compat_splash_screen_no_icon_background
+    @com.kiriai.kiriorganization:dimen/splashscreen_icon_size_no_background
+    @com.kiriai.kiriorganization:attr/splashScreenIconSize
+@com.kiriai.kiriorganization:style/Theme_SplashScreen_IconBackground : reachable=false
+    @com.kiriai.kiriorganization:style/Theme_SplashScreen
+    @com.kiriai.kiriorganization:drawable/compat_splash_screen
+    @com.kiriai.kiriorganization:dimen/splashscreen_icon_size_with_background
+    @com.kiriai.kiriorganization:attr/splashScreenIconSize
+    @com.kiriai.kiriorganization:attr/windowSplashScreenIconBackgroundColor
+@com.kiriai.kiriorganization:style/WalletFragmentDefaultButtonTextAppearance : reachable=false
+    @com.kiriai.kiriorganization:color/wallet_primary_text_holo_light
+    @com.kiriai.kiriorganization:color/wallet_highlighted_text_holo_light
+    @com.kiriai.kiriorganization:color/wallet_hint_foreground_holo_light
+    @com.kiriai.kiriorganization:color/wallet_link_text_light
+@com.kiriai.kiriorganization:style/WalletFragmentDefaultDetailsHeaderTextAppearance : reachable=false
+    @com.kiriai.kiriorganization:style/WalletFragmentDefaultDetailsTextAppearance
+@com.kiriai.kiriorganization:style/WalletFragmentDefaultDetailsTextAppearance : reachable=false
+    @com.kiriai.kiriorganization:color/wallet_secondary_text_holo_dark
+    @com.kiriai.kiriorganization:color/wallet_highlighted_text_holo_dark
+    @com.kiriai.kiriorganization:color/wallet_hint_foreground_holo_dark
+    @com.kiriai.kiriorganization:color/wallet_holo_blue_light
+@com.kiriai.kiriorganization:style/WalletFragmentDefaultStyle : reachable=false
+    @com.kiriai.kiriorganization:attr/buyButtonHeight
+    @com.kiriai.kiriorganization:attr/buyButtonWidth
+    @com.kiriai.kiriorganization:attr/buyButtonText
+    @com.kiriai.kiriorganization:attr/buyButtonAppearance
+    @com.kiriai.kiriorganization:style/WalletFragmentDefaultDetailsTextAppearance
+    @com.kiriai.kiriorganization:attr/maskedWalletDetailsTextAppearance
+    @com.kiriai.kiriorganization:style/WalletFragmentDefaultDetailsHeaderTextAppearance
+    @com.kiriai.kiriorganization:attr/maskedWalletDetailsHeaderTextAppearance
+    @com.kiriai.kiriorganization:color/wallet_bright_foreground_holo_light
+    @com.kiriai.kiriorganization:attr/maskedWalletDetailsBackground
+    @com.kiriai.kiriorganization:attr/maskedWalletDetailsButtonBackground
+    @com.kiriai.kiriorganization:style/WalletFragmentDefaultButtonTextAppearance
+    @com.kiriai.kiriorganization:attr/maskedWalletDetailsButtonTextAppearance
+    @com.kiriai.kiriorganization:color/wallet_bright_foreground_holo_dark
+    @com.kiriai.kiriorganization:attr/maskedWalletDetailsLogoTextColor
+    @com.kiriai.kiriorganization:attr/maskedWalletDetailsLogoImageType
+@com.kiriai.kiriorganization:style/Widget_Compat_NotificationActionContainer : reachable=false
+    @com.kiriai.kiriorganization:drawable/notification_action_background
+@com.kiriai.kiriorganization:style/Widget_Compat_NotificationActionText : reachable=false
+    @com.kiriai.kiriorganization:color/androidx_core_secondary_text_default_material_light
+    @com.kiriai.kiriorganization:dimen/notification_action_text_size
+@com.kiriai.kiriorganization:xml/config : reachable=true
+@com.kiriai.kiriorganization:xml/file_paths : reachable=true
+@com.kiriai.kiriorganization:xml/file_provider_path : reachable=true
 
 The root reachable resources are:
  anim:fragment_fast_out_extra_slow_in:2130771968

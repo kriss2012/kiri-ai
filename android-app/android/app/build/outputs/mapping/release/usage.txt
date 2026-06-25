@@ -6757,9 +6757,6 @@ androidx.compose.material.icons.automirrored.filled.AnnouncementKt:
 androidx.compose.material.icons.automirrored.filled.ArrowBackIosKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _arrowBackIos
     public static final androidx.compose.ui.graphics.vector.ImageVector getArrowBackIos(androidx.compose.material.icons.Icons$AutoMirrored$Filled)
-androidx.compose.material.icons.automirrored.filled.ArrowBackKt:
-    private static androidx.compose.ui.graphics.vector.ImageVector _arrowBack
-    public static final androidx.compose.ui.graphics.vector.ImageVector getArrowBack(androidx.compose.material.icons.Icons$AutoMirrored$Filled)
 androidx.compose.material.icons.automirrored.filled.ArrowForwardIosKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _arrowForwardIos
     public static final androidx.compose.ui.graphics.vector.ImageVector getArrowForwardIos(androidx.compose.material.icons.Icons$AutoMirrored$Filled)
@@ -6817,9 +6814,6 @@ androidx.compose.material.icons.automirrored.filled.CallReceivedKt:
 androidx.compose.material.icons.automirrored.filled.CallSplitKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _callSplit
     public static final androidx.compose.ui.graphics.vector.ImageVector getCallSplit(androidx.compose.material.icons.Icons$AutoMirrored$Filled)
-androidx.compose.material.icons.automirrored.filled.ChatKt:
-    private static androidx.compose.ui.graphics.vector.ImageVector _chat
-    public static final androidx.compose.ui.graphics.vector.ImageVector getChat(androidx.compose.material.icons.Icons$AutoMirrored$Filled)
 androidx.compose.material.icons.automirrored.filled.ChromeReaderModeKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _chromeReaderMode
     public static final androidx.compose.ui.graphics.vector.ImageVector getChromeReaderMode(androidx.compose.material.icons.Icons$AutoMirrored$Filled)
@@ -6901,9 +6895,6 @@ androidx.compose.material.icons.automirrored.filled.GradingKt:
 androidx.compose.material.icons.automirrored.filled.HelpCenterKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _helpCenter
     public static final androidx.compose.ui.graphics.vector.ImageVector getHelpCenter(androidx.compose.material.icons.Icons$AutoMirrored$Filled)
-androidx.compose.material.icons.automirrored.filled.HelpKt:
-    private static androidx.compose.ui.graphics.vector.ImageVector _help
-    public static final androidx.compose.ui.graphics.vector.ImageVector getHelp(androidx.compose.material.icons.Icons$AutoMirrored$Filled)
 androidx.compose.material.icons.automirrored.filled.HelpOutlineKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _helpOutline
     public static final androidx.compose.ui.graphics.vector.ImageVector getHelpOutline(androidx.compose.material.icons.Icons$AutoMirrored$Filled)
@@ -7078,9 +7069,6 @@ androidx.compose.material.icons.automirrored.filled.SegmentKt:
 androidx.compose.material.icons.automirrored.filled.SendAndArchiveKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _sendAndArchive
     public static final androidx.compose.ui.graphics.vector.ImageVector getSendAndArchive(androidx.compose.material.icons.Icons$AutoMirrored$Filled)
-androidx.compose.material.icons.automirrored.filled.SendKt:
-    private static androidx.compose.ui.graphics.vector.ImageVector _send
-    public static final androidx.compose.ui.graphics.vector.ImageVector getSend(androidx.compose.material.icons.Icons$AutoMirrored$Filled)
 androidx.compose.material.icons.automirrored.filled.SendToMobileKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _sendToMobile
     public static final androidx.compose.ui.graphics.vector.ImageVector getSendToMobile(androidx.compose.material.icons.Icons$AutoMirrored$Filled)
@@ -9217,6 +9205,8 @@ androidx.compose.material.icons.filled.ArrowBackIosNewKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _arrowBackIosNew
     public static final androidx.compose.ui.graphics.vector.ImageVector getArrowBackIosNew(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.ArrowBackKt:
+    private static androidx.compose.ui.graphics.vector.ImageVector _arrowBack
+    public static final androidx.compose.ui.graphics.vector.ImageVector getArrowBack(androidx.compose.material.icons.Icons$Filled)
     public static synthetic void getArrowBack$annotations(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.ArrowCircleDownKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _arrowCircleDown
@@ -9895,6 +9885,8 @@ androidx.compose.material.icons.filled.ChatBubbleOutlineKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _chatBubbleOutline
     public static final androidx.compose.ui.graphics.vector.ImageVector getChatBubbleOutline(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.ChatKt:
+    private static androidx.compose.ui.graphics.vector.ImageVector _chat
+    public static final androidx.compose.ui.graphics.vector.ImageVector getChat(androidx.compose.material.icons.Icons$Filled)
     public static synthetic void getChat$annotations(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.CheckBoxKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _checkBox
@@ -11511,6 +11503,8 @@ androidx.compose.material.icons.filled.HelpCenterKt:
     public static final androidx.compose.ui.graphics.vector.ImageVector getHelpCenter(androidx.compose.material.icons.Icons$Filled)
     public static synthetic void getHelpCenter$annotations(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.HelpKt:
+    private static androidx.compose.ui.graphics.vector.ImageVector _help
+    public static final androidx.compose.ui.graphics.vector.ImageVector getHelp(androidx.compose.material.icons.Icons$Filled)
     public static synthetic void getHelp$annotations(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.HelpOutlineKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _helpOutline
@@ -13712,6 +13706,8 @@ androidx.compose.material.icons.filled.SendAndArchiveKt:
     public static final androidx.compose.ui.graphics.vector.ImageVector getSendAndArchive(androidx.compose.material.icons.Icons$Filled)
     public static synthetic void getSendAndArchive$annotations(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.SendKt:
+    private static androidx.compose.ui.graphics.vector.ImageVector _send
+    public static final androidx.compose.ui.graphics.vector.ImageVector getSend(androidx.compose.material.icons.Icons$Filled)
     public static synthetic void getSend$annotations(androidx.compose.material.icons.Icons$Filled)
 androidx.compose.material.icons.filled.SendTimeExtensionKt:
     private static androidx.compose.ui.graphics.vector.ImageVector _sendTimeExtension
@@ -63998,7 +63994,6 @@ androidx.navigation.NavController:
     public final androidx.navigation.NavDestination findDestination(java.lang.String)
     public final androidx.navigation.NavBackStackEntry getBackStackEntry(java.lang.String)
     public final kotlinx.coroutines.flow.StateFlow getCurrentBackStack()
-    public final kotlinx.coroutines.flow.Flow getCurrentBackStackEntryFlow()
     public androidx.navigation.NavInflater getNavInflater()
     public androidx.navigation.NavBackStackEntry getPreviousBackStackEntry()
     public androidx.lifecycle.ViewModelStoreOwner getViewModelStoreOwner(int)
@@ -64368,8 +64363,6 @@ androidx.navigation.compose.NavGraphBuilderKt:
     public static final void navigation(androidx.navigation.NavGraphBuilder,java.lang.String,java.lang.String,java.util.List,java.util.List,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function1)
     public static synthetic void navigation$default(androidx.navigation.NavGraphBuilder,java.lang.String,java.lang.String,java.util.List,java.util.List,kotlin.jvm.functions.Function1,int,java.lang.Object)
     public static synthetic void navigation$default(androidx.navigation.NavGraphBuilder,java.lang.String,java.lang.String,java.util.List,java.util.List,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function1,int,java.lang.Object)
-androidx.navigation.compose.NavHostControllerKt:
-    public static final androidx.compose.runtime.State currentBackStackEntryAsState(androidx.navigation.NavController,androidx.compose.runtime.Composer,int)
 androidx.navigation.compose.R:
     private void <init>()
 androidx.navigation.ktx.R:
@@ -72295,6 +72288,8 @@ com.kiriai.kiriorganization.KiriApplication_MembersInjector:
     public static dagger.MembersInjector create(javax.inject.Provider)
     public void injectMembers(com.kiriai.kiriorganization.KiriApplication)
     public synthetic bridge void injectMembers(java.lang.Object)
+com.kiriai.kiriorganization.MainActivity$onCreate$1:
+    private static final androidx.navigation.NavBackStackEntry invoke$lambda$2(androidx.compose.runtime.State)
 com.kiriai.kiriorganization.R$color:
     public static int ic_launcher_background
     private void <init>()
@@ -94414,7 +94409,6 @@ androidx.compose.foundation.text.selection.TextSelectionColorsKt:
     public static final long DefaultSelectionColor
 androidx.compose.material.icons.Icons$AutoMirrored$Filled:
     public static final androidx.compose.material.icons.Icons$AutoMirrored$Filled INSTANCE
-    static void <clinit>()
 androidx.compose.material.icons.Icons$AutoMirrored$Outlined:
     public static final androidx.compose.material.icons.Icons$AutoMirrored$Outlined INSTANCE
     static void <clinit>()
@@ -143000,6 +142994,7 @@ androidx.navigation.NavController:
     public static java.lang.String findInvalidDestinationDisplayNameInDeepLink()
     public static android.content.Context getContext()
     public final androidx.navigation.NavBackStackEntry getCurrentBackStackEntry()
+    public static kotlinx.coroutines.flow.Flow getCurrentBackStackEntryFlow()
     public final androidx.navigation.NavDestination getCurrentDestination()
     public static int getDestinationCountOnBackStack()
     public final androidx.navigation.NavGraph getGraph()
@@ -148763,7 +148758,7 @@ com.kiriai.kiriorganization.KiriApplication:
     public static androidx.hilt.work.HiltWorkerFactory getWorkerFactory()
 com.kiriai.kiriorganization.MainActivity$CrashDialog$2:
     public final void invoke$2()
-com.kiriai.kiriorganization.MainActivity$onCreate$1$1$1$1$$InternalSyntheticLambda$2$7c4e3ccc5f9df9c532a27a8f38f8b3dda6879394f2a98237402c3e9475f30813$0
+com.kiriai.kiriorganization.MainActivity$onCreate$1$1$1$1$$InternalSyntheticLambda$2$7ae196d437d45c52c8e9dbe7e139d3072afc8060efdd04f3b6996460aeea348c$0
 com.kiriai.kiriorganization.MainActivity$onCreate$1$1$1$1$1$1$$InternalSyntheticLambda$1$0229768ad3acae38e531d34b514b6506bdb24231543af406346eb240ac003407$0
 com.kiriai.kiriorganization.MainActivity$onCreate$1$1$1$1$1$1$$InternalSyntheticLambda$1$0229768ad3acae38e531d34b514b6506bdb24231543af406346eb240ac003407$1
 com.kiriai.kiriorganization.MainActivity$onCreate$1$1$1$1$1$1:
