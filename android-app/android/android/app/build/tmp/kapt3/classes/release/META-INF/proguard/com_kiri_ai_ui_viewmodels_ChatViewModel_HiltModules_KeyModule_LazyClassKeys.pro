@@ -1,1 +1,0 @@
--keep,allowobfuscation,allowshrinking class com.kiri.ai.ui.viewmodels.ChatViewModel

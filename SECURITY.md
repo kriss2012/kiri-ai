@@ -2,20 +2,19 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
 | Version | Supported          |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| Main    | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+Security is taken seriously. If you identify a security vulnerability or sensitive information exposure:
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+1. **Do not create a public issue.** Public disclosure exposes users before a fix can be prepared.
+2. Please submit vulnerability disclosures through [GitHub Security Advisories](https://github.com/kriss2012/kiri-ai/security/advisories/new) or contact the maintainer privately.
+3. Provide details regarding:
+   - Nature of vulnerability
+   - Steps or proof-of-concept to reproduce
+   - Potential impact
+
+All legitimate vulnerability reports will be reviewed and addressed promptly.

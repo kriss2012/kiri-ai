@@ -1,1 +1,0 @@
--keep,allowobfuscation,allowshrinking class com.kiriai.kiriorganization.ui.viewmodels.AuthViewModel
